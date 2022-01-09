@@ -22,7 +22,7 @@ public class Orders {
     @ManyToOne
     @JoinColumn(name = "Member_ID")
     private Member member;
-    @OneToMany( mappedBy = "order")
+    @OneToMany( mappedBy = "orders")
     private List<OrderItem> orderItems= new ArrayList<>();
 
     @OneToOne

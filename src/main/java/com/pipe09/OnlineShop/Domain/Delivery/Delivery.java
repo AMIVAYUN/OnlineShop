@@ -1,6 +1,7 @@
-package com.pipe09.OnlineShop.Domain;
+package com.pipe09.OnlineShop.Domain.Delivery;
 
 
+import com.pipe09.OnlineShop.Domain.Orders.Orders;
 import lombok.Getter;
 import lombok.Setter;
 

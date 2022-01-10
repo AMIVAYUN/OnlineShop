@@ -1,6 +1,7 @@
-package com.pipe09.OnlineShop.Domain;
+package com.pipe09.OnlineShop.Domain.Orders;
 
 
+import com.pipe09.OnlineShop.Domain.Item.Item;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,10 +15,10 @@ public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long OrderItem_ID;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="Item_ID")
     private Item item;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="Order_ID")
     private Orders orders;
 

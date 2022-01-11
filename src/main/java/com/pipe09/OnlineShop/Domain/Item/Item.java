@@ -14,20 +14,41 @@ import java.util.List;
 @DiscriminatorColumn(name = "DTYPE")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Item {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Item_ID;
 
 
     private String Name;
-    private Long Price;
-    private Long StockQuantity;
+    private int Price;
+    private int StockQuantity;
     @Lob
     private String Description;
     ////
-    private Long Weight;
+    private int Weight;
     private String MadeIn;
     private String ManufacturedCompany;
 
-
+    public Item createNewItem(String Name,int Price,int StockQuantity,String description,int Weight,String Madein,String ManufacturedCompany){
+        Item newitem=new Item();
+        newitem.setName(Name);
+        newitem.setPrice(Price);
+        newitem.setStockQuantity(StockQuantity);
+        newitem.setDescription(description);
+        newitem.setWeight(Weight);
+        newitem.setMadeIn(Madein);
+        newitem.setManufacturedCompany(ManufacturedCompany);
+        return newitem;
+    }
+    public void removeStockQuantity(int count){
+        int rest=this.StockQuantity-count;
+        if(rest<0){
+            throw new RuntimeException("재고 수량이 부족합니다");
+        }
+        this.setStockQuantity(rest);
+    }
+    public void addStockQuantity(int count){
+        this.StockQuantity+=count;
+    }
 }

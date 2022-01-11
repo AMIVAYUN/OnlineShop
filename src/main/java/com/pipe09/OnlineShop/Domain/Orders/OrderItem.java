@@ -14,6 +14,8 @@ import javax.persistence.*;
 public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private int Price;
     private Long OrderItem_ID;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="Item_ID")
@@ -21,8 +23,6 @@ public class OrderItem {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="Order_ID")
     private Orders orders;
-
-    private int Price;
 
     private int count;
 

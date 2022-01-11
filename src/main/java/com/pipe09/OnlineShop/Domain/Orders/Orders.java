@@ -2,6 +2,7 @@ package com.pipe09.OnlineShop.Domain.Orders;
 
 
 import com.pipe09.OnlineShop.Domain.Delivery.Delivery;
+import com.pipe09.OnlineShop.Domain.Delivery.Deliverystatus;
 import com.pipe09.OnlineShop.Domain.Member.Member;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,4 +35,13 @@ public class Orders {
     private Date Orderdate;
 
 
+    public void cancel() {
+        if(this.delivery.getStatus()== Deliverystatus.COMPLETE){
+            throw new IllegalStateException("배송 완료 상품은 불가능 합니다.");
+        }
+        this.delivery.setStatus(Deliverystatus.CANCEL);
+        for(OrderItem item:orderItems){
+            
+        }
+    }
 }

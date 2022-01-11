@@ -17,9 +17,9 @@ public class MemberRepository {
         em.persist(member);
         return member.getMember_ID();
     }
-    public Member findByName(String name){
+    public List<Member> findByName(String name){
         String jpql="select m from Member m where m.Name=:name";
-        return em.createQuery(jpql,Member.class).setParameter("name",name).getSingleResult();
+        return em.createQuery(jpql,Member.class).setParameter("name",name).getResultList();
     }
     public Member findById(Long id){
         return em.find(Member.class,id);

@@ -14,6 +14,8 @@ import javax.persistence.*;
 public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private int Price;
     private Long OrderItem_ID;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="Item_ID")
@@ -22,11 +24,21 @@ public class OrderItem {
     @JoinColumn(name="Order_ID")
     private Orders orders;
 
-    private Long Price;
+    private int count;
 
-    private Long count;
-
-    public Long getTotalPrice(){
+    public int getTotalPrice(){
         return this.getPrice()*this.getCount();
+    }
+
+    public static OrderItem createOrderItem(Item item,int price,int count){
+        OrderItem newOrderItem=new OrderItem();
+        newOrderItem.setItem(item);
+        newOrderItem.setPrice(price);
+        newOrderItem.setCount(count);
+        item.removeStockQuantity(count);
+        return newOrderItem;
+    }
+    public void cancel(){
+        getItem().addStockQuantity(this.count);
     }
 }

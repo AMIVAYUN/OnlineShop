@@ -2,14 +2,17 @@ package com.pipe09.OnlineShop.Repository;
 
 import com.pipe09.OnlineShop.Domain.Item.Item;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
 class ItemRepositoryTest {

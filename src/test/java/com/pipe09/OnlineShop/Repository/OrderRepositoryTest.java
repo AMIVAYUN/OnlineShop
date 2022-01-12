@@ -23,10 +23,12 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Transactional
+
 public class OrderRepositoryTest {
     @Autowired OrderRepository orderRepository;
     @Autowired MemberRepository memberRepository;
+
+    @Transactional
     @Test
     public void 주문_등록과불러오기및탐색(){
         Orders newOrder=new Orders();

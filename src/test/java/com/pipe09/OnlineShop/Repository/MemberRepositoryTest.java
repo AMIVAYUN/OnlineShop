@@ -15,12 +15,13 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Transactional
+
 public class MemberRepositoryTest {
 
     @Autowired MemberRepository Repository;
 
     @Test
+    @Transactional
     public void 멤버_등록과수정(){
         Member assignMember=new Member();
         assignMember.setName("윤주석");

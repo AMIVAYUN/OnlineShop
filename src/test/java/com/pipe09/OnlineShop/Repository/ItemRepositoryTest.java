@@ -14,12 +14,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Transactional
+
 class ItemRepositoryTest {
 
     @Autowired ItemRepository repository;
 
     @Test
+    @Transactional
     public void 데이터_저장과불러오기(){
         Item item=new Item();
         item.setName("누수탐지기");

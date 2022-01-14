@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title> Daebong Online Retail Store</title>
+		<link rel="stylesheet" href="css/bootstrap.css">
+
+		<style type="text/css">
+			@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+			h1{
+				color: white;
+			}
+			a{
+				color: white;
+			}
+			li{
+				color: white;
+			}
+
+		</style>
+		<nav class="navbar navbar-expand bg-primary" style="color: white;font-family:'Jua';max-height: 130px">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">
+					<img src="img/DaebongMark.jpg" alt="" width="110" >
+				</a>
+				<a class="navbar-brand" href="#" style="font-size: 5rem">대봉산업기계</a>
+
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left:5%">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0" style="font-size: 3rem">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="/" style="color: white">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#"style="color: white">공지사항</a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link disabled" href="#" style="color: white">장바구니</a>
+						</li>
+					</ul>
+					<form class="d-flex justify-content-end">
+						<button class="btn btn-primary me-xxl-3" type="submit" style="background-color: white;color: black;width:130px;height:70px;font-size: x-large">로그인</button>
+						<button class="btn btn-primary me-xxl-3" type="submit" style="background-color: white;color: black;width:130px;height:70px;font-size: x-large">회원가입</button>
+					</form>
+				</div>
+			</div>
+		</nav>
+	</head>
+<body>
+	<div class="container-fluid row"style="outline-color: black">
+		<div class="col-sm-4 text-center"style="float: none;margin: 0 auto;">
+			<label for="SearchByDataList" class="col-form-label-lg pt-lg-5"style="font-family: 'Jua';font-size: xx-large">제품 검색</label>
+			<form class="d-flex">
+				<input class="form-control" list="CategoryListOptions" id="SearchByDataList" placeholder="제품 이름 혹은 제품군을 검색하세요">
+				<datalist id="CategoryListOptions">
+					<option value="test">
+				</datalist>
+				<button class="btn btn-primary" type="submit" style="background-color: #0dcaf0;font-family: 'Jua';width:100px;height: 50px">검 색</button>
+			</form>
+
+		</div>
+
+	</div>
+	<hr style="border: solid 3px black">
+	<row>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="card" style="width: 100%">
+						<img src="img/LeakDetector.jpg" class="card-img-top" alt="">
+						<div class="card-body">
+							<h5 class="product_Name">Leak Detector</h5>
+							<p class="card-text">대봉 산업기계 Main production</p>
+							<a href="#" class="btn btn-primary">바로가기</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card" style="width: 100%">
+						<img src="img/LeakDetector.jpg" class="card-img-top" alt="">
+						<div class="card-body">
+							<h5 class="product_Name">Leak Detector</h5>
+							<p class="card-text">대봉 산업기계 Main production</p>
+							<a href="#" class="btn btn-primary">바로가기</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card" style="width: 100%">
+						<img src="img/LeakDetector.jpg" class="card-img-top" alt="">
+						<div class="card-body">
+							<h5 class="product_Name">Leak Detector</h5>
+							<p class="card-text">대봉 산업기계 Main production</p>
+							<a href="#" class="btn btn-primary">바로가기</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card" style="width: 100%">
+						<img src="img/LeakDetector.jpg" class="card-img-top" alt="">
+						<div class="card-body">
+							<h5 class="product_Name">Leak Detector</h5>
+							<p class="card-text">대봉 산업기계 Main production</p>
+							<a href="#" class="btn btn-primary">바로가기</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card" style="width: 100%">
+						<img src="img/LeakDetector.jpg" class="card-img-top" alt="">
+						<div class="card-body">
+							<h5 class="product_Name">Leak Detector</h5>
+							<p class="card-text">대봉 산업기계 Main production</p>
+							<a href="#" class="btn btn-primary">바로가기</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card" style="width: 100%">
+						<img src="img/LeakDetector.jpg" class="card-img-top" alt="">
+						<div class="card-body">
+							<h5 class="product_Name">Leak Detector</h5>
+							<p class="card-text">대봉 산업기계 Main production</p>
+							<a href="#" class="btn btn-primary">바로가기</a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</row>
+
+	<row class="container pt-lg-5">
+		<nav aria-label="Content-List">
+			<ul class="pagination justify-content-center">
+				<li class="page-item"><a class="page-link" href="#">1</a> </li>
+				<li class="page-item"><a class="page-link" href="#">2</a> </li>
+				<li class="page-item"><a class="page-link" href="#">3</a> </li>
+			</ul>
+		</nav>
+	</row>
+
+
+</body>
+</html>

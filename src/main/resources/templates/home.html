@@ -1,530 +1,151 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymleaf.org">
 
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title> Daebong Online Retail Store</title>
+		<link rel="stylesheet" href="css/bootstrap.css">
 
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
-<meta name="Author" content="파이프공구닷컴">
-<META name="Subject" content="상하수도,배관 공구전문 - 파이프공구 닷컴">
-<meta name="Keywords" content="하수관,배관,공구,렌치,누수탐지기,청소기">
-<meta name="Description" content="상하수도,배관 공구전문 - 파이프공구닷컴">
+		<style type="text/css">
+			@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+			h1{
+				color: white;
+			}
+			a{
+				color: white;
+			}
+			li{
+				color: white;
+			}
 
-<title>PIPE09에 오신것을 환영합니다.</title>
-<link href="/main.css" rel="stylesheet" type="text/css">
-<script language="JavaScript">
-<!--
-function checkForm_search1(){
-	if(!document.search.search_name.value){
-		alert('검색할 단어를 입력해 주세요!');
-		search.search_name.focus();
-		return back();
-	}
-	document.search.submit();
-}
+		</style>
+		<nav class="navbar navbar-expand bg-primary" style="color: white;font-family:'Jua';max-height: 130px">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">
+					<img src="img/DaebongMark.jpg" alt="" width="110" >
+				</a>
+				<a class="navbar-brand" href="#" style="font-size: 5rem">대봉산업기계</a>
 
-function pipe09pop(poppage,jij) {
- pipe09popwin = window.open(poppage,'',jij);
- } 
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left:5%">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0" style="font-size: 3rem">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="/" style="color: white">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#"style="color: white">공지사항</a>
+						</li>
 
-//function click() { 
-//if ((event.button==2) || (event.button==3)) { 
-//alert('마우스 오른쪽 버튼은 사용할 수 없습니다.');
-//} 
-//} 
-//document.onmousedown=click 
+						<li class="nav-item">
+							<a class="nav-link disabled" href="#" style="color: white">장바구니</a>
+						</li>
+					</ul>
+					<form class="d-flex justify-content-end">
+						<button class="btn btn-primary me-xxl-3" type="submit" style="background-color: white;color: black;width:130px;height:70px;font-size: x-large">로그인</button>
+						<button class="btn btn-primary me-xxl-3" type="submit" style="background-color: white;color: black;width:130px;height:70px;font-size: x-large">회원가입</button>
+					</form>
+				</div>
+			</div>
+		</nav>
+	</head>
+<body>
+	<div class="container-fluid row"style="outline-color: black">
+		<div class="col-sm-4 text-center"style="float: none;margin: 0 auto;">
+			<label for="SearchByDataList" class="col-form-label-lg pt-lg-5"style="font-family: 'Jua';font-size: xx-large">제품 검색</label>
+			<form class="d-flex">
+				<input class="form-control" list="CategoryListOptions" id="SearchByDataList" placeholder="제품 이름 혹은 제품군을 검색하세요">
+				<datalist id="CategoryListOptions">
+					<option value="test">
+				</datalist>
+				<button class="btn btn-primary" type="submit" style="background-color: #0dcaf0;font-family: 'Jua';width:100px;height: 50px">검 색</button>
+			</form>
 
-//-->
-</script>
-</head>
+		</div>
 
-<body leftmargin="4" topmargin="2" marginwidth="4" marginheight="2" bgcolor=ffffff>
-<a name="top"></a>
-<table width="900" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td height="73" background="images/mmenu_bg.gif"><table width="100%" height="100%"  border="0" cellpadding="0" cellspacing="0">
-      <tr>
+	</div>
+	<hr style="border: solid 3px black">
+	<row>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="card" style="width: 100%">
+						<img src="img/LeakDetector.jpg" class="card-img-top" alt="">
+						<div class="card-body">
+							<h5 class="product_Name">Leak Detector</h5>
+							<p class="card-text">대봉 산업기계 Main production</p>
+							<a href="#" class="btn btn-primary">바로가기</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card" style="width: 100%">
+						<img src="img/LeakDetector.jpg" class="card-img-top" alt="">
+						<div class="card-body">
+							<h5 class="product_Name">Leak Detector</h5>
+							<p class="card-text">대봉 산업기계 Main production</p>
+							<a href="#" class="btn btn-primary">바로가기</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card" style="width: 100%">
+						<img src="img/LeakDetector.jpg" class="card-img-top" alt="">
+						<div class="card-body">
+							<h5 class="product_Name">Leak Detector</h5>
+							<p class="card-text">대봉 산업기계 Main production</p>
+							<a href="#" class="btn btn-primary">바로가기</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card" style="width: 100%">
+						<img src="img/LeakDetector.jpg" class="card-img-top" alt="">
+						<div class="card-body">
+							<h5 class="product_Name">Leak Detector</h5>
+							<p class="card-text">대봉 산업기계 Main production</p>
+							<a href="#" class="btn btn-primary">바로가기</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card" style="width: 100%">
+						<img src="img/LeakDetector.jpg" class="card-img-top" alt="">
+						<div class="card-body">
+							<h5 class="product_Name">Leak Detector</h5>
+							<p class="card-text">대봉 산업기계 Main production</p>
+							<a href="#" class="btn btn-primary">바로가기</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card" style="width: 100%">
+						<img src="img/LeakDetector.jpg" class="card-img-top" alt="">
+						<div class="card-body">
+							<h5 class="product_Name">Leak Detector</h5>
+							<p class="card-text">대봉 산업기계 Main production</p>
+							<a href="#" class="btn btn-primary">바로가기</a>
+						</div>
+					</div>
+				</div>
 
-        <td width="200" rowspan="2" align="center" valign=middle><a href="index.php"><img src="images/nlogo.gif" border="0"></a></td>
+			</div>
+		</div>
 
-        <td>
+	</row>
 
-<table width=100% border=0 cellpadding=0 cellspacing=0><tr><td width=80% align=center>
-<TABLE WIDTH=510 BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<TR>
-		<TD>
-			<A HREF="login_w.php">
-			<IMG SRC="images/tmenu_01.gif" WIDTH=62 HEIGHT=21 BORDER=0 ALT=""></A></TD>
-		<TD>
-			<A HREF="stipulation.php">
-				<IMG SRC="images/tmenu_02.gif" WIDTH=63 HEIGHT=21 BORDER=0 ALT=""></A></TD>
-		<TD>
-			<A HREF="shop_myjrg.php?#my_jrg">
-				<IMG SRC="images/tmenu_03.gif" WIDTH=63 HEIGHT=21 BORDER=0 ALT=""></A></TD>
-		<TD>
-			<A HREF="shop_hwamulchujeok.php">
-				<IMG SRC="images/tmenu_04.gif" WIDTH=64 HEIGHT=21 BORDER=0 ALT=""></A></TD>
-		<TD>
-			<A HREF="shop_gyeojwa.php">
-				<IMG SRC="images/tmenu_05.gif" WIDTH=63 HEIGHT=21 BORDER=0 ALT=""></A></TD>
-		<TD>
-			<A HREF="aboutus.php">
-				<IMG SRC="images/tmenu_06.gif" WIDTH=63 HEIGHT=21 BORDER=0 ALT=""></A></TD>
-		<TD>
-			<A HREF="mailto:webmaster@pipe09.com">
-				<IMG SRC="images/tmenu_07.gif" WIDTH=59 HEIGHT=21 BORDER=0 ALT=""></A></TD>
-		<TD>
-			<A HREF="sitemap.php">
-				<IMG SRC="images/tmenu_08.gif" WIDTH=73 HEIGHT=21 BORDER=0 ALT=""></A></TD>
-	</TR>
-</TABLE>
-</td><td align=center>
-<IMG SRC="images/tel.gif">
-</td></tr></table>
+	<row class="container pt-lg-5">
+		<nav aria-label="Content-List">
+			<ul class="pagination justify-content-center">
+				<li class="page-item"><a class="page-link" href="#">1</a> </li>
+				<li class="page-item"><a class="page-link" href="#">2</a> </li>
+				<li class="page-item"><a class="page-link" href="#">3</a> </li>
+			</ul>
+		</nav>
+	</row>
 
-
-</td>
-      </tr>
-      <tr>
-        <td valign="bottom">
-<TABLE WIDTH=706 BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<TR>
-		<TD>
-			<a href="index.php"><IMG SRC="images/mmenu_01.gif" ALT="" border="0"></a></TD>
-		<TD>
-			<a href="shop_mylist.php"><IMG SRC="images/mmenu_02.gif" ALT="" WIDTH=98 HEIGHT=38 border="0"></a></TD>
-		<TD>
-			<a href="shop_cart.php"><IMG SRC="images/mmenu_03.gif" ALT="" WIDTH=98 HEIGHT=38 border="0"></a></TD>
-		<TD>
-			<a href="shop_jumunck.php"><IMG SRC="images/mmenu_04.gif" ALT="" WIDTH=100 HEIGHT=38 border="0"></a></TD>
-		<TD>
-			<a href="shop_iyannae.php"><IMG SRC="images/mmenu_07.gif" ALT="" WIDTH=100 HEIGHT=38 border="0"></a></TD>
-		<TD>
-			<a href="board_list.php?boardcode=board_free&board_grg=board_free_grg&boardname=&#51088;&#50976;&#44172;&#49884;&#54032;"><IMG SRC="images/mmenu_05.gif" ALT="" WIDTH=106 HEIGHT=38 border="0"></a></TD>
-		<!--TD>
-			<a href='newslist.php?&boardcode=news&boardname=관련소식'><IMG SRC="images/mmenu_06.gif" ALT="" WIDTH=99 HEIGHT=38 border="0"></a></TD-->
-	</TR>
-</TABLE>		</td>
-      </tr>
-    </table></td>
-  </tr>
-</table>
-<table width="900" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td width="200" height="32" align="center" background="images/nmain_bg.gif"><img src="images/rogen.gif" border="0"></td>
-    <td width="300" background="images/nmain_bg.gif">
-<table width="100%"  border="0" cellpadding="0" cellspacing="2">
-		<form name=searchs_m action='./shop_sp_br.php' method=post>
-		<input type=hidden name=search_mode value=searchs_m>
-          <tr>
-            <td width="35%" align="right"><select name=search_title style='border:1px solid #616161;height:18px;font-family:돋움,굴림;font-size:12px;background-color:#FfFfFf'>
-						<option value=1>제품이름  </option>
-						<option value=2>제품상세설명  </option>
-						<option value=3>제조회사  </option>
-						</select></td>
-            <td width="40%" align="center"><input type=text name=search_word_m value='' size=20 maxlength=20 class=input style='border:1px solid #0967C6;height:18px;font-family:돋움,굴림;font-size:12px;background-color:#ffffff'></td>
-            <td width="25%" align="left"><input type=image src="images/msearch.gif" border="0" align=absmiddle></td>
-          </tr>
-	    </form>
-      </table>	
-	</td>
-    <td align="center" background="images/nmain_bg.gif">
-<font color=#FFFFFF>▶ 빠른검색 :</font>
-	<a href="./shop_sp_br.php?search_mode=searchs_m&search_title=1&search_word_m=렌치"><font color=#FFFF00>렌치</font></a>
-	<a href="./shop_sp_br.php?search_mode=searchs_m&search_title=1&search_word_m=컷터"><font color=#FFFF00>컷터</font></a> 
-	<a href="./shop_sp_br.php?search_mode=searchs_m&search_title=1&search_word_m=니퍼"><font color=#FFFF00>니퍼</font></a> 
-	<a href="./shop_sp_br.php?search_mode=searchs_m&search_title=1&search_word_m=드릴"><font color=#FFFF00>드릴</font></a> 
-	<a href="./shop_sp_br.php?search_mode=searchs_m&search_title=1&search_word_m=드라이버"><font color=#FFFF00>드라이버</font></a> 
-	<a href="./shop_sp_br.php?search_mode=searchs_m&search_title=1&search_word_m=그라인더"><font color=#FFFF00>그라인더</font></a> 
-	<a href="./shop_sp_br.php?search_mode=searchs_m&search_title=1&search_word_m=해머"><font color=#FFFF00>해머</font></a> 
-	<a href="./shop_sp_br.php?search_mode=searchs_m&search_title=1&search_word_m=대패"><font color=#FFFF00>대패</font></a> 
-	<a href="./shop_sp_br.php?search_mode=searchs_m&search_title=1&search_word_m=샌더"><font color=#FFFF00>샌더</font></a>	
-	<a href="./shop_sp_br.php?search_mode=searchs_m&search_title=1&search_word_m=톱"><font color=#FFFF00>톱</font></a>
-<!-- <table width="70%"  border="0" cellpadding="0" cellspacing="2">
-      <form name=searchs_m action='./shop_sp_br.php' method=post>
-        <input type=hidden name=search_mode2 value=searchs_m>
-        <tr align="center">
-          <td><a class="chlnk" style="cursor:hand" HREF onClick="this.style.behavior='url(#default#homepage)';this.setHomePage('http://pipe09.com');" ><img src="images/mbt_sijack.gif" width="89" height="19" border="0"></a></td>
-          <td><a href="javascript:pipe09pop('often_seek.php','width=470,height=300,scrollbars=yes,status=yes')" class="bottom_menu3"><img src="images/mbt_favorite.gif" width="88" height="19" border="0"></a></td>
-          <td width="10%">&nbsp;</td>
-        </tr>
-      </form>
-    </table>
- -->		
-	</td>
-  </tr>
-</table>
-<table width="900"  border="0" cellpadding="0" cellspacing="0" bgcolor="dddddd">
-  <tr>
-    <td height=2></td>
-  </tr>
-</table>
-
-<table width="900"  border="0" cellpadding="0" cellspacing="0"><tr><td height=3></td></tr></table>
-
-<table width="900" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td width="200" height="600" align="center" valign="top"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td><img src="images/lmenu_01.gif" width="200" height="43"></td>
-      </tr>
-      <tr>
-        <td align="center" background="images/lmenu_bg_01.gif">
-		<table width="78%"  border="0" cellspacing="2" cellpadding="0">
-<script language="javascript" src="../config/md5.js"></script>
-<script language="JavaScript">
-<!--
-function check_form_m(){
-	if(!document.login_form_m.memberid.value){
-		alert('아이디를 입력하세요.');
-		login_form_m.memberid.focus();
-    	return false;
-	}
-	if(!document.login_form_m.pass.value){
-		alert('패스워드를 입력하세요.');
-		login_form_m.pass.focus();
-    	return false;
-	}
-
-	document.login_form_m.submit();
-	return false;
-}
-//-->
-</script>
-<form action=login_find.php?page= method=post  name=login_form_m onsubmit='return check_form_m()'>
-<input type="hidden" name="page" value="http://pipe09.com/">
-          <tr>
-            <td width="35%" align="right"><img src="images/lmenu_id.gif" width="47" height="20"></td>
-            <td align="left"><input type=text name=memberid size=16 maxlength=10 value="" class=input style='border:1px solid #E0E0E0;height:18px;font-family:verdana;font-size:10px;background-color:#FfFfFf'></td>
-          </tr>
-          <tr>
-            <td align="right"><img src="images/lmenu_pw.gif" width="47" height="20"></td>
-            <td align="left"><input type=password name=pass size=16 maxlength=10 class=input style='border:1px solid #E0E0E0;height:18px;font-family:verdana;font-size:10px;background-color:#FfFfFf'></td>
-          </tr>
-        </table>
-          <table width="74%"  border="0" cellspacing="2" cellpadding="0">
-            <tr valign="middle">
-              <td width="50%" align="center" valign="middle"><input type="image" src="images/bt_login_m.gif" width="62" height="20" border="0"></td>
-              <td align="center"><a href="stipulation.php"><img src="images/bt_join_m.gif" width="73" height="20" border="0"></a></td>
-            </tr>
-          </table>
-          <table width="74%"  border="0" cellspacing="2" cellpadding="0">
-            <tr valign="middle">
-              <td width="50%" align="center" valign="middle"><a href="shop_myjrg.php?#my_bunsil"><img src="images/bt_msearch_m.gif" width="84" height="20" border="0"></a></td>
-              <td align="center"><input type="checkbox" name="checkbox" value="checkbox">
-                <img src="images/bt_idsave.gif" width="32" height="12" align="absmiddle"></td>
-            </tr>
-</form>
-		</table>
-	    </td>
-      </tr>
-      <tr>
-        <td><img src="images/lmenu_03.gif" width="200" height="17"></td>
-      </tr>
-    </table>
-	<table width="100%"  border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td height=3></td>
-        </tr>
-	</table>
-      <table width="100%"  border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td><img src="images/lmenu_05.gif" width="200" height="14"></td>
-        </tr>
-        <tr>
-          <td align="center" valign="top" background="images/lmenu_bg_02.gif">	  
-		  <table width="100%"  border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <td align="center"><img src="images/lmenu_06.gif" width="200" height="30"></td>
-            </tr>
-            <tr>
-              <td align="center">
-			 <table width="100%"  border="0" cellspacing="0" cellpadding="0">
-				<tr>
-          		<td height=2></td>
-        		</tr>
-			  </table> 
-			  <table width="80%"  border="0" cellspacing="3" cellpadding="0">
-              </table></td>
-            </tr>
-          </table>          
-		  <table width="100%"  border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <td align="center">
-                <table width="76%"  border="0" cellspacing="0" cellpadding="0">
-<tr><td width=9% height=18><img src='images/i_arrow.gif'></td><td><a href='shop_sp_br.php?br_name=로덴베르거(Rothernbe'><font color=#967727>로덴베르거(Rothernbe</a></td></tr><tr><td colspan=2 height=1 background='images/ml_hline.gif'></td></tr><tr><td colspan=2 height=2></td></tr><tr><td width=9% height=18><img src='images/i_arrow.gif'></td><td><a href='shop_sp_br.php?br_name=리지드/RIDGID'><font color=#967727>리지드/RIDGID</a></td></tr><tr><td colspan=2 height=1 background='images/ml_hline.gif'></td></tr><tr><td colspan=2 height=2></td></tr><tr><td width=9% height=18><img src='images/i_arrow.gif'></td><td><a href='shop_sp_br.php?br_name=대봉산업기계'><font color=#967727>대봉산업기계</a></td></tr><tr><td colspan=2 height=1 background='images/ml_hline.gif'></td></tr><tr><td colspan=2 height=2></td></tr><tr><td width=9% height=18><img src='images/i_arrow.gif'></td><td><a href='shop_sp_br.php?br_name=보쉬전동공구'><font color=#967727>보쉬전동공구</a></td></tr><tr><td colspan=2 height=1 background='images/ml_hline.gif'></td></tr><tr><td colspan=2 height=2></td></tr><tr><td width=9% height=18><img src='images/i_arrow.gif'></td><td><a href='shop_sp_br.php?br_name=마끼다'><font color=#967727>마끼다</a></td></tr><tr><td colspan=2 height=1 background='images/ml_hline.gif'></td></tr><tr><td colspan=2 height=2></td></tr><tr><td width=9% height=18><img src='images/i_arrow.gif'></td><td><a href='shop_sp_br.php?br_name=히타치'><font color=#967727>히타치</a></td></tr>				<tr><td height=4></td></tr>
-                </table>
-</td>
-            </tr>
-          </table></td>
-        </tr>
-        <tr>
-          <td align="center"><img src="images/lmenu_08.gif" width="200" height="16"></td>
-        </tr>
-    </table>
-	  <table width="100%"  border="0" cellspacing="0" cellpadding="0">
-	    <tr>
-	      <td height=3></td>
-        </tr>
-      </table>
-	  <table width="100%"  border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td align="center"><img src="images/ban_rothen.gif" border="0"></td>
-        </tr>
-      </table>
-	  <table width="100%"  border="0" cellspacing="0" cellpadding="0"><tr><td height=3></td></tr></table>
-      <table width="100%"  border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td align="center"><a href="http://ecredit.dacom.net/" target="_blank"><img src="images/ban_dacom.gif" width="194" height="56" border="0"></a></td>
-        </tr>
-      </table>
-	  <table width="100%"  border="0" cellspacing="0" cellpadding="0"><tr><td height=3></td></tr></table>
-      <TABLE WIDTH=194 BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<TR>
-		<TD>
-			<A HREF="stipulation.php">
-				<IMG SRC="images/lico_menu_1.gif" WIDTH=65 HEIGHT=70 BORDER=0 ALT=""></A></TD>
-		<TD>
-			<A HREF="shop_myjrg.php?#my_jungbo">
-				<IMG SRC="images/lico_menu_2.gif" WIDTH=64 HEIGHT=70 BORDER=0 ALT=""></A></TD>
-		<TD>
-			<A HREF="shop_myjrg.php?#my_jrg">
-				<IMG SRC="images/lico_menu_3.gif" WIDTH=65 HEIGHT=70 BORDER=0 ALT=""></A></TD>
-	</TR>
-	<TR>
-		<TD>
-			<A HREF="shop_cart.php">
-				<IMG SRC="images/lico_menu_4.gif" WIDTH=65 HEIGHT=64 BORDER=0 ALT=""></A></TD>
-		<TD>
-			<A HREF="shop_mylist.php">
-				<IMG SRC="images/lico_menu_5.gif" WIDTH=64 HEIGHT=64 BORDER=0 ALT=""></A></TD>
-		<TD>
-			<A HREF="shop_jumunck.php">
-				<IMG SRC="images/lico_menu_6.gif" WIDTH=65 HEIGHT=64 BORDER=0 ALT=""></A></TD>
-	</TR>
-	<TR>
-		<TD>
-			<A HREF="javascript:pipe09pop('shop_gyeonjeok_ys.php','width=800,height=600,scrollbars=yes,status=yes')">
-				<IMG SRC="images/lico_menu_7.gif" WIDTH=65 HEIGHT=72 BORDER=0 ALT=""></A></TD>
-		<TD>
-			<A HREF="shop_yeongsujeung.php">
-				<IMG SRC="images/lico_menu_8.gif" WIDTH=64 HEIGHT=72 BORDER=0 ALT=""></A></TD>
-		<TD><A HREF="shop_iyannae.php">
-			<IMG SRC="images/lico_menu_9.gif" WIDTH=65 HEIGHT=72 BORDER=0 ALT=""></A></TD>
-	</TR>
-</TABLE>
-
-<table width="100%"  border="0" cellspacing="0" cellpadding="0"><tr><td height=3></td></tr></table>
-<script language="JavaScript" type="text/JavaScript">
-<!--
-function MM_jumpMenu(targ,selObj,restore){ //v3.0
-  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
-  if (restore) selObj.selectedIndex=0;
-}
-//-->
-</script>
-<table width="194"  border="0" cellspacing="0" cellpadding="1">
-  <tr>
-    <td bgcolor="#E1E1E1"><table width="100%"  border="0" cellspacing="0" cellpadding="2" bgcolor=#F7F7F7>
-<form name="form_banking" method="post" action="">
-      <tr><td height=3></td></tr>
-      <tr>
-        <td align="center"><b><font color=#009999>인터넷 뱅킹 사이트 </font></td>
-      </tr>
-      <tr>
-        <td align="center" bgcolor="#F9F9F9">
-		<select name="menu1" onChange="MM_jumpMenu('parent',this,0)" class="input_box">
-          <option selected> 은행바로가기 </option>
-          <option>===================</option>
-          <option value="http://www.kyongnambank.co.kr/">경남은행</option>
-          <option value="http://www.kjbank.com/">광주은행</option>
-          <option value="http://www.kbstar.com/">국민은행</option>
-          <option value="http://www.kiupbank.co.kr/">기업은행</option>
-          <option value="http://banking.nonghyup.com/">농협</option>
-          <option value="http://www.dgb.co.kr/">대구은행</option>
-          <option value="http://ibank3.pusanbank.co.kr/">부산은행</option>
-          <option value="http://www.kdb.co.kr/">산업은행</option>
-          <option value="http://www.kfcc.co.kr/">새마을금고</option>
-          <option value="http://www.seoulbank.co.kr/">서울은행</option>
-          <option value="http://www.seoulbank.co.kr/">하나은행</option>
-          <option value="http://www.suhyup.co.kr/">수협중앙회</option>
-          <option value="http://www.cu.co.kr/">신용협동조합</option>
-          <option value="http://www.shinhan.com/">신한은행</option>
-          <option value="http://www.citibank.co.kr/">시티은행</option>
-          <option value="http://www.keb.co.kr/">외환은행</option>
-          <option value="http://www.wooribank.com/">우리은행</option>
-          <option value="http://www.epostbank.go.kr/">우체국</option>
-          <option value="http://www.jbbank.co.kr/">전북은행</option>
-          <option value="http://www.kfb.co.kr/">제일은행</option>
-          <option value="http://www.e-jejubank.com/">제주은행</option>
-          <option value="http://www.chb.co.kr/">조흥은행</option>
-          <option value="http://www.goodbank.com/">한미은행</option>
-        </select></td>
-      </tr><tr><td height=4></td></tr>
-</form></table></td>
-  </tr>
-</table>
-<!-- 
-      <table width="97%"  border="0" cellpadding="1" cellspacing="0" bgcolor="dddddd">
-        <tr>
-          <td><table width="100%"  border="0" cellpadding="4" cellspacing="0" bgcolor="#FCFCF5">
-              <tr>
-                <td align="center">
-<a href='shop_iyannae.php'>이용안내</a>
- | 
-<a href='stipulation.php'>회원가입</a>
- | 
-<a href='shop_myjrg.php'>나의정보</a>
- | 
-<a href='shop_cart.php'>장바구니</a>
- | 
-<a href='shop_jumunck.php'>주문조회</a>      
- | 
-<a href='shop_gyeojwa.php'>입금계좌</a>
- |  
-<a href='shop_hwamulchujeok.php'>배송추적</a>			
-				</td>
-              </tr>
-          </table></td>
-        </tr>
-      </table>
-      <table width="100%"  border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td height=4></td>
-        </tr>
-      </table>
-      <table width="97%"  border="0" cellpadding="1" cellspacing="0" bgcolor="dddddd">
-        <tr>
-          <td><table width="100%"  border="0" cellpadding="4" cellspacing="0" bgcolor="#FCFCF5">
-              <tr>
-                <td align="center"> 
-<a href="javascript:pipe09pop('shop_gyeonjeok_ys.php','width=800,height=600,scrollbars=yes,status=yes')" class=bottom_menu2>견적서양식인쇄</a> | <a href=shop_yeongsujeung.php class=bottom_menu2>영수증인쇄</a>				
-				</td>
-              </tr>
-          </table></td>
-        </tr>
-      </table>
-      <table width="100%"  border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td height=4></td>
-        </tr>
-      </table>      
-      <table width="97%"  border="0" cellpadding="1" cellspacing="0" bgcolor="dddddd">
-        <tr>
-          <td><table width="100%"  border="0" cellpadding="4" cellspacing="0" bgcolor="#FCFCF5">
-              <tr>
-                <td align="center">
-<a href='newslist.php?&boardcode=news&boardname=관련소식'>관련소식</a>
-| 
-<a href='newslist.php?&boardcode=news&boardname=알리는글'>알리는글</a>
-				</td>
-              </tr>
-          </table></td>
-        </tr>
-      </table>
-      <table width="100%"  border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td height=4></td>
-        </tr>
-      </table>
-      <table width="97%"  border="0" cellpadding="1" cellspacing="0" bgcolor="dddddd">
-        <tr>
-          <td><table width="100%"  border="0" cellpadding="4" cellspacing="0" bgcolor="#FCFCF5">
-              <tr>
-                <td align="center">
-<a href='board_list.php?boardcode=board_free&board_grg=board_free_grg&boardname=자유게시판' class=bottom_menu3>자유게시판</a> | 
-<a href='board_list.php?boardcode=board_member&board_grg=board_member_grg&boardname=회원게시판' class=bottom_menu3>회원게시판</a> | 
-<a href='board_list.php?boardcode=board_gongji&board_grg=board_gongji_grg&boardname=&#44277;&#51648;&#49324;&#54637;' class=bottom_menu3>공지사항</a> | 
-<a href='board_list.php?boardcode=board_down&board_grg=board_down_grg&boardname=자료실' class=bottom_menu3>자료실</a> | 
-<a href="imgstart.php?guestimg=jikwonimg&guestimgbr=jikwonimgbr&guestimggr=jikwonimggr&boardname=&#44068;&#47084;&#47532;" class=bottom_menu3>갤러리</a> | 
-<a href="mail_member_wysiwyg_form.php" class=bottom_menu3>메일보내기</a>
-				</td>
-              </tr>
-          </table></td>
-        </tr>
-      </table>
- -->
-
-<table width="100%"  border="0" cellspacing="0" cellpadding="0"><tr><td height=8></td></tr></table>
-	  
-	  </td>
-    <td align="center" valign="top">	
-	<table width="100%"  border="0" cellspacing="0" cellpadding="0"><tr><td height=0></td></tr></table>
-	<table width="100%"  border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td width=99%><center>
-		  <table width="100%"  border="0" cellspacing="0" cellpadding="0"><tr><td height=0></td></tr></table>
-<center>
-<!-- chotg, junggo, gingcb-->
-
-
-
-<table width="100%"  border="0" cellspacing="0" cellpadding="0"><tr><td height=26></td></tr></table>
-</td>
-        </tr>
-	</table>			  
-	</td>
-  </tr>
-</table>
-<table width="900" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td height="1" bgcolor="#E3DAD1"></td>
-  </tr>
-</table>
-<table width="900" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td align="center"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td><a href="#top"><img src="images/mtop.gif" width="26" height="26" border=0></a></td>
-        <td width="80%" align="center">
-		<a href="login_w.php">로그인</a> | 
-		<a href="stipulation.php">회원가입</a> | 
-		<a href="shop_mylist.php">나의쇼핑</a> | 
-		<a href="shop_cart.php">장바구니</a> | 
-		<a href="shop_jumunck.php">주문정보</a> | 
-		<a href="board_list.php?boardcode=board_free&board_grg=board_free_grg&boardname=자유게시판">묻고답하기</a> | 
-		<a href="newslist.php?&boardcode=news&boardname=관련소식">관련소식</a> | 
-		<a href="aboutus.php">회사소개</a>
-		</td>
-        <td align="right"><a href="#top"><img src="images/mtop.gif" width="26" height="26" border=0></a></td>
-      </tr>
-    </table></td>
-  </tr>
-</table>
-<table width="900" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td height="1" bgcolor="#E3DAD1"></td>
-  </tr>
-</table>
-<table width="900" border="0" cellspacing="0" cellpadding="6">
-  <tr>
-    <td align="center" bgcolor="#ffffff"><table width="96%"  border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td width="20%" align="center"><img src="images/logo_g.jpg" width="126" height="51"><br>
-          <img src="images/regular.gif" width="126" height="54"></td>
-        <td width="2" align="center"><img src="images/logo_line.gif" width="5" height="60"></td>
-        <td width="78%">
-Copyright@2005 PIPE09 Inc. All rights reserved. Contact us:<a href="mailto:webmaster@cctvsale.co.kr"><b><font color=#0066FF>webmaster@pipe09.com</font></b></a><br> 
-서울시 금천구 시흥3동 984번지 시흥유통상가 19동 115호&nbsp;&nbsp;&nbsp;
-TEL: 02)6336-8998   FAX: 02)6336-8999<br>
-상호명:대봉산업기계&nbsp;&nbsp;&nbsp;
-사업자등록번호: 138-01-22801&nbsp;&nbsp;&nbsp;
-통신사업자번호: 제18-13159<br>   
-대표자: 윤기봉&nbsp;&nbsp;&nbsp;
-개인정보관련책임자: 김만종
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td height="4"></td>
-  </tr>
-</table>
-<img src="images/btn_mail-safe.gif" width="142" height="21"></td>
-      </tr>
-    </table></td>
-  </tr>
-</table>
-<table width="900" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td height="1" bgcolor="#E3DAD1"></td>
-  </tr>
-</table>
 
 </body>
 </html>

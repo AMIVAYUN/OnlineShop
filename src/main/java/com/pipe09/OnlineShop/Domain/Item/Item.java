@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @Table(name="ITEM")
 @DiscriminatorColumn(name = "DTYPE")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Item {
 
     @Id

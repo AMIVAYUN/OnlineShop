@@ -1,7 +1,6 @@
 package com.pipe09.OnlineShop.Repository;
 
-import com.pipe09.OnlineShop.Domain.Item.Item;
-import com.pipe09.OnlineShop.Domain.Item.LeakDetector;
+import com.pipe09.OnlineShop.Domain.Item.Typed.LeakDetector;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;

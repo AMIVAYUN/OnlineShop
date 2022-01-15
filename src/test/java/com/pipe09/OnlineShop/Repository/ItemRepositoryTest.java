@@ -23,7 +23,6 @@ public class ItemRepositoryTest {
     @Autowired
     ItemRepository repository;
     @Test
-    @Rollback(value = false)
     public void 데이터_저장과불러오기(){
         LeakDetector item = new LeakDetector();
         item.setName("대봉 누수 탐지기");

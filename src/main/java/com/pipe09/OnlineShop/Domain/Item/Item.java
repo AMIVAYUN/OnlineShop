@@ -16,7 +16,7 @@ import java.util.List;
 public class Item {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long Item_ID;
 
 
@@ -29,6 +29,7 @@ public class Item {
     private int Weight;
     private String MadeIn;
     private String ManufacturedCompany;
+    public String imgSrc;
 
     public Item createNewItem(String Name,int Price,int StockQuantity,String description,int Weight,String Madein,String ManufacturedCompany){
         Item newitem=new Item();

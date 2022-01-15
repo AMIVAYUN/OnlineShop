@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Setter
 public class OrderItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
 
     private int Price;
     private Long OrderItem_ID;

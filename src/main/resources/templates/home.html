@@ -2,56 +2,14 @@
 <html xmlns:th="http://www.thymleaf.org">
 
 	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title> Daebong Online Retail Store</title>
-		<link rel="stylesheet" href="css/bootstrap.css">
+		<div th:replace="/fragments/header.html :: fragment-header"></div>
 
-		<style type="text/css">
-			@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
-			h1{
-				color: white;
-			}
-			a{
-				color: white;
-			}
-			li{
-				color: white;
-			}
-
-		</style>
-		<nav class="navbar navbar-expand bg-primary" style="color: white;font-family:'Jua';max-height: 130px">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="#">
-					<img src="img/DaebongMark.jpg" alt="" width="110" >
-				</a>
-				<a class="navbar-brand" href="#" style="font-size: 5rem">대봉산업기계</a>
-
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left:5%">
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0" style="font-size: 3rem">
-						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="/" style="color: white">Home</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#"style="color: white">공지사항</a>
-						</li>
-
-						<li class="nav-item">
-							<a class="nav-link disabled" href="#" style="color: white">장바구니</a>
-						</li>
-					</ul>
-					<form class="d-flex justify-content-end">
-						<button class="btn btn-primary me-xxl-3" type="submit" style="background-color: white;color: black;width:130px;height:70px;font-size: x-large">로그인</button>
-						<button class="btn btn-primary me-xxl-3" type="submit" style="background-color: white;color: black;width:130px;height:70px;font-size: x-large">회원가입</button>
-					</form>
-				</div>
-			</div>
-		</nav>
 	</head>
 <body>
+<hr style="border: solid 5px black">
+	<div th:replace="fragments/bodyheader :: bodyheader"/>
+
+	<hr style="border: solid 3px black">
 	<div class="container-fluid row"style="outline-color: black">
 		<div class="col-sm-4 text-center"style="float: none;margin: 0 auto;">
 			<label for="SearchByDataList" class="col-form-label-lg pt-lg-5"style="font-family: 'Jua';font-size: xx-large">제품 검색</label>
@@ -71,65 +29,23 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-4">
-					<div class="card" style="width: 100%">
-						<img src="img/LeakDetector.jpg" class="card-img-top" alt="">
+					<div class="card" style="width: 100%" th:each="item: ${items}">
+						<img th:src="${item.imgSrc}" class="card-img-top" alt="">
+						<!--<img src="img/LeakDetector.jpg" class="card-img-top" alt=""> -->
 						<div class="card-body">
-							<h5 class="product_Name">Leak Detector</h5>
-							<p class="card-text">대봉 산업기계 Main production</p>
+							<h5 class="product_Name"th:text="${item.name}">hello</h5>
+							<p class="card-text" th:text="${item.price}+원"></p>
+							<p class="card-text" th:text="${item.description}">description</p>
 							<a href="#" class="btn btn-primary">바로가기</a>
 						</div>
+
 					</div>
+
+
+
+
 				</div>
-				<div class="col-md-4">
-					<div class="card" style="width: 100%">
-						<img src="img/LeakDetector.jpg" class="card-img-top" alt="">
-						<div class="card-body">
-							<h5 class="product_Name">Leak Detector</h5>
-							<p class="card-text">대봉 산업기계 Main production</p>
-							<a href="#" class="btn btn-primary">바로가기</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="card" style="width: 100%">
-						<img src="img/LeakDetector.jpg" class="card-img-top" alt="">
-						<div class="card-body">
-							<h5 class="product_Name">Leak Detector</h5>
-							<p class="card-text">대봉 산업기계 Main production</p>
-							<a href="#" class="btn btn-primary">바로가기</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="card" style="width: 100%">
-						<img src="img/LeakDetector.jpg" class="card-img-top" alt="">
-						<div class="card-body">
-							<h5 class="product_Name">Leak Detector</h5>
-							<p class="card-text">대봉 산업기계 Main production</p>
-							<a href="#" class="btn btn-primary">바로가기</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="card" style="width: 100%">
-						<img src="img/LeakDetector.jpg" class="card-img-top" alt="">
-						<div class="card-body">
-							<h5 class="product_Name">Leak Detector</h5>
-							<p class="card-text">대봉 산업기계 Main production</p>
-							<a href="#" class="btn btn-primary">바로가기</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="card" style="width: 100%">
-						<img src="img/LeakDetector.jpg" class="card-img-top" alt="">
-						<div class="card-body">
-							<h5 class="product_Name">Leak Detector</h5>
-							<p class="card-text">대봉 산업기계 Main production</p>
-							<a href="#" class="btn btn-primary">바로가기</a>
-						</div>
-					</div>
-				</div>
+
 
 			</div>
 		</div>

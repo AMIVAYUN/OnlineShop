@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name="MEMBER")
 public class Member {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //auto increment
+    @GeneratedValue //auto increment
     private Long Member_ID;
     // 이름은  10자를 넘기면 안되고 비면 안된다.
     @Column(name= "NAME",nullable = false,length=10)
@@ -22,7 +22,7 @@ public class Member {
     @OneToMany(mappedBy = "member",fetch = FetchType.LAZY)
     private List<Orders> ordersList;
     @Enumerated(EnumType.STRING)@Setter
-    private RoleType roleType;
+    private RoleType roleType = RoleType.USER;
     @Setter @Getter
     private String Phone_Num;
 
@@ -31,7 +31,6 @@ public class Member {
             Member newMember= new Member();
             newMember.setName(name);
             newMember.setPhone_Num(Phone_Num);
-            newMember.setRoleType(RoleType.USER);
             return newMember;
     }
 }

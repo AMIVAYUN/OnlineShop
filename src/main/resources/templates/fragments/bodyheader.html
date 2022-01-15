@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="header" th:fragment="bodyheader">
+    <nav class="navbar navbar-expand bg-primary" style="color: white;font-family:'Jua';max-height: 130px">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="img/DaebongMark.jpg" alt="" width="80" >
+            </a>
+            <a class="navbar-brand" href="#" style="font-size: 3rem">대봉산업기계</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left:5%">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="font-size: 3rem">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/" style="color: white">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"style="color: white">공지사항</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" style="color: white">장바구니</a>
+                    </li>
+                </ul>
+                <form class="d-flex justify-content-end">
+                    <button class="btn btn-primary me-xxl-3" type="submit" style="background-color: white;color: black;width:130px;height:70px;font-size: x-large">로그인</button>
+                    <button class="btn btn-primary me-xxl-3" type="submit" style="background-color: white;color: black;width:130px;height:70px;font-size: x-large">회원가입</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="col-sm4 text-center" style="float:none;margin:0 auto;font-family: 'Jua';font-size: xx-large">
+            대봉 ONLINE RETAIL STORE
+        </div>
+    </div>
+</div>

@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Table(name = "DELIEVERY")
 public class Delivery {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long delivery_ID;
     @OneToOne(mappedBy = "delivery")
     private Orders order;

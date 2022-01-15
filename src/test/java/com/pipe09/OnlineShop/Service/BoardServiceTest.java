@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 public class BoardServiceTest {
     @Autowired BoardService boardService;
     @Test
-    @Rollback(value = false)
+
     public void 게시글_등록(){
         Notice notice=new Notice();
         notice.setName("테스트용 공지입니다.");

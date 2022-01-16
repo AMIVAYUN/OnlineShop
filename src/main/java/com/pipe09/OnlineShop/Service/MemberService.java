@@ -16,9 +16,9 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public Long save(Member member){
+    public String save(Member member){
         validateduplicateMember(member);
-        Long saveid =memberRepository.save(member);
+        String saveid =memberRepository.save(member);
         return saveid;
     }
 
@@ -31,7 +31,7 @@ public class MemberService {
         return memberRepository.findByName(name);
     }
 
-    public Member findByID(Long saveid){
+    public Member findByID(String saveid){
         return memberRepository.findById(saveid);
     }
 

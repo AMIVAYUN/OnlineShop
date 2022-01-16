@@ -1,6 +1,5 @@
 package com.pipe09.OnlineShop.Controller;
 
-import com.pipe09.OnlineShop.Repository.MemberRepository;
 import com.pipe09.OnlineShop.Service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +15,10 @@ public class LogINController {
     @GetMapping("/login")
     public String Login(){
 
-        return "login";
+        return "MemberShip/login";
+    }
+    @GetMapping("/newMember")
+    public String Enter_NewMember(){
+        return "MemberShip/newMember";
     }
 }

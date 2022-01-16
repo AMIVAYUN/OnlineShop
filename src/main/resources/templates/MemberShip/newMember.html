@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/header.html :: header"></div>
+</head>
+<body>
+    <div th:replace="fragments/bodyheader.html :: bodyheader"></div>
+    <div class="col mt-3 align-content-center" >
+        <div class="col-sm-4 text-center"style="float: none;margin: 0 auto;">
+            <row>
+                <form class="d-flex">
+                    <input class="form-control" placeholder="사용하실 아이디를 입력하세요"id="Member_ID">
+                    <button class="btn btn-primary" type="submit" style="background-color: #86b7fe;font-family: 'Jua';width:100px;height: 50px">중복 확인</button>
+
+                </form>
+                <input class="form-control mt-5" placeholder="사용하실 비밀번호를 입력하세요"id="Member_pwd">
+                <form class="d-flex mt-5">
+                    <input class="form-control" placeholder="본인의 이름을 입력하세요"id="Member_name">
+                    <input class="form-control mx-2" placeholder="본인의 생년월일을 입력하세요 ex)970101"id="Member_birth">
+
+                </form>
+                <button class="btn btn-primary mt-5" type="submit" style="background-color: #86b7fe;font-family: 'Jua';width: 150px; height: auto">회원 가입 하기</button>
+
+
+            </row>
+
+        </div>
+    </div>
+</body>
+</html>

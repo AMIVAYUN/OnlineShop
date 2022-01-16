@@ -15,7 +15,7 @@ import java.util.List;
 public class MemberRepository {
     private final EntityManager em;
 
-    public String save(Member member){
+    public Long save(Member member){
         em.persist(member);
 
         return member.getMember_ID();

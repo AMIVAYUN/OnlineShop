@@ -16,9 +16,9 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public String save(Member member){
+    public Long save(Member member){
         validateduplicateMember(member);
-        String saveid =memberRepository.save(member);
+        Long saveid =memberRepository.save(member);
         return saveid;
     }
 

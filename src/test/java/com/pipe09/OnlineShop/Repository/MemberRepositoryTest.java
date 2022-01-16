@@ -23,9 +23,9 @@ public class MemberRepositoryTest {
     @Test
     @Transactional
     public void 멤버_등록과수정(){
-        Member assignMember=Member.createMember("wntjr","wntjr","010");
+        Member assignMember=Member.createMember("wntjr","wntjr","010","5278");
         System.out.println(assignMember.getMember_ID());
-        String id =Repository.save(assignMember);
+        Long id =Repository.save(assignMember);
         /**
         assertEquals("id가 서로 같아야 합니다.",assignMember.getMember_ID(),id);
         assertEquals("번호가 같아야 합니다",Repository.findById(id).getPhone_Num(),assignMember.getPhone_Num());

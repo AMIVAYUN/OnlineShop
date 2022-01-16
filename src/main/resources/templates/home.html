@@ -6,10 +6,25 @@
 		<title> Daebong Online Retail Store</title>
 	</head>
 <body>
-<hr style="border: solid 5px black">
+<hr style="border: solid 5px gray">
 	<div th:replace="fragments/bodyheader.html :: bodyheader"/>
 
 	<hr style="border: solid 3px black">
+<!-- 캐러셀 등록 -->
+	<div class="container-fluid" >
+		<div id="carouselDaebongProduct" class="carousel slide col-sm-5" data-bs-ride="carousel" style="float:none;margin:0 auto">
+			<div class="carousel-inner"style="border: solid #86b7fe 5px">
+				<div class="carousel-item active" th:each="item:${items}">
+					<img th:src="${item.getImgSrc()}" class="d-block w-100" alt="...">
+				</div>
+
+			</div>
+		</div>
+	</div>
+<hr style="border: solid 5px gray">
+
+
+
 	<div class="container-fluid row"style="outline-color: black">
 		<div class="col-sm-4 text-center"style="float: none;margin: 0 auto;">
 			<label for="SearchByDataList" class="col-form-label-lg pt-lg-5"style="font-family: 'Jua';font-size: xx-large">제품 검색</label>

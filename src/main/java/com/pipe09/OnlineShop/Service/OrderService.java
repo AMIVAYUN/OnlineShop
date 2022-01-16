@@ -24,7 +24,7 @@ public class OrderService {
     private final MemberRepository memberRepository;
     private final ItemRepository itemRepository;
 
-    public Long order(Long memberId,Long itemId, int count){
+    public Long order(String memberId,Long itemId, int count){
         Member member= memberRepository.findById(memberId);
         Item item= itemRepository.findItem(itemId);
 

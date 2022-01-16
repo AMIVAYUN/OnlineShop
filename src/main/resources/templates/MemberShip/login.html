@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/header.html :: header"></div>
+</head>
+<body>
+<div class="row mt-4 text-center">
+    <h1 style="float: none;margin: 0 auto;color: black;font-family: 'Jua'">로그인</h1>
+</div>
+<div class="col mt-3 align-content-center text-center" >
+    <div class="input-group mb-3"style="width: 350px;float: none; margin:0 auto;">
+        <span class="input-group-text" id="basic-addon1">@</span>
+        <input type="text" class="form-control" placeholder="ID를 입력하세요" aria-label="MEMBER_ID" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group mb-3" style="width: 350px;float: none; margin:0 auto;">
+        <span class="input-group-text" id="basic-addon2">*</span>
+        <input type="text" class="form-control" placeholder="비밀번호를 입력하세요" aria-label="MEMBER_PWD" aria-describedby="basic-addon2">
+    </div>
+    <div class="btn-primary text-center mt-4"style="float: none;margin: 0 auto;width: 300px"href="#">LOG-IN</div>
+    <hr class="my-3" style="border: solid 4px black">
+    <div class="mt-4"style="float: none; margin:0 auto;">아이디가 없으신가요?</div>
+    <span class="btn btn-primary"style="float: none; margin:0 auto;"onclick="window.open('/newMember')">회원가입</span>
+
+</div>
+
+</div>
+</body>
+</html>
+</html>

@@ -21,7 +21,7 @@ public class BoardController {
     public String notice_Access(Model model){
         List<Notice> noticeList = boardService.findAll();
         model.addAttribute("noticeList",noticeList);
-        return "noticeboard";
+        return "Board/noticeboard";
 
     }
 

@@ -6,7 +6,7 @@ Daebong industrial Online Shop_1.0
 - [X] 요구사항 분석
 - [X] 프로젝트 기초 설계
 - [X] REACT+SPRING BOOT 심화 스터디 //진행 중
-  - [] JAVASCRIPT
+  - [X] JAVASCRIPT
   - [ ] REACT
   - [ ] SPRING BOOT
 - [ ] 프로그램 상세 설계

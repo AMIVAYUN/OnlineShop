@@ -7,9 +7,8 @@ link:http://ec2-13-125-22-236.ap-northeast-2.compute.amazonaws.com:8080/
 # 현재 진행 상태
 - [X] 요구사항 분석
 - [X] 프로젝트 기초 설계
-- [X] REACT+SPRING BOOT 심화 스터디 //진행 중
+- [X] Front(JAVASCRIPT+REACT)+SPRING BOOT 심화 스터디 //진행 중 0120 회의 결과: JAVASCRIPT를 활용한 적응형 웹으로 방향 전환.
   - [X] JAVASCRIPT
-  - [ ] REACT
   - [ ] SPRING BOOT
 - [ ] 프로그램 상세 설계
 - [ ] 테스트 케이스 작성 및 검증

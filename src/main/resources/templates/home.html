@@ -1,82 +1,67 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-
-	<head>
-		<div th:replace="fragments/header.html :: header"></div>
-		<title> Daebong Online Retail Store</title>
-	</head>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+</head>
 <body>
-<hr style="border: solid 5px gray">
-	<div th:replace="fragments/bodyheader.html :: bodyheader"/>
+    <nav id="navi-bar">
+    
+        <a href="#"style="left:1200px;">로그인</a>
+        <a href="#"style="left:1240px;">회원가입</a>
+        <a href="#"style="left:1290px;">마이페이지</a>
+        <a href="#"style="left:1350px;">FAQ</a>
+    </nav>
+    <div id="bodyheader">
+        <div id="mainHeaderbar">
+            <img src="img/DB LOGO.gif" id="logo">
+            <span id="searchbar"><input type="text" placeholder="   제품을 검색하세요."></span>
+            <a id="cursor" href="#">c</a>
+            <img src="img/shoppingcart.png" id="scart" onclick="javascript:location.href='/'">
+        
+                
+            
+        </div>
+    </div>
+    <hr>
+    <div id="category_part">
+        
+        <ul id="category_list">
+            <li>누수 탐지기</li>
+            <li>하수관 청소기</li>
+            <li style="margin-top:3px;">내시경</li>
+            <li>고압 세척기</li>
+            <li style="margin-top:3px;">공구</li>
+            
+        
+        </ul>
+        
+    </div>
+    <div id="footer">
+        <img src="img/cp1.gif">
+    </div>
 
-	<hr style="border: solid 3px black">
-<!-- 캐러셀 등록 -->
-	<div class="container-fluid" >
-		<div id="carouselDaebongProduct" class="carousel slide col-sm-5" data-bs-ride="carousel" style="float:none;margin:0 auto">
-			<div class="carousel-inner"style="border: solid #86b7fe 5px">
-				<div class="carousel-item active" th:each="item:${items}">
-					<img th:src="${item.getImgSrc()}" class="d-block w-100" alt="...">
-				</div>
-
-			</div>
-		</div>
-	</div>
-<hr style="border: solid 5px gray">
-
-
-
-	<div class="container-fluid row"style="outline-color: black">
-		<div class="col-sm-4 text-center"style="float: none;margin: 0 auto;">
-			<label for="SearchByDataList" class="col-form-label-lg pt-lg-5"style="font-family: 'Jua';font-size: xx-large">제품 검색</label>
-			<form class="d-flex">
-				<input class="form-control" list="CategoryListOptions" id="SearchByDataList" placeholder="제품 이름 혹은 제품군을 검색하세요">
-				<datalist id="CategoryListOptions">
-					<option value="test">
-				</datalist>
-				<button class="btn btn-primary" type="submit" style="background-color: #0dcaf0;font-family: 'Jua';width:100px;height: 50px">검 색</button>
-			</form>
-
-		</div>
-
-	</div>
-	<hr style="border: solid 3px black">
-	<row>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-4">
-					<div class="card" style="width: 100%" th:each="item: ${items}">
-						<img th:src="${item.imgSrc}" class="card-img-top" alt="">
-						<!--<img src="img/LeakDetector.jpg" class="card-img-top" alt=""> -->
-						<div class="card-body">
-							<h5 class="product_Name"th:text="${item.name}">hello</h5>
-							<p class="card-text" th:text="${item.price}+원"></p>
-							<p class="card-text" th:text="${item.description}">description</p>
-							<a href="#" class="btn btn-primary">바로가기</a>
-						</div>
-
-					</div>
-
-
-
-
-				</div>
-
-
-			</div>
-		</div>
-
-	</row>
-
-	<row class="container pt-lg-5">
-		<nav aria-label="Content-List">
-			<ul class="pagination justify-content-center">
-				<li class="page-item"><a class="page-link" href="#">1</a> </li>
-				<li class="page-item"><a class="page-link" href="#">2</a> </li>
-				<li class="page-item"><a class="page-link" href="#">3</a> </li>
-			</ul>
-		</nav>
-	</row>
-
-
+    <ul id="shoplist">
+        <li class="item">
+            <div id="item_img">
+                <img src="img/LeakDetector.jpg">
+            </div>
+            <div id="item_text">
+                <a id="item_name">d</a></br>
+                <a id="item_price">d</a></br>
+                <button>바로가기</button>
+            </div>
+        </li>
+        
+    </ul>
+    <script></script>
 </body>
 </html>

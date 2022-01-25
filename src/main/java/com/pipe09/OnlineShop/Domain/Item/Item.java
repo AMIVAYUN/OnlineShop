@@ -1,11 +1,13 @@
 package com.pipe09.OnlineShop.Domain.Item;
 
+
+import com.pipe09.OnlineShop.Dto.M_ItemDto;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -51,5 +53,9 @@ public class Item {
     }
     public void addStockQuantity(int count){
         this.StockQuantity+=count;
+    }
+    public static List<M_ItemDto> itemtoDto(List<Item> items){
+        List<M_ItemDto> dtoList=items.stream().map(M_ItemDto::new).collect(Collectors.toList());
+        return dtoList;
     }
 }

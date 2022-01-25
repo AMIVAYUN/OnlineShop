@@ -57,6 +57,21 @@ body{
     border-radius: 40px 40px;
     padding-inline-start: 25px;
 }
+#side_Bar{
+    position: fixed;
+    left:1400px;
+    width:60px;
+    height:350px;
+    background-color:white ;
+}
+#side_Bar div img{
+    cursor: pointer;
+    width:60px;
+    height:70px;
+}
+#side_Bar div img:hover{
+    filter:opacity(0.7) drop-shadow(0 0 0 #87cefa);
+}
 #cursor{
     
     cursor:pointer;
@@ -93,7 +108,7 @@ hr{
 
 }
 #category_list li{
-    
+    white-space : nowrap;
     margin-right: 20px;
     font-family: 'Do hyeon',sans-serif;
     font-size:20px;

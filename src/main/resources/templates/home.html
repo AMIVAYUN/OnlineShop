@@ -7,10 +7,11 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="js/main.js"></script>
+
 </head>
 <body>
     <nav id="navi-bar">
@@ -25,7 +26,7 @@
             <img src="img/DB LOGO.gif" id="logo">
             <span id="searchbar"><input type="text" placeholder="   제품을 검색하세요."></span>
             <a id="cursor" href="#">c</a>
-            <img src="img/shoppingcart.png" id="scart" onclick="javascript:location.href='/'">
+            <img src="img/shoppingcart.png" id="scart" onclick="javascript:location.href='/shopping-list'">
         
                 
             
@@ -45,12 +46,9 @@
         </ul>
         
     </div>
-    <div id="footer">
-        <img src="img/cp1.gif">
-    </div>
-
     <ul id="shoplist">
-        <li class="item">
+
+        <!--li class="item">
             <div id="item_img">
                 <img src="img/LeakDetector.jpg">
             </div>
@@ -59,9 +57,32 @@
                 <a id="item_price">d</a></br>
                 <button>바로가기</button>
             </div>
-        </li>
-        
+        </li-->
+
     </ul>
-    <script></script>
+
+    <div id="side_Bar">
+        <div id="comp_intr">
+            <img src="img/companyIntroduction_ver2.png" onclick="javascript:location.href='/comp-intro'">
+        </div>
+        <div id="comp_mypage">
+            <img src="img/mypage_ver2.png"onclick="javascript:location.href='/my-page'">
+
+        </div>
+        <div id="comp_hompage">
+            <img src="img/homepage_ver2.png"onclick="javascript:location.href='http://www.대봉산업기계.com'">
+
+        </div>
+        <div id="comp_board">
+            <img src="img/board_ver2.png" onclick="javascript:location.href='/board'">
+        </div>
+        <div id="comp_top">
+            <img src="img/TOP_ver2.png" onclick="window.scroll(0,0)">
+        </div>
+    </div>
+    <div id="footer">
+        <img src="img/cp1.gif">
+    </div>
+
 </body>
 </html>

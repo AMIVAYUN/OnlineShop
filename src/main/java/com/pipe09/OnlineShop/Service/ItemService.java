@@ -32,4 +32,10 @@ public class ItemService {
         item.setName(name);
         item.setPrice(price);
     }
+    public List<Item> findAllbyType(String type){
+        return itemRepository.findAllbyType(type);
+    }
+    public List<Item> findAllaboutTools(){
+        return itemRepository.findAllaboutTools();
+    }
 }

@@ -17,8 +17,9 @@ public class HomeController {
     private final ItemService itemService;
     @GetMapping("/")
     public String home(Model model){
-        log.info("home access"+ LocalDate.now());
+        log.info("home access");
         return "home";
     }
+
 
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>대봉산업기계에 오신 것을 환영합니다!</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,8 @@
         <a href="#"style="left:1200px;">로그인</a>
         <a href="#"style="left:1240px;">회원가입</a>
         <a href="#"style="left:1290px;">마이페이지</a>
-        <a href="#"style="left:1350px;">FAQ</a>
+        <a href="/notice"style="left:1350px;">FAQ</a>
+        <a href="/admin/manage" style="left:1380px;">관리자</a>
     </nav>
     <div id="bodyheader">
         <div id="mainHeaderbar">
@@ -36,14 +37,19 @@
     <div id="category_part">
         
         <ul id="category_list">
-            <li>누수 탐지기</li>
-            <li>하수관 청소기</li>
-            <li style="margin-top:3px;">내시경</li>
-            <li>고압 세척기</li>
-            <li style="margin-top:3px;">공구</li>
+            <li id="default_category">전체 보기</li>
+            <li id="LeakDetector">누수 탐지기</li>
+            <li id="SewerCleaner">하수관 청소기</li>
+            <li id="Endoscope" style="margin-top:3px;">내시경</li>
+            <li id="Tool" style="margin-top:3px;">공구</li>
+            <li id="ETC" style="margin-top:3px;">기타</li>
             
         
         </ul>
+        <select name="정렬" id="OptionalSort">
+            <option value="한줄씩 보기">한줄씩 보기</option>
+            <option value="4개씩 보기">4개씩 보기</option>
+        </select>
         
     </div>
     <ul id="shoplist">
@@ -77,11 +83,11 @@
             <img src="img/board_ver2.png" onclick="javascript:location.href='/board'">
         </div>
         <div id="comp_top">
-            <img src="img/TOP_ver2.png" onclick="window.scroll(0,0)">
+            <img src="img/Top_ver2.png" onclick="window.scroll(0,0)">
         </div>
     </div>
     <div id="footer">
-        <img src="img/cp1.gif">
+        <img src="img/cp1.GIF">
     </div>
 
 </body>

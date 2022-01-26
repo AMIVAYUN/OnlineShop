@@ -23,7 +23,7 @@ body{
     width:100%;
     height:20px;
     position:absolute;
-    right:100px;
+
     
 }
 #navi-bar a{
@@ -59,7 +59,7 @@ body{
 }
 #side_Bar{
     position: fixed;
-    left:1400px;
+    left:1350px;
     width:60px;
     height:350px;
     background-color:white ;
@@ -95,6 +95,8 @@ body{
     cursor: pointer;
 }
 hr{
+    width:1100px;
+    position: center;
     border: 1px solid black;
 }
 #category_part{
@@ -104,7 +106,7 @@ hr{
     list-style: none;
     display: flex;
     position:absolute;
-    left:300px;
+    left:320px;
 
 }
 #category_list li{
@@ -112,11 +114,25 @@ hr{
     margin-right: 20px;
     font-family: 'Do hyeon',sans-serif;
     font-size:20px;
+    cursor: pointer;
 }
+
+#default_category{
+    background-color: black;
+    border-radius: 10px 10px;
+    color:white;
+}
+
 #category_list li:hover{
     background-color: black;
     border-radius: 10px 10px;
     color:white;
+}
+#category_part select{
+    position: absolute;
+    left:1100px;
+    top: 20px;
+
 }
 #shoplist{
     position:absolute;
@@ -130,30 +146,53 @@ hr{
     display:flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-content: flex-start;
+
 }
 #shoplist li{
-    width:300px;
-    height:400px;
-    
-}
-#item_img{
-    width:300px;
+    cursor:pointer;
+    margin-top:0;
+    width:200px;
     height:250px;
+    margin-left:12.5px;
+    margin-right:12.5px;
+    margin-bottom: 10px;
+    border-bottom-left: soild 1px red;
+}
+li #item_img{
+    position: relative;
+    left:25px;
+    width:150px;
+    height:150px;
+    top:15px;
     
 }
-#item_img img{
-    position: relative;
-    left:75px;
-    top:75px;
+li #merchansub{
+    font-size: 10px;
+}
+
+li #item_img img{
+
+    left:25px;
+    top:25px;
     width:150px;
     height:150px;
     border-radius: 50px;
-
 }
 #item_text{
-    width:300px;
-    height:150px;
-    text-align: center;
+    position: relative;
+    margin-top : 20px;
+    margin-left: 40px;
+    width:200px;
+    height:90px;
+    text-align: left;
+}
+#item_name{
+    font-weight: bold;
+}
+#item_price {
+    color:red;
+    font-weight: bold;
 }
 #footer{
     position:fixed;

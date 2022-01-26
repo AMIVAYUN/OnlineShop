@@ -27,4 +27,15 @@ public class ItemRepository {
         String jpql="select i from Item i";
         return em.createQuery(jpql, Item.class).getResultList();
     }
+
+    public List<Item> findAllbyType(String type){
+
+        return em.createQuery("select i from Item i where i.DTYPE=:type").setParameter("type",type).getResultList();
+
+    }
+
+
+    public List<Item> findAllaboutTools() {
+        return em.createQuery("select i from Item i where i.DTYPE=Cutter or i.DTYPE=Drill or i.DTYPE=Grindstone or i.DTYPE=Nipper or i.DTYPE=Wrench ").getResultList();
+    }
 }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>제품 등록</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/register_item.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+</head>
+<body>
+    <form method="post" action="./register_item.do" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="상품 이름"/><br>
+        <input type="number" name="price" placeholder="가격"/></br>
+        <input type="number" name="stockQuantity" placeholder="재고 수량"/></br>
+        <input type="number" name="weight" placeholder="무게"/></br>
+        <input type="text" name="Description" placeholder="상품 설명"/></br>
+        <input type="text" name="MadeIn" placeholder="제조 국가"/></br>
+        <input type="text" name="ManufacturedCompany" placeholder="제조사"/></br>
+        <input type="file" name="img"style="height:50px;"multiple="multiple"/></br>
+        
+        <select name="dtype" >
+            <option name="L">누수탐지기</option>
+            <option name="D">드릴</option>
+            <option name="E">내시경</option>
+            <option name="G">글라인더</option>
+            <option name="H">해머</option>
+            <option name="C">커터</option>
+            <option name="N">니퍼</option>
+            <option name="S">하수관 청소기</option>
+            <option name="W">렌치</option>
+            <option name="ETC">기타</option>
+            
+            
+          </select></br>
+          <button type="submit" value="결과 확인">전송</button>
+
+    </form>
+    <!--
+    private String Name;
+    private int Price;
+    private int StockQuantity;
+    @Lob
+    private String Description;
+    ////
+    private int Weight;
+    private String MadeIn;
+    private String ManufacturedCompany;
+    public String imgSrc;
+    @Column(name="DTYPE",insertable = false,updatable = false)
+    private String DTYPE;
+    -->
+</body>
+</html>

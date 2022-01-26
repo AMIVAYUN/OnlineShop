@@ -1,11 +1,15 @@
 package com.pipe09.OnlineShop.Domain.Member;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pipe09.OnlineShop.Domain.Orders.Orders;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.beans.ConstructorProperties;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -26,12 +30,17 @@ public class Member {
     @Setter
     private String Name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "member",fetch = FetchType.LAZY)
     private List<Orders> ordersList;
     @Enumerated(EnumType.STRING)@Setter
     private RoleType roleType = RoleType.USER;
     @Setter @Getter
     private String Phone_Num;
+
+    @Column(name = "RegDate")
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    private LocalDate date;
 
 
     public static Member createMember(String id,String name,String Phone_Num,String pwd){

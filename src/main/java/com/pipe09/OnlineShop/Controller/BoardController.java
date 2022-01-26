@@ -17,7 +17,7 @@ import java.util.List;
 public class BoardController {
     private final BoardService boardService;
 
-    @GetMapping("/notice-board")
+    @GetMapping("/notice")
     public String notice_Access(Model model){
         List<Notice> noticeList = boardService.findAll();
         model.addAttribute("noticeList",noticeList);

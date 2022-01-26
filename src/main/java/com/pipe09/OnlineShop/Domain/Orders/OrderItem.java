@@ -1,6 +1,7 @@
 package com.pipe09.OnlineShop.Domain.Orders;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pipe09.OnlineShop.Domain.Item.Item;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +22,7 @@ public class OrderItem {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="Item_ID")
     private Item item;
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="Order_ID")
     private Orders orders;

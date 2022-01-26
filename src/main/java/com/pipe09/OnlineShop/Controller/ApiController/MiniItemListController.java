@@ -6,8 +6,7 @@ import com.pipe09.OnlineShop.Dto.M_ItemDto;
 import com.pipe09.OnlineShop.Service.ItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,6 +16,8 @@ import java.util.List;
 @RestController
 public class MiniItemListController {
     private final ItemService service;
+
+    @ResponseBody
     @GetMapping("/api/v1/m-item")
     public List<M_ItemDto> getminiItems(){
         List<Item>items=service.findAll();
@@ -26,4 +27,23 @@ public class MiniItemListController {
         return dtoList;
 
     }
+    @ResponseBody
+    @GetMapping("/api/v1/m-item/{DTYPE}")
+    public List<M_ItemDto> getminiItemsbyType(@PathVariable String DTYPE){
+        List<Item>items=service.findAllbyType(DTYPE);
+        List<M_ItemDto>dtoList=Item.itemtoDto(items);
+
+        log.info("MiniItemListbyType:"+dtoList.toString());
+        return dtoList;
+
+    }
+    @ResponseBody
+    @GetMapping("api/v1/m-item/cast-tool")
+    public List<M_ItemDto> getminiItemsAboutTool(){
+        List<Item>items=service.findAllaboutTools();
+        List<M_ItemDto>dtoList=Item.itemtoDto(items);
+        return dtoList;
+    }
+
+
 }

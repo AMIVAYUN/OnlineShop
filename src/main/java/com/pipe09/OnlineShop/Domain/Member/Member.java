@@ -5,6 +5,8 @@ import com.pipe09.OnlineShop.Domain.Orders.Orders;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.beans.ConstructorProperties;
@@ -21,35 +23,44 @@ public class Member {
     @Setter
     @Id@GeneratedValue
     private Long Member_ID;
-    @Getter@Setter
-    private String User_ID;
+    @Setter@Column( nullable = false )
+    private String user_ID;
     @Column(name="pwd",nullable = false)@Setter
     private String pwd;
     // 이름은  10자를 넘기면 안되고 비면 안된다.
     @Column(name= "NAME",nullable = false,length=10)
     @Setter
     private String Name;
+    @Setter
+    @Column(name = "EMAIL",nullable = false)
+    private String email;
 
     @JsonIgnore
     @OneToMany(mappedBy = "member",fetch = FetchType.LAZY)
     private List<Orders> ordersList;
     @Enumerated(EnumType.STRING)@Setter
     private RoleType roleType = RoleType.USER;
-    @Setter @Getter
+    @Column(nullable = false)
+    @Setter
     private String Phone_Num;
 
-    @Column(name = "RegDate")
+    @Column(name = "RegDate")@Setter
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private LocalDate date;
 
 
-    public static Member createMember(String id,String name,String Phone_Num,String pwd){
-            Member newMember= new Member();
-            newMember.setUser_ID(id);
-            newMember.setName(name);
-            newMember.setPhone_Num(Phone_Num);
-            newMember.setPwd(pwd);
-            newMember.setRoleType(RoleType.USER);
-            return newMember;
+    public static Member createMember(String id,String name,String Phone_Num,String pwd,String email) {
+        Member newMember = new Member();
+        newMember.setUser_ID(id);
+        newMember.setName(name);
+        newMember.setPhone_Num(Phone_Num);
+        newMember.setPwd(pwd);
+        newMember.setEmail(email);
+        newMember.setRoleType(RoleType.USER);
+        newMember.setDate(LocalDate.now());
+        return newMember;
+    }
+    public void Encodepwd(PasswordEncoder encoder){
+        this.pwd=encoder.encode(this.pwd);
     }
 }

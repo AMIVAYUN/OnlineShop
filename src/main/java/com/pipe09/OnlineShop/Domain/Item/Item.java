@@ -1,12 +1,20 @@
 package com.pipe09.OnlineShop.Domain.Item;
 
 
+import com.pipe09.OnlineShop.Domain.Item.Typed.LeakDetector;
 import com.pipe09.OnlineShop.Dto.M_ItemDto;
 import com.pipe09.OnlineShop.Dto.R_itemDto;
+import com.pipe09.OnlineShop.Dto.responseDto;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,10 +72,49 @@ public class Item {
                         m_itemDto.getDtype().substring("com.pipe09.OnlineShop.Domain.Item.Typed.".length())));
         return dtoList;
     }
-    public static Item fromReg(R_itemDto r_itemDto,String src){
+    public static Item fromReg(R_itemDto r_itemDto){
+        System.out.println(r_itemDto.getDtype());
         Item item=createNewItem(r_itemDto.getName(),r_itemDto.getPrice(),r_itemDto.getStockQuantity(),r_itemDto.getDescription(),r_itemDto.getWeight(),r_itemDto.getMadeIn(),r_itemDto.getManufacturedCompany());
-        item.setImgSrc("");
+        item.setImgSrc("img/"+r_itemDto.img.getOriginalFilename());
+        item=item.match(item,r_itemDto.getDtype());
         return item;
+    }
+    public Item match(Item item,String type){
+        Item newItem;
+        switch (type){
+            case("누수탐지기"):
+
+        }
+        newItem=new LeakDetector();
+        newItem.setName(item.getName());
+        newItem.setPrice(item.getPrice());
+        newItem.setWeight(item.getWeight());
+        newItem.setManufacturedCompany(item.getManufacturedCompany());
+        newItem.setDescription(item.getDescription());
+        newItem.setStockQuantity(item.getStockQuantity());
+        newItem.setMadeIn(item.getMadeIn());
+        newItem.setImgSrc(item.getImgSrc());
+        return newItem;
+    }
+    public static responseDto MakingImgfile(MultipartFile mfile){
+        if(mfile!=null) {
+            File file = new File("./src/main/resources/static/img", mfile.getOriginalFilename());
+            try {
+                file.createNewFile();
+                FileOutputStream fos = new FileOutputStream(file);
+                fos.write(mfile.getBytes());
+                fos.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                responseDto fail = new responseDto(HttpStatus.BAD_REQUEST, e, "이미지를 찾을 수 없습니다.");
+                return fail;
+            } catch (IOException e) {
+                e.printStackTrace();
+                responseDto fail = new responseDto(HttpStatus.EXPECTATION_FAILED, e, "이미지 변환간 에러가 발생했습니다.");
+                return fail;
+            }
+        }
+        return new responseDto(HttpStatus.ACCEPTED,null,"제품 등록에 성공하셨습니다.");
     }
 
 }

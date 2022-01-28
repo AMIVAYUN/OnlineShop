@@ -17,7 +17,7 @@ import java.util.List;
 public class MiniItemListController {
     private final ItemService service;
 
-    @ResponseBody
+
     @GetMapping("/api/v1/m-item")
     public List<M_ItemDto> getminiItems(){
         List<Item>items=service.findAll();
@@ -27,7 +27,7 @@ public class MiniItemListController {
         return dtoList;
 
     }
-    @ResponseBody
+
     @GetMapping("/api/v1/m-item/{DTYPE}")
     public List<M_ItemDto> getminiItemsbyType(@PathVariable String DTYPE){
         List<Item>items=service.findAllbyType(DTYPE);
@@ -37,7 +37,7 @@ public class MiniItemListController {
         return dtoList;
 
     }
-    @ResponseBody
+
     @GetMapping("api/v1/m-item/cast-tool")
     public List<M_ItemDto> getminiItemsAboutTool(){
         List<Item>items=service.findAllaboutTools();

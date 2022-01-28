@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDate;
 
@@ -16,10 +17,12 @@ import java.time.LocalDate;
 public class HomeController {
     private final ItemService itemService;
     @GetMapping("/")
-    public String home(Model model){
+    public String home(Model model) {
         log.info("home access");
-        return "home";
+        return "fragments/public/home";
     }
+
+
 
 
 }

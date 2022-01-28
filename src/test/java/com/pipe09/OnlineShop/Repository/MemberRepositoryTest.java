@@ -23,7 +23,7 @@ public class MemberRepositoryTest {
     @Test
     @Transactional
     public void 멤버_등록과수정(){
-        Member assignMember=Member.createMember("wntjr","wntjr","010","5278");
+        Member assignMember=Member.createMember("wntjr","wntjr","010","5278","wntjrdbs@gmail.com");
         System.out.println(assignMember.getMember_ID());
         Long id =Repository.save(assignMember);
         /**

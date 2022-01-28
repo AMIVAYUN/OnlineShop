@@ -73,16 +73,17 @@ public class InitSerivce {
         item4.setMadeIn("Korea");
         item4.setPrice(5000);
         em.persist(item4);
-         Wrench item4 = new Wrench();
-         item4.setName("파이프 렌치 36");
-         item4.setStockQuantity(10);
-         item4.setManufacturedCompany("Rothenberger");
-         item4.setDescription("파이프 렌치");
-         item4.setImgSrc("img/63TC.jpg");
-         item4.setWeight(2);
-         item4.setMadeIn("Germany");
-         item4.setPrice(8000);
-         em.persist(item4);
+        Wrench item5 = new Wrench();
+        item5.setName("파이프 렌치 36");
+        item5.setStockQuantity(10);
+        item5.setManufacturedCompany("Rothenberger");
+        item5.setDescription("파이프 렌치");
+        item5.setImgSrc("img/63TC.jpg");
+        item5.setWeight(2);
+        item5.setMadeIn("Germany");
+        item5.setPrice(8000);
+        em.persist(item4);
+
          */
 
 

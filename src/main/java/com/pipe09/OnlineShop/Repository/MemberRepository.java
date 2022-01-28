@@ -20,12 +20,14 @@ public class MemberRepository {
 
         return member.getMember_ID();
     }
+
     public List<Member> findByName(String name){
         String jpql="select m from Member m where m.Name=:name";
         return em.createQuery(jpql,Member.class).setParameter("name",name).getResultList();
     }
-    public Member findById(String id){
-        return em.find(Member.class,id);
+    public Member findByuserId(String id) {
+        return em.createQuery("select m from Member m where m.user_ID=:id", Member.class)
+                .setParameter("id", id).getSingleResult();
     }
     public List<Member> findAll(){
         return em.createQuery("select mlist from Member mlist").getResultList();

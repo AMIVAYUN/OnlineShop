@@ -36,6 +36,7 @@ body > div{
     width:140px;
     position:relative;
     border: 1px solid black;
+    cursor: pointer;
 }
 
 #title{

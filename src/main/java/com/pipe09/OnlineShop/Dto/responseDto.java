@@ -4,12 +4,22 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 
 @Data
-public class responseDto {
-    Exception e;
+public class responseDto<T> {
+    private int code=0;
     String desc;
+    private T data=null;
 
-    public responseDto(HttpStatus status,Exception e, String desc) {
-        this.e = e;
+    public responseDto(int code, String desc, T data) {
+        this.code = code;
         this.desc = desc;
+        this.data = data;
+    }
+    public static boolean validateNull(Object object){
+        if(object==null){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 }

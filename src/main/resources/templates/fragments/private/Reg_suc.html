@@ -12,13 +12,10 @@
 <body>
     <script th:inline="javascript">
 
-        let desc=[[${rep.desc}]];
+        let desc=[[${rep?.desc}]];
         alert(desc);
         window.close();
 
-
-
-        alert(message);
     </script>
 </body>
 </html>

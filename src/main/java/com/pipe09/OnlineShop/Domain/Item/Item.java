@@ -1,7 +1,7 @@
 package com.pipe09.OnlineShop.Domain.Item;
 
 
-import com.pipe09.OnlineShop.Domain.Item.Typed.LeakDetector;
+import com.pipe09.OnlineShop.Domain.Item.Typed.*;
 import com.pipe09.OnlineShop.Dto.M_ItemDto;
 import com.pipe09.OnlineShop.Dto.R_itemDto;
 import com.pipe09.OnlineShop.Dto.responseDto;
@@ -43,8 +43,9 @@ public class Item {
     public String imgSrc;
     @Column(name="DTYPE",insertable = false,updatable = false)
     private String DTYPE;
-    public static Item createNewItem(String Name,int Price,int StockQuantity,String description,int Weight,String Madein,String ManufacturedCompany){
-        Item newitem=new Item();
+    public static Item createNewItem(String type,String Name,int Price,int StockQuantity,String description,int Weight,String Madein,String ManufacturedCompany){
+        ItemFactory factory=new ItemFactory();
+        Item newitem=factory.makingItemBytype(type);
         newitem.setName(Name);
         newitem.setPrice(Price);
         newitem.setStockQuantity(StockQuantity);
@@ -73,29 +74,12 @@ public class Item {
         return dtoList;
     }
     public static Item fromReg(R_itemDto r_itemDto){
-        System.out.println(r_itemDto.getDtype());
-        Item item=createNewItem(r_itemDto.getName(),r_itemDto.getPrice(),r_itemDto.getStockQuantity(),r_itemDto.getDescription(),r_itemDto.getWeight(),r_itemDto.getMadeIn(),r_itemDto.getManufacturedCompany());
+        Item item=createNewItem(r_itemDto.getDtype(),r_itemDto.getName(),r_itemDto.getPrice(),r_itemDto.getStockQuantity(),r_itemDto.getDescription(),r_itemDto.getWeight(),r_itemDto.getMadeIn(),r_itemDto.getManufacturedCompany());
         item.setImgSrc("img/"+r_itemDto.img.getOriginalFilename());
-        item=item.match(item,r_itemDto.getDtype());
         return item;
     }
-    public Item match(Item item,String type){
-        Item newItem;
-        switch (type){
-            case("누수탐지기"):
 
-        }
-        newItem=new LeakDetector();
-        newItem.setName(item.getName());
-        newItem.setPrice(item.getPrice());
-        newItem.setWeight(item.getWeight());
-        newItem.setManufacturedCompany(item.getManufacturedCompany());
-        newItem.setDescription(item.getDescription());
-        newItem.setStockQuantity(item.getStockQuantity());
-        newItem.setMadeIn(item.getMadeIn());
-        newItem.setImgSrc(item.getImgSrc());
-        return newItem;
-    }
+
     public static responseDto MakingImgfile(MultipartFile mfile){
         if(mfile!=null) {
             File file = new File("./src/main/resources/static/img", mfile.getOriginalFilename());
@@ -106,15 +90,15 @@ public class Item {
                 fos.close();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-                responseDto fail = new responseDto(HttpStatus.BAD_REQUEST, e, "이미지를 찾을 수 없습니다.");
+                responseDto fail = new responseDto(404,"이미지를 찾을 수 없습니다.",mfile);
                 return fail;
             } catch (IOException e) {
                 e.printStackTrace();
-                responseDto fail = new responseDto(HttpStatus.EXPECTATION_FAILED, e, "이미지 변환간 에러가 발생했습니다.");
+                responseDto fail = new responseDto(500, "이미지 변환간 에러가 발생했습니다.",mfile);
                 return fail;
             }
         }
-        return new responseDto(HttpStatus.ACCEPTED,null,"제품 등록에 성공하셨습니다.");
+        return new responseDto(200,"제품 등록에 성공하였습니다.",mfile);
     }
 
 }

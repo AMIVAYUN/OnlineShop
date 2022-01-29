@@ -18,9 +18,9 @@ public class BoardServiceTest {
     @Test
 
     public void 게시글_등록(){
-        Notice notice=new Notice();
-        notice.setName("테스트용 공지입니다.");
-        notice.setDescription("개발은 재밌습니다.");
+        Notice notice=Notice.createNotice("테스트용 공지입니다.","개발은 재밌습니다.");
+        boardService.save(notice);
+
     }
 
 

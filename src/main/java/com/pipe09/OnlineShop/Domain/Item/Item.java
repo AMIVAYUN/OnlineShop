@@ -1,13 +1,11 @@
 package com.pipe09.OnlineShop.Domain.Item;
 
 
-import com.pipe09.OnlineShop.Domain.Item.Typed.*;
 import com.pipe09.OnlineShop.Dto.M_ItemDto;
 import com.pipe09.OnlineShop.Dto.R_itemDto;
-import com.pipe09.OnlineShop.Dto.responseDto;
+import com.pipe09.OnlineShop.Utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
@@ -75,14 +73,15 @@ public class Item {
     }
     public static Item fromReg(R_itemDto r_itemDto){
         Item item=createNewItem(r_itemDto.getDtype(),r_itemDto.getName(),r_itemDto.getPrice(),r_itemDto.getStockQuantity(),r_itemDto.getDescription(),r_itemDto.getWeight(),r_itemDto.getMadeIn(),r_itemDto.getManufacturedCompany());
-        item.setImgSrc("img/"+r_itemDto.img.getOriginalFilename());
+        item.setImgSrc("img/upload/"+r_itemDto.img.getOriginalFilename());
         return item;
     }
 
 
-    public static responseDto MakingImgfile(MultipartFile mfile){
+    public static String MakingImgfile(MultipartFile mfile){
+        String msg=null;
         if(mfile!=null) {
-            File file = new File("./src/main/resources/static/img", mfile.getOriginalFilename());
+            File file = new File(Utils.getImgPATHwithOS()+File.separator+"upload"+File.separator+mfile.getOriginalFilename());
             try {
                 file.createNewFile();
                 FileOutputStream fos = new FileOutputStream(file);
@@ -90,15 +89,15 @@ public class Item {
                 fos.close();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-                responseDto fail = new responseDto(404,"이미지를 찾을 수 없습니다.",mfile);
-                return fail;
+                msg="이미지를 찾을 수 없습니다.";
+                return msg;
             } catch (IOException e) {
                 e.printStackTrace();
-                responseDto fail = new responseDto(500, "이미지 변환간 에러가 발생했습니다.",mfile);
-                return fail;
+                msg="이미지 변환간 에러가 발생했습니다.";
+                return msg;
             }
         }
-        return new responseDto(200,"제품 등록에 성공하였습니다.",mfile);
+        return msg;
     }
 
 }

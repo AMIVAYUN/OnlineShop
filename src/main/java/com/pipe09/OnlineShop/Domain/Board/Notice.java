@@ -35,6 +35,7 @@ public class Notice {
         Notice notice=new Notice();
         notice.setName(name);
         notice.setDescription(desc);
+        notice.setUploadDate();
         return notice;
     }
     public void setUploadDate(){

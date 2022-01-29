@@ -26,4 +26,8 @@ public class Utils {
         }
         return false;
     }
+    public static String deleteKorean(String str){
+        str=str.replaceAll("[ㄱ-힣]","");
+        return str;
+    }
 }

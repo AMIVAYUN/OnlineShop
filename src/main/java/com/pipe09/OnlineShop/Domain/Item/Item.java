@@ -73,15 +73,16 @@ public class Item {
     }
     public static Item fromReg(R_itemDto r_itemDto){
         Item item=createNewItem(r_itemDto.getDtype(),r_itemDto.getName(),r_itemDto.getPrice(),r_itemDto.getStockQuantity(),r_itemDto.getDescription(),r_itemDto.getWeight(),r_itemDto.getMadeIn(),r_itemDto.getManufacturedCompany());
-        item.setImgSrc("img/upload/"+r_itemDto.img.getOriginalFilename());
+        item.setImgSrc("img/upload/"+Utils.deleteKorean(r_itemDto.img.getOriginalFilename()));
         return item;
     }
 
 
     public static String MakingImgfile(MultipartFile mfile){
         String msg=null;
+        String str=Utils.deleteKorean(mfile.getOriginalFilename());
         if(mfile!=null) {
-            File file = new File(Utils.getImgPATHwithOS()+File.separator+"upload"+File.separator+mfile.getOriginalFilename());
+            File file = new File(Utils.getImgPATHwithOS()+File.separator+"upload"+File.separator+str);
             try {
                 file.createNewFile();
                 FileOutputStream fos = new FileOutputStream(file);

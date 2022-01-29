@@ -18,12 +18,15 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @Slf4j
@@ -40,7 +43,7 @@ public class ManagerApiController {
 
     //TODO 이미지 중복처리
     //아이템 등록후 리턴.
-    @PostMapping(path = "/admin/manage/register-item.do",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(path = "/api/v1/register-item.do",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
     public ResponseEntity<R_itemDto> register(@Valid R_itemDto dto){
         String msg=Item.MakingImgfile(dto.img);
@@ -56,7 +59,7 @@ public class ManagerApiController {
 
     }
 
-    @PostMapping("/admin/manage/register-faq.do")
+    @PostMapping("/api/v1/register-faq.do")
     public ResponseEntity<Notice> regfaqAccess(@Valid NoticeDto dto){
         Long id =null;
         if(!Utils.Null(dto)){
@@ -72,6 +75,15 @@ public class ManagerApiController {
         else{
             return new ResponseEntity("요청이 잘못 되었습니다.", HttpStatus.NOT_FOUND);
         }
+    }
+    @GetMapping("/admin/manage/view-faq.do")
+    public ResponseEntity<List<NoticeDto>> faqlist(){
+        List<Notice> noticeList=boardService.findAll();
+        if(noticeList.isEmpty()){
+            return new ResponseEntity("저장된 게시물이 없습니다",HttpStatus.NOT_FOUND);
+        }
+        List<NoticeDto>list=noticeList.stream().map(notice -> new NoticeDto(notice.getName(), notice.getDescription())).collect(Collectors.toList());
+        return new ResponseEntity(list,HttpStatus.OK);
     }
 }
 

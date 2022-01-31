@@ -14,16 +14,14 @@ import com.pipe09.OnlineShop.Utils.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @Slf4j
@@ -40,7 +38,7 @@ public class ManagerApiController {
 
     //TODO 이미지 중복처리
     //아이템 등록후 리턴.
-    @PostMapping(path = "/admin/manage/register-item.do",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(path = "/api/v1/register-item.do",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
     public ResponseEntity<R_itemDto> register(@Valid R_itemDto dto){
         String msg=Item.MakingImgfile(dto.img);
@@ -56,11 +54,12 @@ public class ManagerApiController {
 
     }
 
-    @PostMapping("/admin/manage/register-faq.do")
+    @PostMapping("/api/v1/register-faq.do")
     public ResponseEntity<Notice> regfaqAccess(@Valid NoticeDto dto){
         Long id =null;
         if(!Utils.Null(dto)){
-            Notice newNotice=Notice.createNotice(dto.getName(),dto.getDescription());
+            Notice newNotice=Notice.createNotice(dto.getName(),dto.getDescription(),null);
+            newNotice.setUploadDate();
             id=boardService.save(newNotice);
             log.info("admin"+id+"번째 게시글 등록");
             if(id==null){
@@ -72,6 +71,29 @@ public class ManagerApiController {
         else{
             return new ResponseEntity("요청이 잘못 되었습니다.", HttpStatus.NOT_FOUND);
         }
+    }
+    @GetMapping("/api/v1/view-faq.do")
+    public ResponseEntity<List<NoticeDto>> faqlist(){
+        List<Notice> noticeList=boardService.findAll();
+        if(noticeList.isEmpty()){
+            return new ResponseEntity("저장된 게시물이 없습니다",HttpStatus.NOT_FOUND);
+        }
+        List<NoticeDto>list=noticeList.stream().map(notice -> new NoticeDto(notice.getNotice_ID(),notice.getName(), notice.getDescription(),notice.getDate())).collect(Collectors.toList());
+        return new ResponseEntity(list,HttpStatus.OK);
+    }
+    @PostMapping(path = "/api/v1/delete-faq.do")
+    public ResponseEntity delfaq(@RequestBody NoticeDto dto){
+
+        boolean result=boardService.RemoveByID(dto.getId());
+
+        if(result){
+            return new ResponseEntity<String>("삭제에 성공하였습니다.",HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<String>("삭제에 실패하였습니다",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
     }
 }
 

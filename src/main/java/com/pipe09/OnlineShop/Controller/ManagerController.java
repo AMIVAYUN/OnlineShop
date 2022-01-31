@@ -29,4 +29,6 @@ public class ManagerController {
     public String resultfaqUpload(){
         return "fragments/private/Reg_suc";
     }
+    @GetMapping(path="/admin/manage/view-faq")
+    public String viewlistfaq(){return "fragments/private/MM_View_FAQ";}
 }

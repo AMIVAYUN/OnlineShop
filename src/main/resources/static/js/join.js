@@ -59,7 +59,7 @@ function join() {
 
 function checkValidID(form) {
     if (form.ID.value == "") {
-        document.getElementById('alert_ID').innerText = "ID를 입력하세요.";
+        document.getElementById('alert_ID').innerText = "필수 정보입니다.";
         //form.ID.focus();
         return false;
     }
@@ -69,7 +69,7 @@ function checkValidID(form) {
 
 function checkValidPassword(form) {
     if (form.password.value == "") {
-        document.getElementById('alert_password').innerText = "비밀변호를 입력하세요";
+        document.getElementById('alert_password').innerText = "필수 정보입니다.";
         form.password.focus();
         return false;
     }
@@ -93,7 +93,7 @@ function checkValidPassword(form) {
 
 function checkValidEmail(form) {
     if (form.email.value == "") {
-        document.getElementById('alert_email').innerText = "이메일을 입력하세요.";
+        document.getElementById('alert_email').innerText = "필수 정보입니다.";
         //form.email.focus();
         return false;
     }
@@ -112,7 +112,7 @@ function checkValidEmail(form) {
 
 function checkValidName(form) {
     if (form.name.value == "") {
-        document.getElementById('alert_name').innerText = "이름을 입력하세요.";
+        document.getElementById('alert_name').innerText = "필수 정보입니다.";
         //form.name.focus();
         return false;
     }

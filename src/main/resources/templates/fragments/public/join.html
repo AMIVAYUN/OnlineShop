@@ -2,11 +2,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입 페이지</title>
+    <link rel="stylesheet" href="css/join.css" type="text/css" media="all">
+    <script src="js/join.js"></script>
 </head>
 <body>
-<h1>회원가입 페이지</h1>
-<hr/>
+<!--
 <form action="/join-proc" method="post">
     <input type="text" name="username" placeholder="ID를 입력해주세요"></br>
     <input type="password" name="password" placeholder="password"></br>
@@ -15,5 +17,78 @@
     <input type="tel" name="phone_num"placeholder="전화번호를 입력해주세요"></br>
     <button>회원가입</button>
 </form>
+-->
+
+<div id="container" class="main_container">
+    <div style="padding: 20px;"></div>
+    <div class="join_container">
+        <div class="form_container">
+                <form name="join_form" action="/join-proc" method="post">
+                <div class="form_title_div">
+                    <p style="font-size:20px" class="form_title_p">회원가입</p>
+                </div>
+                <div>
+                    <div>
+                        <a class="form_item_ID">ID</a>
+                    </div>
+                    <div>
+                        <input type="text" name="ID" placeholder="아이디를 입력하세요" class="form_input"/>
+                    </div>
+                    <div class="form_text_alert_padding">
+                        <div id="alert_ID" class="form_text_alert"></div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <a class="form_item_name">Password</a>
+                    </div>
+                    <div>
+                        <input type="password" name="password" placeholder="비밀번호를 입력하세요" class="form_input"/>
+                    </div>
+                    <div class="form_text_alert_padding">
+                        <div id="alert_password" class="form_text_alert"></div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <a class="form_item_name">E-mail</a>
+                    </div>
+                    <div>
+                        <input type="email" name="email" placeholder="이메일을 입력하세요" class="form_input" />
+                    </div>
+                    <div class="form_text_alert_padding">
+                        <div id="alert_email" class="form_text_alert"></div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <a class="form_item_name">Name</a>
+                    </div>
+                    <div>
+                        <input type="text" name="name" placeholder="이름을 입력하세요" class="form_input" />
+                    </div>
+                    <div class="form_text_alert_padding">
+                        <div id="alert_name" class="form_text_alert"></div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <a class="form_item_name">Phone Number</a>
+                    </div>
+                        <div>
+                            <input type="text" name="phone" placeholder="-없이 입력하세요" class="form_input" />
+                        </div>
+                    <div class="form_text_alert_padding">
+                        <div id="alert_phone" class="form_text_alert"></div>
+                    </div>
+                </div>
+                <div style="height: 10px;"></div>
+                <div>
+                    <button type="button" class="form_submit_button" onclick="login()">회원가입</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

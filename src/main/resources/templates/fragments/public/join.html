@@ -5,7 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>회원가입 페이지</title>
         <link rel="stylesheet" href="css/join.css" type="text/css" media="all">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
         <script src="js/join.js"></script>
+        <script src="js/main.js"></script>
     </head>
     <body>
     <!--
@@ -18,9 +24,12 @@
         <button>회원가입</button>
     </form>
     -->
-
+    <div style="padding: 20px;"></div>
     <div id="container" class="main_container">
         <div style="padding: 20px;"></div>
+        <div>
+            <a href = "" target = "_self" > <img src = "img/static/DB_LOGO.gif" class="form_logo"> </a>
+        </div>
         <div class="join_container">
             <div class="form_container">
                 <form name="join_form" action="/join-proc" method="post">
@@ -89,6 +98,9 @@
                 </form>
             </div>
         </div>
+    </div>
+    <div id="footer">
+        <img src="img/static/cp1.GIF">
     </div>
     </body>
 </html>

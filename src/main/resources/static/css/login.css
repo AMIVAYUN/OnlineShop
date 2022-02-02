@@ -2,6 +2,13 @@
     border: 0px solid;
 }
 
+.form_logo{
+    position: relative;
+    width: 220px;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
 .join_container{
     width: 380px;
     height: 364px;

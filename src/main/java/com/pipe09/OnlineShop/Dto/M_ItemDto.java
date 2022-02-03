@@ -25,6 +25,4 @@ public class M_ItemDto {
     public void ManuFacDtype(){
         this.setDtype((new StringBuffer(this.DTYPE).replace(0,this.DTYPE.indexOf("Typed")+6,"")).toString());
     }
-
-
 }

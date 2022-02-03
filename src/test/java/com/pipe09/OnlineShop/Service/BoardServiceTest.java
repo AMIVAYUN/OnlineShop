@@ -35,6 +35,7 @@ public class BoardServiceTest {
         assertEquals(test,notice.getDate());
         boardService.save(notice);
         Notice newNotice=Notice.createNotice("테스트","개발용",test);
+        System.out.println("test");
 
     }
 }

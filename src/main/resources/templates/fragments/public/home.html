@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>젠킨스 테스트에 오신것을 환영합니다!</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+
+</head>
+<body>
+    <nav id="navi-bar">
+    
+        <a href="/login"style="left:1200px;">로그인</a>
+        <a href="/join"style="left:1240px;">회원가입</a>
+        <a href="#"style="left:1290px;">마이페이지</a>
+        <a href="/notice"style="left:1350px;">FAQ</a>
+        <a href="/admin/manage" style="left:1380px;">관리자</a>
+    </nav>
+    <div id="bodyheader">
+        <div id="mainHeaderbar">
+            <img src="img/static/DB_LOGO.gif" id="logo">
+            <span id="searchbar"><input type="text" placeholder="   제품을 검색하세요."></span>
+            <a id="cursor" href="#">c</a>
+            <img src="img/static/shoppingcart.png" id="scart" onclick="javascript:location.href='/shopping-list'">
+        </div>
+    </div>
+    <hr>
+    <div id="category_part">
+        
+        <ul id="category_list">
+            <li id="default_category">전체 보기</li>
+            <li id="LeakDetector">누수 탐지기</li>
+            <li id="SewerCleaner">하수관 청소기</li>
+            <li id="Endoscope" style="margin-top:3px;">내시경</li>
+            <li id="Tool" style="margin-top:3px;">공구</li>
+            <li id="ETC" style="margin-top:3px;">기타</li>
+            
+        
+        </ul>
+        <select name="정렬" id="OptionalSort">
+            <option value="한줄씩 보기">한줄씩 보기</option>
+            <option value="4개씩 보기">4개씩 보기</option>
+        </select>
+        
+    </div>
+    <ul id="shoplist">
+
+        <!--li class="item">
+            <div id="item_img">
+                <img src="img/LeakDetector.jpg">
+            </div>
+            <div id="item_text">
+                <a id="item_name">d</a></br>
+                <a id="item_price">d</a></br>
+                <button>바로가기</button>
+            </div>
+        </li-->
+
+    </ul>
+
+    <div id="side_Bar">
+        <div id="comp_intr">
+            <img src="img/static/companyIntroduction_ver2.png" onclick="javascript:location.href='/comp-intro'">
+        </div>
+        <div id="comp_mypage">
+            <img src="img/static/mypage_ver2.png"onclick="javascript:location.href='/my-page'">
+
+        </div>
+        <div id="comp_hompage">
+            <img src="img/static/homepage_ver2.png"onclick="javascript:location.href='http://www.대봉산업기계.com'">
+
+        </div>
+        <div id="comp_board">
+            <img src="img/static/board_ver2.png" onclick="javascript:location.href='/board'">
+        </div>
+        <div id="comp_top">
+            <img src="img/static/Top_ver2.png" onclick="window.scroll(0,0)">
+        </div>
+    </div>
+    <div id="footer">
+        <img src="img/static/cp1.GIF">
+    </div>
+
+</body>
+</html>

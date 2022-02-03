@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>ManageMent System</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../css/manager.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/manager.js"></script>
+
+</head>
+<body>
+    <div >
+        <img src="../img/static/DaebongMark.JPG">
+    </div>
+    <div id="title">
+        DB 산업 관리자 시스템
+    </div>
+    <div id="menu">
+        <ul>
+            <li><a>제품</a>
+                <ul>
+                    <li><a onclick="window.open('/admin/manage/register-item','new',toolbar=false,menubar=false,scrollbars=true,width=700,height=900);return false">등록</a></li>
+                    <li><a href="#">조회</a></li>
+                </ul>
+            </li>
+            <li><a>FAQ</a>
+                <ul>
+                    <li><a onclick="window.open('/admin/manage/register-faq','new',toolbar=false,menubar=false,scrollbars=true,width=700,height=900);return false">등록</a></li>
+                    <li><a href="/admin/manage/view-faq">조회</a></li>
+                </ul>
+            </li>
+            <li><a>주문</a>
+                <ul>
+                    <li><a href="#">관리</a></li>
+                    <li><a href="#">조회</a></li>
+                </ul>
+            </li>
+            <li><a>회원</a>
+                <ul>
+                    <li><a href="#">관리</a></li>
+                    <li><a href="#">조회</a></li>
+                </ul>
+            </li>
+            <li><a>배송</a>
+                <ul>
+                    <li><a href="#">조회</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    </body>
+</body>
+</html>

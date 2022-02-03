@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>등록 결과</title>
+    <style>
+        body{
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <script th:inline="javascript">
+
+        let desc=[[${rep?.desc}]];
+        alert(desc);
+        window.close();
+
+    </script>
+</body>
+</html>

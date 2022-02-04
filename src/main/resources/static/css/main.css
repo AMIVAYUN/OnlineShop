@@ -44,7 +44,7 @@ body{
 
 }
 #bodyheader input{
-    background-image: url("../img/searchicon.png");
+    background-image: url("/img/static/searchicon.png");
     
     background-position: 535px center;
     background-repeat: no-repeat;

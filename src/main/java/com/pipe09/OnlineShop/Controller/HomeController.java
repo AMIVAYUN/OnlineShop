@@ -4,6 +4,8 @@ package com.pipe09.OnlineShop.Controller;
 import com.pipe09.OnlineShop.Service.ItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +17,10 @@ import java.time.LocalDate;
 @Slf4j
 @RequiredArgsConstructor
 public class HomeController {
-    private final ItemService itemService;
     @GetMapping("/")
     public String home(Model model) {
-        log.info("home access");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        log.info(String.format("%s accessed general home with role type: %s",authentication.getName(),authentication.getAuthorities()));
         return "fragments/public/home";
     }
 

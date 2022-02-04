@@ -1,26 +1,31 @@
+
 <!DOCTYPE html>
-<html lang="ko">
+
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>젠킨스!</title>
+
+    <title>대봉산업기계에 오신 것을 환영합니다.</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="js/main.js"></script>
+
 
 </head>
 <body>
     <nav id="navi-bar">
-    
-        <a href="/login"style="left:1200px;">로그인</a>
-        <a href="/join"style="left:1240px;">회원가입</a>
+
+        <a id="login-navi" href="/login"style="left:1200px;">로그인</a>
+        <a id="join-navi" href="/join"style="left:1240px;">회원가입</a>
         <a href="#"style="left:1290px;">마이페이지</a>
         <a href="/notice"style="left:1350px;">FAQ</a>
-        <a href="/admin/manage" style="left:1380px;">관리자</a>
+        <a id="manager" href="/admin/manage" style="left:1380px;">관리자</a>
     </nav>
     <div id="bodyheader">
         <div id="mainHeaderbar">
@@ -30,6 +35,7 @@
             <img src="img/static/shoppingcart.png" id="scart" onclick="javascript:location.href='/shopping-list'">
         </div>
     </div>
+
     <hr>
     <div id="category_part">
         
@@ -88,4 +94,5 @@
     </div>
 
 </body>
+
 </html>

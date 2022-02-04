@@ -2,6 +2,8 @@ package com.pipe09.OnlineShop.Configuration;
 
 import com.pipe09.OnlineShop.Service.MemberService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -23,6 +25,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
+@Slf4j
 public class SecConfing extends WebSecurityConfigurerAdapter {
     private final MemberService service;
     private final AuthenticationFailureHandler failureHandler;
@@ -38,6 +41,7 @@ public class SecConfing extends WebSecurityConfigurerAdapter {
                 //NEGATIVE WAY
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/api/v1/members").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .formLogin().loginPage("/login").loginProcessingUrl("/loginproc").defaultSuccessUrl("/").successHandler(successHandler).failureHandler(failureHandler)

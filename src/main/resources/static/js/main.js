@@ -1,7 +1,9 @@
+
 $(document).ready(function(){
     getItem();
     gotoItem();
     categorySetting();
+    SessionCheck();
 })
 function getItem(){
     Cleaning($("#shoplist"));
@@ -72,3 +74,20 @@ function getTypedItem(dtype){
     )
 
 }
+async function SessionCheck(){
+    const res1=await fetch("/api/v1/members/session",{method:"GET"}).then(response => response.json());
+
+    if(res1.iswhom !="[ROLE_ADMIN]"){
+        $("#manager").remove();
+    }
+    if(res1.iswhom !="[ROLE_ANONYMOUS]"){
+        $("#login-navi").text(res1.iswho + "님 안녕하세요");
+        $("#login-navi").css("left",1135);
+        $("#join-navi").text("로그아웃");
+        $("#join-navi").attr("href","/logout");
+
+    }
+}
+
+
+

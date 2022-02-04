@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.io.File;
 
-
+//이미지 저장 위치 설정
 @Configuration
 public class WebmvcConfiguration implements WebMvcConfigurer {
     @Override

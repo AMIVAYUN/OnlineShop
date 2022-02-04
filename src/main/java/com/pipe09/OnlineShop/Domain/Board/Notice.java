@@ -13,28 +13,30 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Table(name = "NOTICE")
+
 public class Notice {
 
     @Id
     @GeneratedValue
-    private Long Notice_ID;
+    private Long notice_ID;
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private LocalDate date;
-    private String Name;
+    private String name;
     @Lob
-    private String Description;
+    private String description;
 
 
 
 
 
     public static Notice fromDto(NoticeDto dto){
-        return createNotice(dto.getName(), dto.getDescription());
+        return createNotice(dto.getName(), dto.getDescription(),dto.getDate());
     }
-    public static Notice createNotice(String name,String desc){
+    public static Notice createNotice(String name,String desc,LocalDate date){
         Notice notice=new Notice();
         notice.setName(name);
         notice.setDescription(desc);
+        notice.setDate(date);
         return notice;
     }
     public void setUploadDate(){

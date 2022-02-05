@@ -1,19 +1,19 @@
 function join() {
     const form = document.join_form;
-    const chkID = checkValidID(form);
+    const chkUsername = checkValidUsername(form);
     const chkPw = checkValidPassword(form);
     const chkEmail = checkValidEmail(form);
     const chkName = checkValidName(form);
     const chkPhone = checkValidPhone(form);
 
-    if (chkID) {
-        document.getElementById('alert_ID').innerText = "";
-        form.ID.style.border = '2px solid';
-        form.ID.style.borderColor = '#00D000';
+    if (chkUsername) {
+        document.getElementById('alert_username').innerText = "";
+        form.username.style.border = '2px solid';
+        form.username.style.borderColor = '#00D000';
     } else {
-        form.ID.style.border = '2px solid';
-        form.ID.style.borderColor = '#FF0000';
-        document.getElementById('alert_ID').style.color = '#FF0000';
+        form.username.style.border = '2px solid';
+        form.username.style.borderColor = '#FF0000';
+        document.getElementById('alert_username').style.color = '#FF0000';
     }
 
     if (chkPw) {
@@ -47,19 +47,19 @@ function join() {
     }
 
     if (chkPhone) {
-        document.getElementById('alert_phone').innerText = "";
-        form.phone.style.border = '2px solid';
-        form.phone.style.borderColor = '#00D000';
+        document.getElementById('alert_phone_num').innerText = "";
+        form.phone_num.style.border = '2px solid';
+        form.phone_num.style.borderColor = '#00D000';
     } else {
-        form.phone.style.border = '2px solid';
-        form.phone.style.borderColor = '#FF0000';
-        document.getElementById('alert_phone').style.color = '#FF0000';
+        form.phone_num.style.border = '2px solid';
+        form.phone_num.style.borderColor = '#FF0000';
+        document.getElementById('alert_phone_num').style.color = '#FF0000';
     }
 }
 
-function checkValidID(form) {
-    if (form.ID.value == "") {
-        document.getElementById('alert_ID').innerText = "필수 정보입니다.";
+function checkValidUsername(form) {
+    if (form.username.value == "") {
+        document.getElementById('alert_username').innerText = "필수 정보입니다.";
         //form.ID.focus();
         return false;
     }
@@ -121,8 +121,8 @@ function checkValidName(form) {
 }
 
 function checkValidPhone(form) {
-    if (form.phone.value == "") {
-        document.getElementById('alert_phone').innerText = "전화번호를 입력하세요.";
+    if (form.phone_num.value == "") {
+        document.getElementById('alert_phone_num').innerText = "전화번호를 입력하세요.";
         //form.phone.focus();
         return false;
     }

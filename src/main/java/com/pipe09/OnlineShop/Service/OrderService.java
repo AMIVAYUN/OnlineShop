@@ -14,7 +14,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Transactional
 @Service
@@ -48,4 +50,12 @@ public class OrderService {
         order.cancel();
     }
 
+    public List<Orders> findAllwithToOne(int offset, int limit) {
+        return orderRepository.findAllwithToOne(offset,limit);
+    }
+
+    public List<OrderItem> findOrderItems(Long id) {
+        return orderRepository.findOrderItems(id);
+
+    }
 }

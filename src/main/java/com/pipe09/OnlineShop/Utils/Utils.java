@@ -2,6 +2,7 @@ package com.pipe09.OnlineShop.Utils;
 
 
 import java.io.File;
+import java.time.LocalDate;
 
 public class Utils {
     private static final String IMGPATH=System.getProperty("user.home");
@@ -19,6 +20,10 @@ public class Utils {
 
 
     }
+    public static LocalDate getNow(){
+        return LocalDate.now();
+    }
+
     public static boolean Null(Object obj){
 
         if(obj==null){

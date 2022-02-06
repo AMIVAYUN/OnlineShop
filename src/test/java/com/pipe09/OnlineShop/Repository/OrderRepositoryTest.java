@@ -33,7 +33,6 @@ public class OrderRepositoryTest {
     public void 주문_등록과불러오기및탐색(){
         Orders newOrder=new Orders();
         newOrder.setOrderItems(new ArrayList<>());
-        newOrder.setOrderdate(new Date());
         Member mem=new Member();
         mem.setName("주석");
         memberRepository.save(mem);
@@ -45,6 +44,17 @@ public class OrderRepositoryTest {
         assertEquals("아이디가 같아야 합니다",id,newOrder.getOrder_ID());
         assertEquals("이름이 같아야 합니다",orderRepository.findOne(id).getMember().getName(),"주석");
         assertEquals("쿼리 결과가 같아야 합니다",orderRepository.findByDeliveryStatus(Deliverystatus.READY).get(0).getOrder_ID(),newOrder.getOrder_ID());
+    }
+
+    @Transactional
+    @Test
+    public void 쿼리테스트(){
+        orderRepository.findAll();
+        System.out.println("------------------------------");
+
+        orderRepository.findAllwithToOne(0,100);
+
+        System.out.println("------------------------------");
     }
 
 }

@@ -1,14 +1,23 @@
 package com.pipe09.OnlineShop;
 
 
+import com.pipe09.OnlineShop.Domain.Delivery.Delivery;
+import com.pipe09.OnlineShop.Domain.Delivery.Deliverystatus;
 import com.pipe09.OnlineShop.Domain.Item.Item;
 import com.pipe09.OnlineShop.Domain.Item.Typed.*;
+import com.pipe09.OnlineShop.Domain.Member.Member;
+import com.pipe09.OnlineShop.Domain.Orders.OrderItem;
+import com.pipe09.OnlineShop.Domain.Orders.Orders;
+import com.pipe09.OnlineShop.Utils.Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.nio.file.Watchable;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.Date;
 
 // 객체를 test용으로 안에 넣을때 사용하는 클래스
 @Component
@@ -90,6 +99,28 @@ public class InitSerivce {
 
     }
     public void dbInit2(){
+
+        Item newitem=em.find(Item.class,30L);
+        Member member=em.find(Member.class,5L);
+
+        OrderItem newOrderitem=new OrderItem();
+        newOrderitem.setItem(newitem);
+        newOrderitem.setCount(1);
+        newOrderitem.setPrice(newitem.getPrice());
+
+
+        Delivery newDeli= new Delivery();
+        newDeli.setStatus(Deliverystatus.READY);
+        newDeli.setDelivery_Address("안양");
+
+
+        Orders newOrder=Orders.createOrder(member,newDeli, new Date(),newOrderitem);
+        newOrderitem.setOrders(newOrder);
+        em.persist(newOrder);
+
+
+
+
 
     }
 }

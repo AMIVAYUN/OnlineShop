@@ -12,6 +12,7 @@ import javax.persistence.TemporalType;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class OrderDto {
@@ -20,6 +21,7 @@ public class OrderDto {
     private String user_name;
     private List<OrderItemDto> orderItemDto;
     private Delivery delivery;
+    private int Totalprice;
     @Temporal(TemporalType.DATE)
     private Date orderdate;
     public OrderDto(Orders order){
@@ -27,6 +29,8 @@ public class OrderDto {
         this.user_id=order.getMember().getUser_ID();
         this.user_name=order.getMember().getName();
         this.orderdate=order.getOrderdate();
-
+        this.delivery=order.getDelivery();
+        order.getOrderItems().stream().forEach(item -> item.getItem().getName());
+        this.orderItemDto=order.getOrderItems().stream().map(OrderItemDto::new).collect(Collectors.toList());
     }
 }

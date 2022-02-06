@@ -99,7 +99,7 @@ public class InitSerivce {
 
     }
     public void dbInit2(){
-
+        /*
         Item newitem=em.find(Item.class,30L);
         Member member=em.find(Member.class,5L);
 
@@ -117,6 +117,8 @@ public class InitSerivce {
         Orders newOrder=Orders.createOrder(member,newDeli, new Date(),newOrderitem);
         newOrderitem.setOrders(newOrder);
         em.persist(newOrder);
+
+         */
 
 
 

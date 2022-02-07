@@ -7,7 +7,7 @@ $(document).ready(function(){
 })
 function getItem(){
     Cleaning($("#shoplist"));
-    fetch("./api/v1/m-item",{method:"GET"}).then((response) => response.json()).then(
+    fetch("./api/v1/m-item?offset=0&limit=30",{method:"GET"}).then((response) => response.json()).then(
         (data) => {
             $.each(data, function (idx) {
                 var innerhtml = '<li class="item" id='+data[idx].dtype +'><div id="item_img"><img src=' + data[idx].imgSrc + '></div>' +
@@ -63,6 +63,7 @@ function getTypedItem(dtype){
     else{
         url+=dtype[0];
     }
+    url+="?offset=0&limit=30"
     fetch(url,{method:"GET"}).then((response) => response.json()).then(
         (data) => {
             $.each(data, function (idx, row) {

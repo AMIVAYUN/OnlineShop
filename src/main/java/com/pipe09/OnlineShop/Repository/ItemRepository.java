@@ -23,14 +23,14 @@ public class ItemRepository {
     public Item findItem(Long id){
         return em.find(Item.class,id);
     }
-    public List<Item> findAll(){
+    public List<Item> findAll(int offset,int limit){
         String jpql="select i from Item i";
-        return em.createQuery(jpql, Item.class).getResultList();
+        return em.createQuery(jpql, Item.class).setFirstResult(offset).setMaxResults(limit).getResultList();
     }
 
-    public List<Item> findAllbyType(String type){
+    public List<Item> findAllbyType(String type,int offset,int limit){
 
-        return em.createQuery("select i from Item i where i.DTYPE=:type").setParameter("type",type).getResultList();
+        return em.createQuery("select i from Item i where i.DTYPE=:type").setParameter("type",type).setFirstResult(offset).setMaxResults(limit).getResultList();
 
     }
 

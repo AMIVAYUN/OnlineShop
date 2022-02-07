@@ -20,7 +20,7 @@ public class ItemService {
     @Transactional
     public Long save(Item item){return itemRepository.save(item); }
 
-    public List<Item> findAll(){ return itemRepository.findAll(); }
+    public List<Item> findAll(int offset,int limit){ return itemRepository.findAll(offset,limit); }
 
     public Item findOne(Long id){
         return itemRepository.findItem(id);
@@ -32,8 +32,8 @@ public class ItemService {
         item.setName(name);
         item.setPrice(price);
     }
-    public List<Item> findAllbyType(String type){
-        return itemRepository.findAllbyType(type);
+    public List<Item> findAllbyType(String type,int offset,int limit){
+        return itemRepository.findAllbyType(type,offset,limit);
     }
     public List<Item> findAllaboutTools(){
         return itemRepository.findAllaboutTools();

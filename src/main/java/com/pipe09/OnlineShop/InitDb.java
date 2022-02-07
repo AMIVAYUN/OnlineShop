@@ -13,12 +13,16 @@ import javax.annotation.PostConstruct;
 @RequiredArgsConstructor
 public class InitDb {
     private final InitSerivce initSerivce;
-
+    /*
     @PostConstruct
     public void init(){
         initSerivce.dbInit();
         initSerivce.dbInit2();
+
+
     }
+    */
+
 
 }
 

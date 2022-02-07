@@ -31,4 +31,13 @@ public class ManagerController {
     }
     @GetMapping(path="/admin/manage/view-faq")
     public String viewlistfaq(){return "fragments/private/MM_View_FAQ";}
+    @GetMapping(path="/admin/manage/view-members")
+    public String viewlistmem(){return "fragments/private/MM_View_Members";}
+    @GetMapping(path="/admin/manage/view-delivery")
+    public String viewlistdelievery(){ return "fragments/private/MM_View_Delivery";}
+    @GetMapping(path="/admin/manage/view-orders")
+    public String viewlistOrders(){return "fragments/private/MM_View_Orders";}
+    @GetMapping(path="/admin/manage/view-item")
+    public String viewlistItems(){return "fragments/private/MM_View_Item";}
+
 }

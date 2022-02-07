@@ -3,8 +3,8 @@ package com.pipe09.OnlineShop.Controller.ApiController;
 
 import com.pipe09.OnlineShop.Domain.Board.Notice;
 import com.pipe09.OnlineShop.Domain.Item.Item;
-import com.pipe09.OnlineShop.Dto.NoticeDto;
-import com.pipe09.OnlineShop.Dto.R_itemDto;
+import com.pipe09.OnlineShop.Domain.Member.Member;
+import com.pipe09.OnlineShop.Dto.*;
 import com.pipe09.OnlineShop.Service.BoardService;
 import com.pipe09.OnlineShop.Service.ItemService;
 import com.pipe09.OnlineShop.Service.MemberService;
@@ -95,6 +95,7 @@ public class ManagerApiController {
 
 
     }
+
 }
 
 

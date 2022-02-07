@@ -29,8 +29,8 @@ public class MemberService implements UserDetailsService {
     }
 
 
-    public List<Member> findAll(){
-        return memberRepository.findAll();
+    public List<Member> findAll(int offset,int limit){
+        return memberRepository.findAll(offset,limit);
     }
 
     public List<Member> findByname(String name){

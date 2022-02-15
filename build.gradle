@@ -34,7 +34,8 @@ dependencies {
 	implementation 'org.springframework.security:spring-security-test'
 	compileOnly group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE'
 	implementation 'org.springframework.session:spring-session-core'
-
+	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 	annotationProcessor 'org.projectlombok:lombok'
 
 }

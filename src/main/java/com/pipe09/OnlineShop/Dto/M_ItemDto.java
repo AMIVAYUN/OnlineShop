@@ -2,7 +2,6 @@ package com.pipe09.OnlineShop.Dto;
 
 import com.pipe09.OnlineShop.Domain.Item.Item;
 import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 
 
 @Data

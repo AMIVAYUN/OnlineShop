@@ -11,6 +11,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class Hammer extends Item {
-
+    
 }
 

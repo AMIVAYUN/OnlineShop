@@ -1,23 +1,15 @@
 package com.pipe09.OnlineShop;
 
 
-import com.pipe09.OnlineShop.Domain.Delivery.Delivery;
-import com.pipe09.OnlineShop.Domain.Delivery.Deliverystatus;
 import com.pipe09.OnlineShop.Domain.Item.Item;
-import com.pipe09.OnlineShop.Domain.Item.Typed.*;
-import com.pipe09.OnlineShop.Domain.Member.Member;
-import com.pipe09.OnlineShop.Domain.Orders.OrderItem;
-import com.pipe09.OnlineShop.Domain.Orders.Orders;
-import com.pipe09.OnlineShop.Utils.Utils;
+
+import com.pipe09.OnlineShop.Dto.TestDto;
+import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.nio.file.Watchable;
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.util.Date;
 
 // 객체를 test용으로 안에 넣을때 사용하는 클래스
 @Component
@@ -99,8 +91,12 @@ public class InitSerivce {
 
     }
     public void dbInit2(){
-        /*
+        DefaultMapper<TestDto> mapper=new DefaultMapper(new TestDto());
         Item newitem=em.find(Item.class,30L);
+        TestDto dto= mapper.Translate(newitem);
+        System.out.println(dto.toString());
+        /*
+
         Member member=em.find(Member.class,5L);
 
         OrderItem newOrderitem=new OrderItem();

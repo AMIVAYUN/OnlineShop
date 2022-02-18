@@ -1,4 +1,4 @@
-package com.pipe09.OnlineShop.Dto;
+package com.pipe09.OnlineShop.Dto.OrderItem;
 
 import com.pipe09.OnlineShop.Domain.Orders.OrderItem;
 import lombok.Data;
@@ -14,5 +14,7 @@ public class OrderItemDto {
         this.count=item.getCount();
         this.totalprice=item.getTotalPrice();
     }
+
+
 
 }

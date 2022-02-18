@@ -12,7 +12,7 @@ async function getDeliverys(offset,limit){
 function ListPrint(res){
 
     for(i=0; 0<res.length;i++){
-        var html='<li id="element"><span><a class="delivery_id">'+res[i].delivery_id+'</a><a class="order_id">'+res[i].order.order_ID+'</a><a class="customer_name">'+res[i].order.membername+'</a><a class="orderdate">'+res[i].order.orderdate+'</a><a class="delivery_status">'+res[i].status+'</a><a class="delivery_address">'+res[i].address+'</a></span></li>'
+        var html='<tr id="element"><td class="delivery_id">'+res[i].delivery_id+'</td><td class="order_id">'+res[i].order.order_ID+'</td><td class="customer_name">'+res[i].order.membername+'</td><td class="orderdate">'+res[i].order.orderdate+'</td><td class="delivery_status">'+res[i].status+'</td><td class="delivery_address">'+res[i].address+'</td></tr>'
         $("#delivery_list").append(html);
     }
 

@@ -1,4 +1,4 @@
-package com.pipe09.OnlineShop.Dto;
+package com.pipe09.OnlineShop.Dto.Notice;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;

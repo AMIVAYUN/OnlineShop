@@ -13,7 +13,7 @@ async function getOrders(offset,limit){
 function ListPrint(res){
     alert(res[0].username);
     for(i=0; 0<res.length;i++){
-        var html='<li><span><a class="order_id">'+res[i].orderId+'</a><a class="username">'+res[i].user_name+'</a><a class="totalprice">'+res[i].totalprice+'</a><a class="orderdate">'+res[i].orderdate+'</a><button class="order_desc">주문 상세보기</button></span></li>'
+        var html='<tr><td class="order_id">'+res[i].orderId+'</td><td class="username">'+res[i].user_name+'</td><td class="totalprice">'+res[i].totalprice+'</td><td class="orderdate">'+res[i].orderdate+'</td><td><button class="order_desc">주문 상세보기</button></td></tr>'
         $("#orderlist").append(html);
     }
 

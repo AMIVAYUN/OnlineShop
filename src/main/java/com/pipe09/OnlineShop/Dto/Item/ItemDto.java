@@ -1,4 +1,4 @@
-package com.pipe09.OnlineShop.Dto;
+package com.pipe09.OnlineShop.Dto.Item;
 
 import com.pipe09.OnlineShop.Domain.Item.Item;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import javax.persistence.Lob;
 @Data
 
 public class ItemDto {
-    private Long item_id;
+    private Long Item_ID;
     private String Name;
     private int Price;
     private int StockQuantity;
@@ -22,6 +22,7 @@ public class ItemDto {
     private String ManufacturedCompany;
     public String imgSrc;
     private String DTYPE;
+    /*
     public ItemDto(Item item){
         this.item_id=item.getItem_ID();
         this.Name=item.getName();
@@ -34,4 +35,6 @@ public class ItemDto {
         this.imgSrc=item.getImgSrc();
         this.DTYPE=item.getDTYPE();
     }
+
+     */
 }

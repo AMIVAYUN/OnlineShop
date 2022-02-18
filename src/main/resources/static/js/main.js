@@ -7,7 +7,7 @@ $(document).ready(function(){
 })
 function getItem(){
     Cleaning($("#shoplist"));
-    fetch("./api/v1/m-item?offset=0&limit=30",{method:"GET"}).then((response) => response.json()).then(
+    fetch("./api/v2/items/all?offset=0&limit=30",{method:"GET"}).then((response) => response.json()).then(
         (data) => {
             $.each(data, function (idx) {
                 var innerhtml = '<li class="item" id='+data[idx].dtype +'><div id="item_img"><img src=' + data[idx].imgSrc + '></div>' +
@@ -53,7 +53,7 @@ function Cleaning(bodytag){
 }
 function getTypedItem(dtype){
     Cleaning($("#shoplist"))
-    var url="./api/v1/m-item/"
+    var url="./api/v2/items/"
     if(dtype=="ETC"){
         url+="ETC"
     }

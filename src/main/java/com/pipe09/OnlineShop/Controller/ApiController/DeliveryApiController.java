@@ -2,11 +2,10 @@ package com.pipe09.OnlineShop.Controller.ApiController;
 
 
 import com.pipe09.OnlineShop.Domain.Delivery.Delivery;
-import com.pipe09.OnlineShop.Dto.DeliveryDto;
+import com.pipe09.OnlineShop.Dto.Delivery.DeliveryDto;
 import com.pipe09.OnlineShop.Service.DeliveryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

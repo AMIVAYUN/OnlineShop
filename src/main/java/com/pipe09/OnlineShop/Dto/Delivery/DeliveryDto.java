@@ -1,8 +1,9 @@
-package com.pipe09.OnlineShop.Dto;
+package com.pipe09.OnlineShop.Dto.Delivery;
 
 import com.pipe09.OnlineShop.Domain.Delivery.Delivery;
 import com.pipe09.OnlineShop.Domain.Delivery.Deliverystatus;
 import com.pipe09.OnlineShop.Domain.Orders.Orders;
+import com.pipe09.OnlineShop.Dto.DeliOrdersDto;
 import lombok.Data;
 
 @Data

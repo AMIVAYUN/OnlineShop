@@ -15,4 +15,14 @@ import javax.persistence.Entity;
 @Getter
 @Setter
 public class Endoscope extends Item {
+    private Long Item_ID;
+    private String Name;
+    private int Price;
+    private int StockQuantity;
+    private String Description;
+    private int Weight;
+    private String MadeIn;
+    private String ManufacturedCompany;
+    public String imgSrc;
+    private String DTYPE;
 }

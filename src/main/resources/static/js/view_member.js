@@ -20,5 +20,5 @@ function ListPrint(res){
     }
 }
 function getLiTag(memberid,name,roletype,id,email,phone_num,enrolldate){
-    return '<li><span><a class="member_id">'+memberid+'</a><a class="name">'+name+'</a> <a class="roleType">'+roletype+'</a> <a class="아이디">'+id+'</a><a class="email">'+email+'</a><a class="phone_num">'+phone_num+'</a><a class="enrolldate">'+enrolldate+'</a></a></span></li>'
+    return '<tr><td class="member_id">'+memberid+'</td><td class="name">'+name+'</td> <td class="roleType">'+roletype+'</td> <td class="아이디">'+id+'</td><td class="email">'+email+'</td><td class="phone_num">'+phone_num+'</td><td class="enrolldate">'+enrolldate+'</td></a></span></tr>'
 }

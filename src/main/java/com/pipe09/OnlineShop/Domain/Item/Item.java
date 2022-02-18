@@ -1,8 +1,8 @@
 package com.pipe09.OnlineShop.Domain.Item;
 
 
-import com.pipe09.OnlineShop.Dto.M_ItemDto;
-import com.pipe09.OnlineShop.Dto.R_itemDto;
+import com.pipe09.OnlineShop.Dto.Item.R_itemDto;
+import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
 import com.pipe09.OnlineShop.Utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,8 +13,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -63,17 +61,24 @@ public class Item {
     public void addStockQuantity(int count){
         this.StockQuantity+=count;
     }
+    /** 도메인 정재 */
+    /*
     public static List<M_ItemDto> itemtoDto(List<Item> items){
         List<M_ItemDto> dtoList=items.stream().map(M_ItemDto::new).collect(Collectors.toList());
-        /** 도메인 정재 */
+
         dtoList.stream()
                 .forEach(m_itemDto -> m_itemDto.setDtype(
                         m_itemDto.getDtype().substring("com.pipe09.OnlineShop.Domain.Item.Typed.".length())));
         return dtoList;
     }
+    */
     public static Item fromReg(R_itemDto r_itemDto){
-        Item item=createNewItem(r_itemDto.getDtype(),r_itemDto.getName(),r_itemDto.getPrice(),r_itemDto.getStockQuantity(),r_itemDto.getDescription(),r_itemDto.getWeight(),r_itemDto.getMadeIn(),r_itemDto.getManufacturedCompany());
-        item.setImgSrc("img/upload/"+Utils.deleteKorean(r_itemDto.img.getOriginalFilename()));
+        //Item item=createNewItem(r_itemDto.getDtype(),r_itemDto.getName(),r_itemDto.getPrice(),r_itemDto.getStockQuantity(),r_itemDto.getDescription(),r_itemDto.getWeight(),r_itemDto.getMadeIn(),r_itemDto.getManufacturedCompany());
+        //item.setImgSrc("img/upload/"+Utils.deleteKorean(r_itemDto.img.getOriginalFilename()));
+        r_itemDto.setImgSrc("img/upload/"+Utils.deleteKorean(r_itemDto.img.getOriginalFilename()));
+        DefaultMapper<Item> mapper=new DefaultMapper<>(ItemFactory.makingItemBytype(r_itemDto.getDtype()));
+        Item item=mapper.Translate(r_itemDto);
+
         return item;
     }
 

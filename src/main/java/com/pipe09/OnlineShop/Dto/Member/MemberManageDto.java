@@ -1,4 +1,4 @@
-package com.pipe09.OnlineShop.Dto;
+package com.pipe09.OnlineShop.Dto.Member;
 
 import com.pipe09.OnlineShop.Domain.Member.Member;
 import com.pipe09.OnlineShop.Domain.Member.RoleType;

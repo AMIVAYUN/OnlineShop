@@ -3,8 +3,8 @@ package com.pipe09.OnlineShop.Controller.ApiController;
 
 import com.pipe09.OnlineShop.Domain.Board.Notice;
 import com.pipe09.OnlineShop.Domain.Item.Item;
-import com.pipe09.OnlineShop.Domain.Member.Member;
-import com.pipe09.OnlineShop.Dto.*;
+import com.pipe09.OnlineShop.Dto.Item.R_itemDto;
+import com.pipe09.OnlineShop.Dto.Notice.NoticeDto;
 import com.pipe09.OnlineShop.Service.BoardService;
 import com.pipe09.OnlineShop.Service.ItemService;
 import com.pipe09.OnlineShop.Service.MemberService;
@@ -38,7 +38,7 @@ public class ManagerApiController {
 
     //TODO 이미지 중복처리
     //아이템 등록후 리턴.
-    @PostMapping(path = "/api/v1/register-item.do",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(path = "/api/v2/register-item.do",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
     public ResponseEntity<R_itemDto> register(@Valid R_itemDto dto){
         String msg=Item.MakingImgfile(dto.img);
@@ -83,7 +83,6 @@ public class ManagerApiController {
     }
     @PostMapping(path = "/api/v1/delete-faq.do")
     public ResponseEntity delfaq(@RequestBody NoticeDto dto){
-
         boolean result=boardService.RemoveByID(dto.getId());
 
         if(result){

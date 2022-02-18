@@ -1,9 +1,12 @@
-package com.pipe09.OnlineShop.Dto;
+package com.pipe09.OnlineShop.Dto.Item;
 
 import com.pipe09.OnlineShop.Domain.Item.Item;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-
+@Getter
+@Setter
 @Data
 public class M_ItemDto {
     private Long Item_ID;
@@ -11,8 +14,10 @@ public class M_ItemDto {
     private int Price;
     public String imgSrc;
     private String dtype;
-    private String company;
+    private String ManufacturedCompany;
     private String DTYPE;
+
+    /*
     public M_ItemDto(Item item) {
         Item_ID=item.getItem_ID();
         Name=item.getName();
@@ -21,7 +26,9 @@ public class M_ItemDto {
         dtype= item.getClass().getName();
         company=item.getManufacturedCompany();
     }
+
+     */
     public void ManuFacDtype(){
-        this.setDtype((new StringBuffer(this.DTYPE).replace(0,this.DTYPE.indexOf("Typed")+6,"")).toString());
+        this.setDtype((new StringBuffer(this.dtype).replace(0,this.dtype.indexOf("Typed")+6,"")).toString());
     }
 }

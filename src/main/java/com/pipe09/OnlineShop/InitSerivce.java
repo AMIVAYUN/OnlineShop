@@ -1,10 +1,6 @@
 package com.pipe09.OnlineShop;
 
 
-import com.pipe09.OnlineShop.Domain.Item.Item;
-
-import com.pipe09.OnlineShop.Dto.TestDto;
-import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -91,10 +87,13 @@ public class InitSerivce {
 
     }
     public void dbInit2(){
-        DefaultMapper<TestDto> mapper=new DefaultMapper(new TestDto());
+        /*
+        DefaultMapper<TestDto> mapper=new DefaultMapper();
         Item newitem=em.find(Item.class,30L);
         TestDto dto= mapper.Translate(newitem);
         System.out.println(dto.toString());
+
+         */
         /*
 
         Member member=em.find(Member.class,5L);

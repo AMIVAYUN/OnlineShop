@@ -3,7 +3,7 @@ package com.pipe09.OnlineShop.Controller.ApiController;
 
 import com.pipe09.OnlineShop.Domain.Member.Member;
 import com.pipe09.OnlineShop.Dto.MemauthDto;
-import com.pipe09.OnlineShop.Dto.MemberManageDto;
+import com.pipe09.OnlineShop.Dto.Member.MemberManageDto;
 import com.pipe09.OnlineShop.Service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

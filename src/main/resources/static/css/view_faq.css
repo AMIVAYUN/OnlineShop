@@ -1,0 +1,13 @@
+#faq_list{
+    border:1px solid black;
+    text-align: center;
+}
+
+th,td{
+    border:1px solid black;
+}
+
+.desc{
+    width:400px;
+    height:50px;
+}

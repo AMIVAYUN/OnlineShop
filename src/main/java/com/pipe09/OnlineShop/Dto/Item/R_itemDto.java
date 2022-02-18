@@ -1,4 +1,4 @@
-package com.pipe09.OnlineShop.Dto;
+package com.pipe09.OnlineShop.Dto.Item;
 
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,7 +17,7 @@ public class R_itemDto {
     private String ManufacturedCompany;
     public MultipartFile img;
     private String dtype;
-
+    private String imgSrc;
     public R_itemDto(String name, int price, int stockQuantity, int weight, String description, String madeIn, String manufacturedCompany, MultipartFile img, String dtype) {
         this.name = name;
         this.price = price;

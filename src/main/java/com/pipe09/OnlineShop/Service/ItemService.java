@@ -27,15 +27,32 @@ public class ItemService {
     }
 
     @Transactional
-    public void updateItem(Long id, String name, int price){
-        Item item= itemRepository.findItem(id);
-        item.setName(name);
-        item.setPrice(price);
+    public Long updateItem(Item item){
+        Item changed= itemRepository.findItem(item.getItem_ID());
+        changed.setName(item.getName());
+        changed.setPrice(item.getPrice());
+        changed.setStockQuantity(item.getStockQuantity());
+        changed.setDescription(item.getDescription());
+        changed.setWeight(item.getWeight());
+        changed.setMadeIn(item.getMadeIn());
+        changed.setManufacturedCompany(item.getManufacturedCompany());
+        if(item.getImgSrc() != null){
+            changed.setImgSrc(item.getImgSrc());
+        }
+        return changed.getItem_ID();
     }
     public List<Item> findAllbyType(String type,int offset,int limit){
         return itemRepository.findAllbyType(type,offset,limit);
     }
     public List<Item> findAllaboutTools(){
         return itemRepository.findAllaboutTools();
+    }
+    @Transactional
+    public boolean removeById(Long id){
+        return itemRepository.removeById(id);
+    }
+
+    public List<Item> findByTitleKeyword(String keyWord,int offset,int limit){
+        return itemRepository.findBytitleKeyword(keyWord, offset, limit);
     }
 }

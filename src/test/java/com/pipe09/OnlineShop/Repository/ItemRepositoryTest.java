@@ -1,5 +1,6 @@
 package com.pipe09.OnlineShop.Repository;
 
+import com.pipe09.OnlineShop.Configuration.SwaggerConfig;
 import com.pipe09.OnlineShop.Domain.Item.Item;
 import com.pipe09.OnlineShop.Domain.Item.ItemFactory;
 import com.pipe09.OnlineShop.Domain.Item.Typed.LeakDetector;
@@ -7,18 +8,23 @@ import com.pipe09.OnlineShop.Domain.Item.Typed.LeakDetector;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
+
 public class ItemRepositoryTest {
 
     @Autowired
@@ -42,6 +48,16 @@ public class ItemRepositoryTest {
         System.out.println(repository.findItem(id).getClass());
 
 
+    }
+    @Test
+    public void 스텟변경후아이템불러오기(){
+        List<Item>items=repository.findAll(0,200);
+        items.stream().forEach(item -> System.out.println(item.getName()));
+    }
+    @Test
+    public void 검색테스트(){
+        List<Item>items=repository.findBytitleKeyword("테스트",0,100);
+        assertEquals(items.size(),2);
     }
 
 }

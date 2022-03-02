@@ -52,7 +52,7 @@ public class ItemApiController {
 
      */
 
-    @GetMapping("/api/v2/items/{DTYPE}")
+    @GetMapping("/api/v2/items/typed/{DTYPE}")
     public List<ItemDto> getminiItemsbyType(@PathVariable String DTYPE,@RequestParam int offset,@RequestParam int limit){
         List<Item>items=service.findAllbyType(DTYPE,offset,limit);
         DefaultMapper<ItemDto> mapper=new DefaultMapper<>(new ItemDto());
@@ -81,6 +81,20 @@ public class ItemApiController {
     @GetMapping("/api/v2/items/all")
     public List<ItemDto> getitemall(@RequestParam int offset, @RequestParam int limit){
         List<Item> items=service.findAll(offset, limit);
+        DefaultMapper<ItemDto> mapper=new DefaultMapper<>(new ItemDto());
+        List<ItemDto> dtoList=items.stream().map(item -> mapper.Translate(item)).collect(Collectors.toList());
+        return dtoList;
+    }
+    @GetMapping("/api/v2/items/single/{itemid}")
+    public ItemDto getItembyId(@PathVariable Long itemid){
+        Item item=service.findOne(itemid);
+        DefaultMapper<ItemDto> mapper=new DefaultMapper<>(new ItemDto());
+        return mapper.Translate(item);
+
+    }
+    @GetMapping("/api/v2/items/{keyword}")
+    public List<ItemDto> getItembykeyword(@RequestParam int offset,@RequestParam int limit,@PathVariable String keyword){
+        List<Item> items=service.findByTitleKeyword(keyword,offset,limit);
         DefaultMapper<ItemDto> mapper=new DefaultMapper<>(new ItemDto());
         List<ItemDto> dtoList=items.stream().map(item -> mapper.Translate(item)).collect(Collectors.toList());
         return dtoList;

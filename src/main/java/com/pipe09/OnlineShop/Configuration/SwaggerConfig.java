@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
-//@EnableSwagger2
+
 public class SwaggerConfig {
     private static final String API_NAME="DaeBong Online Shop API";
     private static final String API_VERSION="1.0.0";

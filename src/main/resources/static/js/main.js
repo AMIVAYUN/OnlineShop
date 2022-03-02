@@ -4,6 +4,8 @@ $(document).ready(function(){
     gotoItem();
     categorySetting();
     SessionCheck();
+    SearchSetting();
+    logoSetting();
 })
 function getItem(){
     Cleaning($("#shoplist"));
@@ -53,7 +55,7 @@ function Cleaning(bodytag){
 }
 function getTypedItem(dtype){
     Cleaning($("#shoplist"))
-    var url="./api/v2/items/"
+    var url="./api/v2/items/typed/"
     if(dtype=="ETC"){
         url+="ETC"
     }
@@ -66,7 +68,7 @@ function getTypedItem(dtype){
     url+="?offset=0&limit=30"
     fetch(url,{method:"GET"}).then((response) => response.json()).then(
         (data) => {
-            $.each(data, function (idx, row) {
+            $.each(data, function (idx) {
                 var innerhtml = '<li class="item" id='+data[idx].dtype +'><div id="item_img"><img src=' + data[idx].imgSrc + '></div>' +
                     '<div id="item_text"><span><a id="merchansub">상품명:</a> <a id="item_name">'+data[idx].name+'</a></span></br>'+'<span><a id="merchansub">가 격:  </a><a id="item_price">'+data[idx].price+'</a></span></br></div></li>'
                 $("#shoplist").append(innerhtml);
@@ -89,6 +91,23 @@ async function SessionCheck(){
 
     }
 }
+function SearchSetting(){
+    $("#searchicon").on("click",function(){
+        if($("#searchbar").find("input").val()){
+            var url="/search/"+$("#searchbar").find("input").val();
+            window.open(url);
+        }else{
+            location.reload();
+        }
 
+    })
+}
 
+function logoSetting(){
+    $("#logo").click(function(){
+        var baseurl=window.location;
+        console.log(baseurl .protocol +"//"+baseurl .host);
+            window.location.assign(baseurl .protocol +"//"+baseurl .host);
+    })
 
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>검색 결과</title>
+    <link rel="stylesheet" href="../../css/searchresult.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../../js/searchresult.js"charset="UTF-8"></script>
+</head>
+<body>
+    <nav id="navi-bar">
+
+        <a id="login-navi" href="/login"style="left:1200px;">로그인</a>
+        <a id="join-navi" href="/join"style="left:1240px;">회원가입</a>
+        <a href="#"style="left:1290px;">마이페이지</a>
+        <a href="/notice"style="left:1350px;">FAQ</a>
+        <a id="manager" href="/admin/manage" style="left:1380px;">관리자</a>
+    </nav>
+    <div id="bodyheader">
+        <div id="mainHeaderbar">
+            <img src="../img/static/DB_LOGO.gif" id="logo">
+            <div id="searchbar"><input type="text" placeholder="   제품을 검색하세요."><img  id="searchicon"src="../img/static/searchicon.png"></div>
+            <img src="../img/static/shoppingcart.png" id="scart" onclick="javascript:location.href='/shopping-list'">
+        </div>
+    </div>
+    <hr>
+    <div id="explain_part">
+
+    </div>
+    <ul id="shoplist">
+
+
+    </ul>
+    <div id="side_Bar">
+        <div id="comp_intr">
+            <img src="../img/static/companyIntroduction_ver2.png" onclick="javascript:location.href='/comp-intro'">
+        </div>
+        <div id="comp_mypage">
+            <img src="../img/static/mypage_ver2.png"onclick="javascript:location.href='/my-page'">
+
+        </div>
+        <div id="comp_hompage">
+            <img src="../img/static/homepage_ver2.png"onclick="javascript:location.href='http://www.대봉산업기계.com'">
+
+        </div>
+        <div id="comp_board">
+            <img src="../img/static/board_ver2.png" onclick="javascript:location.href='/board'">
+        </div>
+        <div id="comp_top">
+            <img src="../img/static/Top_ver2.png" onclick="window.scroll(0,0)">
+        </div>
+    </div>
+    <div id="footer">
+        <img src="../img/static/cp1.GIF">
+    </div>
+</body>
+</html>

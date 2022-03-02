@@ -20,6 +20,14 @@ public class Utils {
 
 
     }
+    public static String MakingErrmessage(boolean type){
+        if(type){
+            return "삭제에 성공하였습니다.";
+        }
+        else{
+            return "삭제에 실패하였습니다.(조회 실패)";
+        }
+    }
     public static LocalDate getNow(){
         return LocalDate.now();
     }

@@ -2,6 +2,7 @@ package com.pipe09.OnlineShop.Domain.Item.Typed;
 
 
 import com.pipe09.OnlineShop.Domain.Item.Item;
+import com.pipe09.OnlineShop.Domain.Item.Item_status;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,5 +24,5 @@ public class Grindstone extends Item {
     private String ManufacturedCompany;
     public String imgSrc;
     private String DTYPE;
-
+    private Item_status status;
 }

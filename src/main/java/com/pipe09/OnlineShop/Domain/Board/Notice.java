@@ -5,6 +5,7 @@ import com.pipe09.OnlineShop.Dto.Notice.NoticeDto;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -42,6 +43,7 @@ public class Notice {
     public void setUploadDate(){
         this.date=LocalDate.now();
     }
+
 
 
 }

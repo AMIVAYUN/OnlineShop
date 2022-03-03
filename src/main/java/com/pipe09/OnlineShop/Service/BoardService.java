@@ -33,4 +33,15 @@ public class BoardService {
     {
         return boardRepository.findByID(id);
     }
+
+    @Transactional(readOnly = false)
+    public boolean update(Long id,String name,String description){
+        Notice notice=boardRepository.findByID(id);
+        if(name ==null || description == null){
+            return false;
+        }
+        notice.setName(name);
+        notice.setDescription(description);
+        return true;
+    }
 }

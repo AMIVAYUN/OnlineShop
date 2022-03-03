@@ -19,7 +19,7 @@ public class MemberController {
 
     @GetMapping("/login")
     public String login(){
-        return "fragments/public/login";
+        return "fragments/public/loginTemp";
     }
 
 

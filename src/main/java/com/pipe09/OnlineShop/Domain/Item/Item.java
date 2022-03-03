@@ -39,6 +39,8 @@ public class Item {
     public String imgSrc;
     @Column(name="DTYPE",insertable = false,updatable = false)
     private String DTYPE;
+    @Enumerated(EnumType.STRING)
+    private Item_status status;
     public static Item createNewItem(String type,String Name,int Price,int StockQuantity,String description,int Weight,String Madein,String ManufacturedCompany){
         ItemFactory factory=new ItemFactory();
         Item newitem=factory.makingItemBytype(type);

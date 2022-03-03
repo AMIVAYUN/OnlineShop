@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" src="css/../../css/register_faq.css">
+    <link rel="stylesheet" href="../../css/register_faq.css">
     <title>공지사항 등록</title>
 </head>
 <body>
@@ -10,9 +10,9 @@
 
 
     <form method="post" action="/api/v1/register-faq.do">
-        <input type="text" name="name" placeholder="공지사항 제목"/><br>
-        <input type="text" name="description" placeholder="상품 설명"/></br>
-        <button type="submit" value="결과 확인">전송</button>
+        <input type="text" name="name" id="name"placeholder="공지사항 제목"/><br>
+        <input type="text" name="description" id="description" placeholder="상품 설명"/></br>
+        <button type="submit" value="결과 확인" id="submit">전송</button>
     </form>
 </body>
 </html>

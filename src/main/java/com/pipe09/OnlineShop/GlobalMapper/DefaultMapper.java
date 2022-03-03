@@ -70,8 +70,11 @@ public class DefaultMapper<R> implements Mapper{
 
             try{
                 setter.setAccessible(true);
+                /*
                 log.info("setter: "+setter.toString());
                 log.info("mapTable"+": "+mapTable.get(setter.getName().substring(3).toLowerCase()).get().toString());
+
+                 */
                 setter.invoke(this.object,mapTable.get(setter.getName().substring(3).toLowerCase()).get());
             }catch (IllegalAccessException | InvocationTargetException e){
                 log.info(e.toString());

@@ -13,7 +13,7 @@ body{
     display:flex;
     margin-top: 30px;
     margin-left:30px;
-    
+
 }
 #navi-bar{
     top:0;
@@ -24,7 +24,7 @@ body{
     height:20px;
     position:absolute;
 
-    
+
 }
 #navi-bar a{
     font-size:10px;
@@ -33,7 +33,7 @@ body{
     color:black;
     text-decoration-line: none;
     white-space : nowrap;
-    
+
 }
 
 #logo{
@@ -42,9 +42,6 @@ body{
     height:70px;
     margin-right:10px;
 
-}
-#logo:hover{
-    cursor: pointer;
 }
 
 #searchbar{
@@ -89,20 +86,6 @@ body{
 #side_Bar div img:hover{
     filter:opacity(0.7) drop-shadow(0 0 0 #87cefa);
 }
-#cursor{
-    
-    cursor:pointer;
-    width: 5px;
-    height:5px;
-    position: absolute;
-    left:1135px;
-    top:90px;
-    color:white;
-}
-#bodyheader span img{
-    background-color: white;
-    
-}
 #scart{
     width: 32px;
     height:32px;
@@ -111,48 +94,33 @@ body{
     left: 1200px;
     cursor: pointer;
 }
+#footer{
+    position:fixed;
+    bottom:0px;
+    left:350px;
+
+}
+#footer img{
+    width:900px;
+}
 hr{
     width:1010px;
-    position:absolute;
-    left:320px;
-    border: 1px solid black;
-}
-#category_part{
-    position: relative;
-    margin-top:10px;
-}
-#category_list{
-    list-style: none;
-    display: flex;
-    position:absolute;
-    left:320px;
-
-}
-#category_list li{
-    white-space : nowrap;
-    margin-right: 20px;
-    font-family: 'Do hyeon',sans-serif;
-    font-size:20px;
-    cursor: pointer;
-}
-
-#default_category{
-    background-color: black;
-    border-radius: 10px 10px;
-    color:white;
-}
-
-#category_list li:hover{
-    background-color: black;
-    border-radius: 10px 10px;
-    color:white;
-}
-#category_part select{
     position: absolute;
-    left:1100px;
-    top: 20px;
-
+    border: 1px solid black;
+    left:320px;
 }
+#explain_part{
+    position: absolute;
+    width:1000px;
+    margin-top:40px;
+    text-align: center;
+    left:320px;
+    font-size: 20px;
+    border:5px solid black;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
 #shoplist{
     position:absolute;
     left:340px;
@@ -184,7 +152,7 @@ li #item_img{
     width:150px;
     height:150px;
     top:15px;
-    
+
 }
 li #merchansub{
     font-size: 10px;
@@ -213,12 +181,12 @@ li #item_img img{
     color:red;
     font-weight: bold;
 }
-#footer{
-    position:fixed;
-    bottom:0px;
-    left:350px;
-    
+#logo:hover{
+    cursor: pointer;
 }
-#footer img{
-    width:900px;
+
+#explain_part mark{
+    color:red;
+    font-weight: bold;
+    background-color: white;
 }

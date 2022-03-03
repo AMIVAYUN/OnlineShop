@@ -1,23 +1,97 @@
 <!DOCTYPE html>
-<html lang="ko">
+
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>로그인 페이지</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>세부사항</title>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/iteminfo.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+
 
 </head>
 <body>
-<h1>로그인 페이지</h1>
-<hr/>
-<!-- 시큐리티는 x-www-form-urlencoded 타입만 인식 -->
-<form action="/loginproc" method="post">
-    <input type="text" name="username"></br>
-    <input type="password" name="password"></br>
-    <button>로그인</button>
-</form>
+<nav id="navi-bar">
+
+    <a id="login-navi" href="/login"style="left:1200px;">로그인</a>
+    <a id="join-navi" href="/join"style="left:1240px;">회원가입</a>
+    <a href="#"style="left:1290px;">마이페이지</a>
+    <a href="/notice"style="left:1350px;">FAQ</a>
+    <a id="manager" href="/admin/manage" style="left:1380px;">관리자</a>
+</nav>
+<div id="bodyheader">
+    <div id="mainHeaderbar">
+        <img src="img/static/DB_LOGO.gif" id="logo">
+        <span id="searchbar"><input type="text" placeholder="   제품을 검색하세요."></span>
+        <a id="cursor" href="#">c</a>
+        <img src="img/static/shoppingcart.png" id="scart" onclick="javascript:location.href='/shopping-list'">
+    </div>
+</div>
+
+<hr>
+    <div id="category_part">
+
+        <ul id="category_list">
+            <li id="default_category">전체 보기</li>
+            <li id="LeakDetector">누수 탐지기</li>
+            <li id="SewerCleaner">하수관 청소기</li>
+            <li id="Endoscope" style="margin-top:3px;">내시경</li>
+            <li id="Tool" style="margin-top:3px;">공구</li>
+            <li id="ETC" style="margin-top:3px;">기타</li>
+
+
+        </ul>
+        <select name="정렬" id="OptionalSort">
+            <option value="한줄씩 보기">한줄씩 보기</option>
+            <option value="4개씩 보기">4개씩 보기</option>
+        </select>
+    </div>
+
+    <div class="product_info_container">
+        <button class="back_button" onclick="window.open('/');" style="cursor: pointer" target="_self">뒤로가기</button>
+        <div class="product_image_container">
+            <img src="img/static/DB_LOGO.gif" style="width:300px; height:100px;" id="product_image">
+        </div>
+        <div class="v-line">
+        </div>
+        <div class="product_info_container">
+            트위치 스트리머이자 前 카카오TV PD, 리그 오브 레전드 前 챌린저 플레이어. 시즌 2부터 Greenday라는 닉네임으로 플레이 했던 올드비 유저 및 프로게이머 연습생이었다.
+        </div>
+    </div>
+</div>
+
+
+<div id="side_Bar">
+    <div id="comp_intr">
+        <img src="img/static/companyIntroduction_ver2.png" onclick="javascript:location.href='/comp-intro'">
+    </div>
+    <div id="comp_mypage">
+        <img src="img/static/mypage_ver2.png"onclick="javascript:location.href='/my-page'">
+
+    </div>
+    <div id="comp_hompage">
+        <img src="img/static/homepage_ver2.png"onclick="javascript:location.href='http://www.대봉산업기계.com'">
+
+    </div>
+    <div id="comp_board">
+        <img src="img/static/board_ver2.png" onclick="javascript:location.href='/board'">
+    </div>
+    <div id="comp_top">
+        <img src="img/static/Top_ver2.png" onclick="window.scroll(0,0)">
+    </div>
+</div>
+<div id="footer">
+    <img src="img/static/cp1.GIF">
+</div>
+
 </body>
+
 </html>

@@ -184,3 +184,9 @@ li #item_img img{
 #logo:hover{
     cursor: pointer;
 }
+
+#explain_part mark{
+    color:red;
+    font-weight: bold;
+    background-color: white;
+}

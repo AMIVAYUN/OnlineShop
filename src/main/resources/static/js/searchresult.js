@@ -19,6 +19,7 @@ async function SessionCheck(){
 
     }
 }
+
 function KeyWordCheck(){
     var baseurl=window.location;
     var locate=baseurl .protocol +"//"+baseurl .host+"/search/"

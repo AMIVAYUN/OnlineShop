@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>세부사항</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/iteminfo.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
-
+    <script src="https://kit.fontawesome.com/97e36fce94.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="js/main.js"></script>
 
@@ -55,15 +55,23 @@
     </select>
 </div>
 
-<div class="product_info_container">
+<div class="product_info">
     <button class="back_button" onclick="window.open('/');" style="cursor: pointer" target="_self">뒤로가기</button>
     <div class="product_image_container">
-        <img src="img/static/DB_LOGO.gif" style="width:300px; height:100px;" id="product_image">
+        <img src="img/static/DB_LOGO.gif" style="width:300px; height:100px; margin-top:20px;" id="product_image">
     </div>
-    <div class="v-line">
-    </div>
-    <div class="product_info_container">
-        트위치 스트리머이자 前 카카오TV PD, 리그 오브 레전드 前 챌린저 플레이어. 시즌 2부터 Greenday라는 닉네임으로 플레이 했던 올드비 유저 및 프로게이머 연습생이었다.
+    <div class="v-line"></div>
+    <div class="product_info_container" style="border-radius: 20px;">
+        <h2 class="product_info_name">제품 이름</h2>
+        <!--div class="product_price">
+            <input type="hidden" id="original_price" value="1000000">
+            <dl>
+                <dt></dt>
+                <dd>
+                    <span data_price="1000000"></span>
+                </dd>
+            </dl>
+        </div-->
     </div>
 </div>
 </div>

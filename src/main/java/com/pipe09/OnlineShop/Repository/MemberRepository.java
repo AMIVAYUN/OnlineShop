@@ -14,7 +14,17 @@ import java.util.List;
 @Repository
 public class MemberRepository {
     private final EntityManager em;
+    public Long joinByOauth(Member member){
+        List<Member> exist=this.findByName(member.getName());
+        if(exist==null || exist.isEmpty() ){
+            em.persist(member);
 
+        }else{
+            em.merge(member);
+        }
+        return member.getMember_ID();
+
+    }
     public Long save(Member member){
         em.persist(member);
 

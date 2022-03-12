@@ -2,7 +2,6 @@ package com.pipe09.OnlineShop.Controller.ApiController;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.pipe09.OnlineShop.Domain.Board.Notice;
@@ -11,7 +10,7 @@ import com.pipe09.OnlineShop.Domain.Item.ItemFactory;
 import com.pipe09.OnlineShop.Domain.Item.Item_status;
 import com.pipe09.OnlineShop.Dto.Item.P_itemDto;
 import com.pipe09.OnlineShop.Dto.Item.R_itemDto;
-import com.pipe09.OnlineShop.Dto.Notice.NoticeDto;
+import com.pipe09.OnlineShop.Dto.Board.NoticeDto;
 import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
 import com.pipe09.OnlineShop.Service.BoardService;
 import com.pipe09.OnlineShop.Service.ItemService;
@@ -22,7 +21,6 @@ import com.pipe09.OnlineShop.Utils.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.hibernate.cfg.annotations.reflection.internal.XMLContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +29,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @Slf4j
@@ -84,18 +80,10 @@ public class ManagerApiController {
             return new ResponseEntity("요청이 잘못 되었습니다.", HttpStatus.NOT_FOUND);
         }
     }
-    @GetMapping("/api/v1/view-faq.do")
-    public ResponseEntity<List<NoticeDto>> faqlist(){
-        List<Notice> noticeList=boardService.findAll();
-        if(noticeList.isEmpty()){
-            return new ResponseEntity("저장된 게시물이 없습니다",HttpStatus.NOT_FOUND);
-        }
-        List<NoticeDto>list=noticeList.stream().map(notice -> new NoticeDto(notice.getNotice_ID(),notice.getName(), notice.getDescription(),notice.getDate())).collect(Collectors.toList());
-        return new ResponseEntity(list,HttpStatus.OK);
-    }
+
     @DeleteMapping(path = "/api/v1/delete-faq.do")
     public ResponseEntity delfaq(@RequestBody NoticeDto dto){
-        boolean result=boardService.RemoveByID(dto.getId());
+        boolean result=boardService.RemoveByID(dto.getNotice_id());
 
         if(result){
             return new ResponseEntity<String>("삭제에 성공하였습니다.",HttpStatus.OK);

@@ -2,6 +2,7 @@ package com.pipe09.OnlineShop.Controller.ApiController;
 
 
 import com.pipe09.OnlineShop.Domain.Member.Member;
+import com.pipe09.OnlineShop.Domain.SessionUser;
 import com.pipe09.OnlineShop.Dto.MemauthDto;
 import com.pipe09.OnlineShop.Dto.Member.MemberManageDto;
 import com.pipe09.OnlineShop.Service.MemberService;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MemberApiController{
     private final MemberService memberService;
+    private final HttpSession session;
     @GetMapping("/api/v1/members/is-auth")
     public boolean isAuth(){
         return SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
@@ -38,7 +41,13 @@ public class MemberApiController{
     @GetMapping("/api/v1/members/session")
     public ResponseEntity<MemauthDto> status(){
         Authentication auth=SecurityContextHolder.getContext().getAuthentication();
-        return new ResponseEntity<MemauthDto>(new MemauthDto(auth.isAuthenticated(),auth.getName(),auth.getAuthorities().toString()), HttpStatus.OK);
+        SessionUser user=(SessionUser) session.getAttribute("user");
+        if(user==null){
+            return new ResponseEntity<MemauthDto>(new MemauthDto(auth.isAuthenticated(), auth.getName(), auth.getAuthorities().toString()), HttpStatus.OK);
+        }else{
+            return new ResponseEntity<MemauthDto>(new MemauthDto(auth.isAuthenticated(), user.getName(), auth.getAuthorities().toString()), HttpStatus.OK);
+        }
+
     }
     @GetMapping("/api/v1/members/all")
     public List<MemberManageDto> getmemall(@RequestParam int offset, @RequestParam int limit){

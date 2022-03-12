@@ -2,7 +2,7 @@ package com.pipe09.OnlineShop.Controller.ApiController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pipe09.OnlineShop.Domain.Item.Item;
-import com.pipe09.OnlineShop.Dto.Notice.NoticeDto;
+import com.pipe09.OnlineShop.Dto.Board.NoticeDto;
 import com.pipe09.OnlineShop.Service.ItemService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

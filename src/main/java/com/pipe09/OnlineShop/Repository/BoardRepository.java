@@ -20,7 +20,7 @@ public class BoardRepository {
         em.persist(notice);
         return notice.getNotice_ID();
     }
-    public List<Notice> readNoticeAll(){
+    public List<Notice> findAll(){
         return em.createQuery("select nlist from Notice nlist").getResultList();
     }
     public Notice findByID(Long id){ return em.find(Notice.class,id);}
@@ -31,6 +31,14 @@ public class BoardRepository {
         }
         em.remove(notice);
         return true;
+    }
+    public List<Notice> findWithKeyWord(String Keyword){
+        if(Keyword==null){
+            return findAll();
+        }
+        else{
+            return em.createQuery("select nlist from Notice nlist where nlist.name LIKE concat('%',:Keyword,'%')").setParameter("Keyword",Keyword).getResultList();
+        }
     }
 
 }

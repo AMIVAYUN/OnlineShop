@@ -23,7 +23,7 @@ public class BoardService {
         return saveid;
     }
     public List<Notice> findAll(){
-        return boardRepository.readNoticeAll();
+        return boardRepository.findAll();
     }
     @Transactional
     public boolean RemoveByID(Long id){
@@ -43,5 +43,13 @@ public class BoardService {
         notice.setName(name);
         notice.setDescription(description);
         return true;
+    }
+    public List<Notice>findWithKeyword(String Keyword){
+        if(Keyword==null){
+            return boardRepository.findAll();
+        }
+        else{
+            return boardRepository.findWithKeyWord(Keyword);
+        }
     }
 }

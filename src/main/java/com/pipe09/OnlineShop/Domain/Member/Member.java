@@ -2,6 +2,7 @@ package com.pipe09.OnlineShop.Domain.Member;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pipe09.OnlineShop.Domain.Orders.Orders;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -10,6 +11,7 @@ import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.beans.ConstructorProperties;
 import java.time.LocalDate;
 import java.time.LocalDateTime; 
@@ -41,7 +43,7 @@ public class Member {
     private List<Orders> ordersList;
     @Enumerated(EnumType.STRING)@Setter
     private RoleType roleType = RoleType.USER;
-    @Column(nullable = false)
+    @Column(nullable = true)
     @Setter
     private String Phone_Num;
 
@@ -53,6 +55,11 @@ public class Member {
     @Lob
     @Nullable
     private String withdraw_reason;
+    @Column(name = "PROVIDER_TYPE", length = 20)
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    @Setter
+    private UserType userType;
     public static Member createMember(String id,String name,String Phone_Num,String pwd,String email) {
         Member newMember = new Member();
         newMember.setUser_ID(id);
@@ -61,6 +68,7 @@ public class Member {
         newMember.setPwd(pwd);
         newMember.setEmail(email);
         newMember.setRoleType(RoleType.USER);
+        newMember.setUserType(UserType.GOOGLE);
         newMember.setDate(LocalDate.now());
         return newMember;
     }

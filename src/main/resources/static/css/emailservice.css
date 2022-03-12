@@ -8,6 +8,7 @@ body{
 }
 #wrap{
     position:absolute;
+    margin-left:5%;
     left:50%;
     height:100%;
     transform: translate(-50%);

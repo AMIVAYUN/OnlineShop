@@ -15,6 +15,7 @@
     <script src="https://kit.fontawesome.com/97e36fce94.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/iteminfo.js"></script>
 
 
 </head>
@@ -37,24 +38,20 @@
 </div>
 
 <hr>
-<div id="category_part">
 
-    <ul id="category_list">
-        <li id="default_category">전체 보기</li>
-        <li id="LeakDetector">누수 탐지기</li>
-        <li id="SewerCleaner">하수관 청소기</li>
-        <li id="Endoscope" style="margin-top:3px;">내시경</li>
-        <li id="Tool" style="margin-top:3px;">공구</li>
-        <li id="ETC" style="margin-top:3px;">기타</li>
+<!--
+  "description": "string",          //제품 설명 >> 아래에
+  "dtype": "string",                //제품군
+  "imgSrc": "string",               //제품 이미지
+  "item_ID": 0,                     //제품ID
 
-
-    </ul>
-    <select name="정렬" id="OptionalSort">
-        <option value="한줄씩 보기">한줄씩 보기</option>
-        <option value="4개씩 보기">4개씩 보기</option>
-    </select>
-</div>
-
+  "madeIn": "string",               //제조국가, 원산지
+  "manufacturedCompany": "string",  //제조회사
+  "name": "string",                 //제품 이름
+  "price": 0,                       //제품 가격
+  "stockQuantity": 0,               //제품 재고
+  "weight": 0                       //제품 무게
+-->
 <div class="product_outer_container">
     <div class="product_inner_container">
         <img class="back_button" src="img/static/back-button.png" onclick="window.open('/');" style="cursor: pointer" target="_self">
@@ -64,17 +61,65 @@
         </div>
         <div class="v-line"></div>
         <div class="product_info_container" style="border-radius: 20px;">
-            <h2 class="product_info_name">제품 이름</h2>
-            <!--div class="product_price">
-                <input type="hidden" id="original_price" value="1000000">
-                <dl>
-                    <dt></dt>
-                    <dd>
-                        <span data_price="1000000"></span>
-                    </dd>
-                </dl>
-            </div-->
+            <div class="product_info_name">
+                <h2>하수관 고압세척 장비(G-250)</h2>
+            </div>
+            <div class="product_info_inner_container" style="border-radius: 20px">
+                <div class="product_info"></div>
+                <div class="product_info">
+                    <div class="product_info_left"><b>판매가격</b></div>
+                    <div class="product_info_right">
+                        <img src="img/static/next.png" class="index_arrow"><b>      1,000,000원</b>
+                    </div>
+                </div>
+                <div class="product_info">
+                    <div class="product_info_left">원산지</div>
+                    <div class="product_info_right">
+                        <img src="img/static/next.png" class="index_arrow">  수입
+                    </div>
+                </div>
+                <div class="product_info">
+                    <div class="product_info_left">제조회사</div>
+                    <div class="product_info_right">
+                        <img src="img/static/next.png" class="index_arrow">  대봉산업기계
+                    </div>
+                </div>
+
+                <div class="product_info">
+                    <div class="product_info_left">재고</div>
+                    <div class="product_info_right">
+                        <img src="img/static/next.png" class="index_arrow">  없음
+                    </div>
+                </div>
+                <div class="product_info">
+                    <div class="product_info_left">무게</div>
+                    <div class="product_info_right">
+                        <img src="img/static/next.png" class="index_arrow">  150kg
+                    </div>
+                </div>
+                <div class="product_info">
+                    <div class="product_info_left">구매수량</div>
+                    <div class="product_info_right"><input type="number" value="1" style="width: 40%"></div>
+
+                </div>
+                <div class="div_leftRight">
+                    <button id="btn_cart">장바구니</button>
+                    <button id="btn_buy">바로구매</button>
+                </div>
+            </div>
         </div>
+    </div>
+    <div class="product_details">
+        <nav class="">
+            <button class="details_category" onclick="show_explanation()">제품 상세 설명</button>
+            <button class="details_category" onclick="show_buy()">구입 및 배송 안내</button>
+            <button class="details_category" onclick="show_evaluation()">고객평가</button>
+            <button class="details_category" onclick="show_QnA()">상품관련 Q&A</button>
+        </nav>
+        <div class="product_details_content" id="details_explanation">제품 상세설명입니다.</div>
+        <div class="product_details_content" id="details_buy">제품 구입 및 배송 안내입니다.</div>
+        <div class="product_details_content" id="details_evaluation">제품 고객평가입니다.</div>
+        <div class="product_details_content" id="details_QnA">제품 관련 QnA입니다.</div>
     </div>
 </div>
 </div>

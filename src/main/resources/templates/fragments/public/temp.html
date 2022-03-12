@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 페이지</title>
+    <link rel="stylesheet" href="css/login.css" type="text/css" media="all">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+<body>
+<!--
+시큐리티는 x-www-form-urlencoded 타입만 인식
+<form action="/loginproc" method="post">
+    <input type="text" name="username"></br>
+    <input type="password" name="password"></br>
+    <button>로그인</button>
+</form>
+-->
+<div style="padding: 20px;"></div>
+<div id ="container" class="main_container">
+    <div style="padding: 20px;"></div>
+    <div>
+        <a href = "http://www.pipe09.com/" target = "_self" > <img src = "img/static/DB_LOGO.gif" class="form_logo"> </a>
+    </div>
+    <div class="join_container">
+        <div class="form_container">
+            <form name="login_form" action="/loginproc" method="post">
+                <div class="form_title_div">
+                    <p style="font-size:25px" class="form_title_p">로그인</p>
+                </div>
+                <div>
+                    <div>
+                        <a class="form_item_name">ID</a>
+                    </div>
+                    <div>
+                        <input type="text" name="username" placeholder="아이디를 입력하세요" class="form_input">
+                    </div>
+                    <div class="padding"></div>
+                    <!--div class="form_text_alert_padding">
+                        <div id="alert_ID" class="form_text_alert"></div>
+                    </div-->
+                </div>
+                <div>
+                    <div>
+                        <a class="form_item_name">Password</a>
+                    </div>
+                    <div>
+                        <input type="password" name="password" placeholder="비밀번호를 입력하세요" class="form_input">
+                    </div>
+                    <div class="padding"></div>
+                    <!--div class="form_text_alert_padding">
+                        <div id="alert_password" class="form_text_alert"></div>
+                    </div-->
+                </div>
+                <div style="height: 10px;"></div>
+                <div>
+                    <button type="button" class="form_submit_button">로그인</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="footer">
+    <img src="img/static/cp1.GIF">
+</div>
+</body>
+</html>

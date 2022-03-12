@@ -131,7 +131,7 @@
 .product_details{
     position:absolute;
     margin: 20px;
-    top: 720px;
+    top: 620px;
     width: 850px;
 }
 
@@ -141,4 +141,17 @@
     border-radius: 30px;
     border: 2px solid rgba(33, 36, 37, .6);
     background-color: #fff;
+}
+
+.details_category:hover{
+    width: 150px;
+    height: 40px;
+    border-radius: 30px;
+    border: 2px solid rgba(33, 36, 37, .6);
+    background-color: #212425;
+    color: #fff;
+}
+
+.product_details_content{
+    display: none;
 }

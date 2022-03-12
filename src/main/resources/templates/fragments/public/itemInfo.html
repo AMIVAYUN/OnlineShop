@@ -99,7 +99,7 @@
                 </div>
                 <div class="product_info">
                     <div class="product_info_left">구매수량</div>
-                    <div class="product_info_right"><input type="number" style="width: 40%"></div>
+                    <div class="product_info_right"><input type="number" value="1" style="width: 40%"></div>
 
                 </div>
                 <div class="div_leftRight">
@@ -111,12 +111,15 @@
     </div>
     <div class="product_details">
         <nav class="">
-            <button class="details_category" onclick="show()">제품 상세 설명</button>
-            <button class="details_category">구입 및 배송 안내</button>
-            <button class="details_category">고객평가</button>
-            <button class="details_category">상품관련 Q&A</button>
+            <button class="details_category" onclick="show_explanation()">제품 상세 설명</button>
+            <button class="details_category" onclick="show_buy()">구입 및 배송 안내</button>
+            <button class="details_category" onclick="show_evaluation()">고객평가</button>
+            <button class="details_category" onclick="show_QnA()">상품관련 Q&A</button>
         </nav>
-        <div><img id="fig" src=""></div>
+        <div class="product_details_content" id="details_explanation">제품 상세설명입니다.</div>
+        <div class="product_details_content" id="details_buy">제품 구입 및 배송 안내입니다.</div>
+        <div class="product_details_content" id="details_evaluation">제품 고객평가입니다.</div>
+        <div class="product_details_content" id="details_QnA">제품 관련 QnA입니다.</div>
     </div>
 </div>
 </div>

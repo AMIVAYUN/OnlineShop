@@ -212,19 +212,19 @@ li #item_img img{
     font-weight: bold;
 }
 
-#footer{
+/*#footer{
     position: absolute;
     left: 50%;
     bottom: 0%;
     transform: translate(-50%, -50%);
-}
-/*
+}*/
+
 #footer{
     position:fixed;
     bottom:0px;
     left:350px;
 }
-*/
+
 
 #footer img{
     width:900px;

@@ -20,7 +20,6 @@ public class InitDb {
     public void init(){
         initSerivce.dbInit();
         initSerivce.dbInit2();
-        service.sendMail();
 
     }
 

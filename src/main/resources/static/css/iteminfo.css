@@ -15,7 +15,7 @@
 
 .product_outer_container{
     position:absolute;
-    top: 100px;
+    top: 200px;
     left: 400px;
     width: 1000px;
     height: 600px;
@@ -25,7 +25,6 @@
 .product_inner_container{
     overflow: hidden;
     position:absolute;
-    top: 100px;
     margin-top: 50px;
     width: 900px;
     height: 550px;

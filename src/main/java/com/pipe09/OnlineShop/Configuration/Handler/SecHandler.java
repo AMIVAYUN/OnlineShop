@@ -1,4 +1,4 @@
-package com.pipe09.OnlineShop.Configuration;
+package com.pipe09.OnlineShop.Configuration.Handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;

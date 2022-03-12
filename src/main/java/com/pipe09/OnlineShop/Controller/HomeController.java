@@ -20,8 +20,9 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class HomeController {
     @GetMapping("/")
-    public String home(Model model) {
+    public String home() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
         log.info(String.format("%s accessed general home with role type: %s",authentication.getName(),authentication.getAuthorities()));
         return "fragments/public/home";
     }

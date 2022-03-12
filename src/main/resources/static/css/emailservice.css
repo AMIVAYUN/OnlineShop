@@ -132,7 +132,7 @@ hr{
     width:1010px;
     margin-top:20px;
 }
-#Noticebar{
+#MailService{
     width:1010px;
     height:120px;
     background-color: #A0D8EF;
@@ -144,86 +144,54 @@ hr{
     border-radius: 10px;
 }
 
-#Noticebar mark{
+#MailService mark{
     background-color:#A0D8EF;
     color:black;
-    margin-left:100px;
+    margin-left:55px;
     margin-right:80px;
-}
-#Noticebar input{
-    width:350px;
-    height:38px;
-    border-right: 0px white;
-    border-bottom: 2px solid black;
-}
-#Noticebar #search{
-    background-color: white;
-    border: 2px solid black;
-    border-left:0px white;
-
 
 }
-#Noticebar #search:hover{
-    background-color: black;
-    color: white;
-    border-radius: 5px;
-
+#MailService i{
+    font-weight: bold;
 }
 
-#mailingservice{
-    height:50px;
-    margin-left:25px;
-    width:200px;
-    font-size: 20px;
-    background-color: #406Cb3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
+#form{
+    margin-top:10px;
+    width:950px;
+    height:100%;
+    background-color: #FCF4D9;
+    border-radius: 10px;
+    padding:30px;
+    font-weight: bold;
 }
-#mailingservice:hover{
-    background-color: black;
-    color:white;
-}
-#mailingservice i{
-    margin-right:5px;
+#title{
+    width:948px;
+    height:30px;
 }
 #content{
-    display: flex;
-    flex-direction: column;
-    margin-top:20px;
-    border: 3px solid gray;
-    border-radius: 10px;
-    height: 100%;
+    width:948px;
+    height:300px;
+    resize: none;
 }
-
-.partition{
-    width:1010px;
-    display: flex;
-    align-items: center;
-
-
-
+#name{
+    height: 25px;
 }
-
-#content summary{
-    width:770px;
-    padding-right: 10px;
-    padding-left: 10px;
-    margin-left:110px;
-    height:30px;
-    border-bottom: 1px solid gray;
-    overflow: hidden;
-    font-size: 20px;
-    font-weight: bold;
+#phonenum{
+    width:100%;
+    height:25px;
 }
-#content p{
-    text-indent: 10px;
-    padding-right: 15px;
-    padding-left: 15px;
-    width:760px;
-    border:1px solid black;
-    margin-left:110px;
-    line-height: 30px;
-    font-weight: bold;
+#phonenum input{
+    height: 25px;
+}
+#phone1{
+    width:60px;
+    text-align: center;
+}
+#phone2{
+    width:80px;
+    text-align: center;
+}
+#phone3{
+    width:80px;
+    text-align: center;
 }

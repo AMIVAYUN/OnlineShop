@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -18,7 +20,9 @@ public class MemberController {
     private final MemberService service;
 
     @GetMapping("/login")
-    public String login(){
+    public String login(HttpServletRequest request)
+    {
+        Cookie[] cookies= request.getCookies();
         return "fragments/public/loginTemp";
     }
 

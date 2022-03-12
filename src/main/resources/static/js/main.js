@@ -113,3 +113,23 @@ function logoSetting(){
     })
 
 }
+$(function(){
+    var $win = $(window); var top = $(window).scrollTop();
+    var speed = 500;
+    var easing = 'linear'; var $layer = $('.float_sidebar');
+    var layerTopOffset = 0;
+    $layer.css('position', 'relative').css('z-index', '1');
+
+    if (top > 0 )
+        $win.scrollTop(layerTopOffset+top);
+    else
+        $win.scrollTop(0);
+    $(window).scroll(function(){
+        yPosition = $win.scrollTop() - 1100;
+        if (yPosition < 0) { yPosition = 0; } $layer.animate({"top":yPosition
+        }, {duration:speed, easing:easing, queue:false
+        });
+    });
+});
+
+

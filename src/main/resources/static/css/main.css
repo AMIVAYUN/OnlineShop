@@ -23,7 +23,10 @@ body{
     float:right;
     display: flex;
     height:20px;
+
     justify-content: end;
+
+ 
 }
 #navi-bar a{
     font-size:10px;
@@ -213,12 +216,18 @@ li #item_img img{
     color:red;
     font-weight: bold;
 }
+
+
 #footer{
     position:fixed;
     bottom:0px;
+
     left:400px;
     
+
 }
+
+
 #footer img{
     width:1010px;
 }

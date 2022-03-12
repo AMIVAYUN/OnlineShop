@@ -2,12 +2,20 @@
     border: 0px solid;
 }
 
+.logo{
+    width: 300px;
+    height: 100px;
+    position: relative;
+    left:50%;
+    transform: translateX(-50%);
+}
+
 .join_container{
     width: 380px;
     height: 620px;
     margin: auto;
     border-radius: 20px;
-    box-shadow: 0px 0px 8px #000;
+    box-shadow: 0px 0px 25px #000;
 }
 
 .form_container{

@@ -1,3 +1,20 @@
-#faq_list{
-    list-style: none;
+#name{
+    width:100%;
+    padding-left: 10px;
+    padding-right:10px;
+    height:40px;
+    font-size:18px;
+
+}
+#description{
+    width: 100%;
+    padding-left: 10px;
+    padding-right:10px;
+    height:450px;
+    font-size: 18px;
+}
+#submit{
+    font-size: 20px;
+    margin-top: 10px;
+    height:40px;
 }

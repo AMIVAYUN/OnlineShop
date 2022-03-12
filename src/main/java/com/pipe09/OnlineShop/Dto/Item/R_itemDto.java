@@ -1,5 +1,7 @@
-package com.pipe09.OnlineShop.Dto;
+package com.pipe09.OnlineShop.Dto.Item;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -7,17 +9,17 @@ import javax.persistence.Lob;
 @Data
 public class R_itemDto {
     private String name;
-    private int price;
-    private int StockQuantity;
-    private int weight;
+    private Integer price;
+    private Integer StockQuantity;
+    private Integer weight;
     private String Description;
     ////
-
     private String MadeIn;
     private String ManufacturedCompany;
     public MultipartFile img;
     private String dtype;
-
+    private String imgSrc;
+    /*
     public R_itemDto(String name, int price, int stockQuantity, int weight, String description, String madeIn, String manufacturedCompany, MultipartFile img, String dtype) {
         this.name = name;
         this.price = price;
@@ -29,4 +31,6 @@ public class R_itemDto {
         this.img = img;
         this.dtype = dtype;
     }
+
+     */
 }

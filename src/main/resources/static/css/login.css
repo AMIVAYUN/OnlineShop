@@ -2,11 +2,12 @@
     border: 0px solid;
 }
 
-.form_logo{
+.logo{
+    width: 300px;
+    height: 100px;
     position: relative;
-    width: 220px;
-    left: 50%;
-    transform: translate(-50%, -50%)
+    left:50%;
+    transform: translateX(-50%);
 }
 
 .join_container{
@@ -14,16 +15,12 @@
     height: 364px;
     margin: auto;
     border-radius: 20px;
-    box-shadow: 0px 0px 8px #000;
+    box-shadow: 0px 0px 25px #000;
 }
 
 .form_container{
     width: 300px;
     margin: auto;
-}
-
-.padding{
-    height: 30px;
 }
 
 .form_title_div{

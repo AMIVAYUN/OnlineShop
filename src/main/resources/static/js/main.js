@@ -1,11 +1,15 @@
+
 $(document).ready(function(){
     getItem();
     gotoItem();
     categorySetting();
+    SessionCheck();
+    SearchSetting();
+    logoSetting();
 })
 function getItem(){
     Cleaning($("#shoplist"));
-    fetch("./api/v1/m-item",{method:"GET"}).then((response) => response.json()).then(
+    fetch("./api/v2/items/all?offset=0&limit=30",{method:"GET"}).then((response) => response.json()).then(
         (data) => {
             $.each(data, function (idx) {
                 var innerhtml = '<li class="item" id='+data[idx].dtype +'><div id="item_img"><img src=' + data[idx].imgSrc + '></div>' +
@@ -51,7 +55,7 @@ function Cleaning(bodytag){
 }
 function getTypedItem(dtype){
     Cleaning($("#shoplist"))
-    var url="./api/v1/m-item/"
+    var url="./api/v2/items/typed/"
     if(dtype=="ETC"){
         url+="ETC"
     }
@@ -61,14 +65,49 @@ function getTypedItem(dtype){
     else{
         url+=dtype[0];
     }
+    url+="?offset=0&limit=30"
     fetch(url,{method:"GET"}).then((response) => response.json()).then(
         (data) => {
-            $.each(data, function (idx, row) {
+            $.each(data, function (idx) {
                 var innerhtml = '<li class="item" id='+data[idx].dtype +'><div id="item_img"><img src=' + data[idx].imgSrc + '></div>' +
                     '<div id="item_text"><span><a id="merchansub">상품명:</a> <a id="item_name">'+data[idx].name+'</a></span></br>'+'<span><a id="merchansub">가 격:  </a><a id="item_price">'+data[idx].price+'</a></span></br></div></li>'
                 $("#shoplist").append(innerhtml);
             })
         }
     )
+
+}
+async function SessionCheck(){
+    const res1=await fetch("/api/v1/members/session",{method:"GET"}).then(response => response.json());
+
+    if(res1.iswhom !="[ROLE_ADMIN]"){
+        $("#manager").remove();
+    }
+    if(res1.iswhom !="[ROLE_ANONYMOUS]"){
+        $("#login-navi").text(res1.iswho + "님 안녕하세요");
+        $("#login-navi").css("left",1135);
+        $("#join-navi").text("로그아웃");
+        $("#join-navi").attr("href","/logout");
+
+    }
+}
+function SearchSetting(){
+    $("#searchicon").on("click",function(){
+        if($("#searchbar").find("input").val()){
+            var url="/search/"+$("#searchbar").find("input").val();
+            window.open(url);
+        }else{
+            location.reload();
+        }
+
+    })
+}
+
+function logoSetting(){
+    $("#logo").click(function(){
+        var baseurl=window.location;
+        console.log(baseurl .protocol +"//"+baseurl .host);
+            window.location.assign(baseurl .protocol +"//"+baseurl .host);
+    })
 
 }

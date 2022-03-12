@@ -29,8 +29,8 @@ public class MemberService implements UserDetailsService {
     }
 
 
-    public List<Member> findAll(){
-        return memberRepository.findAll();
+    public List<Member> findAll(int offset,int limit){
+        return memberRepository.findAll(offset,limit);
     }
 
     public List<Member> findByname(String name){
@@ -44,6 +44,7 @@ public class MemberService implements UserDetailsService {
             throw new IllegalStateException("중복 회원 입니다.");
         }
     }
+    //SSR 로그인 로직
     @Override
     public UserDetails loadUserByUsername(String user_id) throws UsernameNotFoundException {
         Member member=memberRepository.findByuserId(user_id);

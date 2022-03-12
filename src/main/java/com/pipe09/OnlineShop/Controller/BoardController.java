@@ -25,4 +25,16 @@ public class BoardController {
 
     }
 
+    @GetMapping("/contact")
+    public String case_selector(){
+        return "fragments/public/Board/caseselector";
+    }
+    @GetMapping("/contact/notice")
+    public String ViewNotice(){
+        return "fragments/public/Board/ViewNotice";
+    }
+    @GetMapping("/contact/em-faq")
+    public String EmailingService(){
+        return "fragments/public/Board/EmailingService";
+    }
 }

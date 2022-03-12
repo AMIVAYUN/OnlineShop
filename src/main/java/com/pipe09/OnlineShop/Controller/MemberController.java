@@ -1,15 +1,13 @@
 package com.pipe09.OnlineShop.Controller;
 
 import com.pipe09.OnlineShop.Domain.Member.Member;
-import com.pipe09.OnlineShop.Dto.MemberDto;
+import com.pipe09.OnlineShop.Dto.Member.MemberDto;
 import com.pipe09.OnlineShop.Service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
@@ -21,7 +19,7 @@ public class MemberController {
 
     @GetMapping("/login")
     public String login(){
-        return "fragments/public/login";
+        return "fragments/public/loginTemp";
     }
 
 

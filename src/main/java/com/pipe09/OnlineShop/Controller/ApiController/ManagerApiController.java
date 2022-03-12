@@ -1,10 +1,18 @@
 package com.pipe09.OnlineShop.Controller.ApiController;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.pipe09.OnlineShop.Domain.Board.Notice;
 import com.pipe09.OnlineShop.Domain.Item.Item;
-import com.pipe09.OnlineShop.Dto.NoticeDto;
-import com.pipe09.OnlineShop.Dto.R_itemDto;
+import com.pipe09.OnlineShop.Domain.Item.ItemFactory;
+import com.pipe09.OnlineShop.Domain.Item.Item_status;
+import com.pipe09.OnlineShop.Dto.Item.P_itemDto;
+import com.pipe09.OnlineShop.Dto.Item.R_itemDto;
+import com.pipe09.OnlineShop.Dto.Notice.NoticeDto;
+import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
 import com.pipe09.OnlineShop.Service.BoardService;
 import com.pipe09.OnlineShop.Service.ItemService;
 import com.pipe09.OnlineShop.Service.MemberService;
@@ -14,10 +22,13 @@ import com.pipe09.OnlineShop.Utils.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.hibernate.cfg.annotations.reflection.internal.XMLContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -38,11 +49,12 @@ public class ManagerApiController {
 
     //TODO 이미지 중복처리
     //아이템 등록후 리턴.
-    @PostMapping(path = "/api/v1/register-item.do",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(path = "/api/v2/register-item.do",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
     public ResponseEntity<R_itemDto> register(@Valid R_itemDto dto){
         String msg=Item.MakingImgfile(dto.img);
         Item item=Item.fromReg(dto);
+        item.setStatus(Item_status.SALE);
         Long saveid=itemService.save(item);
         if(saveid==null){
             return new ResponseEntity("DB 저장에 실패하였습니다",HttpStatus.INTERNAL_SERVER_ERROR);
@@ -81,9 +93,8 @@ public class ManagerApiController {
         List<NoticeDto>list=noticeList.stream().map(notice -> new NoticeDto(notice.getNotice_ID(),notice.getName(), notice.getDescription(),notice.getDate())).collect(Collectors.toList());
         return new ResponseEntity(list,HttpStatus.OK);
     }
-    @PostMapping(path = "/api/v1/delete-faq.do")
+    @DeleteMapping(path = "/api/v1/delete-faq.do")
     public ResponseEntity delfaq(@RequestBody NoticeDto dto){
-
         boolean result=boardService.RemoveByID(dto.getId());
 
         if(result){
@@ -94,6 +105,50 @@ public class ManagerApiController {
         }
 
 
+    }
+    @PutMapping(path="api/v1/faq/{id}/update-faq.do")
+    public ResponseEntity<String> updatefaq(@PathVariable Long id,@RequestBody NoticeDto dto){
+
+        log.info(dto.getDescription());
+        boolean result = boardService.update(id,dto.getName(),dto.getDescription());
+        if(result){
+            return new ResponseEntity<String>("수정에 성공하였습니다", HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<String>("수정에 실패하였습니다",HttpStatus.BAD_REQUEST);
+        }
+
+    }
+    @DeleteMapping("api/v2/items/{id}/delete-item.do")
+    public ResponseEntity<String> deleteItem(@PathVariable Long id){
+        boolean result=itemService.removeById(id);
+        String message=Utils.MakingErrmessage(result);
+
+        return new ResponseEntity<String>(message, HttpStatus.OK);
+    }
+    @PutMapping(path = "api/v2/items/{id}/update-item.do")
+    public ResponseEntity<String> updateItem(@PathVariable Long id, @RequestParam(value = "body")String obj,@RequestPart(value = "file") @Nullable MultipartFile file) throws JsonProcessingException {
+        ObjectMapper objectMapper=new ObjectMapper().registerModule(new SimpleModule());
+        P_itemDto dto =objectMapper.readValue(obj,P_itemDto.class);
+        DefaultMapper<Item> mapper=new DefaultMapper<>(ItemFactory.makingItemBytype(dto.getDtype()));
+        String msg=null;
+        Item item=mapper.Translate(dto);
+        item.setItem_ID(id);
+        if(file != null){
+            msg=Item.MakingImgfile(file);
+            item.setImgSrc("img/upload/"+Utils.deleteKorean(file.getOriginalFilename()));
+        }
+        Long putid= itemService.updateItem(item);
+
+        if((msg==null) && (putid !=null)){
+            return new ResponseEntity<String>("수정에 성공하였습니다.",HttpStatus.OK);
+        }
+        else if (msg != null){
+            return new ResponseEntity<String>(msg,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        else{
+            return new ResponseEntity<String>("데이터 변환간 에러가 발생하였습니다.",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
 

@@ -29,8 +29,8 @@ public class MemberRepository {
         return em.createQuery("select m from Member m where m.user_ID=:id", Member.class)
                 .setParameter("id", id).getSingleResult();
     }
-    public List<Member> findAll(){
-        return em.createQuery("select mlist from Member mlist").getResultList();
+    public List<Member> findAll(int offset,int limit){
+        return em.createQuery("select mlist from Member mlist").setFirstResult(offset).setMaxResults(limit).getResultList();
     }
 
 

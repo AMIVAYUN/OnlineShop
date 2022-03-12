@@ -5,6 +5,7 @@ import com.pipe09.OnlineShop.Domain.Orders.Orders;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.Nullable;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -47,8 +48,11 @@ public class Member {
     @Column(name = "RegDate")@Setter
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private LocalDate date;
-
-
+    @Enumerated(EnumType.STRING)
+    private Mem_status stat;
+    @Lob
+    @Nullable
+    private String withdraw_reason;
     public static Member createMember(String id,String name,String Phone_Num,String pwd,String email) {
         Member newMember = new Member();
         newMember.setUser_ID(id);

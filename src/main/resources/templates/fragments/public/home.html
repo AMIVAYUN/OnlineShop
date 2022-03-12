@@ -1,35 +1,41 @@
+
 <!DOCTYPE html>
-<html lang="ko">
+
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>젠킨스!</title>
+
+    <title>대봉산업에 오신 것을 환영합니다.</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/main.js"charset="UTF-8"></script>
+
 
 </head>
 <body>
     <nav id="navi-bar">
-        <a href="/iteminfo" style="left:1160px">테스트</a>
-        <a href="/login"style="left:1200px;">로그인</a>
-        <a href="/join"style="left:1240px;">회원가입</a>
+
+        <a id="login-navi" href="/login"style="left:1200px;">로그인</a>
+        <a id="join-navi" href="/join"style="left:1240px;">회원가입</a>
         <a href="#"style="left:1290px;">마이페이지</a>
-        <a href="/notice"style="left:1350px;">FAQ</a>
-        <a href="/admin/manage" style="left:1380px;">관리자</a>
+        <a href="/contact"style="left:1350px;">FAQ</a>
+        <a id="manager" href="/admin/manage" style="left:1380px;">관리자</a>
     </nav>
     <div id="bodyheader">
         <div id="mainHeaderbar">
             <img src="img/static/DB_LOGO.gif" id="logo">
-            <span id="searchbar"><input type="text" placeholder="   제품을 검색하세요."></span>
-            <a id="cursor" href="#">c</a>
+            <div id="searchbar"><input type="text" placeholder="   제품을 검색하세요."><img  id="searchicon"src="/img/static/searchicon.png"></div>
             <img src="img/static/shoppingcart.png" id="scart" onclick="javascript:location.href='/shopping-list'">
         </div>
     </div>
+
     <hr>
     <div id="category_part">
         
@@ -40,6 +46,8 @@
             <li id="Endoscope" style="margin-top:3px;">내시경</li>
             <li id="Tool" style="margin-top:3px;">공구</li>
             <li id="ETC" style="margin-top:3px;">기타</li>
+            
+        
         </ul>
         <select name="정렬" id="OptionalSort">
             <option value="한줄씩 보기">한줄씩 보기</option>
@@ -86,4 +94,5 @@
     </div>
 
 </body>
+
 </html>

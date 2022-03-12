@@ -1,6 +1,5 @@
 body{
     position: relative;
-    margin-left:90px;
     height:1200px;
     overflow: scroll;
 }
@@ -17,14 +16,12 @@ body{
     
 }
 #navi-bar{
-    position: absolute;
-    right:475px;
+    position:absolute;
+    right:440px;
     top:0;
-    float:right;
     display: flex;
     height:20px;
 
-    justify-content: end;
 
  
 }
@@ -79,7 +76,7 @@ body{
 
 #side_Bar{
     position: fixed;
-    left:1380px;
+    left:1330px;
     width:60px;
     height:350px;
     background-color:white ;
@@ -222,12 +219,12 @@ li #item_img img{
     position:fixed;
     bottom:0px;
 
-    left:400px;
+    left:340px;
     
 
 }
 
 
 #footer img{
-    width:1010px;
+    width:950px;
 }

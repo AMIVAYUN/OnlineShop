@@ -9,6 +9,7 @@ body{
 #wrap{
     position:absolute;
     left:50%;
+    margin-left:5%;
     height:100%;
     transform: translate(-50%);
     overflow: auto;

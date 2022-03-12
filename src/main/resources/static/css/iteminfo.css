@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&family=Jua&family=Nanum+Gothic&display=swap');
+
 .back_button{
     position:absolute;
     list-style: none;
@@ -13,10 +15,11 @@
 
 .product_outer_container{
     position:absolute;
-    top: 150px;
+    top: 100px;
     left: 400px;
     width: 1000px;
-    height: 900px;
+    height: 600px;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .product_inner_container{
@@ -25,7 +28,7 @@
     top: 100px;
     margin-top: 50px;
     width: 900px;
-    height: 800px;
+    height: 550px;
     box-shadow: 0px 0px 5px #000;
     border-radius: 10px;
     background-color: rgb(245, 245, 245);
@@ -35,7 +38,7 @@
     position:absolute;
     top: 50px;
     width: 375px;
-    height:500px;
+    height: 380px;
     list-style: none;
     margin-left:20px;
     padding:0px;
@@ -50,7 +53,7 @@
     top: 50px;
     left: 450px;
     width: 400px;
-    height: 500px;
+    height: 420px;
     list-style: none;
     margin:10px;
     padding:0px;
@@ -61,7 +64,82 @@
     background-color: rgb(255, 255, 255);
 }
 
-.product_info_name{
-    margin-left: 20px;
+.product_info_inner_container{
+    top: 50px;
+    position:absolute;
+    width: 360px;
+    height: 320px;
+    list-style: none;
+    margin:20px;
+    padding:0px;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    background-color: rgb(245, 245, 245);
 }
 
+.product_info_name{
+    margin-left: 20px;
+    width: 400px;
+    font-family: 'Gowun Dodum', sans-serif;
+}
+
+.product_info{
+    margin-left: 20px;
+    margin-top: 15px;
+    width: 400px;
+}
+
+.index_arrow{
+    width: 15px;
+    height: 10px;
+}
+
+.product_info_left{
+    width: 40%;
+    float: left;
+    font-size: 0.8em;
+}
+.product_info_right{
+    width: 60%;
+    float: right;
+    font-size: 0.9em;
+}
+
+.div_leftRight{
+    margin: 20px;
+    width:100%;
+}
+#btn_cart{
+    width:45%;
+    height: 50px;
+    float:left;
+    border-radius: 30px;
+    border: 2px solid rgba(33, 36, 37, .6);
+    background-color: #fff;
+}
+#btn_buy{
+    width:45%;
+    height: 50px;
+    float:right;
+    border-radius: 30px;
+    color:#fff;
+    border: 2px solid rgba(33, 36, 37, .6);
+    background-color: #212425;
+}
+
+.product_details{
+    position:absolute;
+    margin: 20px;
+    top: 720px;
+    width: 850px;
+}
+
+.details_category{
+    width: 150px;
+    height: 40px;
+    border-radius: 30px;
+    border: 2px solid rgba(33, 36, 37, .6);
+    background-color: #fff;
+}

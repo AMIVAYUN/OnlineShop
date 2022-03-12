@@ -155,3 +155,11 @@
 .product_details_content{
     display: none;
 }
+.product_outer_container{
+    position:absolute;
+    top: 200px;
+    left: 330px;
+    width: 1000px;
+    height: 600px;
+    font-family: 'Nanum Gothic', sans-serif;
+}

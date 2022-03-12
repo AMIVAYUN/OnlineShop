@@ -20,78 +20,83 @@
 
 </head>
 <body>
-    <nav id="navi-bar">
+    <div id="wrap">
+        <nav id="navi-bar">
 
-        <a id="login-navi" href="/login">로그인</a>
-        <a id="join-navi" href="/join">회원가입</a>
-        <a href="#">마이페이지</a>
-        <a href="/contact">FAQ</a>
-        <a id="manager" href="/admin/manage">관리자</a>
-    </nav>
-    <div id="bodyheader">
-        <div id="mainHeaderbar">
-            <img src="img/static/DB_LOGO.gif" id="logo">
-            <div id="searchbar"><input type="text" placeholder="   제품을 검색하세요."><img  id="searchicon"src="/img/static/searchicon.png"></div>
-            <img src="img/static/shoppingcart.png" id="scart" onclick="javascript:location.href='/shopping-list'">
+            <a id="login-navi" href="/login">로그인</a>
+            <a id="join-navi" href="/join">회원가입</a>
+            <a href="#">마이페이지</a>
+            <a href="/contact">FAQ</a>
+            <a id="manager" href="/admin/manage">관리자</a>
+        </nav>
+        <div id="bodyheader">
+            <div id="mainHeaderbar">
+                <img src="img/static/DB_LOGO.gif" id="logo">
+                <div id="searchbar"><input type="text" placeholder="   제품을 검색하세요."><img  id="searchicon"src="/img/static/searchicon.png"></div>
+                <img src="img/static/shoppingcart.png" id="scart" onclick="javascript:location.href='/shopping-list'">
+            </div>
         </div>
-    </div>
 
-    <hr>
-    <div id="category_part">
-        
-        <ul id="category_list">
-            <li id="default_category">전체 보기</li>
-            <li id="LeakDetector">누수 탐지기</li>
-            <li id="SewerCleaner">하수관 청소기</li>
-            <li id="Endoscope" style="margin-top:3px;">내시경</li>
-            <li id="Tool" style="margin-top:3px;">공구</li>
-            <li id="ETC" style="margin-top:3px;">기타</li>
-            
-        
+        <hr>
+        <div id="category_part">
+
+            <ul id="category_list">
+                <li id="default_category">전체 보기</li>
+                <li id="LeakDetector">누수 탐지기</li>
+                <li id="SewerCleaner">하수관 청소기</li>
+                <li id="Endoscope" style="margin-top:3px;">내시경</li>
+                <li id="Tool" style="margin-top:3px;">공구</li>
+                <li id="ETC" style="margin-top:3px;">기타</li>
+
+
+            </ul>
+            <select name="정렬" id="OptionalSort">
+                <option value="한줄씩 보기">한줄씩 보기</option>
+                <option value="4개씩 보기">4개씩 보기</option>
+            </select>
+
+        </div>
+        <div id="side_Bar">
+            <div id="comp_intr">
+                <img src="img/static/companyIntroduction_ver2.png" onclick="javascript:location.href='/comp-intro'">
+            </div>
+            <div id="comp_mypage">
+                <img src="img/static/mypage_ver2.png"onclick="javascript:location.href='/my-page'">
+
+            </div>
+            <div id="comp_hompage">
+                <img src="img/static/homepage_ver2.png"onclick="javascript:location.href='http://www.대봉산업기계.com'">
+
+            </div>
+            <div id="comp_board">
+                <img src="img/static/board_ver3.png" onclick="javascript:location.href='/contact/notice'">
+            </div>
+            <div id="comp_top">
+                <img src="img/static/Top_ver2.png" onclick="window.scroll(0,0)">
+            </div>
+        </div>
+        <ul id="shoplist">
+
+            <!--li class="item">
+                <div id="item_img">
+                    <img src="img/LeakDetector.jpg">
+                </div>
+                <div id="item_text">
+                    <a id="item_name">d</a></br>
+                    <a id="item_price">d</a></br>
+                    <button>바로가기</button>
+                </div>
+            </li-->
+
         </ul>
-        <select name="정렬" id="OptionalSort">
-            <option value="한줄씩 보기">한줄씩 보기</option>
-            <option value="4개씩 보기">4개씩 보기</option>
-        </select>
-        
-    </div>
-    <ul id="shoplist">
 
-        <!--li class="item">
-            <div id="item_img">
-                <img src="img/LeakDetector.jpg">
-            </div>
-            <div id="item_text">
-                <a id="item_name">d</a></br>
-                <a id="item_price">d</a></br>
-                <button>바로가기</button>
-            </div>
-        </li-->
 
-    </ul>
-
-    <div id="side_Bar">
-        <div id="comp_intr">
-            <img src="img/static/companyIntroduction_ver2.png" onclick="javascript:location.href='/comp-intro'">
-        </div>
-        <div id="comp_mypage">
-            <img src="img/static/mypage_ver2.png"onclick="javascript:location.href='/my-page'">
-
-        </div>
-        <div id="comp_hompage">
-            <img src="img/static/homepage_ver2.png"onclick="javascript:location.href='http://www.대봉산업기계.com'">
-
-        </div>
-        <div id="comp_board">
-            <img src="img/static/board_ver3.png" onclick="javascript:location.href='/contact/notice'">
-        </div>
-        <div id="comp_top">
-            <img src="img/static/Top_ver2.png" onclick="window.scroll(0,0)">
+        <div id="footer">
+            <img src="img/static/footer.png">
         </div>
     </div>
-    <div id="footer">
-        <img src="img/static/footer.png">
-    </div>
+
+
 
 </body>
 

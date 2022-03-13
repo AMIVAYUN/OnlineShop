@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>세부사항</title>
+  <link rel="stylesheet" href="css/iteminfo.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/97e36fce94.js" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/iteminfo.js"></script>
+
+
+</head>
+<body>
+<div id="wrap">
+  <nav id="navi-bar">
+
+    <a id="login-navi" href="/login"style="left:1200px;">로그인</a>
+    <a id="join-navi" href="/join"style="left:1240px;">회원가입</a>
+    <a href="#"style="left:1290px;">마이페이지</a>
+    <a href="/notice"style="left:1350px;">FAQ</a>
+    <a id="manager" href="/admin/manage" style="left:1380px;">관리자</a>
+  </nav>
+  <div id="bodyheader">
+    <div id="mainHeaderbar">
+      <img src="/img/static/DB_LOGO.gif" id="logo">
+      <span id="searchbar"><input type="text" placeholder="   제품을 검색하세요."></span>
+      <a id="cursor" href="#">c</a>
+      <img src="/img/static/shoppingcart.png" id="scart" onclick="javascript:location.href='/shopping-list'">
+    </div>
+  </div>
+
+  <hr>
+
+  <!--
+    "description": "string",          //제품 설명 >> 아래에
+    "dtype": "string",                //제품군
+    "imgSrc": "string",               //제품 이미지
+    "item_ID": 0,                     //제품ID
+
+    "madeIn": "string",               //제조국가, 원산지
+    "manufacturedCompany": "string",  //제조회사
+    "name": "string",                 //제품 이름
+    "price": 0,                       //제품 가격
+    "stockQuantity": 0,               //제품 재고
+    "weight": 0                       //제품 무게
+  -->
+  <div class="product_outer_container">
+    <div class="product_inner_container">
+      <img class="back_button" src="/img/static/back-button.png" onclick="window.open('/');" style="cursor: pointer" target="_self">
+
+      <div class="product_image_container">
+        <img src="/img/static/DB_LOGO.gif" style="width:300px; height:100px; margin-top:20px;" id="product_image">
+      </div>
+      <div class="v-line"></div>
+      <div class="product_info_container" style="border-radius: 20px;">
+        <div class="product_info_name">
+          <h2>가스식 누수탐지기Smart i-7700H</h2>
+        </div>
+        <div class="product_info_inner_container" style="border-radius: 20px">
+          <div class="product_info"></div>
+          <div class="product_info">
+            <div class="product_info_left"><b>판매가격</b></div>
+            <div class="product_info_right">
+              <img src="/img/static/next.png" class="index_arrow"><b>  1,000,000원</b>
+            </div>
+          </div>
+          <div class="product_info">
+            <div class="product_info_left">원산지</div>
+            <div class="product_info_right">
+              <img src="/img/static/next.png" class="index_arrow">  수입
+            </div>
+          </div>
+          <div class="product_info">
+            <div class="product_info_left">제조회사</div>
+            <div class="product_info_right">
+              <img src="/img/static/next.png" class="index_arrow">  대봉산업기계
+            </div>
+          </div>
+
+          <div class="product_info">
+            <div class="product_info_left">재고</div>
+            <div class="product_info_right">
+              <img src="/img/static/next.png" class="index_arrow">  없음
+            </div>
+          </div>
+          <div class="product_info">
+            <div class="product_info_left">무게</div>
+            <div class="product_info_right">
+              <img src="/img/static/next.png" class="index_arrow">  150kg
+            </div>
+          </div>
+          <div class="product_info">
+            <div class="product_info_left">구매수량</div>
+            <div class="product_info_right"><input type="number" value="1" style="width: 40%"></div>
+
+          </div>
+          <div class="div_leftRight">
+            <button id="btn_cart">장바구니</button>
+            <button id="btn_buy">바로구매</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="product_details">
+      <nav class="">
+        <button class="details_category" onclick="show_explanation()">제품 상세 설명</button>
+        <button class="details_category" onclick="show_buy()">구입 및 배송 안내</button>
+        <button class="details_category" onclick="show_evaluation()">고객평가</button>
+        <button class="details_category" onclick="show_QnA()">상품관련 Q&A</button>
+      </nav>
+      <div style="width: 50%">
+        <div id="details_explanation" style="display: none">
+          <div>
+            <div class="details_inner_container" style="border-radius: 20px">
+            </div>
+          </div>
+          <div id="details_buy" style="display: none">
+            제품 구입 및 배송 안내입니다.
+          </div>
+          <div id="details_evaluation" style="display: none">
+            제품 고객평가입니다.
+          </div>
+          <div id="details_QnA" style="display: none">
+            제품 관련 QnA입니다.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div id="side_Bar">
+    <div id="comp_intr">
+      <img src="/img/static/companyIntroduction_ver2.png" onclick="javascript:location.href='/comp-intro'">
+    </div>
+    <div id="comp_mypage">
+      <img src="/img/static/mypage_ver2.png"onclick="javascript:location.href='/my-page'">
+
+    </div>
+    <div id="comp_hompage">
+      <img src="/img/static/homepage_ver2.png"onclick="javascript:location.href='http://www.대봉산업기계.com'">
+
+    </div>
+    <div id="comp_board">
+      <img src="/img/static/board_ver2.png" onclick="javascript:location.href='/board'">
+    </div>
+    <div id="comp_top">
+      <img src="/img/static/Top_ver2.png" onclick="window.scroll(0,0)">
+    </div>
+  </div>
+  <div id="footer">
+    <img src="/img/static/footer.png">
+  </div>
+</div>
+</body>
+
+</html>

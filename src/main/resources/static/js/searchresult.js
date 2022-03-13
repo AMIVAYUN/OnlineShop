@@ -67,3 +67,9 @@ function logoSetting(){
     })
 
 }
+function gotoItem(){
+    $('#shoplist').on("click","li",function (){
+        var id=$(this).attr('id');
+        location.assign("./products/"+id);
+    })
+}

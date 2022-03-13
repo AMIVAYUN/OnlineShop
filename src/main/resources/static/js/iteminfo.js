@@ -1,35 +1,59 @@
 function show_explanation() {
-    var con = document.getElementById("details_explanation");
-    if(con.style.display == "none"){
-        con.style.display = "block";
+    var con1 = document.getElementById("details_explanation");
+    var con2 = document.getElementById("details_buy");
+    var con3 = document.getElementById("details_evaluation");
+    var con4 = document.getElementById("details_QnA");
+    if(con1.style.display == "none"){
+        con1.style.display = "block";
+        con2.style.display = "none";
+        con3.style.display = "none";
+        con4.style.display = "none";
     } else {
-        con.style.display = "none";
+        con1.style.display = "none";
     }
 }
 
 function show_buy() {
-    var con = document.getElementById("details_buy");
-    if(con.style.display == "none"){
-        con.style.display = "block";
+    var con1 = document.getElementById("details_explanation");
+    var con2 = document.getElementById("details_buy");
+    var con3 = document.getElementById("details_evaluation");
+    var con4 = document.getElementById("details_QnA");
+    if(con2.style.display == "none"){
+        con1.style.display = "none";
+        con2.style.display = "block";
+        con3.style.display = "none";
+        con4.style.display = "none";
     } else {
-        con.style.display = "none";
+        con2.style.display = "none";
     }
 }
 
 function show_evaluation() {
-    var con = document.getElementById("details_evaluation");
-    if(con.style.display == "none"){
-        con.style.display = "block";
+    var con1 = document.getElementById("details_explanation");
+    var con2 = document.getElementById("details_buy");
+    var con3 = document.getElementById("details_evaluation");
+    var con4 = document.getElementById("details_QnA");
+    if(con3.style.display == "none"){
+        con1.style.display = "none";
+        con2.style.display = "none";
+        con3.style.display = "block";
+        con4.style.display = "none";
     } else {
-        con.style.display = "none";
+        con3.style.display = "none";
     }
 }
 
 function show_QnA() {
-    var con = document.getElementById("details_QnA");
-    if(con.style.display == "none"){
-        con.style.display = "block";
+    var con1 = document.getElementById("details_explanation");
+    var con2 = document.getElementById("details_buy");
+    var con3 = document.getElementById("details_evaluation");
+    var con4 = document.getElementById("details_QnA");
+    if(con4.style.display == "none"){
+        con1.style.display = "none";
+        con2.style.display = "none";
+        con3.style.display = "none";
+        con4.style.display = "block";
     } else {
-        con.style.display = "none";
+        con4.style.display = "none";
     }
 }

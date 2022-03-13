@@ -2,7 +2,9 @@ $(document).ready(function(){
     SessionCheck();
     SearchSetting();
     logoSetting();
+    sendSetting();
 })
+
 async function SessionCheck(){
     const res1=await fetch("/api/v1/members/session",{method:"GET"}).then(response => response.json());
     if(!res1.isauth){
@@ -13,6 +15,7 @@ async function SessionCheck(){
     }
     if(res1.iswhom !="[ROLE_ANONYMOUS]"){
         $("#login-navi").text(res1.iswho + "님 안녕하세요");
+        $("#name").attr("value",res1.iswho);
         $("#login-navi").attr("href","#")
         $("#join-navi").text("로그아웃");
         $("#join-navi").attr("href","/logout");
@@ -30,6 +33,9 @@ function SearchSetting(){
 
     })
 }
+function sendSetting(){
+    $("#send").click(sendmail);
+}
 function logoSetting(){
     $("#logo").click(function(){
         var baseurl=window.location;
@@ -37,3 +43,27 @@ function logoSetting(){
     })
 
 }
+
+async function sendmail(){
+    var baseurl=window.location;
+    let obj= {
+
+    }
+
+    if(confirm("전송하시겠습니까?")){
+        const res=await fetch("/api/v2/mails/post.do",{method:"post",headers:{'Content-Type': 'application/json'},
+            body:JSON.stringify({
+                "name":$("#name").val(),
+                "title":$("#title").val(),
+                "content":$("#content").val(),
+                "phonenum":$("#phone1").val()+"-"+$("#phone2").val()+"-"+$("#phone3").val(),
+                "writtendate":new Date()
+            })
+        }).then(response => response.text());
+        alert(res);
+        location.assign((baseurl .protocol +"//"+baseurl .host));
+    }
+
+
+}
+

@@ -23,7 +23,7 @@ public class MemberController {
     public String login(HttpServletRequest request)
     {
         Cookie[] cookies= request.getCookies();
-        return "fragments/public/loginTemp";
+        return "fragments/public/login";
     }
 
 

@@ -1,5 +1,134 @@
 @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&family=Jua&family=Nanum+Gothic&display=swap');
 
+body{
+    position: relative;
+    margin-left:90px;
+    height:1200px;
+    overflow: scroll;
+}
+#bodyheader{
+    width:1200px;
+    padding-top:40px;
+}
+#mainHeaderbar{
+    padding-left:200px;
+    height:100px;
+    display:flex;
+    margin-top: 30px;
+    margin-left:30px;
+
+}
+#navi-bar{
+    position: absolute;
+    right:475px;
+    top:0;
+    float:right;
+    display: flex;
+    height:20px;
+    justify-content: end;
+}
+#navi-bar a{
+    font-size:10px;
+    margin-left:3px;
+    margin-right:3px;
+    top:5px;
+    color:black;
+    text-decoration-line: none;
+    white-space : nowrap;
+
+}
+
+#logo{
+    padding-left:120px;
+    width: 200px;
+    height:70px;
+    margin-right:10px;
+
+}
+#logo:hover{
+    cursor: pointer;
+}
+
+#searchbar{
+    position: relative;
+    width:600px;
+    height:52px;
+}
+
+#bodyheader input{
+    position: absolute;
+    width:560px;
+    height:45px;
+    margin-top:10px;
+    margin-left:30px;
+    border: 2px solid skyblue;
+    border-radius: 40px 40px;
+    padding-inline-start: 25px;
+}
+#searchicon{
+    position: absolute;
+    left:555px;
+    top:19px;
+}
+#searchicon:hover{
+    cursor: pointer;
+}
+
+
+
+#side_Bar{
+    position: fixed;
+    left:1440px;
+    width:60px;
+    height:350px;
+    background-color:white ;
+}
+#side_Bar div img{
+    cursor: pointer;
+    width:60px;
+    height:70px;
+}
+#side_Bar div img:hover{
+    filter:opacity(0.7) drop-shadow(0 0 0 #87cefa);
+}
+#cursor{
+
+    cursor:pointer;
+    width: 5px;
+    height:5px;
+    position: absolute;
+    left:1135px;
+    top:90px;
+    color:white;
+}
+#bodyheader span img{
+    background-color: white;
+
+}
+#scart{
+    width: 32px;
+    height:32px;
+    position: absolute;
+    top:90px;
+    left: 1200px;
+    cursor: pointer;
+}
+hr{
+    width:1010px;
+    position:absolute;
+    left:320px;
+    border: 1px solid black;
+}
+#footer{
+    position:fixed;
+    bottom:0px;
+    left:400px;
+
+}
+#footer img{
+    width:1010px;
+}
+
 .back_button{
     position:absolute;
     list-style: none;
@@ -16,7 +145,6 @@
 .product_outer_container{
     position:absolute;
     top: 200px;
-    left: 400px;
     width: 1000px;
     height: 600px;
     font-family: 'Nanum Gothic', sans-serif;
@@ -50,7 +178,6 @@
 .product_info_container{
     position:absolute;
     top: 50px;
-    left: 450px;
     width: 400px;
     height: 420px;
     list-style: none;
@@ -80,6 +207,7 @@
 
 .product_info_name{
     margin-left: 20px;
+    margin-right: 20px;
     width: 400px;
     font-family: 'Gowun Dodum', sans-serif;
 }
@@ -118,6 +246,10 @@
     border: 2px solid rgba(33, 36, 37, .6);
     background-color: #fff;
 }
+#btn_cart:hover{
+    font-size: 1em;
+    cursor: pointer;
+}
 #btn_buy{
     width:45%;
     height: 50px;
@@ -127,10 +259,13 @@
     border: 2px solid rgba(33, 36, 37, .6);
     background-color: #212425;
 }
+#btn_buy:hover{
+    font-size: 1em;
+    cursor: pointer;
+}
 
 .product_details{
     position:absolute;
-    margin: 20px;
     top: 620px;
     width: 850px;
 }
@@ -152,6 +287,13 @@
     color: #fff;
 }
 
-.product_details_content{
-    display: none;
+.details_inner_container{
+    overflow: hidden;
+    margin: 0px;
+    margin-top: 20px;
+    width: 900px;
+    height: 400px;
+    box-shadow: 0px 0px 5px #000;
+    border-radius: 10px;
+    background-color: rgb(245, 245, 245);
 }

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
-      xmlns="http://www.w3.org/1999/html">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,8 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/97e36fce94.js" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/iteminfo.js"></script>
+  <script src="../js/iteminfo.js"></script>
 
 
 </head>
@@ -32,7 +30,6 @@
     <div id="mainHeaderbar">
       <img src="/img/static/DB_LOGO.gif" id="logo">
       <span id="searchbar"><input type="text" placeholder="   제품을 검색하세요."></span>
-      <a id="cursor" href="#">c</a>
       <img src="/img/static/shoppingcart.png" id="scart" onclick="javascript:location.href='/shopping-list'">
     </div>
   </div>
@@ -116,11 +113,10 @@
         <button class="details_category" onclick="show_evaluation()">고객평가</button>
         <button class="details_category" onclick="show_QnA()">상품관련 Q&A</button>
       </nav>
-      <div style="width: 50%">
-        <div id="details_explanation" style="display: none">
+      <div>
+        <div id="details_explanation">
           <div>
-            <div class="details_inner_container" style="border-radius: 20px">
-            </div>
+            <div class="details_inner_container" style="border-radius: 20px">asdasdevdac</div>
           </div>
           <div id="details_buy" style="display: none">
             제품 구입 및 배송 안내입니다.
@@ -132,7 +128,6 @@
             제품 관련 QnA입니다.
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -151,7 +146,7 @@
 
     </div>
     <div id="comp_board">
-      <img src="/img/static/board_ver2.png" onclick="javascript:location.href='/board'">
+      <img src="/img/static/board_ver3.png" onclick="javascript:location.href='/board'">
     </div>
     <div id="comp_top">
       <img src="/img/static/Top_ver2.png" onclick="window.scroll(0,0)">

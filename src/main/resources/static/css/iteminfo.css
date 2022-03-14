@@ -30,6 +30,7 @@ body{
 
 }
 #navi-bar{
+    margin-top:5px;
     position:absolute;
     right:250px;
     top:0;
@@ -225,6 +226,7 @@ li #item_img img{
 }
 
 .product_inner_container{
+    left:25px;
     overflow: hidden;
     position:absolute;
     margin-left: 25px;
@@ -251,6 +253,7 @@ li #item_img img{
 }
 
 .product_info_container{
+    left:450px;
     position:absolute;
     top: 50px;
     width: 400px;

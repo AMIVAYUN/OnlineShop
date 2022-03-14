@@ -1,14 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원가입 페이지</title>
-    <link rel="stylesheet" href="css/join.css" type="text/css" media="all">
-    <script src="js/join.js"charset="UTF-8"></script>
-    <title>회사소개</title>
+    <title>검색 결과</title>
+    <link rel="stylesheet" href="../../css/compintro.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/97e36fce94.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../../js/compintro.js"charset="UTF-8"></script>
 </head>
 <body>
+<div id="wrap">
+    <nav id="navi-bar">
+
+        <a id="login-navi" href="/login">로그인</a>
+        <a id="join-navi" href="/join">회원가입</a>
+        <a href="#">마이페이지</a>
+        <a href="/contact">FAQ</a>
+
+    </nav>
+    <div id="bodyheader">
+        <div id="mainHeaderbar">
+            <img src="../img/static/DB_LOGO.gif" id="logo">
+            <div id="searchbar"><input type="text" placeholder="   제품을 검색하세요."><img  id="searchicon"src="../img/static/searchicon.png"></div>
+            <img src="../img/static/shoppingcart.png" id="scart" onclick="javascript:location.href='/shopping-list'">
+        </div>
+    </div>
+    <hr>
+    <div id="main">
+        <h1><i class="fa-solid fa-building"></i>&nbsp회사 소개</h1>
+        <hr class="mainhr">
+        <div id="main_head">
+            <img id="head_img_part" src="../img/static/db_co_main.jpg">
+
+            <div id="head_text_part">
+                <div id="text_head">
+                    <p>환경을 먼저 생각하는 기업 (환경관련 종합설비 장비)<br>
+                    각종 장비도 사무실에서 전화 한통화로 구입하는 시대!<br>
+                    공구상에 나가실 시간에 차라리 공사현장을 지키십시오.<br>
+                    원하시는 장비를 신속.정확하게 방문하여 상담 및 공급해 드리는 서비스 체제를 갖추고 있습니다.
+                        최고의 제품을 저렴한 가격에 신속한 납품과 철저한 A/S를 책임있는 기업 <strong>"대봉"</strong> </p>
+
+                    <p>항상 저희 전직원은 정직한 자세로 고객과의 신용을 그 무엇보다 소중하게 여기고
+                    우수한 장비를 개발하고 보급하겠습니다.</p>
+                </div>
+
+            </div>
+        </div>
+        <h1><i class="fa-solid fa-receipt"></i>&nbsp회사 연혁</h1>
+        <hr class="mainhr">
+        <div id="main_history">
+            <table>
+                <tr>
+                    <th >1995.4.1 </th>
+                    <td > 회사설립 </td>
+                </tr>
+                <tr>
+                    <th >2001.6. 18</th>
+                    <td >하수용 관로자주차 자체개발생산</td>
+                </tr>
+                <tr>
+                    <th >2002.5 7</th>
+                    <td >국내최초로 소형관로 내시경 개발</td>
+                </tr>
+                <tr>
+                    <th >2004.11.16</th>
+                    <td >하수관로촬영기 의장등록 및 특허획득 2005</td>
+                </tr>
+                <tr>
+                    <th >2005. 7.14</th>
+                    <td>관로촬영기를 일본시장에 수출</td>
+                </tr>
+
+            </table>
+        </div>
+        <h1><i class="fa-solid fa-location-dot"></i>&nbsp오시는 길</h1>
+        <hr class="mainhr">
+        <div id="main_map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3167.7397150800266!2d126.89934715123793!3d37.44325317972219!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b61af6cdf52a3%3A0x701063ea0dac87c6!2z64yA67SJ7IKw7JeF6riw6rKM!5e0!3m2!1sko!2skr!4v1647168464508!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+
+
+    </div>
+    <div id="side_Bar">
+        <div id="comp_intr">
+            <img src="../img/static/companyIntroduction_ver2.png" onclick="javascript:location.href='/comp-intro'">
+        </div>
+        <div id="comp_mypage">
+            <img src="../img/static/mypage_ver2.png"onclick="javascript:location.href='/my-page'">
+
+        </div>
+        <div id="comp_hompage">
+            <img src="../img/static/homepage_ver2.png"onclick="javascript:location.href='http://www.대봉산업기계.com'">
+
+        </div>
+        <div id="comp_board">
+            <img src="../img/static/board_ver3.png" onclick="javascript:location.href='/contact/notice'">
+        </div>
+        <div id="comp_top">
+            <img src="../img/static/Top_ver2.png" onclick="window.scroll(0,0)">
+        </div>
+    </div>
+    <div id="footer">
+        <img src="../img/static/footer.png">
+    </div>
+</div>
 
 </body>
 </html>

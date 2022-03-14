@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>세부사항</title>
-  <link rel="stylesheet" href="css/iteminfo.css">
+  <link rel="stylesheet" href="../css/iteminfo.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/97e36fce94.js" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://kit.fontawesome.com/97e36fce94.js" crossorigin="anonymous"></script>
   <script src="../js/iteminfo.js"></script>
 
 
@@ -29,7 +31,7 @@
   <div id="bodyheader">
     <div id="mainHeaderbar">
       <img src="/img/static/DB_LOGO.gif" id="logo">
-      <span id="searchbar"><input type="text" placeholder="   제품을 검색하세요."></span>
+      <div id="searchbar"><input type="text" placeholder="   제품을 검색하세요."><img  id="searchicon"src="/img/static/searchicon.png"></div>
       <img src="/img/static/shoppingcart.png" id="scart" onclick="javascript:location.href='/shopping-list'">
     </div>
   </div>
@@ -54,7 +56,7 @@
       <img class="back_button" src="/img/static/back-button.png" onclick="window.open('/');" style="cursor: pointer" target="_self">
 
       <div class="product_image_container">
-        <img src="/img/static/DB_LOGO.gif" style="width:300px; height:100px; margin-top:20px;" id="product_image">
+        <img  style="width:300px; height:100px; margin-top:20px;" id="product_image">
       </div>
       <div class="v-line"></div>
       <div class="product_info_container" style="border-radius: 20px;">
@@ -113,10 +115,11 @@
         <button class="details_category" onclick="show_evaluation()">고객평가</button>
         <button class="details_category" onclick="show_QnA()">상품관련 Q&A</button>
       </nav>
-      <div>
-        <div id="details_explanation">
+      <div style="width: 50%">
+        <div id="details_explanation" style="display: none">
           <div>
-            <div class="details_inner_container" style="border-radius: 20px">asdasdevdac</div>
+            <div class="details_inner_container" style="border-radius: 20px">
+            </div>
           </div>
           <div id="details_buy" style="display: none">
             제품 구입 및 배송 안내입니다.
@@ -128,6 +131,7 @@
             제품 관련 QnA입니다.
           </div>
         </div>
+
       </div>
     </div>
   </div>

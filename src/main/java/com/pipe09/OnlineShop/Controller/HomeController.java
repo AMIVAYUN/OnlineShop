@@ -31,6 +31,8 @@ public class HomeController {
         return "fragments/public/result_search";
     }
 
+    @GetMapping("/comp-intro")
+    public String compIntroduction(){ return "fragments/public/companyintro"; }
 
 
 

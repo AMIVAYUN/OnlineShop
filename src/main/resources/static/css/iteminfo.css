@@ -12,7 +12,8 @@ body{
     position:absolute;
     left:50%;
     margin-left:5%;
-    height:100%;
+    height:auto;
+    min-height: 120%;
     transform: translate(-50%);
     overflow: auto;
 }
@@ -90,7 +91,6 @@ body{
 #searchicon:hover{
     cursor: pointer;
 }
-
 
 
 #side_Bar{
@@ -226,14 +226,13 @@ li #item_img img{
 }
 
 .product_inner_container{
-    left:25px;
     overflow: hidden;
     position:absolute;
-    margin-left: 25px;
+    margin-left: 20px;
     margin-top: 50px;
     width: 900px;
     height: 550px;
-    box-shadow: 0px 0px 5px #000;
+    /*box-shadow: 0px 0px 5px #000;*/
     border-radius: 10px;
     background-color: rgb(245, 245, 245);
 }
@@ -345,8 +344,10 @@ li #item_img img{
 .product_details{
     position:absolute;
     margin: 20px;
+    margin-top:0px;
     top: 620px;
     width: 850px;
+    height: 460px;
 }
 
 .details_category{
@@ -367,13 +368,17 @@ li #item_img img{
     cursor: pointer;
 }
 
-.details_inner_container{
+.details_outer_container{
     overflow: hidden;
-    margin: 0px;
-    margin-top: 20px;
+    margin-top:20px;
     width: 900px;
     height: 400px;
-    box-shadow: 0px 0px 5px #000;
+    /*box-shadow: 0px 0px 5px #000;*/
     border-radius: 10px;
     background-color: rgb(245, 245, 245);
+}
+
+.details_inner_container{
+    margin:30px;
+    font-family: 'Gowun Dodum', sans-serif;
 }

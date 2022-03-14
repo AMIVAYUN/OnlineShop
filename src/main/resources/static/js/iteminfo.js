@@ -10,13 +10,14 @@ function show_explanation() {
     var con2 = document.getElementById("details_buy");
     var con3 = document.getElementById("details_evaluation");
     var con4 = document.getElementById("details_QnA");
+    var btn = document.getElementById("details_explanation_btn");
     if(con1.style.display == "none"){
         con1.style.display = "block";
         con2.style.display = "none";
         con3.style.display = "none";
         con4.style.display = "none";
-    } else {
-        con1.style.display = "none";
+        btn.style.backgroundColor = "#212425";
+        btn.style.color = "#fff";
     }
 }
 
@@ -30,8 +31,6 @@ function show_buy() {
         con2.style.display = "block";
         con3.style.display = "none";
         con4.style.display = "none";
-    } else {
-        con2.style.display = "none";
     }
 }
 
@@ -45,8 +44,6 @@ function show_evaluation() {
         con2.style.display = "none";
         con3.style.display = "block";
         con4.style.display = "none";
-    } else {
-        con3.style.display = "none";
     }
 }
 
@@ -60,8 +57,6 @@ function show_QnA() {
         con2.style.display = "none";
         con3.style.display = "none";
         con4.style.display = "block";
-    } else {
-        con4.style.display = "none";
     }
 }
 async function SessionCheck(){
@@ -105,7 +100,15 @@ async function getItem(keyword){
     var url="/api/v2/items/single/"+keyword;
     const res=await fetch(url, {method: "get"}).then(response => response.json());
     $("#product_image").attr("src","/"+res.imgSrc);
+    $("#product_name").text(res.name);
+    $("#product_price").text(res.price);
+    $("#product_madeIn").text(res.madeIn);
+    $("#product_manufacturedCompany").text(res.manufacturedCompany);
+    $("#product_stockQuantity").text(res.stockQuantity);
+    $("#product_weight").text(res.weight);
+    $("#product_description").text(res.description);
 }
+
 function KeyWordCheck(){
     var baseurl=window.location;
     var locate=baseurl .protocol +"//"+baseurl .host+"/products/"

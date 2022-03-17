@@ -354,6 +354,8 @@ li #item_img img{
     width: 150px;
     height: 40px;
     background-color: rgb(245, 245, 245);
+    border-top-right-radius: 20px 20px;
+    border-top-left-radius: 20px 20px;
     border-style:none;
 }
 

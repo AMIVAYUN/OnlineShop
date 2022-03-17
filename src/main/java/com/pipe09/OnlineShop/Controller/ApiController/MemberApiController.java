@@ -2,9 +2,12 @@ package com.pipe09.OnlineShop.Controller.ApiController;
 
 
 import com.pipe09.OnlineShop.Domain.Member.Member;
+import com.pipe09.OnlineShop.Domain.Member.UserType;
 import com.pipe09.OnlineShop.Domain.SessionUser;
 import com.pipe09.OnlineShop.Dto.MemauthDto;
+import com.pipe09.OnlineShop.Dto.Member.MemberDto;
 import com.pipe09.OnlineShop.Dto.Member.MemberManageDto;
+import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
 import com.pipe09.OnlineShop.Service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,11 +15,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,5 +56,18 @@ public class MemberApiController{
         List<Member> list=memberService.findAll(offset,limit);
         List<MemberManageDto> dtoList=list.stream().map(MemberManageDto::new).collect(Collectors.toList());
         return dtoList;
+    }
+    @PostMapping("/join-proc")
+    public String create(@Valid MemberDto dto){
+        Member newMember= Member.createMember(dto.getUsername(),dto.getName(),dto.getPhone_num(),dto.getPassword(),dto.getEmail()) ;
+        memberService.save(newMember);
+        return "redirect:/";
+    }
+
+    @GetMapping("/api/v1/members/single/local/{username}")
+    public MemberDto getSingleMem(@PathVariable String username){
+        Member member=memberService.findByname(username);
+        MemberDto dto= new MemberDto(member.getUser_ID(),member.getPwd(),member.getEmail(),member.getName(),member.getPhone_Num());
+        return dto;
     }
 }

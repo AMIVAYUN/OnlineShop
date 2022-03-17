@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>회원가입 페이지</title>
         <link rel="stylesheet" href="css/join.css" type="text/css" media="all">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="js/join.js"charset="UTF-8"></script>
     </head>
     <body>
@@ -25,7 +26,7 @@
         <div style="padding: 20px;"></div>
         <div class="join_container">
             <div class="form_container">
-                <form name="join_form" action="/join-proc" method="post">
+
                     <div class="form_title_div">
                         <p style="font-size:25px" class="form_title_p">회원가입</p>
                     </div>
@@ -34,8 +35,8 @@
                             <a class="form_item_name">ID</a>
                         </div>
                         <div>
-                            <input type="text" name="username" placeholder="아이디를 입력하세요" class="form_input"/>
-                        </div>b
+                            <input type="text" name="username" placeholder="아이디를 입력하세요" class="form_input" id="username"/>
+                        </div>
                         <div class="form_text_alert_padding">
                             <div id="alert_username" class="form_text_alert"></div>
                         </div>
@@ -45,7 +46,7 @@
                             <a class="form_item_name">Password</a>
                         </div>
                         <div>
-                            <input type="password" name="password" placeholder="비밀번호를 입력하세요" class="form_input"/>
+                            <input type="password" name="password" placeholder="비밀번호를 입력하세요" class="form_input" id="password"/>
                         </div>
                         <div class="form_text_alert_padding">
                             <div id="alert_password" class="form_text_alert"></div>
@@ -56,7 +57,7 @@
                             <a class="form_item_name">E-mail</a>
                         </div>
                         <div>
-                            <input type="email" name="email" placeholder="이메일을 입력하세요" class="form_input" />
+                            <input type="email" name="email" placeholder="이메일을 입력하세요" class="form_input" id="email" />
                         </div>
                         <div class="form_text_alert_padding">
                             <div id="alert_email" class="form_text_alert"></div>
@@ -67,7 +68,7 @@
                             <a class="form_item_name">Name</a>
                         </div>
                         <div>
-                            <input type="text" name="name" placeholder="이름을 입력하세요" class="form_input" />
+                            <input type="text" name="name" placeholder="이름을 입력하세요" class="form_input" id="name"/>
                         </div>
                         <div class="form_text_alert_padding">
                             <div id="alert_name" class="form_text_alert"></div>
@@ -78,7 +79,7 @@
                             <a class="form_item_name">Phone Number</a>
                         </div>
                         <div>
-                            <input type="text" name="phone_num" placeholder="-없이 입력하세요" class="form_input" />
+                            <input type="text" name="phone_num" placeholder="-없이 입력하세요" class="form_input" id="phone_num" />
                         </div>
                         <div class="form_text_alert_padding">
                             <div id="alert_phone_num" class="form_text_alert"></div>
@@ -86,9 +87,9 @@
                     </div>
                     <div style="height: 10px;"></div>
                     <div>
-                        <button type="submit" class="form_submit_button" onclick="join()">회원가입</button>
+                        <button type="button" class="form_submit_button">회원가입</button>
                     </div>
-                </form>
+
             </div>
         </div>
     </div>

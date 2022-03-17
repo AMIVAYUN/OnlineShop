@@ -2,6 +2,7 @@ package com.pipe09.OnlineShop.Service;
 
 
 import com.pipe09.OnlineShop.Domain.Member.Member;
+import com.pipe09.OnlineShop.Domain.Member.UserType;
 import com.pipe09.OnlineShop.Repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
@@ -33,14 +34,14 @@ public class MemberService implements UserDetailsService {
         return memberRepository.findAll(offset,limit);
     }
 
-    public List<Member> findByname(String name){
+    public Member findByname(String name){
         return memberRepository.findByName(name);
     }
 
 
     private void validateduplicateMember(Member member) {
-        List<Member> findMembers=memberRepository.findByName(member.getName());
-        if(!findMembers.isEmpty()){
+        Member findMember=memberRepository.findByName(member.getName());
+        if(findMember!=null){
             throw new IllegalStateException("중복 회원 입니다.");
         }
     }

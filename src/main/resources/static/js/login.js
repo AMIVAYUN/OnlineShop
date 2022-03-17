@@ -1,5 +1,5 @@
 
-function penOauth2(){
+function openOauth2(){
     location.assign("/oauth2/authorization/google");
 }
 

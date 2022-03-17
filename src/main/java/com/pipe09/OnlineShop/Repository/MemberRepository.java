@@ -1,6 +1,7 @@
 package com.pipe09.OnlineShop.Repository;
 
 import com.pipe09.OnlineShop.Domain.Member.Member;
+import com.pipe09.OnlineShop.Domain.Member.UserType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,8 +16,8 @@ import java.util.List;
 public class MemberRepository {
     private final EntityManager em;
     public Long joinByOauth(Member member){
-        List<Member> exist=this.findByName(member.getName());
-        if(exist==null || exist.isEmpty() ){
+        Member exist=this.findByNameWithOauth(member.getName());
+        if(exist==null ){
             em.persist(member);
 
         }else{
@@ -30,10 +31,13 @@ public class MemberRepository {
 
         return member.getMember_ID();
     }
-
-    public List<Member> findByName(String name){
+    public Member findByNameWithOauth(String name){
         String jpql="select m from Member m where m.Name=:name";
-        return em.createQuery(jpql,Member.class).setParameter("name",name).getResultList();
+        return em.createQuery(jpql,Member.class).setParameter("name",name).getSingleResult();
+    }
+    public Member findByName(String name){
+        String jpql="select m from Member m where m.Name=:name and m.userType=:type";
+        return em.createQuery(jpql,Member.class).setParameter("name",name).setParameter("type", UserType.LOCAL).getSingleResult();
     }
     public Member findByuserId(String id) {
         return em.createQuery("select m from Member m where m.user_ID=:id", Member.class)

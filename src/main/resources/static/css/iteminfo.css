@@ -251,6 +251,13 @@ li #item_img img{
     align-content: flex-start;
 }
 
+#product_image{
+    margin-top: 40px;
+    margin-left: 20px;
+    width: 375px;
+    height: 375px;
+}
+
 .product_info_container{
     left:450px;
     position:absolute;

@@ -25,7 +25,7 @@
         <div style="padding: 20px;"></div>
         <div class="join_container">
             <div class="form_container">
-                <form name="join_form" action="/join-proc" method="post">
+                <form name="join_form" action="/join-proc" method="post" id="submit">
                     <div class="form_title_div">
                         <p style="font-size:25px" class="form_title_p">회원가입</p>
                     </div>
@@ -35,7 +35,7 @@
                         </div>
                         <div>
                             <input type="text" name="username" placeholder="아이디를 입력하세요" class="form_input"/>
-                        </div>b
+                        </div>
                         <div class="form_text_alert_padding">
                             <div id="alert_username" class="form_text_alert"></div>
                         </div>
@@ -86,7 +86,7 @@
                     </div>
                     <div style="height: 10px;"></div>
                     <div>
-                        <button type="submit" class="form_submit_button" onclick="join()">회원가입</button>
+                        <button type="button" id="submit_button" class="form_submit_button" onclick="join()">회원가입</button>
                     </div>
                 </form>
             </div>

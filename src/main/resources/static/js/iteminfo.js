@@ -35,10 +35,7 @@ function show_explanation() {
         btn2.style.backgroundColor = "rgb(245,245,245)";
         btn3.style.backgroundColor = "rgb(245,245,245)";
         btn4.style.backgroundColor = "rgb(245,245,245)";
-        btn1_state = true;
-        btn2_state = false;
-        btn3_state = false;
-        btn4_state = false;
+        btn1_state = true; btn2_state = false; btn3_state = false; btn4_state = false;
     }
 }
 
@@ -61,10 +58,7 @@ function show_buy() {
         btn2.style.backgroundColor = "rgb(225,225,225)";
         btn3.style.backgroundColor = "rgb(245,245,245)";
         btn4.style.backgroundColor = "rgb(245,245,245)";
-        btn1_state = false;
-        btn2_state = true;
-        btn3_state = false;
-        btn4_state = false;
+        btn1_state = false; btn2_state = true; btn3_state = false; btn4_state = false;
     }
 }
 
@@ -86,10 +80,7 @@ function show_evaluation() {
         btn2.style.backgroundColor = "rgb(245,245,245)";
         btn3.style.backgroundColor = "rgb(225,225,225)";
         btn4.style.backgroundColor = "rgb(245,245,245)";
-        btn1_state = false;
-        btn2_state = false;
-        btn3_state = true;
-        btn4_state = false;
+        btn1_state = false; btn2_state = false; btn3_state = true; btn4_state = false;
     }
 }
 
@@ -111,10 +102,7 @@ function show_QnA() {
         btn2.style.backgroundColor = "rgb(245,245,245)";
         btn3.style.backgroundColor = "rgb(245,245,245)";
         btn4.style.backgroundColor = "rgb(225,225,225)";
-        btn1_state = false;
-        btn2_state = false;
-        btn3_state = false;
-        btn4_state = true;
+        btn1_state = false; btn2_state = false; btn3_state = false; btn4_state = true;
     }
 }
 

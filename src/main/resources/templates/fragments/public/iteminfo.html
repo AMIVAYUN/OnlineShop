@@ -56,44 +56,44 @@
       <img class="back_button" src="/img/static/back-button.png" onclick="window.open('/');" style="cursor: pointer" target="_self">
 
       <div class="product_image_container">
-        <img  style="width:300px; height:100px; margin-top:20px;" id="product_image">
+        <img style="width:300px; height:100px; margin-top:20px;" id="product_image">
       </div>
       <div class="v-line"></div>
       <div class="product_info_container" style="border-radius: 20px;">
         <div class="product_info_name">
-          <h2>가스식 누수탐지기Smart i-7700H</h2>
+          <h2 id="product_name"></h2>
         </div>
         <div class="product_info_inner_container" style="border-radius: 20px">
           <div class="product_info"></div>
           <div class="product_info">
             <div class="product_info_left"><b>판매가격</b></div>
             <div class="product_info_right">
-              <img src="/img/static/next.png" class="index_arrow"><b>  1,000,000원</b>
+              <img src="/img/static/next.png" class="index_arrow"><b>  <span id="product_price"></span></b>
             </div>
           </div>
           <div class="product_info">
             <div class="product_info_left">원산지</div>
             <div class="product_info_right">
-              <img src="/img/static/next.png" class="index_arrow">  수입
+              <img src="/img/static/next.png" class="index_arrow">  <span id="product_madeIn"></span>
             </div>
           </div>
           <div class="product_info">
             <div class="product_info_left">제조회사</div>
             <div class="product_info_right">
-              <img src="/img/static/next.png" class="index_arrow">  대봉산업기계
+              <img src="/img/static/next.png" class="index_arrow">  <span id="product_manufacturedCompany"></span>
             </div>
           </div>
 
           <div class="product_info">
             <div class="product_info_left">재고</div>
             <div class="product_info_right">
-              <img src="/img/static/next.png" class="index_arrow">  없음
+              <img src="/img/static/next.png" class="index_arrow">  <span id="product_stockQuantity"></span>
             </div>
           </div>
           <div class="product_info">
             <div class="product_info_left">무게</div>
             <div class="product_info_right">
-              <img src="/img/static/next.png" class="index_arrow">  150kg
+              <img src="/img/static/next.png" class="index_arrow">  <span id="product_weight"></span>
             </div>
           </div>
           <div class="product_info">
@@ -110,29 +110,25 @@
     </div>
     <div class="product_details">
       <nav class="">
-        <button class="details_category" onclick="show_explanation()">제품 상세 설명</button>
-        <button class="details_category" onclick="show_buy()">구입 및 배송 안내</button>
-        <button class="details_category" onclick="show_evaluation()">고객평가</button>
-        <button class="details_category" onclick="show_QnA()">상품관련 Q&A</button>
+        <button class="details_category" id="details_explanation_btn" onclick="show_explanation()">제품 상세 설명</button>
+        <button class="details_category" id="details_buy_btn" onclick="show_buy()">구입 및 배송 안내</button>
+        <button class="details_category" id="details_evaluation_btn" onclick="show_evaluation()">고객평가</button>
+        <button class="details_category" id="details_QnA_btn" onclick="show_QnA()">상품관련 Q&A</button>
       </nav>
-      <div style="width: 50%">
-        <div id="details_explanation" style="display: none">
-          <div>
-            <div class="details_inner_container" style="border-radius: 20px">
-            </div>
+        <div class="details_outer_container">
+          <div class="details_inner_container" id="details_explanation">
+            <span id="product_description"></span>
           </div>
-          <div id="details_buy" style="display: none">
+          <div class="details_inner_container" id="details_buy" style="display: none">
             제품 구입 및 배송 안내입니다.
           </div>
-          <div id="details_evaluation" style="display: none">
+          <div class="details_inner_container" id="details_evaluation" style="display: none">
             제품 고객평가입니다.
           </div>
-          <div id="details_QnA" style="display: none">
+          <div class="details_inner_container" id="details_QnA" style="display: none">
             제품 관련 QnA입니다.
           </div>
         </div>
-
-      </div>
     </div>
   </div>
 
@@ -161,5 +157,4 @@
   </div>
 </div>
 </body>
-
 </html>

@@ -12,10 +12,12 @@ body{
     position:absolute;
     left:50%;
     margin-left:5%;
-    height:100%;
+    height:auto;
+    min-height: 120%;
     transform: translate(-50%);
     overflow: auto;
 }
+
 #bodyheader{
     width:1200px;
     padding-top:40px;
@@ -89,7 +91,6 @@ body{
 #searchicon:hover{
     cursor: pointer;
 }
-
 
 
 #side_Bar{
@@ -196,19 +197,11 @@ li #item_img img{
 #footer{
     position:fixed;
     bottom:0px;
-
-
-
 }
-
 
 #footer img{
     width:950px;
 }
-
-
-
-
 
 
 .back_button{
@@ -233,13 +226,13 @@ li #item_img img{
 }
 
 .product_inner_container{
-    left:25px;
     overflow: hidden;
     position:absolute;
+    margin-left: 20px;
     margin-top: 50px;
     width: 900px;
     height: 550px;
-    box-shadow: 0px 0px 5px #000;
+    /*box-shadow: 0px 0px 5px #000;*/
     border-radius: 10px;
     background-color: rgb(245, 245, 245);
 }
@@ -266,6 +259,7 @@ li #item_img img{
     height: 420px;
     list-style: none;
     margin:10px;
+    left: 450px;
     padding:0px;
     display:flex;
     flex-direction: row;
@@ -329,6 +323,10 @@ li #item_img img{
     border: 2px solid rgba(33, 36, 37, .6);
     background-color: #fff;
 }
+#btn_cart:hover{
+    font-size: 1em;
+    cursor: pointer;
+}
 #btn_buy{
     width:45%;
     height: 50px;
@@ -338,38 +336,49 @@ li #item_img img{
     border: 2px solid rgba(33, 36, 37, .6);
     background-color: #212425;
 }
+#btn_buy:hover{
+    font-size: 1em;
+    cursor: pointer;
+}
 
 .product_details{
     position:absolute;
     margin: 20px;
+    margin-top:0px;
     top: 620px;
     width: 850px;
+    height: 460px;
 }
 
 .details_category{
     width: 150px;
     height: 40px;
-    border-radius: 30px;
-    border: 2px solid rgba(33, 36, 37, .6);
-    background-color: #fff;
+    background-color: rgb(245, 245, 245);
+    border-top-right-radius: 20px 20px;
+    border-top-left-radius: 20px 20px;
+    border-style:none;
 }
 
 .details_category:hover{
     width: 150px;
     height: 40px;
-    border-radius: 30px;
-    border: 2px solid rgba(33, 36, 37, .6);
     background-color: #212425;
     color: #fff;
+    cursor: pointer;
 }
 
-.product_details_content{
-    display: none;
+.details_outer_container{
+    overflow: hidden;
+    width: 900px;
+    height: 400px;
+    /*box-shadow: 0px 0px 5px #000;*/
+    border-top-right-radius: 20px 20px;
+    border-bottom-right-radius: 20px 20px;
+    border-bottom-left-radius: 20px 20px;
+    background-color: rgb(225, 225, 225);
 }
-.product_outer_container{
-    position:absolute;
-    top: 200px;
-    width: 1000px;
-    height: 600px;
-    font-family: 'Nanum Gothic', sans-serif;
+
+.details_inner_container{
+    margin:30px;
+    font-family: 'Gowun Dodum', sans-serif;
 }

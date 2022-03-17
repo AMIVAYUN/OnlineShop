@@ -199,7 +199,7 @@ li #item_img img{
     width:950px;
 }
 
-.product_outer_container{
+.mypage_outer_container{
     position:absolute;
     top: 200px;
     width: 1000px;
@@ -207,7 +207,7 @@ li #item_img img{
     font-family: 'Nanum Gothic', sans-serif;
 }
 
-.product_inner_container{
+.mypage_inner_container{
     overflow: hidden;
     position:absolute;
     margin-left: 20px;

@@ -4,6 +4,7 @@ $(document).ready(function (){
     SessionCheck();
     SearchSetting();
     logoSetting();
+    mypageSetting();
 
 })
 function KeyWordCheck(){
@@ -103,4 +104,18 @@ function search(){
     var keyword=$("#faqkeyword").val();
     window.location.assign(baseurl .protocol +"//"+baseurl .host+"/contact/notice?keyword="+keyword);
 
+}
+function mypageSetting(){
+    var baseurl=window.location;
+
+
+
+    $("#mypage").click(function (){
+        if($("#login-navi").text()=="로그인"){
+            alert("로그인이 필요한 서비스 입니다.")
+        }else{
+            var url=baseurl .protocol +"//"+baseurl .host+"/mypage"
+            location.assign(url);
+        }
+    })
 }

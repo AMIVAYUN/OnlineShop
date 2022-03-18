@@ -6,6 +6,9 @@ $(document).ready(function(){
     logoSetting();
 })
 async function SessionCheck(){
+    //shoplist 세팅 포함
+    var baseurl=window.location;
+
     const res1=await fetch("/api/v1/members/session",{method:"GET"}).then(response => response.json());
     if(!res1.isauth){
         return false;
@@ -18,8 +21,15 @@ async function SessionCheck(){
         $("#login-navi").attr("href","#")
         $("#join-navi").text("로그아웃");
         $("#join-navi").attr("href","/logout");
-
+        $("#scart").click(function (){
+            window.location.assign(baseurl .protocol +"//"+baseurl .host+"/shopping-list");
+        })
+    }else{
+        $("#scart").click(function (){
+            alert("로그인이 필요한 서비스 입니다.")
+        })
     }
+
 }
 
 function KeyWordCheck(){

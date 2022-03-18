@@ -9,7 +9,9 @@ public class MemberDto {
     private String email;
     private String name;
     private String phone_num;
+    public MemberDto(){
 
+    }
     public MemberDto(String username, String password, String email, String name, String phone_num) {
         this.username = username;
         this.password = password;

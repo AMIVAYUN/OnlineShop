@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../css/ShopCart.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/97e36fce94.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../../js/ShopCart.js"charset="UTF-8"></script>
+    <title>장바구니</title>
+</head>
+<body>
+<div id="wrap">
+    <nav id="navi-bar">
+
+        <a id="login-navi" href="/login">로그인</a>
+        <a id="join-navi" href="/join">회원가입</a>
+        <a href="#">마이페이지</a>
+        <a href="/contact">FAQ</a>
+
+    </nav>
+    <div id="bodyheader">
+        <div id="mainHeaderbar">
+            <img src="../img/static/DB_LOGO.gif" id="logo">
+            <div id="searchbar"><input type="text" placeholder="   제품을 검색하세요."><img  id="searchicon"src="../img/static/searchicon.png"></div>
+            <img src="../img/static/shoppingcart.png" id="scart" onclick="javascript:location.href='/shopping-list'">
+        </div>
+    </div>
+    <hr>
+    <div id="main">
+        <h1><i class="fa-solid fa-cart-shopping"></i></i>&nbsp장바구니</h1>
+        <hr class="mainhr">
+
+
+    </div>
+    <div id="side_Bar">
+        <div id="comp_intr">
+            <img src="../img/static/companyIntroduction_ver2.png" onclick="javascript:location.href='/comp-intro'">
+        </div>
+        <div id="comp_mypage">
+            <img src="../img/static/mypage_ver2.png"onclick="javascript:location.href='/my-page'">
+
+        </div>
+        <div id="comp_hompage">
+            <img src="../img/static/homepage_ver2.png"onclick="javascript:location.href='http://www.대봉산업기계.com'">
+
+        </div>
+        <div id="comp_board">
+            <img src="../img/static/board_ver3.png" onclick="javascript:location.href='/contact/notice'">
+        </div>
+        <div id="comp_top">
+            <img src="../img/static/Top_ver2.png" onclick="window.scroll(0,0)">
+        </div>
+    </div>
+    <div id="footer">
+        <img src="../img/static/footer.png">
+    </div>
+</div>
+
+
+
+</body>
+</html>

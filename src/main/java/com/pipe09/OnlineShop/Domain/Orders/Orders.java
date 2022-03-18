@@ -31,7 +31,6 @@ public class Orders {
 
 
     @OneToMany( mappedBy = "orders",cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
-
     private List<OrderItem> orderItems= new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)

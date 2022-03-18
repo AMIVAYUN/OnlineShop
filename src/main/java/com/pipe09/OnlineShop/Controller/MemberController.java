@@ -32,11 +32,5 @@ public class MemberController {
     public String join(){
         return "fragments/public/join";
     }
-    @PostMapping("/join-proc")
-    public String create(@Valid MemberDto dto){
-        System.out.println(dto.getEmail());
-        Member newMember= Member.createMember(dto.getUsername(),dto.getName(),dto.getPhone_num(),dto.getPassword(),dto.getEmail()) ;
-        service.save(newMember);
-        return "redirect:/";
-    }
+
 }

@@ -3,6 +3,7 @@ package com.pipe09.OnlineShop.Domain.Member;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pipe09.OnlineShop.Domain.Orders.Orders;
 
+import com.pipe09.OnlineShop.Domain.Shoplist.ShopCart;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -60,6 +61,10 @@ public class Member {
     @NotNull
     @Setter
     private UserType userType;
+    @Setter
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "shoplist_ID")
+    private ShopCart shopCart;
     public static Member createMember(String id,String name,String Phone_Num,String pwd,String email) {
         Member newMember = new Member();
         newMember.setUser_ID(id);
@@ -68,8 +73,10 @@ public class Member {
         newMember.setPwd(pwd);
         newMember.setEmail(email);
         newMember.setRoleType(RoleType.USER);
-        newMember.setUserType(UserType.GOOGLE);
+        newMember.setUserType(UserType.LOCAL);
         newMember.setDate(LocalDate.now());
+        newMember.setShopCart(new ShopCart());
+
         return newMember;
     }
     public void Encodepwd(PasswordEncoder encoder){

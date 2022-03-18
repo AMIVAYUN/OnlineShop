@@ -10,6 +10,7 @@ $(document).ready(function(){
     var keyword=KeyWordCheck();
     getItem(keyword);
     detailBtnSet();
+    mypageSetting();
 })
 
 function detailBtnSet(){
@@ -218,4 +219,18 @@ function KeyWordCheck(){
     var str=baseurl.toString();
     var Keyword=str.substr(locate.length,str.length);
     return Keyword;
+}
+function mypageSetting(){
+    var baseurl=window.location;
+
+
+
+    $("#mypage").click(function (){
+        if($("#login-navi").text()=="로그인"){
+            alert("로그인이 필요한 서비스 입니다.")
+        }else{
+            var url=baseurl .protocol +"//"+baseurl .host+"/mypage"
+            location.assign(url);
+        }
+    })
 }

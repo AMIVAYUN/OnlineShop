@@ -33,4 +33,9 @@ public class MemberController {
         return "fragments/public/join";
     }
 
+
+    @GetMapping("/mypage")
+    public String getMypage(){
+        return "/fragments/public/mypage";
+    }
 }

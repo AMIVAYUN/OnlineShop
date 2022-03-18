@@ -20,11 +20,11 @@ function detailBtnSet(){
 function show_explanation() {
     var con1 = document.getElementById("details_explanation");
     var con2 = document.getElementById("details_buy");
-    var con3 = document.getElementById("details_evaluation");
+    var con3 = document.getElementById("details_exchange");
     var con4 = document.getElementById("details_QnA");
     var btn1 = document.getElementById("details_explanation_btn");
     var btn2 = document.getElementById("details_buy_btn");
-    var btn3 = document.getElementById("details_evaluation_btn");
+    var btn3 = document.getElementById("details_exchange_btn");
     var btn4 = document.getElementById("details_QnA_btn");
     if(con1.style.display == "none"){
         con1.style.display = "block";
@@ -45,12 +45,12 @@ function show_explanation() {
 function show_buy() {
     var con1 = document.getElementById("details_explanation");
     var con2 = document.getElementById("details_buy");
-    var con3 = document.getElementById("details_evaluation");
+    var con3 = document.getElementById("details_exchange");
     var con4 = document.getElementById("details_QnA");
     var btn = document.getElementById("details_buy_btn");
     var btn1 = document.getElementById("details_explanation_btn");
     var btn2 = document.getElementById("details_buy_btn");
-    var btn3 = document.getElementById("details_evaluation_btn");
+    var btn3 = document.getElementById("details_exchange_btn");
     var btn4 = document.getElementById("details_QnA_btn");
     if(con2.style.display == "none"){
         con1.style.display = "none";
@@ -61,21 +61,18 @@ function show_buy() {
         btn2.style.backgroundColor = "rgb(225,225,225)";
         btn3.style.backgroundColor = "rgb(245,245,245)";
         btn4.style.backgroundColor = "rgb(245,245,245)";
-        btn1_state = false;
-        btn2_state = true;
-        btn3_state = false;
-        btn4_state = false;
+        btn1_state = false; btn2_state = true; btn3_state = false; btn4_state = false;
     }
 }
 
-function show_evaluation() {
+function show_exchange() {
     var con1 = document.getElementById("details_explanation");
     var con2 = document.getElementById("details_buy");
-    var con3 = document.getElementById("details_evaluation");
+    var con3 = document.getElementById("details_exchange");
     var con4 = document.getElementById("details_QnA");
     var btn1 = document.getElementById("details_explanation_btn");
     var btn2 = document.getElementById("details_buy_btn");
-    var btn3 = document.getElementById("details_evaluation_btn");
+    var btn3 = document.getElementById("details_exchange_btn");
     var btn4 = document.getElementById("details_QnA_btn");
     if(con3.style.display == "none"){
         con1.style.display = "none";
@@ -96,11 +93,11 @@ function show_evaluation() {
 function show_QnA() {
     var con1 = document.getElementById("details_explanation");
     var con2 = document.getElementById("details_buy");
-    var con3 = document.getElementById("details_evaluation");
+    var con3 = document.getElementById("details_exchange");
     var con4 = document.getElementById("details_QnA");
     var btn1 = document.getElementById("details_explanation_btn");
     var btn2 = document.getElementById("details_buy_btn");
-    var btn3 = document.getElementById("details_evaluation_btn");
+    var btn3 = document.getElementById("details_exchange_btn");
     var btn4 = document.getElementById("details_QnA_btn");
     if(con4.style.display == "none"){
         con1.style.display = "none";
@@ -141,7 +138,7 @@ $(document).ready(function(){
             $(this).css('backgroundColor', 'rgb(225,225,225)');
         }
     })
-    $('#details_evaluation_btn').hover(function(){
+    $('#details_exchange_btn').hover(function(){
         $(this).css('color', '#fff');
         $(this).css('backgroundColor', '#212425');
         }, function(){

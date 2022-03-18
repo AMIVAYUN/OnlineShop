@@ -251,6 +251,13 @@ li #item_img img{
     align-content: flex-start;
 }
 
+#product_image{
+    margin-top: 40px;
+    margin-left: 20px;
+    width: 375px;
+    height: 375px;
+}
+
 .product_info_container{
     left:450px;
     position:absolute;
@@ -316,6 +323,7 @@ li #item_img img{
     width:100%;
 }
 #btn_cart{
+    font-family: 'Gowun Dodum', sans-serif;
     width:45%;
     height: 50px;
     float:left;
@@ -328,6 +336,7 @@ li #item_img img{
     cursor: pointer;
 }
 #btn_buy{
+    font-family: 'Gowun Dodum', sans-serif;
     width:45%;
     height: 50px;
     float:right;
@@ -381,4 +390,20 @@ li #item_img img{
 .details_inner_container{
     margin:30px;
     font-family: 'Gowun Dodum', sans-serif;
+}
+
+#mail_QnA_btn{
+    font-family: 'Gowun Dodum', sans-serif;
+    font-size: 20px;
+    border: 0px;
+    border-radius: 20px;
+    width: 200px;
+    height: 70px;
+    background-color: #fff;
+}
+
+#mail_QnA_btn:hover{
+    font-family: 'Gowun Dodum', sans-serif;
+    font-size: 22px;
+    cursor: pointer;
 }

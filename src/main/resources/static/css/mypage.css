@@ -199,17 +199,11 @@ li #item_img img{
     width:950px;
 }
 
-.mypage_outer_container{
-    position:absolute;
-    top: 200px;
-    width: 1000px;
-    height: 600px;
+.mypage_container{
     font-family: 'Nanum Gothic', sans-serif;
-}
-
-.mypage_inner_container{
     overflow: hidden;
     position:absolute;
+    top: 200px;
     margin-left: 20px;
     margin-top: 50px;
     width: 900px;

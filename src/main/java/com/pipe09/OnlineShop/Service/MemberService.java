@@ -60,4 +60,8 @@ public class MemberService implements UserDetailsService {
     public PasswordEncoder getPasswordEncoder() {
         return passwordEncoder;
     }
+
+    public Member findById(String id){
+        return memberRepository.findByuserId(id);
+    }
 }

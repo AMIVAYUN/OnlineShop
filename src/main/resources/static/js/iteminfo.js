@@ -220,10 +220,9 @@ function KeyWordCheck(){
     var Keyword=str.substr(locate.length,str.length);
     return Keyword;
 }
+
 function mypageSetting(){
     var baseurl=window.location;
-
-
 
     $("#mypage").click(function (){
         if($("#login-navi").text()=="로그인"){

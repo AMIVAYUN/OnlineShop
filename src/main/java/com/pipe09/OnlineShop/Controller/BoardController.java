@@ -18,13 +18,7 @@ import java.util.List;
 public class BoardController {
     private final BoardService boardService;
 
-    @GetMapping("/notice")
-    public String notice_Access(Model model){
-        List<Notice> noticeList = boardService.findAll();
-        model.addAttribute("noticeList",noticeList);
-        return "Board/noticeboard";
 
-    }
 
     @GetMapping("/contact")
     public String case_selector(){

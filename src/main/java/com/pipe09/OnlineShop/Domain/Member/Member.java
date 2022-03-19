@@ -65,6 +65,10 @@ public class Member {
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "shoplist_ID")
     private ShopCart shopCart;
+    @Setter
+    @Column(name="address")
+    @Lob
+    private String address;
     public static Member createMember(String id,String name,String Phone_Num,String pwd,String email) {
         Member newMember = new Member();
         newMember.setUser_ID(id);

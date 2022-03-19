@@ -46,6 +46,7 @@ public class SecConfing extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/members").hasRole("USER")
                 .antMatchers("/contact/em-faq").hasAnyRole("ADMIN","USER")
                 .antMatchers("/shopping-list").hasAnyRole("ADMIN","USER")
+                .antMatchers("/mypage").hasAnyRole("ADMIN","USER")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin().loginPage("/login").loginProcessingUrl("/loginproc").defaultSuccessUrl("/").successHandler(successHandler).failureHandler(failureHandler)

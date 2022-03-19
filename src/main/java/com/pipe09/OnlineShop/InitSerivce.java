@@ -6,12 +6,16 @@ import com.pipe09.OnlineShop.Domain.Member.Member;
 import com.pipe09.OnlineShop.Domain.Shoplist.ShopCart;
 import com.pipe09.OnlineShop.Domain.Shoplist.Shop_Item;
 import com.pipe09.OnlineShop.Repository.ShopCartRepository;
+import com.pipe09.OnlineShop.Service.MailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.mail.MessagingException;
 import javax.persistence.EntityManager;
+
+import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,8 +27,12 @@ import static org.junit.Assert.assertEquals;
 public class InitSerivce {
     private final EntityManager em;
     private final ShopCartRepository repository;
+    private final MailService mailservice;
     @Transactional
-    public void dbInit(){
+    public void dbInit() throws MessagingException, IOException {
+        mailservice.getAuthfield().put("wntjrdbs@gmail.com","111111");
+        //메일 서비스 테스트
+        //mailservice.Emailprove("wntjrdbs@gmail.com");
         /*
         //숖카 만들기
         Member member=em.find(Member.class,5L);

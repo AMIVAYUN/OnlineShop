@@ -5,9 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-
-
-
+import javax.mail.MessagingException;
+import java.io.IOException;
 
 
 @Component
@@ -17,7 +16,7 @@ public class InitDb {
     private final MailService service;
 
     @PostConstruct
-    public void init(){
+    public void init() throws MessagingException, IOException {
         initSerivce.dbInit();
         initSerivce.dbInit2();
 

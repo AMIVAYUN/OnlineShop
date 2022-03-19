@@ -63,11 +63,19 @@ public class MemberApiController{
         memberService.save(newMember);
         return "redirect:/";
     }
-
+    /*
     @GetMapping("/api/v1/members/single/local/{username}")
     public MemberDto getSingleMem(@PathVariable String username){
         Member member=memberService.findByname(username);
         MemberDto dto= new MemberDto(member.getUser_ID(),member.getPwd(),member.getEmail(),member.getName(),member.getPhone_Num());
+        return dto;
+    }
+
+     */
+    @GetMapping("/api/v1/members/single/local/{user_id}")
+    public MemberDto getSingleMembyID(@PathVariable String user_id){
+        Member member= memberService.findById(user_id);
+        MemberDto dto=new MemberDto(member.getUser_ID(),"발신거부",member.getEmail(),member.getName(),member.getPhone_Num());
         return dto;
     }
 }

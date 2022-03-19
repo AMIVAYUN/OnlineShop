@@ -24,15 +24,15 @@ public class HomeController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         log.info(String.format("%s accessed general home with role type: %s",authentication.getName(),authentication.getAuthorities()));
-        return "fragments/public/home";
+        return "/fragments/public/home";
     }
     @GetMapping("/search/{keyword}")
     public String search(@PathVariable @Nullable String keyword){
-        return "fragments/public/result_search";
+        return "/fragments/public/result_search";
     }
 
     @GetMapping("/comp-intro")
-    public String compIntroduction(){ return "fragments/public/companyintro"; }
+    public String compIntroduction(){ return "/fragments/public/companyintro"; }
 
 
 

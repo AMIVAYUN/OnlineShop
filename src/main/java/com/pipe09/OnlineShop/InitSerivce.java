@@ -30,7 +30,8 @@ public class InitSerivce {
     private final MailService mailservice;
     @Transactional
     public void dbInit() throws MessagingException, IOException {
-        mailservice.getAuthfield().put("wntjrdbs@gmail.com","111111");
+        //mailservice.getAuthfield().put("wntjrdbs@gmail.com","111111");
+        //Member member=em.find(Member.class,)
         //메일 서비스 테스트
         //mailservice.Emailprove("wntjrdbs@gmail.com");
         /*

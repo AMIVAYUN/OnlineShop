@@ -12,7 +12,7 @@ body{
     margin-left:5%;
     height:100%;
     transform: translate(-50%);
-    overflow: auto;
+    overflow: revert;
 }
 #bodyheader{
     width:1200px;
@@ -212,6 +212,7 @@ li #item_img img{
     margin-left: 25px;
     border-radius: 10px;
     font-weight:bold;
+    overflow: hidden;
 }
 #main h1{
     margin-top: 30px;
@@ -225,5 +226,89 @@ li #item_img img{
     border: 0px;
 
 }
+.mer_img{
+    width:130px;
+}
+#main_body{
+    font-weight: lighter;
+}
+
+.name{
+    width:380px;
+}
+.mer_img img{
+    width:80px;
+    height:80px;
+}
+.component{
+    height:120px;
+    overflow: hidden;
+}
+#shoppinglist{
+    width:100%;
+    margin-top:35px;
+
+}
+.component td{
+    text-align: center;
+    vertical-align: middle;
+
+}
 
 
+.del{
+    cursor: pointer;
+}
+#total{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    height:102px;
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 20px;
+}
+.totalbt{
+    border-radius: 10px;
+    background-color: lightgray;
+    cursor: pointer;
+    margin:10px;
+    height: 30px;
+    width:100px;
+    line-height: 30px;
+    text-align: center;
+    background-color: lightskyblue;
+    color: black;
+}
+#totalprice{
+    width:250px;
+}
+.totalbt:hover{
+    background-color: black;
+    color: white;
+}
+
+#totalprice{
+    width: 100%;
+    line-height: 50px;
+    justify-content: end;
+    display: flex;
+    margin-right: 20px;
+    border-bottom: 2px solid lightgray;
+}
+#totalprice strong{
+    color:red;
+    font-size:25px;
+}
+#btn_side{
+    margin-top:5px;
+    width:100%;
+    height:50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+#total hr{
+    color: lightgray;
+    size:2px;
+}

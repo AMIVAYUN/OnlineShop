@@ -39,10 +39,8 @@ public class MailService {
 
     }
 
-    @Async
     public boolean confirm(MProveDto dto){
-        log.info("맵 키값:" + authfield.get(dto.getEmail()));
-        log.info(String.valueOf((authfield.get(dto.getEmail())).equals(dto.getKey())));
+
         return (authfield.get(dto.getEmail())).equals(dto.getKey());
 
     }

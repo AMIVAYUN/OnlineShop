@@ -264,6 +264,11 @@ li #item_img img{
     height: 82px;
     margin-left:20px;
     border-radius: 10px;
+    cursor: pointer;
+}
+#email-identify:hover{
+    color:white;
+    background-color: gray;
 }
 #emailpart input{
     width:95%;
@@ -308,6 +313,7 @@ li #item_img img{
 #submit{
     height:35px;
     border:2px solid gray;
+    cursor:pointer;
 }
 
 
@@ -330,4 +336,21 @@ li #item_img img{
     height: 30px;
     margin-top: 5px;
     width:40%;
+}
+#purpose{
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-left: 40px;
+    border: 3px solid gray;
+    width: 820px;
+    text-align: center;
+    height:50px;
+    line-height:50px ;
+    font-size:24px;
+    margin-bottom: 10px;
+}
+#purpose:hover{
+    background-color: black;
+    color:white;
+    cursor:pointer;
 }

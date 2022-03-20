@@ -7,13 +7,14 @@ body{
     overflow: scroll;
 }
 #wrap{
+    overflow: revert;
     position:absolute;
     left:50%;
     margin-left:5%;
     height:auto;
     min-height: 120%;
     transform: translate(-50%);
-    overflow: auto;
+
 }
 
 #bodyheader{

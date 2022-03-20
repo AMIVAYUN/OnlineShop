@@ -36,7 +36,7 @@ public class MemberRepository {
         return em.createQuery(jpql,Member.class).setParameter("name",name).getSingleResult();
     }
     public Member findByName(String name){
-        String jpql="select m from Member m where m.Name=:name and m.userType=:type";
+        String jpql="select m from Member m join fetch m.shopCart where m.Name=:name and m.userType=:type";
         return em.createQuery(jpql,Member.class).setParameter("name",name).setParameter("type", UserType.LOCAL).getSingleResult();
     }
     public Member findByuserId(String id) {
@@ -46,6 +46,7 @@ public class MemberRepository {
     public List<Member> findAll(int offset,int limit){
         return em.createQuery("select mlist from Member mlist").setFirstResult(offset).setMaxResults(limit).getResultList();
     }
+
 
 
 }

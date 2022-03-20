@@ -27,7 +27,6 @@ public class ShopCart {
     @JsonIgnore
     private Member member;
 
-    @Transactional
     public void addItem(Shop_Item... items){
         Arrays.stream(items).forEach( shop_item -> this.shopItems.add(shop_item));
 

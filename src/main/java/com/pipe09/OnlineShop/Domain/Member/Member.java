@@ -20,22 +20,20 @@ import java.util.List;
 
 @Entity
 @Getter
+@Setter
 @Table(name="MEMBER")
 public class Member {
 
     @Column(name = "member_id",nullable = false)
-    @Setter
     @Id@GeneratedValue
     private Long Member_ID;
-    @Setter@Column( nullable = false )
+    @Column( nullable = false )
     private String user_ID;
     @Column(name="pwd",nullable = false)@Setter
     private String pwd;
     // 이름은  10자를 넘기면 안되고 비면 안된다.
     @Column(name= "NAME",nullable = false,length=10)
-    @Setter
     private String Name;
-    @Setter
     @Column(name = "EMAIL",nullable = false)
     private String email;
 
@@ -45,7 +43,6 @@ public class Member {
     @Enumerated(EnumType.STRING)@Setter
     private RoleType roleType = RoleType.USER;
     @Column(nullable = true)
-    @Setter
     private String Phone_Num;
 
     @Column(name = "RegDate")@Setter
@@ -59,17 +56,14 @@ public class Member {
     @Column(name = "PROVIDER_TYPE", length = 20)
     @Enumerated(EnumType.STRING)
     @NotNull
-    @Setter
     private UserType userType;
-    @Setter
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "shoplist_ID")
     private ShopCart shopCart;
-    @Setter
     @Column(name="address")
-    @Lob
-    private String address;
-    public static Member createMember(String id,String name,String Phone_Num,String pwd,String email) {
+    @Embedded
+    private Address address;
+    public static Member createMember(String id,String name,String Phone_Num,String pwd,String email,Address address) {
         Member newMember = new Member();
         newMember.setUser_ID(id);
         newMember.setName(name);
@@ -78,7 +72,9 @@ public class Member {
         newMember.setEmail(email);
         newMember.setRoleType(RoleType.USER);
         newMember.setUserType(UserType.LOCAL);
+        newMember.setStat(Mem_status.ACTIVATED);
         newMember.setDate(LocalDate.now());
+        newMember.setAddress(address);
         newMember.setShopCart(new ShopCart());
 
         return newMember;

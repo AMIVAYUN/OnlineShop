@@ -1,9 +1,12 @@
+var count=0;
 $(document).ready(function(){
+
     SessionCheck();
     SearchSetting();
     logoSetting();
     mypageSetting();
     emailProveSetting();
+    purposeSetting();
 })
 
 async function SessionCheck(){
@@ -73,6 +76,7 @@ function mypageSetting(){
 function execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
+            sessionStorage.setItem("juso",true);
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
             // 각 주소의 노출 규칙에 따라 주소를 조합한다.
@@ -119,7 +123,7 @@ function execDaumPostcode() {
 }
 function emailProveSetting(){
     $("#email-identify").click(async function page1(){
-        if(checkvaildEmail()){
+        if(checkvalidEmail()){
             $("#code").attr("disabled",false);
             var baseurl=window.location;
             var url=baseurl .protocol +"//"+baseurl .host+"/api/v2/mails/confirm?email="+$("#emailvalue").val();
@@ -145,10 +149,21 @@ async function page2(){
         "email":$("#emailvalue").val(),
         "key":$("#code").val()
     }
-    const res=await fetch("/api/v2/mails/prove.do",{method:"post",headers:{'Content-Type': 'application/json'},body:JSON.stringify(obj)}).then(res => res.text())
-    alert(res);
+    const res=await fetch("/api/v2/mails/prove.do",{method:"post",headers:{'Content-Type': 'application/json'},body:JSON.stringify(obj)}).then(res => res.json())
+    if(count>4){
+        alert("이메일 인증한도를 넘으셨습니다. 처음부터 다시 시도해주세요");
+        location.reload();
+    }
+    if(res.result){
+        alert("이메일 인증에 성공하셨습니다.");
+        $("#code").attr("disabled",true);
+        sessionStorage.setItem("email",true);
+    }else{
+        alert("이메일 인증에 실패하셨습니다. 코드를 다시 입력해주세요");
+        count+=1;
+    }
 }
-function checkvaildEmail(){
+function checkvalidEmail(){
     if ($("#emailvalue").val() == "") {
         $("#emailvalue").attr("placeholder","필수 정보입니다.");
         $("#emailvalue").css("border-color","red");
@@ -171,5 +186,117 @@ function checkvaildEmail(){
     $("#emailvalue").css("border-color","black");
     return true;
 }
+function purposeSetting(){
 
+    $("#purpose").click(function (){
+        const emailproof=sessionStorage.getItem("email");
+
+        if(checkValidName()&&checkValidPassword()&&checkValidPhone()&&checkValidUsername()&&emailproof&&checkAddress()){
+            JoinbyLocal();
+        }
+
+    })
+}
+function checkValidUsername() {
+    $("#pid").css("color","black");
+    $("#pid").css("border","1px solid black");
+    if ($("#pid").val() == "") {
+        $("#pid").attr("placeholder","필수 정보 입니다.");
+        $("#pid").css("border","3px solid red");
+        $("#pid").css("color","red");
+        return false;
+    }
+
+    return true;
+}
+
+function checkValidPassword() {
+    $("#ppwd").css("color","black");
+    $("#ppwd").css("border","1px solid black");
+    if ($("#ppwd").val() == "") {
+        $("#ppwd").attr("placeholder","필수 정보 입니다.");
+        $("#ppwd").css("border","3px solid red");
+        $("#ppwd").css("color","red");
+        return false;
+    }
+
+    const pw = $("#ppwd").val();
+    // String.prototype.search() :: 검색된 문자열 중에 첫 번째로 매치되는 것의 인덱스를 반환한다. 찾지 못하면 -1 을 반환한다.
+    // number
+
+    if (pw.length < 6) {
+        // 최소 6문자.
+        $("#ppwd").val(null);
+        $("#ppwd").attr("placeholder","비밀번호는 6글자 이상이어야 합니다.");
+        $("#ppwd").css("border","3px solid red");
+        $("#ppwd").css("color","red");
+        return false;
+    } else if (pw.search(/\s/) != -1) {
+        // 공백 제거.
+        $("#ppwd").val(null);
+        $("#ppwd").attr("placeholder","공백(스페이스 바)없이 입력해주세요");
+        $("#ppwd").css("border","3px solid red");
+        $("#ppwd").css("color","red");
+        return false;
+    }
+
+    return true;
+}
+
+
+
+function checkValidName() {
+    $("#pname").css("color","black");
+    $("#pname").css("border","1px solid black");
+    if ($("#pname").val() == "") {
+        $("#pname").attr("placeholder","필수 정보 입니다.");
+        $("#pname").css("border","3px solid red");
+        $("#pname").css("color","red");
+        return false;
+    }
+
+    return true;
+}
+
+function checkValidPhone() {
+    if ( ($("#phone1").val() == "") ||($("#phone2").val() == "")||($("#phone3").val() == "")) {
+        alert("전화번호를 다시 기입해주세요")
+        //form.phone.focus();
+        return false;
+    }
+
+    return true;
+}
+
+function checkAddress(){
+    const juso=sessionStorage.getItem("juso")
+    if(juso&&($("#detailAddress").val()!=null)){
+        return true;
+    }
+    else{
+        alert("주소를 검색해주세요");
+        return false;
+    }
+}
+async function JoinbyLocal(){
+    var baseurl=window.location;
+    url=baseurl .protocol +"//"+baseurl .host+"/join-proc";
+    let obj={
+        "username":$("#pid").val(),
+        "password":$("#ppwd").val(),
+        "email":$("#emailvalue").val(),
+        "name":$("#pname").val(),
+        "phone_num":$("#phone1").val()+$("#phone2").val()+$("#phone3").val(),
+        "address":{
+            "postcode":$("#postcode").val(),
+            "address":$("#address").val()+" "+$("#detailAddress").val()+" "+$("#extraAddress").val()
+        }
+
+    }
+    const res=fetch(url,{method:"post",headers:{'Content-Type': 'application/json'},body:JSON.stringify(obj)}).then(response => {
+        if(response.status==200){
+            alert("회원가입이 완료되었습니다.");
+        }
+    })
+}
 

@@ -1,5 +1,6 @@
 package com.pipe09.OnlineShop.Repository;
 
+import com.pipe09.OnlineShop.Domain.Member.Address;
 import com.pipe09.OnlineShop.Domain.Member.Member;
 import com.pipe09.OnlineShop.Domain.Member.RoleType;
 import org.junit.Test;
@@ -23,7 +24,7 @@ public class MemberRepositoryTest {
     @Test
     @Transactional
     public void 멤버_등록과수정(){
-        Member assignMember=Member.createMember("wntjr","wntjr","010","5278","wntjrdbs@gmail.com");
+        Member assignMember=Member.createMember("wntjr","wntjr","010","5278","wntjrdbs@gmail.com",new Address());
         System.out.println(assignMember.getMember_ID());
         Long id =Repository.save(assignMember);
         /**

@@ -23,7 +23,7 @@ public class MemberService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     @Transactional
     public Long save(Member member){
-        validateduplicateMember(member);
+        //validateduplicateMember(member);
         member.Encodepwd(passwordEncoder);
         Long saveid =memberRepository.save(member);
         return saveid;

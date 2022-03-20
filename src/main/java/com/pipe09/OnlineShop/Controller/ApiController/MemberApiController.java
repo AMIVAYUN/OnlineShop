@@ -58,10 +58,11 @@ public class MemberApiController{
         return dtoList;
     }
     @PostMapping("/join-proc")
-    public String create(@Valid MemberDto dto){
-        Member newMember= Member.createMember(dto.getUsername(),dto.getName(),dto.getPhone_num(),dto.getPassword(),dto.getEmail()) ;
+    public boolean create(@Valid @RequestBody MemberDto dto){
+        log.info(dto.getAddress().getAddress());
+        Member newMember= Member.createMember(dto.getUsername(),dto.getName(),dto.getPhone_num(),dto.getPassword(),dto.getEmail(),dto.getAddress()) ;
         memberService.save(newMember);
-        return "redirect:/";
+        return true;
     }
     /*
     @GetMapping("/api/v1/members/single/local/{username}")
@@ -75,7 +76,8 @@ public class MemberApiController{
     @GetMapping("/api/v1/members/single/local/{user_id}")
     public MemberDto getSingleMembyID(@PathVariable String user_id){
         Member member= memberService.findById(user_id);
-        MemberDto dto=new MemberDto(member.getUser_ID(),"발신거부",member.getEmail(),member.getName(),member.getPhone_Num());
+        log.info(member.getAddress().getPostcode());
+        MemberDto dto=new MemberDto(member.getUser_ID(),"접근 불가",member.getEmail(),member.getName(),member.getPhone_Num(),member.getAddress());
         return dto;
     }
 }

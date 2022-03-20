@@ -241,8 +241,8 @@ li #item_img img{
 .separation{
     position: relative;
     left: 50%;
-    transform: translateX(-50%);
-    width: 860px;
+    transform: translateX(-64%);
+    width: 670px;
     height: 5px;
     background-color: #fff;
     margin: 0px;
@@ -264,7 +264,7 @@ li #item_img img{
 
 .mypage_details_right_outer{
     margin-left: 40px;
-    width: 55%;
+    width: 45%;
     height: 45px;
     background-color: #fff;
     border-radius: 10px;

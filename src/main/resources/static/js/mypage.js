@@ -50,8 +50,10 @@ async function nameCheckMypage(){
     const userinfoRes = await fetch(url, {method: "get"}).then(response => response.json());
     fetch(url).then((response) => console.log(response));
     $("#members_username").text(usernameRes);
-
-    alert(usernameRes + userinfoRes)
+    //$("#members_password").text(userinfoRes.password);
+    $("#members_name").text(userinfoRes.name);
+    $("#members_phone_num").text(userinfoRes.phone_num);
+    $("#members_email").text(userinfoRes.email);
 }
 
 

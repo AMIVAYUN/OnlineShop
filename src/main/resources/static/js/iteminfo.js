@@ -5,7 +5,6 @@ var btn4_state = false;
 
 $(document).ready(function(){
     SessionCheck();
-
     SearchSetting();
     logoSetting();
     var keyword=KeyWordCheck();

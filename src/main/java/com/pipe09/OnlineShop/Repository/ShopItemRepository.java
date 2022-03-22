@@ -20,5 +20,10 @@ public class ShopItemRepository {
     public List<Shop_Item> findAllbyCartID(Long Cart_id){
         return em.createQuery("select si from Shop_Item si where si.shoplist.shoplist_ID=:Cart_id").setParameter("Cart_id",Cart_id).getResultList();
     }
+    public boolean deleteIndividual(Long item_id){
+        Shop_Item delItem=em.createQuery("select si from Shop_Item  si where si.id=:item_id",Shop_Item.class).setParameter("item_id",item_id).getSingleResult();
+        em.remove(delItem);
+        return true;
+    }
 
 }

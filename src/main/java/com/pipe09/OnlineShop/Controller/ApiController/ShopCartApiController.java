@@ -4,6 +4,7 @@ package com.pipe09.OnlineShop.Controller.ApiController;
 import com.pipe09.OnlineShop.Domain.Item.Item;
 import com.pipe09.OnlineShop.Domain.Shoplist.Shop_Item;
 import com.pipe09.OnlineShop.Dto.ShopCarts.ShopCartAppendDto;
+import com.pipe09.OnlineShop.Dto.ShopCarts.ShopCartDelDto;
 import com.pipe09.OnlineShop.Dto.ShopCarts.ShopItemDto;
 import com.pipe09.OnlineShop.Service.ItemService;
 import com.pipe09.OnlineShop.Service.MemberService;
@@ -39,6 +40,15 @@ public class ShopCartApiController {
         List<Shop_Item>itemList=cartService.getShopItems(CartId);
         List<ShopItemDto> dtoList=itemList.stream().map( ShopItemDto::new).collect(Collectors.toList());
         return dtoList;
+
+
+    }
+    @DeleteMapping("/api/v1/shopcarts/items/single")
+    public Boolean deleteIndividual(@RequestBody ShopCartDelDto dto){
+        log.info(dto.getUsername()+"사용자 삭제 기능 사용"+dto.getItem_id());
+        Boolean result=cartService.DelIndividualItem(dto.getItem_id());
+
+        return result;
 
 
     }

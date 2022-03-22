@@ -43,5 +43,8 @@ public class ShopCartService {
             return false;
         }
     }
+    public boolean DelIndividualItem(Long item_id){
+        return shopItemRepository.deleteIndividual(item_id);
+    }
 
 }

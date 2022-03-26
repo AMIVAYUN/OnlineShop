@@ -191,11 +191,20 @@ function purposeSetting(){
     $("#purpose").click(function (){
         const emailproof=sessionStorage.getItem("email");
 
-        if(checkValidName()&&checkValidPassword()&&checkValidPhone()&&checkValidUsername()&&emailproof&&checkAddress()){
+        if(checkValidName()&&checkValidPassword()&&checkValidPhone()&&checkValidUsername()&&emailproof&&checkAddress()&&checkTerms()){
+
             JoinbyLocal();
         }
 
     })
+}
+function checkTerms(){
+    if($("#info-passAssign").is(":checked")&&$("#ElectricTradeAssign").is(":checked")&&$("#DBCommercialAssgin").is(":checked")){
+        return true;
+    }else{
+        alert("약관에 동의해주세요");
+        return false;
+    }
 }
 function checkValidUsername() {
     $("#pid").css("color","black");
@@ -289,13 +298,18 @@ async function JoinbyLocal(){
         "phone_num":$("#phone1").val()+$("#phone2").val()+$("#phone3").val(),
         "address":{
             "postcode":$("#postcode").val(),
-            "address":$("#address").val()+" "+$("#detailAddress").val()+" "+$("#extraAddress").val()
+            "address":$("#address").val(),
+            "detailAddress":$("#detailAddress").val(),
+            "ref_address":$("#extraAddress").val()
         }
 
     }
     const res=fetch(url,{method:"post",headers:{'Content-Type': 'application/json'},body:JSON.stringify(obj)}).then(response => {
         if(response.status==200){
             alert("회원가입이 완료되었습니다.");
+            location.assign("/");
+        }else{
+            alert("오류가 발생하였습니다. 잠시후에 다시 시도해주세요");
         }
     })
 }

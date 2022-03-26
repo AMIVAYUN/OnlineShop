@@ -30,7 +30,16 @@ public class InitSerivce {
     private final MailService mailservice;
     @Transactional
     public void dbInit() throws MessagingException, IOException {
-        mailservice.getAuthfield().put("wntjrdbs@gmail.com","111111");
+        //mailservice.getAuthfield().put("wntjrdbs@gmail.com","111111");
+
+        /*ShopCart cart=em.find(ShopCart.class, 12L);
+        Item item= em.find(Item.class,10L);
+        Shop_Item newitem=Shop_Item.makenewShop_Item(item,1,cart);
+
+        cart.addItem(newitem);
+
+        log.info(newitem.getShoplist().getShoplist_ID().toString());*/
+
         //메일 서비스 테스트
         //mailservice.Emailprove("wntjrdbs@gmail.com");
         /*

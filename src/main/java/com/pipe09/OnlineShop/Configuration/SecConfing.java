@@ -39,11 +39,13 @@ public class SecConfing extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.csrf().disable();
+        http.headers().frameOptions().sameOrigin();
         http
                 //NEGATIVE WAY
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/api/v1/members").hasRole("USER")
+                .antMatchers("/payments/**").hasAnyRole("ADMIN","USER")
                 .antMatchers("/contact/em-faq").hasAnyRole("ADMIN","USER")
                 .antMatchers("/shopping-list").hasAnyRole("ADMIN","USER")
                 .antMatchers("/mypage").hasAnyRole("ADMIN","USER")

@@ -22,34 +22,36 @@
     </div>
     <div id="menu">
         <ul>
-            <li><a>제품</a>
+            <li class="tag"><a>제품</a>
                 <ul>
-                    <li><a onclick="window.open('/admin/manage/register-item','new',toolbar=false,menubar=false,scrollbars=true,width=700,height=900);return false">등록</a></li>
+                    <li><a onclick="window.open('/admin/manage/register-item','new',toolbar=false,menubar=false,scrollbars=true,width=700,height=900);return false" style="cursor:pointer">등록</a></li>
                     <li><a href="/admin/manage/view-item">조회</a></li>
                 </ul>
             </li>
-            <li><a>FAQ</a>
+            <li class="tag"><a>FAQ</a>
                 <ul>
-                    <li><a onclick="window.open('/admin/manage/register-faq','new',toolbar=false,menubar=false,scrollbars=true,width=700,height=900);return false">등록</a></li>
+                    <li><a onclick="window.open('/admin/manage/register-faq','new',toolbar=false,menubar=false,scrollbars=true,width=700,height=900);return false" style="cursor:pointer;">등록</a></li>
                     <li><a href="/admin/manage/view-faq">조회</a></li>
                 </ul>
             </li>
-            <li><a>주문</a>
+            <li class="tag"><a>주문</a>
                 <ul>
                     <li class="sub"><a href="/admin/manage/view-orders">관리·조회</a></li>
 
                 </ul>
             </li>
-            <li><a>회원</a>
+            <li class="tag"><a>회원</a>
                 <ul>
                     <li class="sub"><a href="/admin/manage/view-members">관리·조회</a></li>
                 </ul>
             </li>
+            <!--
             <li><a>배송</a>
                 <ul>
                     <li class="sub"><a href="/admin/manage/view-delivery">관리·조회</a></li>
                 </ul>
             </li>
+            -->
         </ul>
     </div>
     </body>

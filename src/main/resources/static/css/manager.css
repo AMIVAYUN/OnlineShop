@@ -20,7 +20,7 @@ body > div{
 #menu {
     font-size: 16px;
     font-family: 'Jua',sans-serif;
-    width:710px;
+    width:568px;
     height:50px;
     background: skyblue;
     color:black;
@@ -36,8 +36,10 @@ body > div{
     width:140px;
     position:relative;
     border: 1px solid black;
-    cursor: pointer;
+
 }
+
+
 
 #title{
     font-family: 'Jua';

@@ -6,6 +6,7 @@ $(document).ready(function (){
     logoSetting();
     mypageSetting();
 
+
 })
 function KeyWordCheck(){
     var baseurl=window.location;
@@ -89,11 +90,17 @@ async function SessionCheck(){
         $("#login-navi").attr("href","#")
         $("#join-navi").text("로그아웃");
         $("#join-navi").attr("href","/logout");
+        $("#mailingservice").on("click",function(){
+            location.assign(baseurl .protocol +"//"+baseurl .host+"/contact/em-faq");
+        })
         $("#scart").click(function (){
             window.location.assign(baseurl .protocol +"//"+baseurl .host+"/shopping-list");
         })
     }else{
         $("#scart").click(function (){
+            alert("로그인이 필요한 서비스 입니다.")
+        })
+        $("#mailingservice").on("click",function(){
             alert("로그인이 필요한 서비스 입니다.")
         })
     }

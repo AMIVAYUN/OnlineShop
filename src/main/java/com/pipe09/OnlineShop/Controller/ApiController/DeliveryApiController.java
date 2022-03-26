@@ -1,6 +1,6 @@
 package com.pipe09.OnlineShop.Controller.ApiController;
 
-
+/*
 import com.pipe09.OnlineShop.Domain.Delivery.Delivery;
 import com.pipe09.OnlineShop.Dto.Delivery.DeliveryDto;
 import com.pipe09.OnlineShop.Service.DeliveryService;
@@ -26,3 +26,5 @@ public class DeliveryApiController {
     }
 }
 
+
+ */

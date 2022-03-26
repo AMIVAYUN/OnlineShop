@@ -34,6 +34,11 @@ public class HomeController {
     @GetMapping("/comp-intro")
     public String compIntroduction(){ return "fragments/public/companyintro"; }
 
-
+    @GetMapping("/laws/DBstatic")
+    public String getDBstaticlaw(){ return "fragments/private/DBServiceLaw"; }
+    @GetMapping("/laws/ElectricTran")
+    public String getDBElectricTransactionlaw(){ return "fragments/private/ElectricTransactionLaw"; }
+    @GetMapping("/laws/PersonalInfo")
+    public String getPersonalInfo(){ return "fragments/private/PersonalInfoLaw"; }
 
 }

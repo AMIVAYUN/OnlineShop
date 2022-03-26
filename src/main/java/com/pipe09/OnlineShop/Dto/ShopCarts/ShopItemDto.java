@@ -10,11 +10,13 @@ public class ShopItemDto {
     private int count;
     private int price;
     private String imgSrc;
+    private int stockQuantity;
     public ShopItemDto(Shop_Item item){
         this.item_id=item.getId();
         this.item_name=item.getItem().getName();
         this.count=item.getCount();
         this.price=item.getItem().getPrice();
         this.imgSrc=item.getItem().getImgSrc();
+        this.stockQuantity=item.getItem().getStockQuantity();
     }
 }

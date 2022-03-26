@@ -4,6 +4,7 @@ var btn3_state = false;
 var btn4_state = false;
 
 $(document).ready(function(){
+    localStorage.setItem("count","1");
     SessionCheck();
     SearchSetting();
     logoSetting();
@@ -12,7 +13,7 @@ $(document).ready(function(){
     detailBtnSet();
     mypageSetting();
     shopCartSetting(keyword);
-
+    buySetting(keyword);
 })
 
 function detailBtnSet(){
@@ -197,7 +198,6 @@ function SearchSetting(){
 function logoSetting(){
     $("#logo").click(function(){
         var baseurl=window.location;
-        console.log(baseurl .protocol +"//"+baseurl .host);
         window.location.assign(baseurl .protocol +"//"+baseurl .host);
     })
 
@@ -214,6 +214,7 @@ async function getItem(keyword){
     $("#product_stockQuantity").text(res.stockQuantity);
     $("#product_weight").text(res.weight);
     $("#product_description").text(res.description);
+    localStorage.setItem("stock",res.stockQuantity);
 }
 
 function KeyWordCheck(){
@@ -261,5 +262,24 @@ async function shopCartSetting(keyword){
 
 
 }
+function buySetting(keyword){
+    $("#btn_buy").on("click",function(){
+        var baseurl=window.location;
+
+        location.assign(baseurl .protocol +"//"+baseurl .host+"/payments/purchase/single/"+keyword);
+    })
+}
 
 
+function countvalChecked(){
+    const stock=parseInt($("#product_stockQuantity").text());
+    const count=parseInt($("#itemcount").val());
+    if(count>stock){
+        alert("재고 수량이 부족합니다.");
+        $("#itemcount").val(count-1);
+    }else{
+        localStorage.setItem("count",$("#itemcount").val());
+    }
+
+
+}

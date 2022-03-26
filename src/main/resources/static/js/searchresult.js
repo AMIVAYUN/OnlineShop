@@ -4,6 +4,7 @@ $(document).ready(function(){
     SearchByKeyWord(keyword);
     SearchSetting();
     logoSetting();
+    gotoItem();
     mypageSetting();
 })
 async function SessionCheck(){
@@ -13,6 +14,12 @@ async function SessionCheck(){
     const res1=await fetch("/api/v1/members/session",{method:"GET"}).then(response => response.json());
     if(!res1.isauth){
         return false;
+    }
+    function gotoItem(){
+        $('#shoplist').on("click","li",function (){
+            var id=$(this).attr('id');
+            location.assign("./products/"+id);
+        })
     }
     if(res1.iswhom !="[ROLE_ADMIN]"){
         $("#manager").remove();

@@ -28,7 +28,6 @@ async function SessionCheck(){
         })
         var suburl="/api/v1/shopcarts/items/all?username="+res1.iswho;
         const res=await fetch(suburl,{method:"get"}).then(response => response.json());
-
         await $.each(res, function(idx){
             var innerhtml='<tr class="component">\n' +
                 '                    <td class="mer_img"><img src='+res[idx].imgSrc+'></td>\n' +
@@ -111,3 +110,9 @@ async function deleteIndividual(obj){
     }
 }
 
+function goshop(){
+    location.assign("/");
+}
+function goOrder(){
+    location.assign("/payments/purchase/bycart")
+}

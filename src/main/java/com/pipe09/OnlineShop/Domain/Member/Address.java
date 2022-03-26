@@ -13,4 +13,8 @@ public class Address {
     private String postcode;
     @Lob
     private String address;
+    @Lob
+    private String detailAddress;
+    @Lob
+    private String ref_address;
 }

@@ -11,6 +11,8 @@ $(document).ready(function(){
     getItem(keyword);
     detailBtnSet();
     mypageSetting();
+    shopCartSetting(keyword);
+
 })
 
 function detailBtnSet(){
@@ -178,6 +180,7 @@ async function SessionCheck(){
         $("#join-navi").attr("href","/logout");
 
     }
+
 }
 function SearchSetting(){
     $("#searchicon").on("click",function(){
@@ -220,9 +223,10 @@ function KeyWordCheck(){
     var Keyword=str.substr(locate.length,str.length);
     return Keyword;
 }
-
 function mypageSetting(){
     var baseurl=window.location;
+
+
 
     $("#mypage").click(function (){
         if($("#login-navi").text()=="로그인"){
@@ -233,12 +237,29 @@ function mypageSetting(){
         }
     })
 
-    $("#comp_mypage").click(function (){
-    if($("#login-navi").text()=="로그인"){
-            alert("로그인이 필요한 서비스 입니다.")
-    }else{
-        var url=baseurl .protocol +"//"+baseurl .host+"/mypage"
-        location.assign(url);
+}
+async function shopCartSetting(keyword){
+    $("#btn_cart").click(async function(){
+        const res=await fetch("/api/v1/members/is-who",{method:"get"}).then(response => response.text());
+        if(res==='anonymousUser'){
+            alert("로그인이 필요한 서비스 입니다.");
+        }else{
+            let obj={
+                "username":res,
+                "item_id":keyword,
+                "count":$("#itemcount").val()
+
+            }
+            const res1= await fetch("/api/v1/shopcarts/single/append.do",{method:"post",headers:{'Content-Type': 'application/json'},body:JSON.stringify(obj)}).then(response => response.json());
+            if(res1){
+                alert("장바구니에 담겼습니다.");
+            }else{
+                alert("이미 담으신 상품입니다.");
+            }
         }
     })
+
+
 }
+
+

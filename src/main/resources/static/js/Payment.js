@@ -5,7 +5,7 @@ $(document).ready(function (){
     logoSetting();
     mypageSetting();
     delBtnSetting();
-
+    purchaseSetting();
 
 })
 async function SessionCheck(){
@@ -112,7 +112,7 @@ function mypageSetting(){
 function execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
-            sessionStorage.setItem("juso",true);
+            sessionStorage.setItem("jusoOrder",true);
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
             // 각 주소의 노출 규칙에 따라 주소를 조합한다.
@@ -185,6 +185,10 @@ function dynamictotal(){
         newsum+=(a*b);
 
     })
+    if(newsum==0){
+        alert("결제하실 상품이 존재하지 않습니다.");
+        location.assign("/");
+    }
     $("#totalprice").text(newsum +"원");
 
 }
@@ -198,9 +202,15 @@ function getcountVal(){
     return localStorage.getItem("count");
 }
 async function getuserInfo(){
+    const condition=await fetch("/api/v1/members/is-oauth",{method:"get"}).then(response => response.json())
+    if(condition){
+        alert("Oauth 로그인(대행 로그인)은 이용하실 수 없는 서비스 입니다.");
+        $("#sameUserinfo").prop("checked",false);
+        return;
+    }
     if($("#sameUserinfo").is(":checked")){
-        const res=await fetch("/api/v1/members/is-who",{method:"get"}).then(response => response.text());
-        var userurl="/api/v1/members/single/local/"+res
+        //const res=await fetch("/api/v1/members/is-who",{method:"get"}).then(response => response.text());
+        var userurl="/api/v1/members/single/local/aboutMe"
         const res1= await fetch(userurl,{method:"get",headers:{'Content-type':'application/json'}}).then(response => response.json());
         $("#user_info_name").val(res1.name);
         $("#user_info_tel").val(res1.phone_num);
@@ -214,9 +224,15 @@ async function getuserInfo(){
 
 }
 async function getuserAddress(){
+    const condition=await fetch("/api/v1/members/is-oauth",{method:"get"}).then(response => response.json())
+    if(condition){
+        alert("Oauth 로그인(대행 로그인)은 이용하실 수 없는 서비스 입니다.");
+        $("#sameUseraddress").prop("checked",false);
+        return;
+    }
     if($("#sameUseraddress").is(":checked")){
-        const res=await fetch("/api/v1/members/is-who",{method:"get"}).then(response => response.text());
-        var userurl="/api/v1/members/single/local/"+res
+        //const res=await fetch("/api/v1/members/is-who",{method:"get"}).then(response => response.text());
+        var userurl="/api/v1/members/single/local/aboutMe"
         const res1= await fetch(userurl,{method:"get",headers:{'Content-type':'application/json'}}).then(response => response.json());
         $("#postcode").val(res1.address.postcode);
         $("#address").val(res1.address.address);
@@ -229,4 +245,105 @@ async function getuserAddress(){
         $("#extraAddress").val("");
     }
 
+}
+function purchaseSetting(){
+    $("#main_purchase").on("click","div",function(){
+        if(checkTerms()&&checkValidName()&&checkvalidEmail()&&checkAddress()&&checkValidPhone()){
+            var itemlist=getIteminCode();
+            data={
+                "name":$("#user_info_name").val(),
+                "phone_num":$("#user_info_tel").val(),
+                "email":$("#user_info_email").val(),
+                "totalprice":$("#totalprice").text(),
+                "postcode":$("#postcode").val(),
+                "address":$("#address").val(),
+                "detailAddress":$("#detailAddress").val(),
+                "extraAddress":$("#extraAddress").val(),
+                "item":itemlist
+            }
+            makeOrder(data);
+
+        }else{
+            alert("빈 칸을 전부 채워주세요");
+        }
+    })
+}
+
+function checkvalidEmail(){
+    if ($("#user_info_email").val() == "") {
+        $("#user_info_email").attr("placeholder","필수 정보입니다.");
+        $("#user_info_email").css("border-color","red");
+        //form.email.focus();
+        return false;
+    }
+
+    const exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+
+    // "ㅁ@ㅁ.ㅁ" 이메일 형식 검사.
+    if (exptext.test($("#user_info_email").val()) === false) {
+        $("#user_info_email").val(null);
+        $("#user_info_email").attr("placeholder","유효하지 않은 이메일입니다");
+        $("#user_info_email").css("border-color","red");
+        //form.email.select();
+        return false;
+    }
+
+    $("#emailvalue").attr("placeholder","이메일을 입력해주세요");
+    $("#emailvalue").css("border-color","black");
+    return true;
+}
+
+function checkValidName() {
+    $("#user_info_name").css("color","black");
+    $("#user_info_name").css("border","1px solid black");
+    if ($("#user_info_name").val() == "") {
+        $("#user_info_name").attr("placeholder","필수 정보 입니다.");
+        $("#user_info_name").css("border","3px solid red");
+        $("#user_info_name").css("color","red");
+        return false;
+    }
+
+    return true;
+}
+function checkValidPhone() {
+    if ( ($("#user_info_tel").val() == "")) {
+        alert("전화번호를 다시 기입해주세요")
+        //form.phone.focus();
+        return false;
+    }
+
+    return true;
+}
+function checkAddress(){
+    const juso=sessionStorage.getItem("jusoOrder")
+    if(juso&&($("#detailAddress").val()!=null)){
+        return true;
+    }
+    else{
+        alert("주소를 검색해주세요");
+        return false;
+    }
+}
+function getIteminCode(){
+    var item=[];
+    $("#shoppinglist .component").each(function(){
+        var individualItem={
+            "item_id":$(this).find(".name").attr('id'),
+            "count":$(this).find(".count input").val()
+        }
+
+        item.push(individualItem);
+        console.log(individualItem.item_id+"갯수:"+individualItem.count)
+    })
+
+    return item;
+
+}
+
+async function makeOrder(data){
+    const result=await fetch("/api/v1/orders/create"
+    ,{
+        method:"post",headers:{'Content-Type':'application/json'},
+            body:JSON.stringify(data)
+        })
 }

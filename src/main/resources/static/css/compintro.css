@@ -1,4 +1,11 @@
+@font-face {
+    font-family: 'SUIT-Medium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Medium.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
 body{
+    font-family: SUIT-Medium;
     width:1500px;
     position: relative;
     margin:0 auto;
@@ -259,7 +266,7 @@ li #item_img img{
 }
 
 #main_history table th{
-    width:100px;
+    width:150px;
     border-right:2px solid gray;
     border-bottom: 2px solid gray;
 }

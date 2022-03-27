@@ -82,4 +82,9 @@ public class Member {
     public void Encodepwd(PasswordEncoder encoder){
         this.pwd=encoder.encode(this.pwd);
     }
+    public Member updateName(String name){
+        this.setName(name);
+        return this;
+
+    }
 }

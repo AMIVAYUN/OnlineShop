@@ -1,5 +1,5 @@
 package com.pipe09.OnlineShop.Domain.Delivery;
 
 public enum Deliverystatus {
-    CANCEL,READY,DELIVERY,COMPLETE
+    BEFOREPAYMENT,READY,DELIVERY,COMPLETE,CANCEL
 }

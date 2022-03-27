@@ -46,6 +46,10 @@ public class MemberRepository {
     public List<Member> findAll(int offset,int limit){
         return em.createQuery("select mlist from Member mlist").setFirstResult(offset).setMaxResults(limit).getResultList();
     }
+    public Member findByEmailinOauth(String email){
+        String jpql="select m from Member m where m.email=:email and m.userType<>:usertype";
+        return em.createQuery(jpql,Member.class).setParameter("email",email).setParameter("usertype",UserType.LOCAL).getSingleResult();
+    }
 
 
 

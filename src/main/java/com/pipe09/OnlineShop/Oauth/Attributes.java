@@ -1,11 +1,15 @@
 package com.pipe09.OnlineShop.Oauth;
 
+import com.pipe09.OnlineShop.Domain.Member.Mem_status;
 import com.pipe09.OnlineShop.Domain.Member.Member;
 import com.pipe09.OnlineShop.Domain.Member.RoleType;
 import com.pipe09.OnlineShop.Domain.Member.UserType;
+import com.pipe09.OnlineShop.Domain.Shoplist.ShopCart;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Map;
 
 @Getter
@@ -45,11 +49,20 @@ public class Attributes {
                 .attributes(attributes)
                 .nameAttributeKey(usernameAttributeName).build();
     }
-    public Member toMem(){
+    public Member toMem(String registrationId){
         Member goomem=new Member();
         goomem.setName(name);
         goomem.setEmail(email);
-        goomem.setUserType(UserType.GOOGLE);
+        if(registrationId.equals("google")){
+            goomem.setUserType(UserType.GOOGLE);
+        }else{
+            goomem.setUserType(UserType.KAKAO);
+        }
+        goomem.setUser_ID(email);
+
+        goomem.setDate(LocalDate.now());
+        goomem.setStat(Mem_status.ACTIVATED);
+        goomem.setShopCart(new ShopCart());
         goomem.setRoleType(RoleType.USER);
         return goomem;
     }

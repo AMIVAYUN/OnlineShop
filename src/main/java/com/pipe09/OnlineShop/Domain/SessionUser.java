@@ -1,5 +1,6 @@
 package com.pipe09.OnlineShop.Domain;
 
+import com.pipe09.OnlineShop.Domain.Member.RoleType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

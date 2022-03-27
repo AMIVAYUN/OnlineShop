@@ -49,6 +49,7 @@ public class Orders {
         order.setMember(member);
         order.setOrderdate(orderdate);
         order.addOrderItem(orderItems);
+        order.setDeliverystatus(Deliverystatus.BEFOREPAYMENT);
         return order;
     }
 

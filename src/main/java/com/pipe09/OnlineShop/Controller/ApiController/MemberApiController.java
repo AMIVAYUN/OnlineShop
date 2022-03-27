@@ -2,6 +2,7 @@ package com.pipe09.OnlineShop.Controller.ApiController;
 
 
 import com.pipe09.OnlineShop.Domain.Member.Member;
+import com.pipe09.OnlineShop.Domain.Member.RoleType;
 import com.pipe09.OnlineShop.Domain.Member.UserType;
 import com.pipe09.OnlineShop.Domain.SessionUser;
 import com.pipe09.OnlineShop.Dto.MemauthDto;
@@ -9,12 +10,14 @@ import com.pipe09.OnlineShop.Dto.Member.MemberDto;
 import com.pipe09.OnlineShop.Dto.Member.MemberManageDto;
 import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
 import com.pipe09.OnlineShop.Service.MemberService;
+import com.pipe09.OnlineShop.Service.Oauth2Service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -27,14 +30,29 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MemberApiController{
     private final MemberService memberService;
-    private final HttpSession session;
+    private final Oauth2Service oauth2Service;
+    @GetMapping("/api/v1/members/is-oauth")
+    public boolean isOauth(){
+        SessionUser user=(SessionUser) oauth2Service.getHttpSession().getAttribute("user");
+        if(user==null){
+            return false;
+        }else{
+            return true;
+        }
+    }
     @GetMapping("/api/v1/members/is-auth")
     public boolean isAuth(){
         return SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
     }
     @GetMapping("/api/v1/members/is-who")
     public String iswho(){
-        return SecurityContextHolder.getContext().getAuthentication().getName();
+        SessionUser user=(SessionUser) oauth2Service.getHttpSession().getAttribute("user");
+        if(user==null){
+            return SecurityContextHolder.getContext().getAuthentication().getName();
+        }else{
+            return user.getEmail();
+        }
+
     }
     @GetMapping("/api/v1/members/is-whom")
     public String iswhom(){
@@ -43,11 +61,12 @@ public class MemberApiController{
     @GetMapping("/api/v1/members/session")
     public ResponseEntity<MemauthDto> status(){
         Authentication auth=SecurityContextHolder.getContext().getAuthentication();
-        SessionUser user=(SessionUser) session.getAttribute("user");
+
+        SessionUser user=(SessionUser) oauth2Service.getHttpSession().getAttribute("user");
         if(user==null){
-            return new ResponseEntity<MemauthDto>(new MemauthDto(auth.isAuthenticated(), auth.getName(), auth.getAuthorities().toString()), HttpStatus.OK);
+            return new ResponseEntity<MemauthDto>(new MemauthDto(auth.isAuthenticated(),auth.getName(),auth.getAuthorities().toString()), HttpStatus.OK);
         }else{
-            return new ResponseEntity<MemauthDto>(new MemauthDto(auth.isAuthenticated(), user.getName(), auth.getAuthorities().toString()), HttpStatus.OK);
+            return new ResponseEntity<MemauthDto>(new MemauthDto(auth.isAuthenticated(), user.getEmail(), "ROLE_USER"), HttpStatus.OK);
         }
 
     }
@@ -73,10 +92,17 @@ public class MemberApiController{
     }
 
      */
-    @GetMapping("/api/v1/members/single/local/{user_id}")
-    public MemberDto getSingleMembyID(@PathVariable String user_id){
+    //TODO 보안취약 수정必 --> 수정 완
+    @GetMapping("/api/v1/members/single/local/aboutMe")
+    public MemberDto getSingleMembyID(){
+        SessionUser user=(SessionUser) oauth2Service.getHttpSession().getAttribute("user");
+        String user_id;
+        if(user==null){
+            user_id=SecurityContextHolder.getContext().getAuthentication().getName();
+        }else{
+            user_id= user.getEmail();
+        }
         Member member= memberService.findById(user_id);
-        log.info(member.getAddress().getPostcode());
         MemberDto dto=new MemberDto(member.getUser_ID(),"접근 불가",member.getEmail(),member.getName(),member.getPhone_Num(),member.getAddress());
         return dto;
     }

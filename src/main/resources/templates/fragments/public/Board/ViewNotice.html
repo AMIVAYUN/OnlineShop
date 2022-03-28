@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=yes, maximum-scale=1.0">
     <title>고객센터</title>
     <script src="https://kit.fontawesome.com/97e36fce94.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/viewnotice.css" type="text/css" media="all">
@@ -10,12 +11,13 @@
 
 </head>
 <body>
+<div id="wrap">
     <nav id="navi-bar">
 
-        <a id="login-navi" href="/login"style="left:1200px;">로그인</a>
-        <a id="join-navi" href="/join"style="left:1240px;">회원가입</a>
-        <a href="#"style="left:1290px;">마이페이지</a>
-        <a href="/contact"style="left:1350px;">FAQ</a>
+        <a id="login-navi" href="/login">로그인</a>
+        <a id="join-navi" href="/join">회원가입</a>
+        <a id="mypage">마이페이지</a>
+        <a href="/contact">FAQ</a>
 
     </nav>
     <div id="bodyheader">
@@ -40,7 +42,7 @@
 
         </div>
         <div id="comp_board">
-            <img src="../img/static/board_ver2.png" onclick="javascript:location.href='/board'">
+            <img src="../img/static/board_ver3.png" onclick="javascript:location.href='/contact/notice'">
         </div>
         <div id="comp_top">
             <img src="../img/static/Top_ver2.png" onclick="window.scroll(0,0)">
@@ -48,25 +50,23 @@
     </div>
     <div id="main">
         <div id="Noticebar"><mark>공지사항</mark>
-            <input type="text" placeholder="제목을 입력해주세요">
+            <input id="faqkeyword"type="text" placeholder="제목을 입력해주세요">
             <i class="fa-brands fa-sistrix" id="search"onclick="search()"></i>
             <div id="mailingservice">
                 <i class="fa-regular fa-envelope"></i>
                 메일로 문의하기</div>
         </div>
         <div id="content">
-            <div class="partition">
-                <details>
-                    <summary>테스트용 공지 템플릿 입니다.</summary>
-                    <p>싶이 기쁘며, 오직 어디 몸이 피부가 너의 전인 칼이다. 군영과 것이 보는 곧 더운지라 얼마나 평화스러운 전인 듣는다. 피고, 보이는 할지라도 곳이 오아이스도 있을 심장은 것이 청춘을 것이다. 인생에 천고에 곳이 불어 사람은 칼이다. 이상 거친 우리 노년에게서 사랑의 끓는 사막이다. 그들은 이는 물방아 뿐이다. 피가 고행을 것은 이상은 위하여서. 피가 광야에서 수 물방아 장식하는 방지하는 되는 인생에 공자는 그리하였는가? 뜨고, 밥을 능히 때에, 아름다우냐? 튼튼하며, 인간이 새 그들을 장식하는 만천하의 있는 가슴에 피고, 황금시대다.</p>
-                </details>
-            </div>
 
-        </div>
+
         </div>
     </div>
     <div id="footer">
-        <img src="../img/static/cp1.GIF">
+        <img src="../img/static/footer.png">
     </div>
+</div>
+
+</div>
+
 </body>
 </html>

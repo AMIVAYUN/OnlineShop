@@ -1,20 +1,80 @@
 package com.pipe09.OnlineShop;
 
 
+import com.pipe09.OnlineShop.Domain.Item.Item;
+import com.pipe09.OnlineShop.Domain.Member.Member;
+import com.pipe09.OnlineShop.Domain.Shoplist.ShopCart;
+import com.pipe09.OnlineShop.Domain.Shoplist.Shop_Item;
+import com.pipe09.OnlineShop.Repository.ShopCartRepository;
+import com.pipe09.OnlineShop.Service.MailService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.mail.MessagingException;
 import javax.persistence.EntityManager;
+
+import java.io.IOException;
+
+import static org.junit.Assert.assertEquals;
 
 // 객체를 test용으로 안에 넣을때 사용하는 클래스
 @Component
 @Transactional
 @RequiredArgsConstructor
+@Slf4j
 public class InitSerivce {
     private final EntityManager em;
+    private final ShopCartRepository repository;
+    private final MailService mailservice;
+    @Transactional
+    public void dbInit() throws MessagingException, IOException {
+        //mailservice.getAuthfield().put("wntjrdbs@gmail.com","111111");
+        //Member member=em.find(Member.class,)
+        //메일 서비스 테스트
+        //mailservice.Emailprove("wntjrdbs@gmail.com");
+        /*
+        //숖카 만들기
+        Member member=em.find(Member.class,5L);
+        ShopCart shopCart=new ShopCart();
+        member.setShopCart(shopCart);
 
-    public void dbInit(){
+         */
+        //숖카 컴포넌트 추가
+        /*
+        ShopCart cart=em.find(ShopCart.class,165L);
+        Item item= em.find(Item.class,130L);
+        Item item2=em.find(Item.class,127L);
+        Item item3=em.find(Item.class,128L);
+        Shop_Item newitem=Shop_Item.makenewShop_Item(item,1,cart);
+        Shop_Item newitem2=Shop_Item.makenewShop_Item(item2,1,cart);
+        Shop_Item newitem3=Shop_Item.makenewShop_Item(item3,1,cart);
+        cart.addItem(newitem,newitem2,newitem3);
+
+        log.info(newitem.getShoplist().getShoplist_ID().toString());
+
+         */
+
+
+         //숖카 지워보기 --성공
+        /*
+        repository.removeAllofItemAboutShoplist(165L);
+
+        ShopCart cart=em.find(ShopCart.class,165L);
+        Item item3=em.find(Item.class,127L);
+        Shop_Item newitem3=Shop_Item.makenewShop_Item(item3,1,cart);
+
+        cart.addItem(newitem3);
+
+         */
+
+
+
+
+
+
+
         /**
         LeakDetector item = new LeakDetector();
         item.setName("I-970");

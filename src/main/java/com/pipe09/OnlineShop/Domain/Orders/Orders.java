@@ -1,7 +1,6 @@
 package com.pipe09.OnlineShop.Domain.Orders;
 
 
-import com.pipe09.OnlineShop.Domain.Delivery.Delivery;
 import com.pipe09.OnlineShop.Domain.Delivery.Deliverystatus;
 import com.pipe09.OnlineShop.Domain.Member.Member;
 import lombok.*;
@@ -31,12 +30,11 @@ public class Orders {
 
 
     @OneToMany( mappedBy = "orders",cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
-
     private List<OrderItem> orderItems= new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name= "Delivery_ID")
-    private Delivery delivery;
+    @Column
+    private Deliverystatus deliverystatus;
+
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")
@@ -46,21 +44,20 @@ public class Orders {
         Arrays.stream(orderItems).forEach(orderItem -> this.orderItems.add(orderItem));
     }
 
-    public static Orders createOrder(Member member,Delivery delivery, Date orderdate,OrderItem... orderItems){
+    public static Orders createOrder(Member member,Date orderdate,OrderItem... orderItems){
         Orders order=new Orders();
         order.setMember(member);
-        order.setDelivery(delivery);
-        order.getDelivery().setOrder(order);
         order.setOrderdate(orderdate);
         order.addOrderItem(orderItems);
+        order.setDeliverystatus(Deliverystatus.BEFOREPAYMENT);
         return order;
     }
 
     public void cancel() {
-        if(this.delivery.getStatus()== Deliverystatus.COMPLETE){
+        if(this.getDeliverystatus()== Deliverystatus.COMPLETE){
             throw new IllegalStateException("배송 완료 상품은 불가능 합니다.");
         }
-        this.delivery.setStatus(Deliverystatus.CANCEL);
+        this.setDeliverystatus(Deliverystatus.CANCEL);
         for(OrderItem item:orderItems){
             
         }

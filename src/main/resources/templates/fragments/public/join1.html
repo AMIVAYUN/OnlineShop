@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=yes, maximum-scale=1.0">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="../css/join1.css" type="text/css" media="all">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/97e36fce94.js" crossorigin="anonymous"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="../js/join1.js"charset="UTF-8"></script>
+
+</head>
+<body>
+<div id="wrap">
+    <nav id="navi-bar">
+
+        <a id="login-navi" href="/login">로그인</a>
+        <a id="join-navi" href="/join">회원가입</a>
+        <a id="mypage">마이페이지</a>
+        <a href="/contact">FAQ</a>
+
+    </nav>
+    <div id="bodyheader">
+        <div id="mainHeaderbar">
+            <img src="../img/static/DB_LOGO.gif" id="logo">
+            <div id="searchbar"><input type="text" placeholder="   제품을 검색하세요."><img  id="searchicon"src="../img/static/searchicon.png"></div>
+            <img src="../img/static/shoppingcart.png" id="scart" onclick="javascript:location.href='/shopping-list'">
+        </div>
+    </div>
+
+    <hr>
+    <div id="side_Bar">
+        <div id="comp_intr">
+            <img src="../img/static/companyIntroduction_ver2.png" onclick="javascript:location.href='/comp-intro'">
+        </div>
+        <div id="comp_mypage">
+            <img src="../img/static/mypage_ver2.png"onclick="javascript:location.href='/my-page'">
+
+        </div>
+        <div id="comp_hompage">
+            <img src="../img/static/homepage_ver2.png"onclick="javascript:location.href='http://www.대봉산업기계.com'">
+
+        </div>
+        <div id="comp_board">
+            <img src="../img/static/board_ver2.png" onclick="javascript:location.href='/board'">
+        </div>
+        <div id="comp_top">
+            <img src="../img/static/Top_ver2.png" onclick="window.scroll(0,0)">
+        </div>
+    </div>
+    <div id="main">
+        <h1><i class="fa-regular fa-address-card"></i>&nbsp회원가입</h1>
+        <hr class="mainhr">
+        <div id="main_body">
+            <div id="part1">
+                <div class="component" id="name"><strong>*</strong>이름<br><input type="text" id="pname" placeholder="이름을 입력해주세요"></div>
+                <div class="component" id="tel"><strong>*</strong>연락처<mark>&nbsp;(잘못 기입시 불이익이 발생할 수 있습니다.)</mark><br>
+                    <input type='tel' id="phone1" maxlength="3"/> -
+                    <input type='tel' id="phone2" maxlength="4"/> -
+                    <input type='tel' id="phone3" maxlength="4"/></div>
+                <div class="component" id="id"><strong>*</strong>아이디<br><input type="text" id="pid" placeholder="아이디를 입력해주세요"></div>
+                <div class="component" id="pwd"><strong>*</strong>비밀번호<br><input type="password" id="ppwd" placeholder="비밀번호를 입력해주세요"></div>
+                <div class="component" id="email"><strong>*</strong>이메일<br>
+                    <div id="email-wrap">
+                        <div id="emailpart">
+                            <input type="text" placeholder="이메일을 입력해주세요" id="emailvalue">
+                            <input type="text" placeholder="코드를 입력해주세요" id="code" disabled>
+                        </div>
+                        <button id="email-identify">인증 하기</button>
+                    </div>
+
+                </div>
+
+
+                <div id="addressapi"><strong>*</strong>주소<br><input type="text" id="postcode" placeholder="우편번호">
+                    <input type="button" id="submit" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+                    <input type="text" id="address" placeholder="주소"><br>
+                    <input type="text" id="detailAddress" placeholder="상세주소">
+                    <input type="text" id="extraAddress" placeholder="참고항목"></div>
+
+
+            </div>
+
+
+
+        </div>
+
+        <div id="user_terms">
+            <div class="title">&nbsp;약관 동의</div><br>
+            <div class="termsbox"><input type="checkbox" id="info-passAssign" >
+                <div class="terms"><strong>필수</strong>&nbsp; 개인정보 수집·이용·제3자 제공동의</div>
+                <div class="detail" onclick="window.open('/laws/PersonalInfo','개인정보 이용동의','width=800,height=600')"><u>자세히</u></div>
+            </div>
+
+            <div class="termsbox"><input type="checkbox" id="ElectricTradeAssign" >
+                <div class="terms"><strong>필수</strong>&nbsp; 전자금융거래 약관동의</div>
+                <div class="detail" onclick="window.open('laws/ElectricTran','개인정보 이용동의','width=800,height=600')"><u>자세히</u></div>
+
+            </div>
+            <div class="termsbox"><input type="checkbox" id="DBCommercialAssgin" >
+                <div class="terms"><strong>필수</strong>&nbsp; 대봉산업기계 구매회원 동의</div>
+                <div class="detail" onclick="window.open('/laws/DBstatic','개인정보 이용동의','width=800,height=600')"><u>자세히</u></div>
+
+            </div>
+
+
+        </div>
+
+        <div id="purpose">
+            제출하기
+        </div>
+
+
+
+
+    </div>
+
+
+
+</div>
+
+
+
+
+</body>
+</html>

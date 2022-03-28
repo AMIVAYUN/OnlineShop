@@ -1,7 +1,7 @@
 package com.pipe09.OnlineShop.Service;
 
 
-import com.pipe09.OnlineShop.Domain.Delivery.Delivery;
+//import com.pipe09.OnlineShop.Domain.Delivery.Delivery;
 import com.pipe09.OnlineShop.Domain.Delivery.Deliverystatus;
 import com.pipe09.OnlineShop.Domain.Item.Item;
 import com.pipe09.OnlineShop.Domain.Member.Member;
@@ -30,15 +30,13 @@ public class OrderService {
         Member member= memberRepository.findByuserId(memberId);
         Item item= itemRepository.findItem(itemId);
 
-        Delivery delivery=new Delivery();
-        delivery.setStatus(Deliverystatus.READY);
-        delivery.setDelivery_Address("온라인으로 받아와야 함");
+
         OrderItem orderItem=OrderItem.createOrderItem(item,item.getPrice(),count);
         Orders newOrder=new Orders();
         newOrder.getOrderItems().add(orderItem);
         newOrder.setOrderdate(new Date());
         newOrder.setMember(member);
-        newOrder.setDelivery(delivery);
+        newOrder.setDeliverystatus(Deliverystatus.READY);
         orderRepository.save(newOrder);
         return newOrder.getOrder_ID();
 

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=yes, maximum-scale=1.0">
+  <title>세부사항</title>
+  <link rel="stylesheet" href="../css/iteminfo.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/97e36fce94.js" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://kit.fontawesome.com/97e36fce94.js" crossorigin="anonymous"></script>
+  <script src="../js/iteminfo.js"></script>
+
+
+</head>
+<body>
+<div id="wrap">
+  <nav id="navi-bar">
+
+    <a id="login-navi" href="/login" style="left:1200px;">로그인</a>
+    <a id="join-navi" href="/join" style="left:1240px;">회원가입</a>
+    <a id="mypage" style= "left:1290px;">마이페이지</a>
+    <a href="/contact" style="left:1350px;">FAQ</a>
+    <a id="manager" href="/admin/manage" style="left:1380px;">관리자</a>
+  </nav>
+  <div id="bodyheader">
+    <div id="mainHeaderbar">
+      <img src="/img/static/DB_LOGO.gif" id="logo">
+      <div id="searchbar"><input type="text" placeholder="   제품을 검색하세요."><img  id="searchicon" src="/img/static/searchicon.png"></div>
+      <img src="/img/static/shoppingcart.png" id="scart" onclick="javascript:location.href='/shopping-list'">
+    </div>
+  </div>
+
+  <hr>
+
+  <!--
+    "description": "string",          //제품 설명 >> 아래에
+    "dtype": "string",                //제품군
+    "imgSrc": "string",               //제품 이미지
+    "item_ID": 0,                     //제품ID
+
+    "madeIn": "string",               //제조국가, 원산지
+    "manufacturedCompany": "string",  //제조회사
+    "name": "string",                 //제품 이름
+    "price": 0,                       //제품 가격
+    "stockQuantity": 0,               //제품 재고
+    "weight": 0                       //제품 무게
+  -->
+  <div class="product_outer_container">
+    <div class="product_inner_container">
+      <img class="back_button" src="/img/static/back-button.png" onclick="location.assign('/');" style="cursor: pointer">
+
+      <div class="product_image_container">
+        <img src="" id="product_image">
+      </div>
+      <div class="v-line"></div>
+      <div class="product_info_container" style="border-radius: 20px;">
+        <div class="product_info_name">
+          <h2 id="product_name"></h2>
+        </div>
+        <div class="product_info_inner_container" style="border-radius: 20px">
+          <div class="product_info"></div>
+          <div class="product_info">
+            <div class="product_info_left"><b>판매가격</b></div>
+            <div class="product_info_right">
+              <img src="/img/static/next.png" class="index_arrow"><b>  <span id="product_price"></span></b>
+            </div>
+          </div>
+          <div class="product_info">
+            <div class="product_info_left">원산지</div>
+            <div class="product_info_right">
+              <img src="/img/static/next.png" class="index_arrow">  <span id="product_madeIn"></span>
+            </div>
+          </div>
+          <div class="product_info">
+            <div class="product_info_left">제조회사</div>
+            <div class="product_info_right">
+              <img src="/img/static/next.png" class="index_arrow">  <span id="product_manufacturedCompany"></span>
+            </div>
+          </div>
+
+          <div class="product_info">
+            <div class="product_info_left">재고</div>
+            <div class="product_info_right">
+              <img src="/img/static/next.png" class="index_arrow">  <span id="product_stockQuantity"></span>
+            </div>
+          </div>
+          <div class="product_info">
+            <div class="product_info_left">무게</div>
+            <div class="product_info_right">
+              <img src="/img/static/next.png" class="index_arrow">  <span id="product_weight"></span>
+            </div>
+          </div>
+          <div class="product_info">
+            <div class="product_info_left">구매수량</div>
+            <div class="product_info_right"><input id="itemcount" type="number" value="1" min="1" style="width: 40%" onchange="countvalChecked()"></div>
+
+          </div>
+          <div class="div_leftRight">
+            <button id="btn_cart">장바구니</button>
+            <button id="btn_buy">바로구매</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="product_details">
+      <nav class="">
+        <button class="details_category" id="details_explanation_btn" onclick="show_explanation()">제품 상세 설명</button>
+        <button class="details_category" id="details_buy_btn" onclick="show_buy()">구입 및 배송 안내</button>
+        <button class="details_category" id="details_exchange_btn" onclick="show_exchange()">교환 및 반품 안내</button>
+        <button class="details_category" id="details_QnA_btn" onclick="show_QnA()">상품관련 Q&A</button>
+      </nav>
+        <div class="details_outer_container">
+          <div class="details_inner_container" id="details_explanation">
+            <span id="product_description"></span>
+          </div>
+          <div class="details_inner_container" id="details_buy" style="display: none">
+            * 제품구입 방법<br>
+            ▣&nbsp;&nbsp;원하시는 상품을 선택하시고 신용카드 또는 무통장 입금으로 결제하시면 됩니다.<br>
+            ▣&nbsp;&nbsp;택배비 포함여부를 꼭 확인하시기 바랍니다.<br>
+            ▣&nbsp;&nbsp;하루 택배 발송의 마감은 오후 4시30 까지 입니다. 4시30분 까지 입금이 확인되면 그날 바로
+            제품의 발송이 시작됩니다.<br>
+            ▣&nbsp;&nbsp;배송은 제주도를 제외한 전 지역에 보통 2~3일 정도 소요됩니다.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;단 일요일, 휴무일 등이 포함될 경우 그만큼 더 소요될 수 있습니다.<br>
+            ▣&nbsp;&nbsp;일부 외부업체에서 직접 배송되는 제품은 함께 주문하셨어도 따로 배송됨을 알려드립니다.<br>
+            ▣&nbsp;&nbsp;주문하신 제품에 대해서는 빠르고 안전한 배송이 되도록 최선을 다하고 있습니다<br><br>
+            * 배송비 안내<br>
+            ▣&nbsp;&nbsp;기본적으로 본사에서 배송되는 제품은 대한통운택배를 이용하여 배송을 하고 있습니다.<br>
+            ▣&nbsp;&nbsp;9만원 이상구매하신 분은 배송비가 무료입니다.<br>
+          </div>
+          <div class="details_inner_container" id="details_exchange" style="display: none">
+            ▣&nbsp;&nbsp;교환 및 반품이 가능한 경우.<br>
+            &nbsp;&nbsp;&nbsp;- 상품 및 서비스를 공급 받으신 날로부터 7일 이내<br>
+            ▣&nbsp;&nbsp;교환 및 반품이 불가능한 경우.<br>
+            &nbsp;&nbsp;&nbsp;- 고객님에게 책임있는 사유로 상품등이 멸실 또는 훼손된 경우<br>
+            &nbsp;&nbsp;&nbsp;- 고객님의 사용 또는 일부소비에 의하여 상품등의 가치가 현저히 감소한 경우<br>
+            &nbsp;&nbsp;&nbsp;- 복제가 가능한 상품등의 포장을 훼손한 경우<br>
+            ▣&nbsp;&nbsp;반송시 배송비 부담.<br>
+            &nbsp;&nbsp;&nbsp;- 제품 하자 또는 파손에 의한 반송비용은 액트몰이 부담합니다.<br>
+            &nbsp;&nbsp;&nbsp;- 그러나, 고객님의 고객님의 단순변심에 의한 교환, 또는 반품을 하실 경우 상품반송 비용은 고객님께서<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;부담하셔야 합니다.(색상 교환, 사이즈 교환, 모델 변경 등 포함)<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;주문과 배송에 관해 궁금한 점이 있으시면 언제든지 문의바랍니다.&nbsp;&nbsp;고객지원센터 : 02-2108-8666
+          </div>
+          <div class="details_inner_container" id="details_QnA" style="display: none">
+            ▣&nbsp;&nbsp;궁금하신 사항은 메일 혹은 ()로 문의 주시기 바랍니다.<br>
+            <br><br>
+            <button id="mail_QnA_btn" onclick="location.href='/contact/em-faq'"><b>메일 문의하기</b></button>
+          </div>
+        </div>
+    </div>
+  </div>
+
+
+  <div id="side_Bar">
+    <div id="comp_intr">
+      <img src="/img/static/companyIntroduction_ver2.png" onclick="javascript:location.href='/comp-intro'">
+    </div>
+    <div id="comp_mypage">
+      <img src="/img/static/mypage_ver2.png" onclick="javascript:location.href='/my-page'">
+
+    </div>
+    <div id="comp_hompage">
+      <img src="/img/static/homepage_ver2.png" onclick="javascript:location.href='http://www.대봉산업기계.com'">
+
+    </div>
+    <div id="comp_board">
+      <img src="/img/static/board_ver3.png" onclick="javascript:location.href='/board'">
+    </div>
+    <div id="comp_top">
+      <img src="/img/static/Top_ver2.png" onclick="window.scroll(0,0)">
+    </div>
+  </div>
+  <div id="footer">
+    <img src="/img/static/footer.png">
+  </div>
+</div>
+</body>
+</html>

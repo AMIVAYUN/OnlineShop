@@ -4,11 +4,11 @@ $(document).ready(function(){
 
 })
 function getFaqlist(){
-    fetch("/api/v1/view-faq.do",{method:"get"}).then((response) => response.json()).then(
+    fetch("/api/v2/faq/all",{method:"get"}).then((response) => response.json()).then(
         (data) => {
             var i=0;
             $.each(data, function (idx){
-                var innerhtml='<tr class="faq" id="'+(i++)+'"><td class="date">'+data[idx].date+'</td>'+'<td class="id">'+data[idx].id+'</td><td class="name">'+data[idx].name+'</td><td class="desc">'
+                var innerhtml='<tr class="faq" id="'+(i++)+'"><td class="date">'+data[idx].date+'</td>'+'<td class="id">'+data[idx].notice_id+'</td><td class="name">'+data[idx].name+'</td><td class="desc">'
                      + data[idx].description+'</td><td><button class="replace" type="수정">수정</button></td><td><button class="delete" type="submit">제거</button></td></tr>'
                 $("#faq_list").append(innerhtml);
             })
@@ -24,7 +24,7 @@ function doUpdate(){
     var id=context.attr("id");
     console.log(id);
     let obj={
-        "id": $(this).closest("tr").find(".id").text(),
+        "notice_id": $(this).closest("tr").find(".id").text(),
         "name": $(this).closest("tr").find(".name").text(),
         "description": $(this).closest("tr").find(".desc").text(),
         "date": $(this).closest("tr").find(".date").text()
@@ -65,7 +65,7 @@ async function updatePost(obj){
 }
 async function deletePost() {
     let obj = {
-        "id": $(this).closest("tr").find(".id").text(),
+        "notice_id": $(this).closest("tr").find(".id").text(),
         "name": $(this).closest("tr").find(".name").text(),
         "description": $(this).closest("tr").find(".desc").text(),
         "date": $(this).closest("tr").find(".date").text()

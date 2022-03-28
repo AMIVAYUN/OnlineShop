@@ -1,5 +1,5 @@
 package com.pipe09.OnlineShop.Dto.Delivery;
-
+/*
 import com.pipe09.OnlineShop.Domain.Delivery.Delivery;
 import com.pipe09.OnlineShop.Domain.Delivery.Deliverystatus;
 import com.pipe09.OnlineShop.Domain.Orders.Orders;
@@ -20,3 +20,5 @@ public class DeliveryDto {
         this.address=delivery.getDelivery_Address();
     }
 }
+
+ */

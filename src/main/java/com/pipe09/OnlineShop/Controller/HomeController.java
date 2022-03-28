@@ -20,8 +20,9 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class HomeController {
     @GetMapping("/")
-    public String home(Model model) {
+    public String home() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
         log.info(String.format("%s accessed general home with role type: %s",authentication.getName(),authentication.getAuthorities()));
         return "fragments/public/home";
     }
@@ -30,7 +31,14 @@ public class HomeController {
         return "fragments/public/result_search";
     }
 
+    @GetMapping("/comp-intro")
+    public String compIntroduction(){ return "fragments/public/companyintro"; }
 
-
+    @GetMapping("/laws/DBstatic")
+    public String getDBstaticlaw(){ return "fragments/private/DBServiceLaw"; }
+    @GetMapping("/laws/ElectricTran")
+    public String getDBElectricTransactionlaw(){ return "fragments/private/ElectricTransactionLaw"; }
+    @GetMapping("/laws/PersonalInfo")
+    public String getPersonalInfo(){ return "fragments/private/PersonalInfoLaw"; }
 
 }

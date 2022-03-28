@@ -1,5 +1,5 @@
 package com.pipe09.OnlineShop.Domain.Delivery;
-
+/*
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pipe09.OnlineShop.Domain.Orders.Orders;
@@ -24,3 +24,6 @@ public class Delivery {
     private String Delivery_Address;
 
 }
+
+
+ */

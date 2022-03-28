@@ -1,14 +1,26 @@
 body{
+    width:1500px;
     position: relative;
-    height:100%;
+    margin:0 auto;
+
+    height:1200px;
     overflow: scroll;
+}
+#wrap{
+    overflow: revert;
+    position:absolute;
+    left:50%;
+    margin-left:5%;
+    height:100%;
+    transform: translate(-50%);
+
 }
 #bodyheader{
     width:1200px;
     padding-top:40px;
 }
 #mainHeaderbar{
-    padding-left:200px;
+
     height:100px;
     display:flex;
     margin-top: 30px;
@@ -16,20 +28,21 @@ body{
 
 }
 #navi-bar{
-    top:0;
-    left:0;
-    display: flex;
-    justify-content: end;
-    width:100%;
-    height:20px;
+    margin-top:5px;
     position:absolute;
+    right:250px;
+    top:0;
+    display: flex;
+    height:20px;
+
 
 
 }
 #navi-bar a{
     font-size:10px;
+    margin-left:3px;
+    margin-right:3px;
     top:5px;
-    position:absolute;
     color:black;
     text-decoration-line: none;
     white-space : nowrap;
@@ -37,7 +50,9 @@ body{
 }
 
 #logo{
-    padding-left:120px;
+    /*padding-left:120px;
+
+     */
     width: 200px;
     height:70px;
     margin-right:10px;
@@ -58,14 +73,16 @@ body{
     width:560px;
     height:45px;
     margin-top:10px;
-    margin-left:30px;
+    /*
+
+     */
     border: 2px solid skyblue;
     border-radius: 40px 40px;
     padding-inline-start: 25px;
 }
 #searchicon{
     position: absolute;
-    left:555px;
+    left:530px;
     top:19px;
 }
 #searchicon:hover{
@@ -75,13 +92,16 @@ body{
 
 
 #side_Bar{
+    left:1000px;
     position: fixed;
-    left:1350px;
     width:60px;
-    height:350px;
+    height:500px;
+    Top:200px;
     background-color:white ;
+
 }
 #side_Bar div img{
+    left:850px;
     cursor: pointer;
     width:60px;
     height:70px;
@@ -89,51 +109,112 @@ body{
 #side_Bar div img:hover{
     filter:opacity(0.7) drop-shadow(0 0 0 #87cefa);
 }
-#cursor{
 
-    cursor:pointer;
-    width: 5px;
-    height:5px;
-    position: absolute;
-    left:1135px;
-    top:90px;
-    color:white;
-}
 #bodyheader span img{
     background-color: white;
 
 }
 #scart{
+    left:860px;
     width: 32px;
     height:32px;
     position: absolute;
     top:90px;
-    left: 1200px;
     cursor: pointer;
 }
 hr{
-    width:1010px;
+    width:940px;
     position:absolute;
-    left:320px;
+
     border: 1px solid black;
 }
+
+
+#shoplist{
+    position:absolute;
+
+    top:300px;
+    width:900px;
+    height:800px;
+    list-style: none;
+    margin:0px;
+    padding:0px;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+
+}
+#shoplist li{
+    cursor:pointer;
+    margin-top:0;
+    width:200px;
+    height:250px;
+    margin-left:12.5px;
+    margin-right:12.5px;
+    margin-bottom: 10px;
+    border-bottom-left: soild 1px red;
+}
+li #item_img{
+    position: relative;
+
+    width:150px;
+    height:150px;
+    top:15px;
+
+}
+li #merchansub{
+    font-size: 10px;
+}
+
+li #item_img img{
+
+
+    top:25px;
+    width:150px;
+    height:150px;
+    border-radius: 50px;
+}
+#item_text{
+    position: relative;
+    margin-top : 20px;
+
+    width:200px;
+    height:90px;
+    text-align: left;
+}
+#item_name{
+    font-weight: bold;
+}
+#item_price {
+    color:red;
+    font-weight: bold;
+}
+
+
 #footer{
     position:fixed;
     bottom:0px;
-    left:350px;
+
+
 
 }
+
+
 #footer img{
-    width:900px;
+    width:950px;
 }
+
+/**/
+
 #main{
     position: absolute;
-    left:320px;
-    width:1010px;
+
+    width:950px;
     margin-top:20px;
 }
 #Noticebar{
-    width:1010px;
+    width:950px;
     height:120px;
     background-color: #A0D8EF;
     font-size: 40px;
@@ -147,7 +228,7 @@ hr{
 #Noticebar mark{
     background-color:#A0D8EF;
     color:black;
-    margin-left:100px;
+    margin-left:50px;
     margin-right:80px;
 }
 #Noticebar input{

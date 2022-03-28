@@ -1,7 +1,8 @@
 package com.pipe09.OnlineShop.Dto.Order;
 
 
-import com.pipe09.OnlineShop.Domain.Delivery.Delivery;
+//import com.pipe09.OnlineShop.Domain.Delivery.Delivery;
+import com.pipe09.OnlineShop.Domain.Delivery.Deliverystatus;
 import com.pipe09.OnlineShop.Domain.Orders.Orders;
 import com.pipe09.OnlineShop.Dto.OrderItem.OrderItemDto;
 import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
@@ -19,7 +20,7 @@ public class OrderDto {
     private String user_id;
     private String user_name;
     private List<OrderItemDto> orderItemDto;
-    private Delivery delivery;
+    private Deliverystatus deliverystatus;
     private int Totalprice=0;
     @Temporal(TemporalType.DATE)
     private Date orderdate;
@@ -40,7 +41,7 @@ public class OrderDto {
         this.user_id=order.getMember().getUser_ID();
         this.user_name=order.getMember().getName();
         this.orderdate=order.getOrderdate();
-        this.delivery=order.getDelivery();
+        this.deliverystatus=order.getDeliverystatus();
         order.getOrderItems().stream().forEach(item -> item.getItem().getName());
         this.orderItemDto=order.getOrderItems().stream().map(OrderItemDto::new).collect(Collectors.toList());
         orderItemDto.stream().forEach(orderItemDto1 -> {

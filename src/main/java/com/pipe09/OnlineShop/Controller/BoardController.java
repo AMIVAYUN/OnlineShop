@@ -11,19 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
+
 @Controller
 @Slf4j
 @RequiredArgsConstructor
 public class BoardController {
     private final BoardService boardService;
 
-    @GetMapping("/notice")
-    public String notice_Access(Model model){
-        List<Notice> noticeList = boardService.findAll();
-        model.addAttribute("noticeList",noticeList);
-        return "Board/noticeboard";
 
-    }
 
     @GetMapping("/contact")
     public String case_selector(){

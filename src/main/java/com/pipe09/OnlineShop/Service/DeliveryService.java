@@ -1,5 +1,5 @@
 package com.pipe09.OnlineShop.Service;
-
+/*
 import com.pipe09.OnlineShop.Domain.Delivery.Delivery;
 import com.pipe09.OnlineShop.Repository.DeliveryRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,3 +15,6 @@ public class DeliveryService {
         return repository.findAll(offset,limit);
     }
 }
+
+
+ */

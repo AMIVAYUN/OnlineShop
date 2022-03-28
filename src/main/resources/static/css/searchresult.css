@@ -1,14 +1,26 @@
 body{
+    width:1500px;
     position: relative;
+    margin:0 auto;
+
     height:1200px;
     overflow: scroll;
+}
+#wrap{
+    overflow: revert;
+    position:absolute;
+    margin-left:5%;
+    left:50%;
+    height:100%;
+    transform: translate(-50%);
+
 }
 #bodyheader{
     width:1200px;
     padding-top:40px;
 }
 #mainHeaderbar{
-    padding-left:200px;
+
     height:100px;
     display:flex;
     margin-top: 30px;
@@ -16,20 +28,21 @@ body{
 
 }
 #navi-bar{
-    top:0;
-    left:0;
-    display: flex;
-    justify-content: end;
-    width:100%;
-    height:20px;
     position:absolute;
+    right:250px;
+    top:0;
+    display: flex;
+    height:20px;
+    margin-top:5px;
+
 
 
 }
 #navi-bar a{
     font-size:10px;
+    margin-left:3px;
+    margin-right:3px;
     top:5px;
-    position:absolute;
     color:black;
     text-decoration-line: none;
     white-space : nowrap;
@@ -37,11 +50,16 @@ body{
 }
 
 #logo{
-    padding-left:120px;
+    /*padding-left:120px;
+
+     */
     width: 200px;
     height:70px;
     margin-right:10px;
 
+}
+#logo:hover{
+    cursor: pointer;
 }
 
 #searchbar{
@@ -55,14 +73,16 @@ body{
     width:560px;
     height:45px;
     margin-top:10px;
-    margin-left:30px;
+    /*
+
+     */
     border: 2px solid skyblue;
     border-radius: 40px 40px;
     padding-inline-start: 25px;
 }
 #searchicon{
     position: absolute;
-    left:555px;
+    left:530px;
     top:19px;
 }
 #searchicon:hover{
@@ -72,13 +92,16 @@ body{
 
 
 #side_Bar{
+    left:1000px;
     position: fixed;
-    left:1350px;
     width:60px;
-    height:350px;
+    height:500px;
+    Top:200px;
     background-color:white ;
+
 }
 #side_Bar div img{
+    left:850px;
     cursor: pointer;
     width:60px;
     height:70px;
@@ -86,44 +109,30 @@ body{
 #side_Bar div img:hover{
     filter:opacity(0.7) drop-shadow(0 0 0 #87cefa);
 }
+
+#bodyheader span img{
+    background-color: white;
+
+}
 #scart{
+    left:860px;
     width: 32px;
     height:32px;
     position: absolute;
     top:90px;
-    left: 1200px;
     cursor: pointer;
 }
-#footer{
-    position:fixed;
-    bottom:0px;
-    left:350px;
-
-}
-#footer img{
-    width:900px;
-}
 hr{
-    width:1010px;
-    position: absolute;
+    width:940px;
+    position:absolute;
+
     border: 1px solid black;
-    left:320px;
 }
-#explain_part{
-    position: absolute;
-    width:1000px;
-    margin-top:40px;
-    text-align: center;
-    left:320px;
-    font-size: 20px;
-    border:5px solid black;
-    font-weight: bold;
-    border-radius: 10px;
-}
+
 
 #shoplist{
     position:absolute;
-    left:340px;
+
     top:300px;
     width:900px;
     height:800px;
@@ -148,7 +157,7 @@ hr{
 }
 li #item_img{
     position: relative;
-    left:25px;
+
     width:150px;
     height:150px;
     top:15px;
@@ -160,7 +169,7 @@ li #merchansub{
 
 li #item_img img{
 
-    left:25px;
+
     top:25px;
     width:150px;
     height:150px;
@@ -169,7 +178,7 @@ li #item_img img{
 #item_text{
     position: relative;
     margin-top : 20px;
-    margin-left: 40px;
+
     width:200px;
     height:90px;
     text-align: left;
@@ -181,8 +190,30 @@ li #item_img img{
     color:red;
     font-weight: bold;
 }
-#logo:hover{
-    cursor: pointer;
+
+
+#footer{
+    position:fixed;
+    bottom:0px;
+
+
+
+}
+
+
+#footer img{
+    width:950px;
+}
+#explain_part{
+    position: absolute;
+    width:950px;
+    margin-top:40px;
+    text-align: center;
+
+    font-size: 20px;
+    border:5px solid black;
+    font-weight: bold;
+    border-radius: 10px;
 }
 
 #explain_part mark{

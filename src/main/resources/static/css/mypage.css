@@ -203,12 +203,17 @@ li #item_img img{
 #mypage_title_container{
     position:absolute;
     margin-left: 40px;
-    background-color: rgb(235,235,235);
+    background-color: #fff;
     border-top-right-radius: 10px 10px;
     border-top-left-radius: 10px 10px;
     width: 250px;
     height: 50px;
-    top: 200px;
+    top: 195px;
+    border-top: 3px solid #212425;
+    border-left: 3px solid #212425;
+    border-right: 3px solid #212425;
+    border-bottom: 5px solid #fff;
+    z-index: 2;
 }
 
 #mypage_title{
@@ -222,39 +227,44 @@ li #item_img img{
 }
 
 .mypage_details_div_leftRight{
-    margin: 20px;
+    margin-top: 12px;
+    margin-bottom: 7px;
+    margin-left: 30px;
     width: 100%;
     height: 45px;
 }
 
 .mypage_container{
-    font-family: 'Nanum Gothic', sans-serif;
     overflow: hidden;
     position:absolute;
     top: 250px;
     margin-left: 20px;
     width: 900px;
-    height: 550px;
+    height: 700px;
     border-radius: 10px;
-    background-color: rgb(235, 235, 235);
+    border: 3px solid;
+    border-color: #212425;
+    background-color: #fff;
+    z-index: 1;
 }
 
 .separation{
     position: relative;
     left: 50%;
-    transform: translateX(-64%);
-    width: 670px;
-    height: 5px;
-    background-color: #fff;
+    transform: translateX(-72%);
+    width: 580px;
+    height: 3px;
+    background-color: #212425;
     margin: 0px;
 }
 
 .mypage_details_left_outer{
     width: 25%;
-    height: 45px;
-    background-color: #fff;
+    height: 35px;
+    background-color: rgb(245,245,245);
     border-radius: 10px;
     float: left;
+    border: 1px solid #212425;
 }
 .mypage_details_inner{
     position: relative;
@@ -265,9 +275,29 @@ li #item_img img{
 
 .mypage_details_right_outer{
     margin-left: 40px;
-    width: 45%;
-    height: 45px;
+    width: 35%;
+    height: 35px;
     background-color: #fff;
+    border: 1px solid #212425;
     border-radius: 10px;
     float: left;
+}
+
+.mypage_details_right_outer2{
+    margin-left: 20px;
+    width: 25%;
+    height: 35px;
+    background-color: #fff;
+    border: 1px solid #212425;
+    border-radius: 10px;
+    float: left;
+}
+
+.mypage_details_change{
+    margin-left: 40px;
+    width: 10%;
+    height: 35px;
+    background-color: rgb(235,235,235);
+    float: left;
+    border: 2px solid #212425;
 }

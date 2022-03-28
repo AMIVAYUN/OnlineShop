@@ -19,7 +19,6 @@ async function SessionCheck(){
         $("#login-navi").attr("href","#")
         $("#join-navi").text("로그아웃");
         $("#join-navi").attr("href","/logout");
-
     }
 }
 function SearchSetting(){
@@ -54,6 +53,9 @@ async function nameCheckMypage(){
     $("#members_name").text(userinfoRes.name);
     $("#members_phone_num").text(userinfoRes.phone_num);
     $("#members_email").text(userinfoRes.email);
+    $("#members_postcode").text(userinfoRes.address.postcode);
+    $("#members_address").text(userinfoRes.address.address);
+    $("#members_detailAddress").text(userinfoRes.address.detailAddress);
 }
 
 

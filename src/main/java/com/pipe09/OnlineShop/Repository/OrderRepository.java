@@ -26,11 +26,11 @@ public class OrderRepository {
         return em.createQuery(jpql).getResultList();
     }
     public List<Orders> findByDeliveryStatus(Deliverystatus status){
-        String jpql="select o from Orders o join fetch o.delivery where o.delivery.status=:status";
+        String jpql="select o from Orders o where o.deliverystatus=:status";
         return em.createQuery(jpql,Orders.class).setParameter("status",status).getResultList();
     }
     public List<Orders> findAllwithToOne(int offset,int limit){
-        return em.createQuery("select o from Orders o join fetch o.member m join fetch o.delivery d", Orders.class).setFirstResult(offset).setMaxResults(limit).getResultList();
+        return em.createQuery("select o from Orders o join fetch o.member m", Orders.class).setFirstResult(offset).setMaxResults(limit).getResultList();
     }
     public List<OrderItem> findOrderItems(Long id){
         return em.createQuery("select oi from OrderItem oi join fetch oi.item i where oi.orders.Order_ID=:id",OrderItem.class).setParameter("id",id).getResultList();

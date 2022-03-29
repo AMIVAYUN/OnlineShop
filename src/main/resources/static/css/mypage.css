@@ -296,8 +296,9 @@ li #item_img img{
 .mypage_details_change{
     margin-left: 40px;
     width: 10%;
-    height: 35px;
+    height: 32px;
     background-color: rgb(235,235,235);
     float: left;
     border: 2px solid #212425;
+    text-align: center;
 }

@@ -1,7 +1,7 @@
 var count=0;
 $(document).ready(function(){
 
-    SessionCheck();
+    //SessionCheck();
     SearchSetting();
     logoSetting();
     mypageSetting();
@@ -304,7 +304,7 @@ async function JoinbyLocal(){
         }
 
     }
-    const res=fetch(url,{method:"post",headers:{'Content-Type': 'application/json'},body:JSON.stringify(obj)}).then(response => {
+    await fetch(url,{method:"post",headers:{'Content-Type': 'application/json'},body:JSON.stringify(obj)}).then(response => {
         if(response.status==200){
             alert("회원가입이 완료되었습니다.");
             location.assign("/");

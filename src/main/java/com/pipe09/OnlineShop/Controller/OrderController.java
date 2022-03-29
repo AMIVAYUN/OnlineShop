@@ -14,5 +14,6 @@ public class OrderController {
     @GetMapping("/payments/purchase/bycart")
     public String getPaymentsCartPage(){ return "fragments/public/Payment"; }
 
-
+    @GetMapping("/payments/credit/bytoss")
+    public String getTossPage(){return "fragments/private/TossPay"; }
 }

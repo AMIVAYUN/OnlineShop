@@ -19,6 +19,7 @@ async function SessionCheck(){
         $("#manager").remove();
     }
     if(res1.iswhom !="[ROLE_ANONYMOUS]"){
+        console.log(res1.iswho);
         $("#login-navi").text(res1.iswho + "님 안녕하세요");
         $("#login-navi").attr("href","#")
         $("#join-navi").text("로그아웃");

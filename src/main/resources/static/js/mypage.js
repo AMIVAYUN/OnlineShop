@@ -147,7 +147,7 @@ async function nameCheckMypage(){
     var url="/api/v1/members/single/local/aboutMe";
     const userinfoRes = await fetch(url, {method:"get"}).then((response) => response.json());
     fetch(url).then((response) => console.log(response));
-    $("#members_username").text(usernameRes);
+    $("#members_username").val(usernameRes);
     $("#members_name").val(userinfoRes.name);
     $("#members_phone_num").val(userinfoRes.phone_num);
     $("#members_email").text(userinfoRes.email);

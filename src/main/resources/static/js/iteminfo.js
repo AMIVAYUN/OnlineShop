@@ -16,6 +16,7 @@ $(document).ready(function(){
     buySetting(keyword);
 })
 
+
 function detailBtnSet(){
     var btn = document.getElementById("details_explanation_btn");
     btn.style.backgroundColor = "rgb(225,225,225)";
@@ -39,10 +40,7 @@ function show_explanation() {
         btn2.style.backgroundColor = "rgb(245,245,245)";
         btn3.style.backgroundColor = "rgb(245,245,245)";
         btn4.style.backgroundColor = "rgb(245,245,245)";
-        btn1_state = true;
-        btn2_state = false;
-        btn3_state = false;
-        btn4_state = false;
+        btn1_state = true; btn2_state = false; btn3_state = false; btn4_state = false;
     }
 }
 
@@ -87,10 +85,7 @@ function show_exchange() {
         btn2.style.backgroundColor = "rgb(245,245,245)";
         btn3.style.backgroundColor = "rgb(225,225,225)";
         btn4.style.backgroundColor = "rgb(245,245,245)";
-        btn1_state = false;
-        btn2_state = false;
-        btn3_state = true;
-        btn4_state = false;
+        btn1_state = false; btn2_state = false; btn3_state = true; btn4_state = false;
     }
 }
 
@@ -112,10 +107,7 @@ function show_QnA() {
         btn2.style.backgroundColor = "rgb(245,245,245)";
         btn3.style.backgroundColor = "rgb(245,245,245)";
         btn4.style.backgroundColor = "rgb(225,225,225)";
-        btn1_state = false;
-        btn2_state = false;
-        btn3_state = false;
-        btn4_state = true;
+        btn1_state = false; btn2_state = false; btn3_state = false; btn4_state = true;
     }
 }
 
@@ -208,7 +200,9 @@ async function getItem(keyword){
     const res=await fetch(url, {method: "get"}).then(response => response.json());
     $("#product_image").attr("src","/"+res.imgSrc);
     $("#product_name").text(res.name);
-    $("#product_price").text(res.price);
+    var priceComma = res.price;
+    priceComma = priceComma.toLocaleString();
+    $("#product_price").text(priceComma);
     $("#product_madeIn").text(res.madeIn);
     $("#product_manufacturedCompany").text(res.manufacturedCompany);
     $("#product_stockQuantity").text(res.stockQuantity);

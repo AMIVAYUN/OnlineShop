@@ -12,20 +12,24 @@ $(document).ready(function(){
     $('#mypage_title_container').hover(function(){
         $('#mypage_userinfo_btn').css('color', '#fff');
         $(this).css('backgroundColor', '#212425');
-        $(this).css('border-bottom', '5px solid #212425')
+        $(this).css('border-bottom', '5px solid #212425');
+        $(this).css('cursor', 'pointer');
     }, function(){
         $('#mypage_userinfo_btn').css('color', 'black');
         $(this).css('backgroundColor', '#fff');
-        $(this).css('border-bottom', '5px solid #fff')
+        $(this).css('border-bottom', '5px solid #fff');
+        $(this).css('cursor', 'default');
     })
     $('#mypage_title_container2').hover(function(){
         $('#mypage_order_btn').css('color', '#fff');
         $(this).css('backgroundColor', '#212425');
-        $(this).css('border-bottom', '5px solid #212425')
+        $(this).css('border-bottom', '5px solid #212425');
+        $(this).css('cursor', 'pointer');
     }, function(){
         $('#mypage_order_btn').css('color', 'black');
         $(this).css('backgroundColor', '#fff');
-        $(this).css('border-bottom', '5px solid #fff')
+        $(this).css('border-bottom', '5px solid #fff');
+        $(this).css('cursor', 'default');
     })
 })
 

@@ -16,6 +16,7 @@ $(document).ready(function(){
     buySetting(keyword);
 })
 
+
 function detailBtnSet(){
     var btn = document.getElementById("details_explanation_btn");
     btn.style.backgroundColor = "rgb(225,225,225)";
@@ -199,7 +200,9 @@ async function getItem(keyword){
     const res=await fetch(url, {method: "get"}).then(response => response.json());
     $("#product_image").attr("src","/"+res.imgSrc);
     $("#product_name").text(res.name);
-    $("#product_price").text(res.price);
+    var priceComma = res.price;
+    priceComma = priceComma.toLocaleString();
+    $("#product_price").text(priceComma);
     $("#product_madeIn").text(res.madeIn);
     $("#product_manufacturedCompany").text(res.manufacturedCompany);
     $("#product_stockQuantity").text(res.stockQuantity);

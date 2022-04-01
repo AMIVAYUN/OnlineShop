@@ -36,7 +36,7 @@
         <div class="mypage_title_inner" id="mypage_userinfo_btn"><i class="fa-solid fa-user-gear"></i> <b>마이페이지</b></div>
     </button>
     <button id="mypage_title_container2" onclick="show_order()">
-        <div class="mypage_title_inner" id="mypage_order_btn"><b>주문내역</b></div>
+        <div class="mypage_title_inner" id="mypage_order_btn"><i class="fa-solid fa-receipt"></i> <b>주문내역</b></div>
     </button>
     <div class="mypage_container" id="mypage_userinfo">
         <div class="mypage_details_div_leftRight" style="margin-top: 35px">
@@ -69,6 +69,7 @@
                     <input class="userinfoChange" id="members_password_chk" type="password"></input>
                 </div>
             </div>
+            <button class="mypage_details_change" onclick="">비밀번호 변경</button>
         </div>
         <div class="separation"></div>
         <div class="mypage_details_div_leftRight">
@@ -90,6 +91,9 @@
                     <input class="userinfoChange" id="members_phone_num" type="text"></input>
                 </div>
             </div>
+            <button class="mypage_details_change" onclick="">
+                전화번호 변경
+            </button>
         </div>
         <div class="mypage_details_div_leftRight">
             <div class="mypage_details_left_outer">
@@ -137,6 +141,7 @@
                     <input class="userinfoChange" id="members_ref_address" type="text"></input>
                 </div>
             </div>
+            <button class="mypage_details_change" onclick="">주소 변경</button>
         </div>
         <!--주문내역 버튼 추가-->
         <button id="submit_button">회원정보 변경</button>

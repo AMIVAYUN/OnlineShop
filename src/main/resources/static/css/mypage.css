@@ -93,8 +93,8 @@ body{
 
 
 #side_Bar{
-    left:1000px;
-    position: fixed;
+    margin-left:1000px;
+    position: sticky;
     width:60px;
     height:500px;
     Top:200px;
@@ -328,7 +328,7 @@ input:-webkit-autofill {
 .mypage_details_change{
     margin-left: 40px;
     width: 15%;
-    height: 32px;
+    height: 36px;
     background-color: rgb(235,235,235);
     float: left;
     border: 2px solid #212425;

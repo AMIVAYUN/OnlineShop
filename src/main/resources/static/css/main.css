@@ -94,8 +94,8 @@ body{
 
 
 #side_Bar{
-    left:1000px;
-    position: fixed;
+    margin-left:1000px;
+    position: sticky;
     width:60px;
     height:500px;
     Top:200px;

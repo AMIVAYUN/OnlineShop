@@ -7,12 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=yes, maximum-scale=1.0">
     <title>마이페이지</title>
     <link rel="stylesheet" href="../css/mypage.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/97e36fce94.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/97e36fce94.js" crossorigin="anonymous"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="../js/mypage.js"></script>
 </head>
 <body>
@@ -33,11 +32,122 @@
         </div>
     </div>
     <hr>
-
-    <div class="mypage_outer_container">
-        <div class="mypage_inner_container">
-            asdasdasdsad
+    <button id="mypage_title_container" onclick="show_userinfo()">
+        <div class="mypage_title_inner" id="mypage_userinfo_btn"><i class="fa-solid fa-user-gear"></i> <b>마이페이지</b></div>
+    </button>
+    <button id="mypage_title_container2" onclick="show_order()">
+        <div class="mypage_title_inner" id="mypage_order_btn"><i class="fa-solid fa-receipt"></i> <b>주문내역</b></div>
+    </button>
+    <div class="mypage_container" id="mypage_userinfo">
+        <div class="mypage_details_div_leftRight" style="margin-top: 35px">
+            <div class="mypage_details_left_outer">
+                <div class="mypage_details_inner">회원 ID</div>
+            </div>
+            <div class="mypage_details_right_outer">
+                <div class="mypage_details_inner">
+                    <input class="userinfoChange" id="members_username" type="text" readonly></input>
+                </div>
+            </div>
         </div>
+        <div class="separation"></div>
+        <div class="mypage_details_div_leftRight">
+            <div class="mypage_details_left_outer">
+                <div class="mypage_details_inner">비밀번호 변경</div>
+            </div>
+            <div class="mypage_details_right_outer">
+                <div class="mypage_details_inner" id="members_password_outer">
+                    <input class="userinfoChange" id="members_password" type="password"></input>
+                </div>
+            </div>
+        </div>
+        <div class="mypage_details_div_leftRight">
+            <div class="mypage_details_left_outer">
+                <div class="mypage_details_inner">비밀번호 확인</div>
+            </div>
+            <div class="mypage_details_right_outer">
+                <div class="mypage_details_inner">
+                    <input class="userinfoChange" id="members_password_chk" type="password"></input>
+                </div>
+            </div>
+            <button class="mypage_details_change" onclick="">비밀번호 변경</button>
+        </div>
+        <div class="separation"></div>
+        <div class="mypage_details_div_leftRight">
+            <div class="mypage_details_left_outer">
+                <div class="mypage_details_inner">이름</div>
+            </div>
+            <div class="mypage_details_right_outer">
+                <div class="mypage_details_inner">
+                    <input class="userinfoChange" id="members_name" type="text" readonly></input>
+                </div>
+            </div>
+        </div>
+        <div class="mypage_details_div_leftRight">
+            <div class="mypage_details_left_outer">
+                <div class="mypage_details_inner">전화번호</div>
+            </div>
+            <div class="mypage_details_right_outer">
+                <div class="mypage_details_inner">
+                    <input class="userinfoChange" id="members_phone_num" type="text"></input>
+                </div>
+            </div>
+            <button class="mypage_details_change" onclick="">
+                전화번호 변경
+            </button>
+        </div>
+        <div class="mypage_details_div_leftRight">
+            <div class="mypage_details_left_outer">
+                <div class="mypage_details_inner">이메일</div>
+            </div>
+            <div class="mypage_details_right_outer">
+                <div class="mypage_details_inner" id="members_email"></div>
+            </div>
+        </div>
+        <div class="separation"></div>
+        <div class="mypage_details_div_leftRight">
+            <div class="mypage_details_left_outer">
+                <div class="mypage_details_inner">우편번호</div>
+            </div>
+            <div class="mypage_details_right_outer">
+                <div class="mypage_details_inner">
+                    <input class="userinfoChange" id="members_postcode" type="text"></input>
+                </div>
+            </div>
+            <button class="mypage_details_change" onclick="execDaumPostcode()">
+                우편번호 찾기
+            </button>
+        </div>
+        <div class="mypage_details_div_leftRight">
+            <div class="mypage_details_left_outer">
+                <div class="mypage_details_inner">주소</div>
+            </div>
+            <div class="mypage_details_right_outer" style="width: 25%">
+                <div class="mypage_details_inner">
+                    <input class="userinfoChange" id="members_address" type="text" style="width: 180px"></input>
+                </div>
+            </div>
+            <div class= "mypage_details_right_outer" style="width: 25%; margin:left:20px">
+                <div class="mypage_details_inner">
+                    <input class="userinfoChange" id="members_detailAddress" type="text" style="width: 180px;"></input>
+                </div>
+            </div>
+        </div>
+        <div class="mypage_details_div_leftRight">
+            <div class="mypage_details_left_outer">
+                <div class="mypage_details_inner">참고항목</div>
+            </div>
+            <div class="mypage_details_right_outer">
+                <div class="mypage_details_inner">
+                    <input class="userinfoChange" id="members_ref_address" type="text"></input>
+                </div>
+            </div>
+            <button class="mypage_details_change" onclick="">주소 변경</button>
+        </div>
+        <!--주문내역 버튼 추가-->
+        <button id="submit_button">회원정보 변경</button>
+    </div>
+    <div class="mypage_container2" id="mypage_order" style="display: none">
+        asd
     </div>
 
     <div id="side_Bar">
@@ -45,7 +155,7 @@
             <img src="/img/static/companyIntroduction_ver2.png" onclick="javascript:location.href='/comp-intro'">
         </div>
         <div id="comp_mypage">
-            <img src="/img/static/mypage_ver2.png"onclick="javascript:location.href='/my-page'">
+            <img src="/img/static/mypage_ver2.png">
 
         </div>
         <div id="comp_hompage">

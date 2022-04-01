@@ -115,7 +115,14 @@ function search(){
 function mypageSetting(){
     var baseurl=window.location;
 
-
+    $("#comp_mypage").click(function (){
+    if($("#login-navi").text()=="로그인"){
+            alert("로그인이 필요한 서비스 입니다.")
+    }else{
+        var url=baseurl .protocol +"//"+baseurl .host+"/mypage"
+        location.assign(url);
+        }
+    })
 
     $("#mypage").click(function (){
         if($("#login-navi").text()=="로그인"){

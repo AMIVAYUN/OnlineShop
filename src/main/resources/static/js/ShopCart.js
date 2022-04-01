@@ -30,15 +30,20 @@ async function SessionCheck(){
         var suburl="/api/v1/shopcarts/items/all?username="+res1.iswho;
         const res=await fetch(suburl,{method:"get"}).then(response => response.json());
         await $.each(res, function(idx){
+            var priceComma = res[idx].price;
+            priceComma = priceComma.toLocaleString();
+            var totalComma = res[idx].count * res[idx].price;
+            totalComma = totalComma.toLocaleString();
             var innerhtml='<tr class="component">\n' +
                 '                    <td class="mer_img"><img src='+res[idx].imgSrc+'></td>\n' +
                 '                    <td class="name" id='+res[idx].item_id+'>'+res[idx].item_name+'</td>\n' +
                 '                    <td class="count">'+res[idx].count+'개</td>\n' +
-                '                    <td class="price">'+res[idx].price+'</td>\n' +
-                '                    <td class="total">'+res[idx].count*res[idx].price+'원</td>\n' +
+                '                    <td class="price">'+priceComma+'</td>\n' +
+                '                    <td class="total">'+totalComma+'원</td>\n' +
                 '                    <td class="del"><i id="delete" class="fa-solid fa-trash-can"></i></td></tr>';
             $("#shoppinglist").append(innerhtml);
             sum+=res[idx].count*res[idx].price;
+            sum = sum.toLocaleString();
         })
 
     }else{

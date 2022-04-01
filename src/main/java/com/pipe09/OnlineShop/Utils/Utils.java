@@ -1,6 +1,10 @@
 package com.pipe09.OnlineShop.Utils;
 
 
+import com.pipe09.OnlineShop.Domain.Delivery.Deliverystatus;
+import lombok.Getter;
+import org.springframework.beans.factory.annotation.Value;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.time.LocalDate;
@@ -9,6 +13,9 @@ public class Utils {
     private final static String HEADER_AUTHORIZATION = "Authorization";
     private final static String TOKEN_PREFIX = "Bearer ";
     private static final String IMGPATH=System.getProperty("user.home");
+    @Value("${tosspayment.secret}")
+    @Getter
+    private static String SecretKey;
     public static String getImgPATHwithOS(){
         String os=System.getProperty("os.name").toLowerCase();
         if (os.contains("win")) {
@@ -56,6 +63,21 @@ public class Utils {
             return headerValue.substring(TOKEN_PREFIX.length());
         }
         return null;
+    }
+    public static String getAnnouncedDeliverystatus(Deliverystatus deliverystatus){
+        if(deliverystatus.equals(Deliverystatus.BEFORE)){
+            return "결제 대기중";
+        }else if(deliverystatus.equals(Deliverystatus.READY)){
+            return "배송 대기중";
+        }else if(deliverystatus.equals(Deliverystatus.CANCEL)){
+            return "결제 취소";
+        }else if(deliverystatus.equals(Deliverystatus.DELIVERY)){
+            return "배달 중";
+        }else if(deliverystatus.equals(Deliverystatus.COMPLETE)){
+            return "배달 완료";
+        }else{
+            return "에러 발생";
+        }
     }
 
 }

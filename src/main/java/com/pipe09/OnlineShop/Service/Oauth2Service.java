@@ -43,7 +43,7 @@ public class Oauth2Service implements OAuth2UserService<OAuth2UserRequest,OAuth2
 //저장
         Member member=saveOrUpdate(attributes,registratioId);
 
-        httpSession.setAttribute("user",new SessionUser(member.getName(),member.getEmail()));
+        httpSession.setAttribute("user",new SessionUser(member.getName(),member.getEmail(),registratioId));
 
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")), attributes.getAttributes(), attributes.getNameAttributeKey()

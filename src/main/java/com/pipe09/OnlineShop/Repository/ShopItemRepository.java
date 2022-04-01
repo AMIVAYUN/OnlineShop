@@ -25,5 +25,8 @@ public class ShopItemRepository {
         em.remove(delItem);
         return true;
     }
+    public Shop_Item findShopItemByShopItemId(Long shopitemId){
+        return em.find(Shop_Item.class,shopitemId);
+    }
 
 }

@@ -1,6 +1,6 @@
 package com.pipe09.OnlineShop.Repository;
 
-import com.pipe09.OnlineShop.Domain.Delivery.Delivery;
+
 import com.pipe09.OnlineShop.Domain.Delivery.Deliverystatus;
 import com.pipe09.OnlineShop.Domain.Member.Member;
 import com.pipe09.OnlineShop.Domain.Orders.OrderItem;
@@ -37,9 +37,7 @@ public class OrderRepositoryTest {
         mem.setName("주석");
         memberRepository.save(mem);
         newOrder.setMember(mem);
-        Delivery delivery=new Delivery();
-        delivery.setStatus(Deliverystatus.READY);
-        newOrder.setDelivery(delivery);
+        newOrder.setDeliverystatus(Deliverystatus.BEFORE);
         Long id=orderRepository.save(newOrder);
         assertEquals("아이디가 같아야 합니다",id,newOrder.getOrder_ID());
         assertEquals("이름이 같아야 합니다",orderRepository.findOne(id).getMember().getName(),"주석");

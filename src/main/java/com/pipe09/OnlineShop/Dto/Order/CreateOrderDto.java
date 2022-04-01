@@ -17,6 +17,7 @@ public class CreateOrderDto {
     private String address;
     private String detailAddress;
     private String extraAddress;
+    private String type;
     private List<createOrderItemDto> item;
 
 }

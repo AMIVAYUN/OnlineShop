@@ -34,6 +34,7 @@ async function SessionCheck(){
         var len=context.substr((baseurl .protocol +"//"+baseurl .host+"/payments/purchase/").length);
         //결제창 아이템 처리
         if(len.indexOf("bycart")!=-1){
+            sessionStorage.setItem("type","cart");
             var suburl="/api/v1/shopcarts/items/all?username="+res1.iswho;
             const res=await fetch(suburl,{method:"get"}).then(response => response.json());
             await $.each(res, function(idx){
@@ -49,6 +50,7 @@ async function SessionCheck(){
             })
 
         }else{
+            sessionStorage.setItem("type","single");
             var suburl2="/api/v2/items/single/"+len.substring(len.indexOf("/")+1);
             const res2=await fetch(suburl2,{method:"get"}).then(response => response.json());
             var innerhtml='<tr class="component">\n' +
@@ -259,6 +261,7 @@ function purchaseSetting(){
                 "address":$("#address").val(),
                 "detailAddress":$("#detailAddress").val(),
                 "extraAddress":$("#extraAddress").val(),
+                "type":sessionStorage.getItem("type"),
                 "item":itemlist
             }
             makeOrder(data);
@@ -345,5 +348,26 @@ async function makeOrder(data){
     ,{
         method:"post",headers:{'Content-Type':'application/json'},
             body:JSON.stringify(data)
-        })
+        }).then( response => response.text())
+
+    if(result==-1){
+        alert("에러가 발생하였습니다. 다시 시도해주세요");
+        location.reload();
+    }else{
+
+        data.orderId=result;
+        $("#orderId").val(result);
+        var id=data.item[0].item_id;
+        var str="#"+id;
+        var firstName=$(str).text();
+        var orderName=firstName+" 및 "+$(".component").length+"건";
+        $("#orderName").val(orderName);
+        $("#customerName").val(data.name);
+        openTosspay();
+
+
+    }
+    function openTosspay(){
+        window.open("/payments/credit/bytoss",'토스페이 결제',"width=800,height=600");
+    }
 }

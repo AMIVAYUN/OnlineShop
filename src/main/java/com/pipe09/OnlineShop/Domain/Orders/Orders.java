@@ -33,6 +33,7 @@ public class Orders {
     private List<OrderItem> orderItems= new ArrayList<>();
 
     @Column
+    @Enumerated(value = EnumType.STRING)
     private Deliverystatus deliverystatus;
 
 
@@ -40,16 +41,38 @@ public class Orders {
     @DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")
     private Date Orderdate;
 
-    public void addOrderItem(OrderItem[] orderItems){
-        Arrays.stream(orderItems).forEach(orderItem -> this.orderItems.add(orderItem));
+    @Column(name="totalprice")
+    private int totalPrice;
+
+    @Column(name ="paymentKey")
+    private String paymentKey;
+
+    public void addOrderItem(OrderItem[] orderItems,Orders order){
+        Arrays.stream(orderItems).forEach(orderItem -> {
+            orderItem.setOrders(order);
+            this.orderItems.add(orderItem);
+        });
     }
 
     public static Orders createOrder(Member member,Date orderdate,OrderItem... orderItems){
         Orders order=new Orders();
         order.setMember(member);
         order.setOrderdate(orderdate);
-        order.addOrderItem(orderItems);
-        order.setDeliverystatus(Deliverystatus.BEFOREPAYMENT);
+        order.addOrderItem(orderItems,order);
+        order.setDeliverystatus(Deliverystatus.BEFORE);
+        return order;
+    }
+
+    public static Orders createOrder(Member member,Date orderdate,List<OrderItem> orderItemList,String totalprice){
+        Orders order=new Orders();
+        order.setMember(member);
+        order.setOrderdate(orderdate);
+        OrderItem[] items=orderItemList.toArray(OrderItem[]::new);
+        order.addOrderItem(items,order);
+        order.setDeliverystatus(Deliverystatus.BEFORE);
+        //정규 표현식
+        int totalPrice=Integer.valueOf(totalprice.replaceAll("[^0-9]", ""));
+        order.setTotalPrice(totalPrice);
         return order;
     }
 

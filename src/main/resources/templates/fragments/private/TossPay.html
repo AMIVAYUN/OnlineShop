@@ -11,15 +11,34 @@
     var tossPayments = TossPayments(clientKey)
 </script>
 <body>
+
     <script>
-        tossPayments.requestPayment('카드', {
-            amount: 15000,
-            orderId: 'zdhGaF7CG3vv0KyTII8QZ',
-            orderName: '토스 티셔츠 외 2건',
-            customerName: '박토스',
-            successUrl: 'http://localhost:8080/success',
-            failUrl: 'http://localhost:8080/fail',
+
+        var amount=window.opener.document.getElementById('totalprice');
+        var orderId=window.opener.document.getElementById('orderId');
+        var orderName=window.opener.document.getElementById('orderName');
+        var customerName=window.opener.document.getElementById('customerName');
+        console.log(Date.now());
+        tossPayments.requestPayment('카드', { // 결제 수단 파라미터
+            // 결제 정보 파라미터
+            amount: parseInt(amount.innerText),
+            orderId: orderId.value,
+            orderName: orderName.value,
+            customerName: customerName.value,
+            successUrl: 'http://localhost:8080/payments/purchase/success',
+            failUrl: 'http://localhost:8080/payments/purchase/fail',
         })
+        /*
+        tossPayments.requestPayment('카드', {
+            amount: amount.innerText,
+            orderId: orderId.value,
+            orderName: orderName.value,
+            customerName: customerName.value,
+            successUrl: 'http://localhost:8080/payments/purchase/success',
+            failUrl: 'http://localhost:8080/payments/purchase/fail',
+        })
+
+         */
     </script>
 </body>
 </html>

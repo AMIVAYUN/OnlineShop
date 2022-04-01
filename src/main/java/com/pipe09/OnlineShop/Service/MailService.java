@@ -77,8 +77,9 @@ public class MailService {
 
     @Async
     public void sendMail(SimpleMailMessage message){
-        //ArrayList<String> toUserList=new ArrayList<>();
         /*
+        ArrayList<String> toUserList=new ArrayList<>();
+
         toUserList.add("wntjrdbs@gmail.com");
         SimpleMailMessage message=new SimpleMailMessage();
         message.setTo(toUserList.get(0));

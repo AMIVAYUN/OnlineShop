@@ -15,25 +15,15 @@ import java.util.List;
 @Repository
 public class MemberRepository {
     private final EntityManager em;
-    public Long joinByOauth(Member member){
-        Member exist=this.findByNameWithOauth(member.getName());
-        if(exist==null ){
-            em.persist(member);
 
-        }else{
-            em.merge(member);
-        }
-        return member.getMember_ID();
-
-    }
     public Long save(Member member){
         em.persist(member);
 
         return member.getMember_ID();
     }
-    public Member findByNameWithOauth(String name){
-        String jpql="select m from Member m where m.Name=:name";
-        return em.createQuery(jpql,Member.class).setParameter("name",name).getSingleResult();
+    public Member findByNameWithOauth(String name,UserType type){
+        String jpql="select m from Member m where m.Name=:name and m.userType=:type";
+        return em.createQuery(jpql,Member.class).setParameter("name",name).setParameter("type",type).getSingleResult();
     }
     public Member findByName(String name){
         String jpql="select m from Member m join fetch m.shopCart where m.Name=:name and m.userType=:type";

@@ -23,6 +23,7 @@ public class MailApiController {
     @PostMapping("/api/v2/mails/post.do")
     public String SendMail(@RequestBody MailDto dto){
         log.info(dto.getName()+"유저 메일 서비스 사용");
+        service.makeQuestion(dto);
         service.sendMail(service.makeQuestion(dto));
         return "전송에 성공하였습니다";
     }

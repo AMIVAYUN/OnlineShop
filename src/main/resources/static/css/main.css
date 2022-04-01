@@ -94,8 +94,8 @@ body{
 
 
 #side_Bar{
-    margin-left:1000px;
-    position: sticky;
+    margin-left:1200px;
+    position: fixed;
     width:60px;
     height:500px;
     Top:200px;
@@ -234,7 +234,7 @@ li #item_img img{
 
 #footer{
     position: absolute;
-    left: 50%;
+    left: 36%;
     bottom: 0%;
     transform: translate(-50%, -50%);
 }

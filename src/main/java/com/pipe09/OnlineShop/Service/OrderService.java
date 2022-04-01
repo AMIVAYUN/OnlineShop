@@ -19,6 +19,7 @@ import com.pipe09.OnlineShop.Repository.OrderRepository;
 import com.pipe09.OnlineShop.Repository.ShopItemRepository;
 //import com.pipe09.OnlineShop.Utils.AES;
 import com.pipe09.OnlineShop.Utils.BASE64Utils;
+import com.pipe09.OnlineShop.Utils.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -53,8 +54,7 @@ public class OrderService {
     private final ShopItemRepository shopItemRepository;
     private final Oauth2Service oauth2Service;
     private final ItemRepository itemRepository;
-    @Value("${tosspayment.secret}")
-    private String SecretKey;
+
     /*
     public Long order(String memberId,Long itemId, int count){
         Member member= memberRepository.findByuserId(memberId);
@@ -163,7 +163,7 @@ public class OrderService {
     public HttpHeaders getRequestTossHeaders(){
         HttpHeaders headers=new HttpHeaders();
         BASE64Utils base64 = new BASE64Utils(Base64.getEncoder(),Base64.getDecoder());
-        String En_secretkey=base64.translateSecKey(this.SecretKey+":");
+        String En_secretkey=base64.translateSecKey(Utils.getSecretKey() +":");
         headers.add("Authorization"," Basic "+En_secretkey);
         headers.add("Content-Type","application/json");
         return headers;
@@ -201,5 +201,6 @@ public class OrderService {
 
         );
         log.info(response.getStatusCode() +": "+ response.getStatusCodeValue());
+        response.getBody();
     }
 }

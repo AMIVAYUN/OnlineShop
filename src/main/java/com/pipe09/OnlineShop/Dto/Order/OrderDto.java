@@ -6,6 +6,7 @@ import com.pipe09.OnlineShop.Domain.Delivery.Deliverystatus;
 import com.pipe09.OnlineShop.Domain.Orders.Orders;
 import com.pipe09.OnlineShop.Dto.OrderItem.OrderItemDto;
 import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
+import com.pipe09.OnlineShop.Utils.Utils;
 import lombok.Data;
 
 import javax.persistence.Temporal;
@@ -19,8 +20,9 @@ public class OrderDto {
     private Long OrderId;
     private String user_id;
     private String user_name;
+    private String address;
     private List<OrderItemDto> orderItemDto;
-    private Deliverystatus deliverystatus;
+    private String deliverystatus;
     private int Totalprice=0;
     @Temporal(TemporalType.DATE)
     private Date orderdate;
@@ -41,7 +43,8 @@ public class OrderDto {
         this.user_id=order.getMember().getUser_ID();
         this.user_name=order.getMember().getName();
         this.orderdate=order.getOrderdate();
-        this.deliverystatus=order.getDeliverystatus();
+        this.deliverystatus= Utils.getAnnouncedDeliverystatus(order.getDeliverystatus());
+        this.address=order.getMember().getAddress().getPostcode()+" "+order.getMember().getAddress().getAddress()+" "+order.getMember().getAddress().getDetailAddress()+"("+order.getMember().getAddress().getRef_address()+")";
         order.getOrderItems().stream().forEach(item -> item.getItem().getName());
         this.orderItemDto=order.getOrderItems().stream().map(OrderItemDto::new).collect(Collectors.toList());
         orderItemDto.stream().forEach(orderItemDto1 -> {

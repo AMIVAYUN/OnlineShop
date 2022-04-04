@@ -114,7 +114,6 @@ function mypageSetting(){
 function execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
-            sessionStorage.setItem("jusoOrder",true);
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
             // 각 주소의 노출 규칙에 따라 주소를 조합한다.
@@ -267,7 +266,7 @@ function purchaseSetting(){
             makeOrder(data);
 
         }else{
-            alert("빈 칸을 전부 채워주세요");
+            alert("필수 입력사항을 전부 입력해주세요.");
         }
     })
 }
@@ -318,12 +317,12 @@ function checkValidPhone() {
     return true;
 }
 function checkAddress(){
-    const juso=sessionStorage.getItem("jusoOrder")
-    if(juso&&($("#detailAddress").val()!=null)){
+
+    if($("#postcode").val()&&$("#address").val()&&$("#detailAddress").val()&&$("#extraAddress").val()){
         return true;
     }
     else{
-        alert("주소를 검색해주세요");
+
         return false;
     }
 }
@@ -371,3 +370,4 @@ async function makeOrder(data){
         window.open("/payments/credit/bytoss",'토스페이 결제',"width=800,height=600");
     }
 }
+

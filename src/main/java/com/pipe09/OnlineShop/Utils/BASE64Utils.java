@@ -12,10 +12,10 @@ import java.nio.ByteBuffer;
 import java.util.Base64;
 
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class BASE64Utils {
-    private Base64.Encoder encoder;
-    private Base64.Decoder decoder;
+    private final Base64.Encoder encoder;
+    private final Base64.Decoder decoder;
 
 
     public String translateSecKey(String key){

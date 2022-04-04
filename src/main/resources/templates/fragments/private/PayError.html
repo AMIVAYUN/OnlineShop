@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>결제 실패</title>
+    <link rel="stylesheet" href="../../css/payend.css">
+</head>
+<body>
+<div id="wrap">
+    <div th:text="${message}"></div>
+    <span><button onclick='openPaylist()'>주문 내역 보기</button>&nbsp;<button onclick='openShop()'>쇼핑 계속하기</button></span>
+    <script>
+        function openPaylist(){
+            window.opener.document.location.assign("/")
+            window.close();
+        }
+        function openShop(){
+            window.opener.document.location.assign("/")
+            window.close();
+        }
+    </script>
+</div>
+</body>
+</html>

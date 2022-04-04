@@ -8,18 +8,16 @@ import com.pipe09.OnlineShop.Domain.Member.Member;
 import com.pipe09.OnlineShop.Domain.Member.UserType;
 import com.pipe09.OnlineShop.Domain.Orders.OrderItem;
 import com.pipe09.OnlineShop.Domain.Orders.Orders;
+import com.pipe09.OnlineShop.Domain.Payment.Failure;
+import com.pipe09.OnlineShop.Domain.Payment.payment;
 import com.pipe09.OnlineShop.Domain.SessionUser;
 import com.pipe09.OnlineShop.Domain.Shoplist.Shop_Item;
 import com.pipe09.OnlineShop.Dto.Order.CreateOrderDto;
 import com.pipe09.OnlineShop.Dto.Payment.approvePaymentDto;
 import com.pipe09.OnlineShop.Dto.Payment.requestApproveDto;
-import com.pipe09.OnlineShop.Repository.ItemRepository;
-import com.pipe09.OnlineShop.Repository.MemberRepository;
-import com.pipe09.OnlineShop.Repository.OrderRepository;
-import com.pipe09.OnlineShop.Repository.ShopItemRepository;
+import com.pipe09.OnlineShop.Repository.*;
 //import com.pipe09.OnlineShop.Utils.AES;
 import com.pipe09.OnlineShop.Utils.BASE64Utils;
-import com.pipe09.OnlineShop.Utils.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -54,7 +52,10 @@ public class OrderService {
     private final ShopItemRepository shopItemRepository;
     private final Oauth2Service oauth2Service;
     private final ItemRepository itemRepository;
-
+    private final PaymentRepository paymentRepository;
+    @Value("${tosspayment.secret}")
+    private String SecretKey;
+    private final RestTemplate rt;
     /*
     public Long order(String memberId,Long itemId, int count){
         Member member= memberRepository.findByuserId(memberId);
@@ -77,7 +78,6 @@ public class OrderService {
         try{
             BASE64Utils utils=new BASE64Utils(Base64.getEncoder(),Base64.getDecoder());
             String encoded=utils.encode(value);
-            orderRepository.saveOrderKey(encoded,value);
             return encoded;
         }catch (Exception e){
             return e.toString();
@@ -163,7 +163,7 @@ public class OrderService {
     public HttpHeaders getRequestTossHeaders(){
         HttpHeaders headers=new HttpHeaders();
         BASE64Utils base64 = new BASE64Utils(Base64.getEncoder(),Base64.getDecoder());
-        String En_secretkey=base64.translateSecKey(Utils.getSecretKey() +":");
+        String En_secretkey=base64.translateSecKey(this.SecretKey+":");
         headers.add("Authorization"," Basic "+En_secretkey);
         headers.add("Content-Type","application/json");
         return headers;
@@ -177,7 +177,7 @@ public class OrderService {
     }
 
      */
-    public void getApprovalofPayment(String paymentKey,String orderId, int amount){
+    public String getApprovalofPayment(String paymentKey,String orderId, int amount){
         requestApproveDto entity=new requestApproveDto();
         entity.setAmount(amount);
         entity.setOrderId(orderId);
@@ -190,7 +190,7 @@ public class OrderService {
 
          */
         //보내기
-        RestTemplate rt = new RestTemplate();
+
         rt.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
         String url="https://api.tosspayments.com/v1/payments/"+paymentKey;
         ResponseEntity<approvePaymentDto> response=rt.exchange(
@@ -201,6 +201,68 @@ public class OrderService {
 
         );
         log.info(response.getStatusCode() +": "+ response.getStatusCodeValue());
-        response.getBody();
+        if(response.getStatusCodeValue()==200){
+            String result=processPaymentApprove(response.getBody());
+            log.info(result+" Entity 결제 완료 및 저장 ");
+            return String.valueOf(response.getStatusCodeValue());
+        }else{
+            return response.getBody().getMessage();
+        }
+    }
+
+
+
+    @Transactional
+    public String processPaymentApprove(approvePaymentDto dto){
+        payment payment=new payment(dto);
+        String user_id=getLoginUsername();
+        Member member=memberRepository.findByuserId(user_id);
+        payment.setMember(member);
+        paymentRepository.save(payment);
+        return payment.getPaymentKey();
+    }
+
+    @Transactional
+    public boolean getFail(String code,String message,String orderId){
+        payment payment=paymentRepository.findByOrderId(orderId);
+        if(payment.isNotfound()){
+            return false;
+        }else{
+            Failure failure=new Failure();
+            failure.setCode(code);
+            failure.setMessage(message);
+            payment.setFailure(failure);
+            return true;
+        }
+
+    }
+
+    public List<payment> getListByUser(int offset,int limit){
+        String user_id=getLoginUsername();
+        List<payment> paymentList=paymentRepository.findByUserId(user_id,offset,limit);
+        if(paymentList==null){
+            return null;
+        }else{
+            return paymentList;
+        }
+
+    }
+
+    public String getLoginUsername(){
+        SessionUser user=(SessionUser) oauth2Service.getHttpSession().getAttribute("user");
+        if(user==null){
+            return SecurityContextHolder.getContext().getAuthentication().getName();
+        }else{
+            return user.getEmail();
+        }
+    }
+    public List<OrderItem> getOrderItemsByEncodedOrderID(String orderId){
+        BASE64Utils utils=new BASE64Utils(Base64.getEncoder(),Base64.getDecoder());
+        Long order_id=Long.valueOf(utils.decode(orderId));
+        List<OrderItem> itemList=orderRepository.findOrderItems(order_id);
+        if(itemList==null){
+            return null;
+        }
+        return orderRepository.findOrderItems(order_id);
     }
 }

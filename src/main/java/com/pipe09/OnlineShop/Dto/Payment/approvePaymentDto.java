@@ -1,7 +1,10 @@
 package com.pipe09.OnlineShop.Dto.Payment;
 
 
+import com.pipe09.OnlineShop.Domain.Payment.Cancels;
 import lombok.Data;
+
+import java.util.HashMap;
 
 @Data
 public class approvePaymentDto {
@@ -12,28 +15,31 @@ public class approvePaymentDto {
     public String orderName;
     public String currency;
     public String method;
-    public String status;
+    public String status; //READY,IN_PROGRESS,WAITING_FOR_DEPOSIT,DONE,CANCELED,PARTIAL_CANCELED,ABORTED,EXPIRED
     public String requestedAt;
     public String approvedAt;
     public boolean useEscrow;
     public boolean cultureExpense;
     public cardDto card;
-    public String virtualAccount;
-    public String transfer;
-    public String mobilePhone;
-    public String giftCertificate;
+    public VirtualAccountDto virtualAccount;
+    public TransferDto transfer;
+    public MobilePhoneDto mobilePhone;
+    public GiftCertificateDto giftCertificate;
     public String foreignEasyPay;
-    public String cashReceipt;
-    public String discount;
-    public String cancels;
-    public String secret;
+    public CashReceiptDto cashReceipt;
+    public DiscountDto discount;
+    public HashMap<String,Object> cancels; //cancelAmount(취소금액),cancelReason(취소사유),taxFreeAmount(면세처리금액),taxAmount(과세금액),refundableAmount(취소후 환불가능금액),canceledAt(취소 날짜정보 YYYY-MM-dd'T'HH:mm:SS±hh:mm)
+    //순서대로  NUM,STRING,NUM,NUM,STRING
+    public String secret; //가상계좌 콜백 시크릿키
     public String type;
-    public String easyPay;
-    public String country;
-    public String failure;
+    public String easyPay; //간편결제 타입 정보
+    public String country; //결제 국가
+    public FailureDto failure; //결제 실패 내용
     public int totalAmount;
     public int balanceAmount;
     public int suppliedAmount;
     public int vat;
     public int taxFreeAmount;
+    public String code;
+    public String message;
 }

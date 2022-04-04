@@ -1,0 +1,28 @@
+body{
+    background-color: lightskyblue;
+}
+@font-face {
+    font-family: 'SUIT-Medium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Medium.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+#wrap{
+    font-family: SUIT-Medium;
+    position:absolute;
+    width:50%;
+    height:10%;
+    left:50%;
+    top:25%;
+    margin-left:5%;
+    transform: translate(-50%);
+    overflow: revert;
+    background-color: white;
+    border-radius: 20px;
+    padding-top:20px;
+    text-align: center;
+}
+#wrap span button{
+    border-radius: 10px;
+
+}

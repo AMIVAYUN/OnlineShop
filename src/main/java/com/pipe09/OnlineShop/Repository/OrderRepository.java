@@ -10,6 +10,7 @@ import org.hibernate.criterion.Order;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import java.util.Base64;
 import java.util.List;
 
@@ -37,14 +38,22 @@ public class OrderRepository {
         return em.createQuery("select o from Orders o join fetch o.member m", Orders.class).setFirstResult(offset).setMaxResults(limit).getResultList();
     }
     public List<OrderItem> findOrderItems(Long id){
-        return em.createQuery("select oi from OrderItem oi join fetch oi.item i where oi.orders.Order_ID=:id",OrderItem.class).setParameter("id",id).getResultList();
+        try{
+            return em.createQuery("select oi from OrderItem oi join fetch oi.item i where oi.orders.Order_ID=:id",OrderItem.class).setParameter("id",id).getResultList();
+        }catch (EntityNotFoundException e){
+            return null;
+        }
+
     }
+    /*
     public String saveOrderKey(String key,Long Order_ID){
         OrderKey orderKey=new OrderKey();
         orderKey.setOrderKey(key); orderKey.setOrder_ID(Order_ID);
         em.persist(orderKey);
         return orderKey.getOrderKey();
     }
+
+     */
     
 
 }

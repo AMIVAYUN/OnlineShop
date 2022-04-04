@@ -4,18 +4,20 @@ package com.pipe09.OnlineShop.Utils;
 import com.pipe09.OnlineShop.Domain.Delivery.Deliverystatus;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.time.LocalDate;
 
+
 public class Utils {
     private final static String HEADER_AUTHORIZATION = "Authorization";
     private final static String TOKEN_PREFIX = "Bearer ";
     private static final String IMGPATH=System.getProperty("user.home");
-    @Value("${tosspayment.secret}")
-    @Getter
-    private static String SecretKey;
+
+
+
     public static String getImgPATHwithOS(){
         String os=System.getProperty("os.name").toLowerCase();
         if (os.contains("win")) {

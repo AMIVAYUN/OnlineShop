@@ -15,11 +15,11 @@ public class ManagerController {
     }
     @GetMapping("/admin/manage/register-item")
     public String regitemAccess(){
-        return "fragments/private/MM_Register_Item";
+        return "fragments/private/Pop_Regitem";
     }
     @GetMapping(path = "/admin/manage")
     public String managerAccess(){
-        return "fragments/private/manager";
+        return "fragments/private/managerv2";
     }
     @GetMapping(path="/admin/manage/register-item.do")
     public String resultitemUpload(){
@@ -39,5 +39,6 @@ public class ManagerController {
     public String viewlistOrders(){return "fragments/private/MM_View_Orders";}
     @GetMapping(path="/admin/manage/view-item")
     public String viewlistItems(){return "fragments/private/MM_View_Item";}
-
+    @GetMapping(path = "/admin/manage/image/putImage")
+    public String putImageHTML(){ return "fragments/private/getImage";}
 }

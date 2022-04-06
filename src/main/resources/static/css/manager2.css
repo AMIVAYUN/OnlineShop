@@ -1,0 +1,97 @@
+body{
+    width:100%;
+    overflow-x:hidden;
+}
+nav{
+    width:200px;
+    background-color: #eee;
+    border-right:1px solid #ddd;
+    position:fixed;
+    height:100%;
+}
+
+@font-face {
+    font-family: 'SUIT-Medium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Medium.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+h1{
+    font-size:18px; padding:20px;
+    font-family: SUIT-Medium;
+}
+h1 img{
+    width:150px;
+}
+.menu li a{
+    height:30px;
+    line-height:30px;
+    display:block;
+    padding:0 20px;
+    font-size:12px;
+    font-weight: bold;
+    color:#555;
+}
+.menu li a:hover{background-color: lightgrey; color:white;}
+
+.section{
+    width:70%;
+    display:none;
+    margin-left:250px;
+    padding-top:50px;
+    height:900px;
+}
+#bodyheader{
+    width:80%;
+    height:800px;
+}
+
+#item_img{
+    width:60px;
+    height:60px;
+}
+.del{
+    background-color: white;
+    border-radius: 10px;
+    border:3px solid lightgray;
+    font-family: SUIT-Medium;
+    margin-left:20px;
+    width:100px;
+    height:50px;
+    margin-top: 20px;
+
+}
+.del:hover{
+    background-color: black;
+    color: white;
+}
+.rep{
+    background-color: white;
+    border-radius: 10px;
+    border:3px solid lightgray;
+    font-family: SUIT-Medium;
+    margin-left:20px;
+    width:100px;
+    height:50px;
+    margin-top: 20px;
+
+}
+.rep:hover{
+    background-color: black;
+    color: white;
+}
+.reg{
+    background-color: white;
+    border-radius: 10px;
+    border:3px solid lightgray;
+    font-family: SUIT-Medium;
+    margin-left:20px;
+    width:100px;
+    height:50px;
+    margin-top: 20px;
+
+}
+.reg:hover{
+    background-color: black;
+    color: white;
+}

@@ -1,19 +1,14 @@
 package com.pipe09.OnlineShop.Controller;
 
 
-import com.pipe09.OnlineShop.Service.ItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import java.time.LocalDate;
 
 @Controller
 @Slf4j
@@ -40,5 +35,6 @@ public class HomeController {
     public String getDBElectricTransactionlaw(){ return "fragments/private/ElectricTransactionLaw"; }
     @GetMapping("/laws/PersonalInfo")
     public String getPersonalInfo(){ return "fragments/private/PersonalInfoLaw"; }
+
 
 }

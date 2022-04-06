@@ -48,7 +48,7 @@ public class OrderDto {
         order.getOrderItems().stream().forEach(item -> item.getItem().getName());
         this.orderItemDto=order.getOrderItems().stream().map(OrderItemDto::new).collect(Collectors.toList());
         orderItemDto.stream().forEach(orderItemDto1 -> {
-            Totalprice+=orderItemDto1.getTotalprice();
+            Totalprice+=(orderItemDto1.getPrice()*orderItemDto1.getCount());
         });
     }
 

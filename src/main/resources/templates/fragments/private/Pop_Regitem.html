@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제품 등록ㆍ삭제</title>
+    <style>
+        body{
+            position: relative;
+        }
+        #wrap{
+            overflow: revert;
+            position:absolute;
+            left:50%;
+            top:25%;
+            width:100%;
+            margin-left:5%;
+            height:100%;
+            transform: translate(-50%);
+        }
+        form{
+            text-align: center;
+        }
+        .input{
+            width:500px;
+            height:40px;
+            border:3px solid black;
+            border-radius: 10px;
+            text-indent: 5px;
+            margin-bottom:5px;
+
+        }
+        #desc{
+            width:500px;
+            border:3px solid black;
+            border-radius: 10px;
+            text-indent: 5px;
+            height:80px;
+            margin-bottom:5px;
+            resize: none;
+        }
+        select{
+            width:200px;
+            height:25px;
+            border-radius: 10px;
+            border:3px solid black;
+            margin-bottom:5px;
+        }
+        #file{
+            width:500px;
+            border:3px solid black;
+            border-radius: 10px;
+            text-indent: 5px;
+            height:50px;
+            margin-bottom:5px;
+            text-align: center;
+        }
+        form button{
+            background-color: white;
+            border:3px solid black;
+            border-radius: 10px;
+            width:80px;
+            height:30px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        form button:hover{
+            background-color: black;
+            color:white;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <form method="post" action="/api/v2/register-item.do" enctype="multipart/form-data">
+        <input type="text" class="input" name="name" placeholder="상품 이름"/><br>
+        <input type="number"class="input" name="price" placeholder="가격"/></br>
+        <input type="number"class="input" name="StockQuantity" placeholder="재고 수량"/></br>
+        <input type="number"class="input" name="Weight" placeholder="무게"/></br>
+        <textarea type="text" id="desc"name="Description" placeholder="상품 설명"/></textarea></br>
+        <input type="text"class="input" name="MadeIn" placeholder="제조 국가"/></br>
+        <input type="text"class="input" name="ManufacturedCompany" placeholder="제조사"/></br>
+        <input type="file"id="file" name="img"style="height:50px;"accept="image/jpeg,image/gif,image/png"/></br>
+
+        <select name="dtype" >
+            <option name="L">누수탐지기</option>
+            <option name="D">드릴</option>
+            <option name="E">내시경</option>
+            <option name="G">글라인더</option>
+            <option name="H">해머</option>
+            <option name="C">커터</option>
+            <option name="N">니퍼</option>
+            <option name="S">하수관 청소기</option>
+            <option name="W">렌치</option>
+            <option name="ETC">기타</option>
+        </select></br>
+        <button type="submit" value="결과 확인">전송</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

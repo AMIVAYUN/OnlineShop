@@ -8,6 +8,7 @@ import com.pipe09.OnlineShop.Domain.Board.Notice;
 import com.pipe09.OnlineShop.Domain.Item.Item;
 import com.pipe09.OnlineShop.Domain.Item.ItemFactory;
 import com.pipe09.OnlineShop.Domain.Item.Item_status;
+import com.pipe09.OnlineShop.Dto.Item.Dv2_itemDto;
 import com.pipe09.OnlineShop.Dto.Item.P_itemDto;
 import com.pipe09.OnlineShop.Dto.Item.R_itemDto;
 import com.pipe09.OnlineShop.Dto.Board.NoticeDto;
@@ -21,13 +22,20 @@ import com.pipe09.OnlineShop.Utils.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.catalina.security.SecurityClassLoad;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @RestController
@@ -39,7 +47,16 @@ public class ManagerApiController {
     private final MemberService memberService;
     private final BoardService boardService;
 
+    @GetMapping("/logout")
+    public RedirectView logout(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        Authentication auth= SecurityContextHolder.getContext().getAuthentication();
+        if(auth!=null){
+            new SecurityContextLogoutHandler().logout(request, response, auth);
 
+
+        }
+        return new RedirectView("/");
+    }
 
 
 
@@ -138,6 +155,44 @@ public class ManagerApiController {
             return new ResponseEntity<String>("데이터 변환간 에러가 발생하였습니다.",HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @DeleteMapping("/admin/v2/items/delete-item.do")
+    public ResponseEntity<String> deleteItemV2(@RequestBody Dv2_itemDto dto){
+
+        dto.getItemIdList().stream().forEach(id -> {
+            itemService.removeById(id);
+        });
+
+
+        return new ResponseEntity<String>("삭제가 완료되었습니다.", HttpStatus.OK);
+    }
+
+
+    @PutMapping(path = "/admin/v2/items/{id}/update-item.do")
+    public ResponseEntity<String> updateItemV2(@PathVariable Long id, @RequestParam(value = "body")String obj,@RequestPart(value = "file") @Nullable MultipartFile file) throws JsonProcessingException {
+        ObjectMapper objectMapper=new ObjectMapper().registerModule(new SimpleModule());
+        P_itemDto dto =objectMapper.readValue(obj,P_itemDto.class);
+        DefaultMapper<Item> mapper=new DefaultMapper<>(ItemFactory.makingItemBytype(dto.getDtype()));
+        String msg=null;
+        Item item=mapper.Translate(dto);
+        item.setItem_ID(id);
+        if(file != null){
+            msg=Item.MakingImgfile(file);
+            item.setImgSrc("img/upload/"+Utils.deleteKorean(file.getOriginalFilename()));
+        }
+        Long putid= itemService.updateItem(item);
+
+        if((msg==null) && (putid !=null)){
+            return new ResponseEntity<String>("수정에 성공하였습니다.",HttpStatus.OK);
+        }
+        else if (msg != null){
+            return new ResponseEntity<String>(msg,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        else{
+            return new ResponseEntity<String>("데이터 변환간 에러가 발생하였습니다.",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 }
 
 

@@ -5,14 +5,18 @@ import lombok.Data;
 
 @Data
 public class OrderItemDto {
+    private Long orderitem_id;
+    private Long item_id;
     private String itemname;
     private int count;
-    private int totalprice;
+    private int price;
 
     public OrderItemDto(OrderItem item){
+        this.orderitem_id=item.getOrderItem_ID();
+        this.item_id=item.getItem().getItem_ID();
         this.itemname=item.getItem().getName();
         this.count=item.getCount();
-        this.totalprice=item.getTotalPrice();
+        this.price=item.getPrice();
     }
 
 

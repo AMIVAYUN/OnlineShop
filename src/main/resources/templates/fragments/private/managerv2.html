@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ax5ui/ax5ui-grid/master/dist/ax5grid.css" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ax5ui/ax5ui-calendar/master/dist/ax5calendar.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ax5ui/ax5ui-picker/master/dist/ax5picker.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ax5ui/ax5ui-select/master/dist/ax5select.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ax5ui/ax5ui-grid/master/dist/ax5grid.css">
+    <script type="text/javascript" src="https://cdn.rawgit.com/ax5ui/ax5core/master/dist/ax5core.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/ax5ui/ax5ui-calendar/master/dist/ax5calendar.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/ax5ui/ax5ui-picker/master/dist/ax5picker.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/ax5ui/ax5ui-formatter/master/dist/ax5formatter.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/ax5ui/ax5ui-select/master/dist/ax5select.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/ax5ui/ax5ui-grid/master/dist/ax5grid.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ax5ui/ax5ui-modal/master/dist/ax5modal.css">
+    <script type="text/javascript" src="https://cdn.rawgit.com/ax5ui/ax5ui-modal/master/dist/ax5modal.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/97e36fce94.js" crossorigin="anonymous"></script>
+    <link rel ="stylesheet" type="text/css" href="../css/manager2.css">
+    <script src="../js/manager2.js"></script>
+
+    <title>관리자 시스템</title>
+
+</head>
+<body>
+<nav>
+    <h1><img src="../img/static/DaebongMark.jpg">대봉 산업 관리 시스템</h1>
+    <ul class="menu">
+        <li><a>홈 화면</a></li>
+        <li><a>상품 관리</a></li>
+        <li><a>공지 관리</a></li>
+        <li><a>주문 관리</a></li>
+        <li><a>회원 관리</a></li>
+    </ul>
+</nav>
+<div id="bodyheader">
+    <div id="default" class="section">
+
+    </div>
+    <div id="item" class="section">
+        <h1><i class="fa-solid fa-cubes"></i></i>&nbsp;상품 관리</h1>
+        <div data-ax5grid="item-grid" data-ax5grid-config="{}" style="width:1200px;height:700px;"></div>
+        <button class="del" onclick="deleteItems()">삭제</button>
+        <button class="rep" onclick="replaceItems()">수정</button>
+        <button class="reg" onclick="registerItems()">등록</button>
+    </div>
+
+    <div id="faq" class="section">
+        <h1><i class="fa-brands fa-discourse"></i>&nbsp;공지 관리</h1>
+        <div data-ax5grid="faq-grid" data-ax5grid-config="{}" style="width:1200px;height:700px;"></div>
+        <button class="del" onclick="deleteItems()">삭제</button>
+        <button class="rep" onclick="replaceItems()">수정</button>
+        <button class="reg" onclick="registerItems()">등록</button>
+    </div>
+    <div id="order" class="section">
+        <h1><i class="fa-solid fa-calendar-check"></i>&nbsp;주문 관리</h1>
+        <div data-ax5grid="order-grid" data-ax5grid-config="{}" style="width:1200px;height:700px;"></div>
+        <button class="rep" onclick="replaceItems()">수정</button>
+
+    </div>
+    <div id="member" class="section">
+        <h1><i class="fa-solid fa-clipboard-user"></i>&nbsp;회원 관리</h1>
+        <div data-ax5grid="member-grid" data-ax5grid-config="{}" style="width:1200px;height:700px;"></div>
+        <button class="del" onclick="deleteItems()">삭제</button>
+        <button class="rep" onclick="replaceItems()">수정</button>
+        <button class="reg" onclick="registerItems()">등록</button>
+    </div>
+</div>
+
+
+
+</body>
+</html>

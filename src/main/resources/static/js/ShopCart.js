@@ -43,7 +43,7 @@ async function SessionCheck(){
                 '                    <td class="del"><i id="delete" class="fa-solid fa-trash-can"></i></td></tr>';
             $("#shoppinglist").append(innerhtml);
             sum+=res[idx].count*res[idx].price;
-            sum = sum.toLocaleString();
+
         })
 
     }else{
@@ -51,6 +51,7 @@ async function SessionCheck(){
             alert("로그인이 필요한 서비스 입니다.")
         })
     }
+    sum = sum.toLocaleString();
     $("#totalpricevalue").text(sum +"원");
 
 }

@@ -37,3 +37,5 @@ out/
 .vscode/
 
 application-aws.properties
+DBonlineshop.pkcs12
+DBtrust.pkcs12

@@ -91,12 +91,12 @@ body{
 
 
 #side_Bar{
-    margin-left:1000px;
-    position: sticky;
-    width:60px;
-    height:500px;
-    Top:200px;
-    background-color:white ;
+     margin-left:1200px;
+      position: fixed;
+      width:60px;
+      height:500px;
+      Top:200px;
+      background-color:white ;
 
 }
 #side_Bar div img{

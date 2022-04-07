@@ -5,6 +5,7 @@ import com.pipe09.OnlineShop.Domain.Orders.OrderItem;
 import com.pipe09.OnlineShop.Domain.Orders.Orders;
 import com.pipe09.OnlineShop.Domain.Payment.payment;
 import com.pipe09.OnlineShop.Dto.Order.CreateOrderDto;
+import com.pipe09.OnlineShop.Dto.Order.DeliverySetDto;
 import com.pipe09.OnlineShop.Dto.Order.OrderDto;
 import com.pipe09.OnlineShop.Dto.OrderItem.OrderItemDto;
 import com.pipe09.OnlineShop.Dto.Payment.Us_paymentDto;
@@ -78,6 +79,15 @@ public class OrderApiController {
             }).collect(Collectors.toList());
             return new ResponseEntity<List<Us_paymentDto>>(dtoList, HttpStatus.OK);
         }
+    }
+    @PutMapping("/admin/manage/orders/upto-delivery")
+    public ResponseEntity setupDelivery(@RequestBody DeliverySetDto dto){
+        try{
+            orderService.ChangeStatToDelivery(dto.getOrder_id());
+        }catch(Exception e){
+            return new ResponseEntity(e.toString(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 

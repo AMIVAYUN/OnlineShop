@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 public class ManagerController {
 
+    //version2
     @GetMapping("/admin/manage/register-faq")
     public String regfaqAccess(){
         return "fragments/private/MM_Register_FAQ";
@@ -21,7 +22,9 @@ public class ManagerController {
     public String managerAccess(){
         return "fragments/private/managerv2";
     }
-    @GetMapping(path="/admin/manage/register-item.do")
+    @GetMapping(path = "/admin/manage/image/putImage")
+    public String putImageHTML(){ return "fragments/private/getImage";}
+    @GetMapping(path="/api/v2/register-item.do")
     public String resultitemUpload(){
         return "fragments/private/Reg_suc";
     }
@@ -29,6 +32,8 @@ public class ManagerController {
     public String resultfaqUpload(){
         return "fragments/private/Reg_suc";
     }
+    //version_1;
+    /*
     @GetMapping(path="/admin/manage/view-faq")
     public String viewlistfaq(){return "fragments/private/MM_View_FAQ";}
     @GetMapping(path="/admin/manage/view-members")
@@ -39,6 +44,9 @@ public class ManagerController {
     public String viewlistOrders(){return "fragments/private/MM_View_Orders";}
     @GetMapping(path="/admin/manage/view-item")
     public String viewlistItems(){return "fragments/private/MM_View_Item";}
-    @GetMapping(path = "/admin/manage/image/putImage")
-    public String putImageHTML(){ return "fragments/private/getImage";}
+
+
+
+     */
+
 }

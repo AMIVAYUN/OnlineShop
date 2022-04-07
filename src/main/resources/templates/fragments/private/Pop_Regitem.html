@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>제품 등록ㆍ삭제</title>
     <style>
         body{
@@ -56,6 +62,15 @@
             margin-bottom:5px;
             text-align: center;
         }
+        #input-image{
+            width:500px;
+            border:3px solid black;
+            border-radius: 10px;
+            text-indent: 5px;
+            height:50px;
+            margin-bottom:5px;
+            text-align: center;
+        }
         form button{
             background-color: white;
             border:3px solid black;
@@ -73,7 +88,93 @@
 </head>
 <body>
 <div id="wrap">
+    <!--<form method="post" action="/api/v2/register-item.do" enctype="multipart/form-data">-->
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+    <input type="text" name="name"class="input" id="name" placeholder="상품 이름"/><br>
+    <input type="number" name="price"class="input"id="price" placeholder="가격"/></br>
+    <input type="number" name="StockQuantity" class="input"id="StockQuantity" placeholder="재고 수량"/></br>
+    <input type="number" name="Weight" class="input"id="Weight" placeholder="무게"/></br>
+    <textarea type="text" name="Description"class="input" id="desc" placeholder="상품 설명"/></textarea></br>
+    <input type="text" name="MadeIn" class="input"id="MadeIn" placeholder="제조 국가"/></br>
+    <input type="text" name="ManufacturedCompany"class="input"id="ManufacturedCompany" placeholder="제조사"/></br>
+    <input type="file" id="input-image" class="input"name="file"style="height:50px;"/></br>
+
+    <select name="dtype" id="dtype">
+        <option name="L">누수탐지기</option>
+        <option name="D">드릴</option>
+        <option name="E">내시경</option>
+        <option name="G">글라인더</option>
+        <option name="H">해머</option>
+        <option name="C">커터</option>
+        <option name="N">니퍼</option>
+        <option name="S">하수관 청소기</option>
+        <option name="W">렌치</option>
+        <option name="ETC">기타</option>
+
+
+    </select></br>
+    <button type="submit" value="결과 확인" onclick="postItem()">전송</button>
+
+
+
+    <script>
+        const csrfToken = $('meta[name="_csrf"]').attr('content');
+        function postItem(){
+            var formData=new FormData();
+            var alph=$("#input-image")
+            data=alph[0].files[0];
+            if($("#input-image").length){
+                formData.append('file',data);
+            }else{
+                alert("이미지를 추가해주세요.");
+                return;
+            }
+            let obj={
+                "name":$("#name").val(),
+                "Description": $("#desc").val(),
+                "price": $("#price").val(),
+                "dtype":$("#dtype").val(),
+                "StockQuantity":$("#StockQuantity").val(),
+                "ManufacturedCompany":$("#ManufacturedCompany").val(),
+                "MadeIn":$("#MadeIn").val(),
+                "weight":$("#Weight").val()
+            }
+
+            formData.append('body',JSON.stringify(obj));
+            console.log(formData);
+            postItemSequence(formData);
+        }
+
+        async function postItemSequence(formData) {
+            var url = "/admin/manage/items/register-item.do"
+
+            await fetch(url, {
+                method: "post",
+                headers: {'X-CSRF-TOKEN': csrfToken},
+                body: formData
+            }).then(response => {
+                if (response.status == 200) {
+                    alert("게시물 등록에 성공하였습니다.");
+                    window.opener.ItemlistSetting();
+                    window.close();
+                } else {
+                    alert("내부 서버 에러 발생");
+                    console.log(response.status);
+
+                }
+                }
+            )
+        }
+    </script>
+</div>
+</body>
+
+<!--
+<body>
+
+<div id="wrap">
     <form method="post" action="/api/v2/register-item.do" enctype="multipart/form-data">
+
         <input type="text" class="input" name="name" placeholder="상품 이름"/><br>
         <input type="number"class="input" name="price" placeholder="가격"/></br>
         <input type="number"class="input" name="StockQuantity" placeholder="재고 수량"/></br>
@@ -96,10 +197,11 @@
             <option name="ETC">기타</option>
         </select></br>
         <button type="submit" value="결과 확인">전송</button>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
     </form>
 
 </div>
 
-</body>
+</body>-->
 </html>

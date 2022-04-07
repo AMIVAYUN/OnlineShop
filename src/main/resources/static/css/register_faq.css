@@ -1,9 +1,21 @@
+#wrap{
+    position:absolute;
+    margin-left:5%;
+    left:50%;
+    top:25%;
+    height:100%;
+    transform: translate(-50%);
+    overflow: revert;
+    width:60%;
+}
 #name{
     width:100%;
     padding-left: 10px;
     padding-right:10px;
     height:40px;
     font-size:18px;
+    margin-bottom:10px;
+    border:3px solid black;
 
 }
 #description{
@@ -12,9 +24,13 @@
     padding-right:10px;
     height:450px;
     font-size: 18px;
+    resize: none;
+    margin-bottom:10px;
+    border:3px solid black;
 }
 #submit{
     font-size: 20px;
     margin-top: 10px;
     height:40px;
+    background-color: darkgray;
 }

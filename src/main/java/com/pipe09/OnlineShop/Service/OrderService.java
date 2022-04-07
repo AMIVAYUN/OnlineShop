@@ -2,7 +2,7 @@ package com.pipe09.OnlineShop.Service;
 
 
 //import com.pipe09.OnlineShop.Domain.Delivery.Delivery;
-import com.pipe09.OnlineShop.Domain.Delivery.Deliverystatus;
+import com.pipe09.OnlineShop.Domain.Board.Delivery.Deliverystatus;
 import com.pipe09.OnlineShop.Domain.Item.Item;
 import com.pipe09.OnlineShop.Domain.Member.Member;
 import com.pipe09.OnlineShop.Domain.Member.UserType;
@@ -11,7 +11,6 @@ import com.pipe09.OnlineShop.Domain.Orders.Orders;
 import com.pipe09.OnlineShop.Domain.Payment.Failure;
 import com.pipe09.OnlineShop.Domain.Payment.payment;
 import com.pipe09.OnlineShop.Domain.SessionUser;
-import com.pipe09.OnlineShop.Domain.Shoplist.Shop_Item;
 import com.pipe09.OnlineShop.Dto.Order.CreateOrderDto;
 import com.pipe09.OnlineShop.Dto.Payment.approvePaymentDto;
 import com.pipe09.OnlineShop.Dto.Payment.requestApproveDto;
@@ -26,18 +25,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import javax.servlet.http.HttpSession;
-import java.net.http.HttpRequest;
-import java.time.LocalDate;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
@@ -264,5 +256,8 @@ public class OrderService {
             return null;
         }
         return orderRepository.findOrderItems(order_id);
+    }
+    public void ChangeStatToDelivery(Long id){
+        orderRepository.changeStatDelivery(id);
     }
 }

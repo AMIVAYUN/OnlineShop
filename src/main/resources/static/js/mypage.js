@@ -1,5 +1,6 @@
 var title_btn1_state = true;
 var title_btn2_state = false;
+const csrfToken = $('meta[name="_csrf"]').attr('content');
 
 $(document).ready(function(){
     SessionCheck();
@@ -224,7 +225,7 @@ async function JoinbyLocal(){
         }
 
     }
-    await fetch(url,{method:"post",headers:{'Content-Type': 'application/json'},body:JSON.stringify(obj)}).then(response => {
+    await fetch(url,{method:"post",headers:{'Content-Type': 'application/json','X-CSRF-TOKEN': csrfToken},body:JSON.stringify(obj)}).then(response => {
         if(response.status==200){
             alert("회원가입이 완료되었습니다.");
             location.assign("/");

@@ -33,7 +33,6 @@ public class BoardApiController {
     }
     @GetMapping("/api/v2/faq/all")
     public ResponseEntity<List<NoticeDto>> faqlistbyV2(@RequestParam(required = false) String keyword){
-        log.info(keyword);
         List<Notice> noticeList=boardService.findWithKeyword(keyword);
 
         if(noticeList.size()==0){

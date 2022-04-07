@@ -8,10 +8,10 @@ import com.pipe09.OnlineShop.Domain.Board.Notice;
 import com.pipe09.OnlineShop.Domain.Item.Item;
 import com.pipe09.OnlineShop.Domain.Item.ItemFactory;
 import com.pipe09.OnlineShop.Domain.Item.Item_status;
-import com.pipe09.OnlineShop.Dto.Item.Dv2_itemDto;
-import com.pipe09.OnlineShop.Dto.Item.P_itemDto;
-import com.pipe09.OnlineShop.Dto.Item.R_itemDto;
+import com.pipe09.OnlineShop.Dto.Board.UpdateNoticeDto;
+import com.pipe09.OnlineShop.Dto.Item.*;
 import com.pipe09.OnlineShop.Dto.Board.NoticeDto;
+import com.pipe09.OnlineShop.Dto.SimpleLongArrayDto;
 import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
 import com.pipe09.OnlineShop.Service.BoardService;
 import com.pipe09.OnlineShop.Service.ItemService;
@@ -37,7 +37,10 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.util.List;
 
+@CrossOrigin
 @RestController
 @Slf4j
 @RequiredArgsConstructor
@@ -59,13 +62,12 @@ public class ManagerApiController {
     }
 
 
-
     //TODO 이미지 중복처리
     //아이템 등록후 리턴.
+    /*
     @PostMapping(path = "/api/v2/register-item.do",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @ResponseBody
     public ResponseEntity<R_itemDto> register(@Valid R_itemDto dto){
-        String msg=Item.MakingImgfile(dto.img);
+        String msg=itemService.MakingImgfile(dto.img);
         Item item=Item.fromReg(dto);
         item.setStatus(Item_status.SALE);
         Long saveid=itemService.save(item);
@@ -79,6 +81,35 @@ public class ManagerApiController {
 
     }
 
+     */
+    @PostMapping(path = "/admin/manage/items/register-item.do")
+    public ResponseEntity<String> postItemV2(@RequestParam(value = "body")String obj,@RequestPart(value = "file") @Nullable MultipartFile file) throws JsonProcessingException {
+        ObjectMapper objectMapper=new ObjectMapper().registerModule(new SimpleModule());
+        R_itemDtoV2 dto =objectMapper.readValue(obj,R_itemDtoV2.class);
+        DefaultMapper<Item> mapper=new DefaultMapper<>(ItemFactory.makingItemBytype(dto.getDtype()));
+        ImgPathDto img=new ImgPathDto(null,null);
+        if(file != null){
+            img =itemService.MakingImgfile(file);
+            dto.setImgSrc("img/upload/"+img.getName());
+        }
+        Item item=Item.fromRegv2(dto);
+        item.setStatus(Item_status.SALE);
+        try {
+            Long saveid=itemService.save(item);
+
+            return new ResponseEntity(""+saveid+"번째 제품 저장에 성공하였습니다.",HttpStatus.OK);
+
+        }catch(Exception e) {
+            log.info(e.toString());
+        }
+        return new ResponseEntity("DB 저장에 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
+
+
+
+    /*
     @PostMapping("/api/v1/register-faq.do")
     public ResponseEntity<Notice> regfaqAccess(@Valid NoticeDto dto){
         Long id =null;
@@ -98,6 +129,37 @@ public class ManagerApiController {
         }
     }
 
+     */
+    @PostMapping("/admin/manage/register-faq.do")
+    public ResponseEntity reg_faq(@Valid @RequestBody NoticeDto dto){
+        try{
+            if(dto.getName()==null||dto.getDescription()==null){
+                return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+            Notice newEntity=Notice.createNotice(dto.getName(),dto.getDescription(), LocalDate.now());
+            Long id=boardService.save(newEntity);
+            log.info("admin"+id+"번째 게시글 등록");
+
+        }catch(Exception e){
+            log.info(e.toString());
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity(HttpStatus.OK);
+    }
+    @DeleteMapping("/admin/manage/delete-faq.do")
+    public ResponseEntity delfaqv2(@RequestBody SimpleLongArrayDto dto){
+        try{
+            dto.getValues().stream().forEach(value -> {
+                boardService.RemoveByID(value);
+            });
+
+        }catch(Exception e){
+            log.info(e.toString());
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity(HttpStatus.OK);
+    }
+    /*
     @DeleteMapping(path = "/api/v1/delete-faq.do")
     public ResponseEntity delfaq(@RequestBody NoticeDto dto){
         boolean result=boardService.RemoveByID(dto.getNotice_id());
@@ -111,6 +173,19 @@ public class ManagerApiController {
 
 
     }
+
+     */
+    @PutMapping(path="/admin/manage/update-faq.do")
+    public ResponseEntity updatefaqv2(@RequestBody List<UpdateNoticeDto> dtoList){
+        try{
+            dtoList.stream().forEach(dto -> boardService.update(dto.getNotice_id(),dto.getName(),dto.getDescription()));
+        }catch (Exception e){
+            log.info(e.toString());
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity(HttpStatus.OK);
+    }
+    /*
     @PutMapping(path="api/v1/faq/{id}/update-faq.do")
     public ResponseEntity<String> updatefaq(@PathVariable Long id,@RequestBody NoticeDto dto){
 
@@ -124,6 +199,9 @@ public class ManagerApiController {
         }
 
     }
+
+     */
+    /*
     @DeleteMapping("api/v2/items/{id}/delete-item.do")
     public ResponseEntity<String> deleteItem(@PathVariable Long id){
         boolean result=itemService.removeById(id);
@@ -131,6 +209,9 @@ public class ManagerApiController {
 
         return new ResponseEntity<String>(message, HttpStatus.OK);
     }
+
+     */
+    /*
     @PutMapping(path = "api/v2/items/{id}/update-item.do")
     public ResponseEntity<String> updateItem(@PathVariable Long id, @RequestParam(value = "body")String obj,@RequestPart(value = "file") @Nullable MultipartFile file) throws JsonProcessingException {
         ObjectMapper objectMapper=new ObjectMapper().registerModule(new SimpleModule());
@@ -155,7 +236,9 @@ public class ManagerApiController {
             return new ResponseEntity<String>("데이터 변환간 에러가 발생하였습니다.",HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @DeleteMapping("/admin/v2/items/delete-item.do")
+
+     */
+    @DeleteMapping("/admin/manage/items/delete-item.do")
     public ResponseEntity<String> deleteItemV2(@RequestBody Dv2_itemDto dto){
 
         dto.getItemIdList().stream().forEach(id -> {
@@ -167,25 +250,25 @@ public class ManagerApiController {
     }
 
 
-    @PutMapping(path = "/admin/v2/items/{id}/update-item.do")
+    @PutMapping(path = "/admin/manage/items/{id}/update-item.do")
     public ResponseEntity<String> updateItemV2(@PathVariable Long id, @RequestParam(value = "body")String obj,@RequestPart(value = "file") @Nullable MultipartFile file) throws JsonProcessingException {
         ObjectMapper objectMapper=new ObjectMapper().registerModule(new SimpleModule());
         P_itemDto dto =objectMapper.readValue(obj,P_itemDto.class);
         DefaultMapper<Item> mapper=new DefaultMapper<>(ItemFactory.makingItemBytype(dto.getDtype()));
-        String msg=null;
+        ImgPathDto img=new ImgPathDto(null,null);
         Item item=mapper.Translate(dto);
         item.setItem_ID(id);
         if(file != null){
-            msg=Item.MakingImgfile(file);
-            item.setImgSrc("img/upload/"+Utils.deleteKorean(file.getOriginalFilename()));
+            img =itemService.MakingImgfile(file);
+            item.setImgSrc("img/upload/"+img.getName());
         }
         Long putid= itemService.updateItem(item);
 
-        if((msg==null) && (putid !=null)){
+        if((img.getMsg()==null && putid !=null)){
             return new ResponseEntity<String>("수정에 성공하였습니다.",HttpStatus.OK);
         }
-        else if (msg != null){
-            return new ResponseEntity<String>(msg,HttpStatus.INTERNAL_SERVER_ERROR);
+        else if (img.getMsg() != null){
+            return new ResponseEntity<String>(img.getMsg(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
         else{
             return new ResponseEntity<String>("데이터 변환간 에러가 발생하였습니다.",HttpStatus.INTERNAL_SERVER_ERROR);

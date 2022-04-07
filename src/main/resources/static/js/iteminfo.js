@@ -2,7 +2,7 @@ var btn1_state = true;
 var btn2_state = false;
 var btn3_state = false;
 var btn4_state = false;
-
+const csrfToken = $('meta[name="_csrf"]').attr('content');
 $(document).ready(function(){
     localStorage.setItem("count","1");
     SessionCheck();
@@ -234,6 +234,8 @@ function mypageSetting(){
 
 }
 async function shopCartSetting(keyword){
+
+
     $("#btn_cart").click(async function(){
         const res=await fetch("/api/v1/members/is-who",{method:"get"}).then(response => response.text());
         if(res==='anonymousUser'){
@@ -245,7 +247,7 @@ async function shopCartSetting(keyword){
                 "count":$("#itemcount").val()
 
             }
-            const res1= await fetch("/api/v1/shopcarts/single/append.do",{method:"post",headers:{'Content-Type': 'application/json'},body:JSON.stringify(obj)}).then(response => response.json());
+            const res1= await fetch("/api/v1/shopcarts/single/append.do",{method:"post",headers:{'Content-Type': 'application/json','X-CSRF-TOKEN': csrfToken},body:JSON.stringify(obj)}).then(response => response.json());
             if(res1){
                 alert("장바구니에 담겼습니다.");
             }else{

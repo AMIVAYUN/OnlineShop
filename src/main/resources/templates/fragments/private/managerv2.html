@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ax5ui/ax5ui-grid/master/dist/ax5grid.css" />
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ax5ui/ax5ui-calendar/master/dist/ax5calendar.css">
@@ -29,7 +30,7 @@
 </head>
 <body>
 <nav>
-    <h1><img src="../img/static/DaebongMark.jpg">대봉 산업 관리 시스템</h1>
+    <h1><img src="../img/static/DaebongMark.jpg" onclick="gotoHome()" id="logo">대봉 산업 관리 시스템</h1>
     <ul class="menu">
         <li><a>홈 화면</a></li>
         <li><a>상품 관리</a></li>
@@ -53,22 +54,19 @@
     <div id="faq" class="section">
         <h1><i class="fa-brands fa-discourse"></i>&nbsp;공지 관리</h1>
         <div data-ax5grid="faq-grid" data-ax5grid-config="{}" style="width:1200px;height:700px;"></div>
-        <button class="del" onclick="deleteItems()">삭제</button>
-        <button class="rep" onclick="replaceItems()">수정</button>
-        <button class="reg" onclick="registerItems()">등록</button>
+        <button class="del" onclick="deleteNotice()">삭제</button>
+        <button class="rep" onclick="putNotice()">수정</button>
+        <button class="reg" onclick="registerNotice()">등록</button>
     </div>
     <div id="order" class="section">
         <h1><i class="fa-solid fa-calendar-check"></i>&nbsp;주문 관리</h1>
-        <div data-ax5grid="order-grid" data-ax5grid-config="{}" style="width:1200px;height:700px;"></div>
-        <button class="rep" onclick="replaceItems()">수정</button>
+        <div data-ax5grid="order-grid" data-ax5grid-config="{}" style="width:1400px;height:700px;"></div>
 
     </div>
     <div id="member" class="section">
         <h1><i class="fa-solid fa-clipboard-user"></i>&nbsp;회원 관리</h1>
         <div data-ax5grid="member-grid" data-ax5grid-config="{}" style="width:1200px;height:700px;"></div>
-        <button class="del" onclick="deleteItems()">삭제</button>
-        <button class="rep" onclick="replaceItems()">수정</button>
-        <button class="reg" onclick="registerItems()">등록</button>
+
     </div>
 </div>
 

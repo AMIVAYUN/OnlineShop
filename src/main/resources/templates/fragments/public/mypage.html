@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
       xmlns="http://www.w3.org/1999/html">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=yes, maximum-scale=1.0">
     <title>마이페이지</title>
     <link rel="stylesheet" href="../css/mypage.css">
@@ -126,7 +129,7 @@
                     <input class="userinfoChange" id="members_address" type="text" style="width: 180px"></input>
                 </div>
             </div>
-            <div class= "mypage_details_right_outer" style="width: 25%; margin:left:20px">
+            <div class= "mypage_details_right_outer" style="width: 25%; margin-left:20px">
                 <div class="mypage_details_inner">
                     <input class="userinfoChange" id="members_detailAddress" type="text" style="width: 180px;"></input>
                 </div>

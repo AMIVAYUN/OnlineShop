@@ -1,17 +1,13 @@
 package com.pipe09.OnlineShop.Repository;
 
-import com.pipe09.OnlineShop.Domain.Delivery.Deliverystatus;
+import com.pipe09.OnlineShop.Domain.Board.Delivery.Deliverystatus;
 import com.pipe09.OnlineShop.Domain.Orders.OrderItem;
-import com.pipe09.OnlineShop.Domain.Orders.OrderKey;
 import com.pipe09.OnlineShop.Domain.Orders.Orders;
-import com.pipe09.OnlineShop.Utils.BASE64Utils;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.criterion.Order;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
-import java.util.Base64;
 import java.util.List;
 
 @Repository
@@ -44,6 +40,11 @@ public class OrderRepository {
             return null;
         }
 
+    }
+    public void changeStatDelivery(Long id){
+        em.createQuery( "update Orders o set o.deliverystatus=:stat where o.Order_ID=:id ")
+                .setParameter("stat",Deliverystatus.DELIVERY).setParameter("id",id).executeUpdate();
+        em.clear();
     }
     /*
     public String saveOrderKey(String key,Long Order_ID){

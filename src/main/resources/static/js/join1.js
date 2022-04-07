@@ -1,4 +1,5 @@
 var count=0;
+const csrfToken = $('meta[name="_csrf"]').attr('content');
 $(document).ready(function(){
 
     //SessionCheck();
@@ -121,6 +122,20 @@ function execDaumPostcode() {
         }
     }).open();
 }
+function getCookie(name) {
+    if (!document.cookie) {
+        return null;
+    }
+
+    const xsrfCookies = document.cookie.split(';')
+        .map(c => c.trim())
+        .filter(c => c.startsWith(name + '='));
+
+    if (xsrfCookies.length === 0) {
+        return null;
+    }
+    return decodeURIComponent(xsrfCookies[0].split('=')[1]);
+}
 function emailProveSetting(){
     $("#email-identify").click(async function page1(){
         if(checkvalidEmail()){
@@ -149,7 +164,7 @@ async function page2(){
         "email":$("#emailvalue").val(),
         "key":$("#code").val()
     }
-    const res=await fetch("/api/v2/mails/prove.do",{method:"post",headers:{'Content-Type': 'application/json'},body:JSON.stringify(obj)}).then(res => res.json())
+    const res=await fetch("/api/v2/mails/prove.do",{method:"post",headers:{'Content-Type': 'application/json','X-CSRF-TOKEN': csrfToken},body:JSON.stringify(obj)}).then(res => res.json())
     if(count>4){
         alert("이메일 인증한도를 넘으셨습니다. 처음부터 다시 시도해주세요");
         location.reload();
@@ -304,11 +319,12 @@ async function JoinbyLocal(){
         }
 
     }
-    await fetch(url,{method:"post",headers:{'Content-Type': 'application/json'},body:JSON.stringify(obj)}).then(response => {
+    await fetch(url,{method:"post",headers:{'Content-Type': 'application/json','X-CSRF-TOKEN': csrfToken},body:JSON.stringify(obj)}).then(response => {
         if(response.status==200){
             alert("회원가입이 완료되었습니다.");
             location.assign("/");
         }else{
+            console.log(response.status);
             alert("오류가 발생하였습니다. 잠시후에 다시 시도해주세요");
         }
     })

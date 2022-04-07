@@ -1,5 +1,6 @@
 var firstGrid;
 var selected;
+const csrfToken = $('meta[name="_csrf"]').attr('content');
 let formData=new FormData();
 $(document).ready(function(){
     buttonSetting();
@@ -131,11 +132,12 @@ async function FaqlistSetting(){
 
     firstGrid.setConfig({
         target: $('[data-ax5grid="faq-grid"]'),
+        showRowSelector: true,
         columns: [
             {key: "faq_date", label: "등록 날짜"},
             {key: "faq_id", label: "공지 번호"},
-            {key: "faq_title", label: "공지 제목"},
-            {key: "faq_description", label: "공지 내용"},
+            {key: "faq_title", label: "공지 제목", width:300,editor:{type:"textarea"}},
+            {key: "faq_description", label: "공지 내용", width:675,editor:{type:"textarea"}},
 
             
         ]
@@ -151,17 +153,93 @@ async function FaqlistSetting(){
             firstGrid.setData(list);
         })
 }
+
+function putNotice(){
+    var selected=firstGrid.getList("selected");
+    var list=[];
+
+
+    if(window.confirm("작성하신 내용대로 변경하시겠습니까?")){
+
+        $.each(selected,function(i){
+            var obj={
+                "notice_id": selected[i].faq_id,
+                "name":selected[i].faq_title,
+                "description":selected[i].faq_description,
+            }
+            list.push(obj);
+        })
+        updatePost(list);
+    }
+}
+async function updatePost(obj){
+
+    var url="/admin/manage/update-faq.do"
+
+    await fetch(url,{
+        method:"put",
+        headers: {'Content-Type': 'application/json','X-CSRF-TOKEN': csrfToken},
+        body:JSON.stringify(obj)
+    }).then(response => {
+        if(response.status==200){
+            alert("변경에 성공하였습니다.");
+            FaqlistSetting();
+        }else{
+            alert("내부 서버 에러 발생");
+        }
+    });
+
+
+
+}
+function registerNotice(){
+    var popup=window.open("/admin/manage/register-faq" ,'new',toolbar=false,menubar=false,scrollbars=true,width=700,height=700)
+    popup.focus();
+
+}
+async function deleteNotice() {
+    list=[];
+    var selected=firstGrid.getList("selected");
+    $.each(selected,function(i){
+        list.push(selected[i].faq_id)
+    })
+    let obj={
+        values:list
+    }
+    //var NoticeDto=makeJsonObject(name,description,date);
+    //name:$(this).find("#name").text(),description:$(this).find("#desc").text(),date:$(this).find("#date")
+    var url = "/admin/manage/delete-faq.do"
+
+    const res=await fetch(url, {
+        method: "delete",
+        headers: {'Content-Type': 'application/json', 'Accept': 'application/json;charset=utf-8','X-CSRF-TOKEN': csrfToken},
+        body: JSON.stringify(obj)
+    }).then(response => {
+        if(response.status==200){
+            alert("삭제에 성공하였습니다.")
+            FaqlistSetting();
+        }else{
+            alert("내부 서버 에러 발생")
+        }
+    });
+
+
+
+
+}
+
 async function OrderlistSetting(){
     firstGrid = new ax5.ui.grid();
 
     firstGrid.setConfig({
         target: $('[data-ax5grid="order-grid"]'),
+
         columns: [
             {key: "order_Id", label: "주문 번호"},
             {key: "order_customer", label: "주문 고객"},
             {key: "order_totalprice", label: "주문 가격",formatter:"money"},
-            {key: "order_date", label: "주문 날짜",width:150},
-            {label: "주문 상품",width:200,columns:[
+            {key: "order_date", label: "주문 날짜",width:160},
+            {label: "주문 상품",width:180,columns:[
                     {key:"id", label: "식별 코드"}, //orderitem_id+//+item_id
                     {key:"itemname",label:"제품 이름"},
                     {key:"count",label:"제품 개수"},
@@ -169,13 +247,28 @@ async function OrderlistSetting(){
 
 
                 ]},
-            {key: "order_address", label: "배달 장소",width:200},
-            {key: "order_status",label:"주문 상태"},
+            {
+                key: "isChecked", label: "Checkbox", width: 50, sortable: false, align: "center", editor: {
+                    type: "checkbox", config: {height: 17, trueValue: "Y", falseValue: "N"}
+                }},
+            {key: "order_address", label: "배달 장소",width:320,editor:{type:"textarea"}},
+            {key: "order_status",label:"주문 상태"}
 
             
         ],
         body:{
-            mergeCells:["order_Id","order_customer","order_totalprice","order_date","order_address","order_status"]
+            mergeCells:["order_Id","order_customer","order_totalprice","order_date","order_address","order_status"],
+            onDBLClick: function(){
+                if(this.item.order_status==='배송 대기중'){
+                    if(confirm("배송 중인 상태로 수정하시겠습니까?")){
+                        ChangeOrders(this.item.order_Id);
+                        OrderlistSetting();
+                    }
+                }else{
+                    alert("해당 주문은 배송 대기중인 건이 아닙니다.");
+                }
+
+            }
         }
 
 
@@ -204,6 +297,20 @@ async function OrderlistSetting(){
 
 
 }
+async function ChangeOrders(id){
+    let obj={
+        "order_id":id
+    }
+    await fetch("/admin/manage/orders/upto-delivery",{
+        method:"put",headers:{'Content-Type':'application/json','X-CSRF-TOKEN': csrfToken},body:JSON.stringify(obj)
+    }).then(res=> {
+        if(res.status==200){
+            alert("상태가 변경되었습니다.");
+        }else{
+            alert("서버 에러 발생");
+        }
+    })
+}
 async function MemberlistSetting(){
     firstGrid = new ax5.ui.grid();
 
@@ -211,12 +318,12 @@ async function MemberlistSetting(){
         target: $('[data-ax5grid="member-grid"]'),
         columns: [
             {key: "member_id", label: "회원 번호"},
-            {key: "member_name", label: "회원 이름"},
+            {key: "member_name", label: "회원 이름",width:200},
             {key: "member_role", label: "회원 타입"},
-            {key: "member_username", label: "회원 아이디"},
-            {key: "member_email", label: "회원 이메일"},
+            {key: "member_username", label: "회원 아이디",width:200},
+            {key: "member_email", label: "회원 이메일",width:200},
             {key: "member_Tel", label: "회원 연락처"},
-            {key: "member_date", label: "가입 날짜"}
+            {key: "member_date", label: "가입 날짜",width:300}
             
         ]
     });
@@ -236,7 +343,7 @@ async function deleteItems(){
     let obj={
         "itemIdList":selected
     }
-    const res=await fetch("/admin/v2/items/delete-item.do",{method:"delete",headers:{'Content-Type':'application/json'},body:JSON.stringify(obj)}).then(response => response.text());
+    const res=await fetch("/admin/manage/items/delete-item.do",{method:"delete",headers:{'Content-Type':'application/json','X-CSRF-TOKEN': csrfToken},body:JSON.stringify(obj)}).then(response => response.text());
     alert(res);
     ItemlistSetting();
 
@@ -305,6 +412,9 @@ function registerItems(){
     window.open('/admin/manage/register-item','new',toolbar=false,menubar=false,scrollbars=true,width=700,height=900);return false
 
 }
+function gotoHome(){
+    location.assign('/');
+}
 function getReturnValue(returnValue) {
     formData.append('file',returnValue.get('file'));
     let obj={
@@ -322,12 +432,13 @@ function getReturnValue(returnValue) {
 
 }
 async function updateItemSequence(id,formData){
-    var url="/api/v2/items/"+id+"/update-item.do"
+    var url="/admin/manage/items/"+id+"/update-item.do"
 
-    await fetch(url,{method:"put",body:formData}).then(response => response.text()).then(
+    await fetch(url,{method:"put",headers:{'X-CSRF-TOKEN': csrfToken},body:formData}).then(response => response.text()).then(
         (res) => {
             alert(res);
-            location.reload();
+            window.opener.
+            window.close();
         }
     )
 

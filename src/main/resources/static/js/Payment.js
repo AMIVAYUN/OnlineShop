@@ -1,4 +1,5 @@
 var sum=0;
+const csrfToken = $('meta[name="_csrf"]').attr('content');
 $(document).ready(function (){
     SessionCheck();
     SearchSetting();
@@ -345,7 +346,7 @@ function getIteminCode(){
 async function makeOrder(data){
     const result=await fetch("/api/v1/orders/create"
     ,{
-        method:"post",headers:{'Content-Type':'application/json'},
+        method:"post",headers:{'Content-Type':'application/json','X-CSRF-TOKEN': csrfToken},
             body:JSON.stringify(data)
         }).then( response => response.text())
 

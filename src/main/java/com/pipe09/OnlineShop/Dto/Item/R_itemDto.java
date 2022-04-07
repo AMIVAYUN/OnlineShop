@@ -6,6 +6,9 @@ import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Lob;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 @Data
 public class R_itemDto {
     private String name;
@@ -16,6 +19,7 @@ public class R_itemDto {
     ////
     private String MadeIn;
     private String ManufacturedCompany;
+    @NotNull
     public MultipartFile img;
     private String dtype;
     private String imgSrc;

@@ -2,6 +2,9 @@ body{
     width:100%;
     overflow-x:hidden;
 }
+#logo{
+    cursor: pointer;
+}
 nav{
     width:200px;
     background-color: #eee;

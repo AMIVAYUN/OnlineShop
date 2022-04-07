@@ -7,6 +7,7 @@ import lombok.Data;
 public class OrderItemDto {
     private Long orderitem_id;
     private Long item_id;
+    private String imgSrc;
     private String itemname;
     private int count;
     private int price;
@@ -19,6 +20,7 @@ public class OrderItemDto {
         this.itemname=item.getItem().getName();
         this.count=item.getCount();
         this.price=item.getPrice();
+        this.imgSrc=item.getItem().getImgSrc();
     }
 
 

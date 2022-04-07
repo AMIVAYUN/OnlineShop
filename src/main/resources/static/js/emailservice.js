@@ -56,12 +56,13 @@ function logoSetting(){
 
 async function sendmail(){
     var baseurl=window.location;
+    const csrfToken = $('meta[name="_csrf"]').attr('content');
     let obj= {
 
     }
 
     if(confirm("전송하시겠습니까?")){
-        const res=await fetch("/api/v2/mails/post.do",{method:"post",headers:{'Content-Type': 'application/json'},
+        const res=await fetch("/api/v2/mails/post.do",{method:"post",headers:{'Content-Type': 'application/json','X-CSRF-TOKEN': csrfToken},
             body:JSON.stringify({
                 "name":$("#name").val(),
                 "title":$("#title").val(),

@@ -1,18 +1,60 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+
 <head>
+
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../../css/register_faq.css">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <title>공지사항 등록</title>
 </head>
 <body>
 
 
+    <div id="wrap">
 
-    <form method="post" action="/api/v1/register-faq.do">
         <input type="text" name="name" id="name"placeholder="공지사항 제목"/><br>
-        <input type="text" name="description" id="description" placeholder="상품 설명"/></br>
-        <button type="submit" value="결과 확인" id="submit">전송</button>
-    </form>
+        <textarea type="text" name="description" id="description" placeholder="상품 설명"></textarea></br>
+        <button type="submit" value="결과 확인" id="submit" onclick="doReg()">전송</button>
+        <script>
+            function getCookie(name) {
+                if (!document.cookie) {
+                    return null;
+                }
+
+                const xsrfCookies = document.cookie.split(';')
+                    .map(c => c.trim())
+                    .filter(c => c.startsWith(name + '='));
+
+                if (xsrfCookies.length === 0) {
+                    return null;
+                }
+                return decodeURIComponent(xsrfCookies[0].split('=')[1]);
+            }
+            async function doReg(){
+                const csrfToken = $('meta[name="_csrf"]').attr('content');
+                let obj={
+                    name:$("#name").val(),
+                    description:$("#description").val()
+                }
+                await fetch("/admin/manage/register-faq.do",{method:"post",headers:{'Content-Type':'application/json','X-CSRF-TOKEN': csrfToken},body:JSON.stringify(obj)})
+                .then(response => {
+                    if( response.status ==200){
+                        alert("게시물 등록에 성공하였습니다.");
+                        window.opener.FaqlistSetting();
+                        window.close();
+                    }else{
+                        alert("내부 서버 에러 발생");
+                        console.log(response.status)
+
+                    }
+                })
+            }
+        </script>
+
+    </div>
+
 </body>
 </html>

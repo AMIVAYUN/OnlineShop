@@ -1,4 +1,4 @@
-package com.pipe09.OnlineShop.Domain.Delivery;
+package com.pipe09.OnlineShop.Domain.Board.Delivery;
 /*
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

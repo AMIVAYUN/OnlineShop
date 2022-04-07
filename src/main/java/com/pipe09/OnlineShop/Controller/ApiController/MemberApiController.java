@@ -76,13 +76,7 @@ public class MemberApiController{
         List<MemberManageDto> dtoList=list.stream().map(MemberManageDto::new).collect(Collectors.toList());
         return dtoList;
     }
-    @PostMapping("/join-proc")
-    public boolean create(@Valid @RequestBody MemberDto dto){
-        log.info(dto.getAddress().getAddress());
-        Member newMember= Member.createMember(dto.getUsername(),dto.getName(),dto.getPhone_num(),dto.getPassword(),dto.getEmail(),dto.getAddress()) ;
-        memberService.save(newMember);
-        return true;
-    }
+
     /*
     @GetMapping("/api/v1/members/single/local/{username}")
     public MemberDto getSingleMem(@PathVariable String username){

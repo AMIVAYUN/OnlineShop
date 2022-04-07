@@ -1,4 +1,5 @@
 var sum=0;
+const csrfToken = $('meta[name="_csrf"]').attr('content');
 $(document).ready(function (){
     SessionCheck();
     SearchSetting();
@@ -108,7 +109,7 @@ function delBtSetting(){
     });
 }
 async function deleteIndividual(obj){
-    const res=await fetch("/api/v1/shopcarts/items/single",{method:"delete",headers:{'Content-Type': 'application/json'},body:JSON.stringify(obj)}).then(response => response.json())
+    const res=await fetch("/api/v1/shopcarts/items/single",{method:"delete",headers:{'Content-Type': 'application/json','X-CSRF-TOKEN': csrfToken},body:JSON.stringify(obj)}).then(response => response.json())
     if(res){
         alert("선택하신 상품이 제외되었습니다.");
         location.reload();

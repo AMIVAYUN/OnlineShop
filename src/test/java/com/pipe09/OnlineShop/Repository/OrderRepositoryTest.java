@@ -2,9 +2,8 @@ package com.pipe09.OnlineShop.Repository;
 
 
 
-import com.pipe09.OnlineShop.Domain.Delivery.Deliverystatus;
+import com.pipe09.OnlineShop.Domain.Board.Delivery.Deliverystatus;
 import com.pipe09.OnlineShop.Domain.Member.Member;
-import com.pipe09.OnlineShop.Domain.Orders.OrderItem;
 import com.pipe09.OnlineShop.Domain.Orders.Orders;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,12 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.swing.*;
 import javax.transaction.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 import static org.junit.Assert.*;
 

@@ -1,10 +1,7 @@
 package com.pipe09.OnlineShop.Utils;
 
 
-import com.pipe09.OnlineShop.Domain.Delivery.Deliverystatus;
-import lombok.Getter;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
+import com.pipe09.OnlineShop.Domain.Board.Delivery.Deliverystatus;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -53,7 +50,7 @@ public class Utils {
     }
     public static String deleteKorean(String str){
         str=str.replaceAll("[ㄱ-힣]","");
-        return str;
+        return Long.toString(System.nanoTime())+str;
     }
     public static String getAccessToken(HttpServletRequest request){
         String headerValue=request.getHeader(HEADER_AUTHORIZATION);

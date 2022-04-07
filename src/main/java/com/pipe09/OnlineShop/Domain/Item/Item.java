@@ -2,10 +2,12 @@ package com.pipe09.OnlineShop.Domain.Item;
 
 
 import com.pipe09.OnlineShop.Dto.Item.R_itemDto;
+import com.pipe09.OnlineShop.Dto.Item.R_itemDtoV2;
 import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
 import com.pipe09.OnlineShop.Utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
@@ -13,6 +15,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Entity
 @Getter
@@ -41,6 +45,7 @@ public class Item {
     private String DTYPE;
     @Enumerated(EnumType.STRING)
     private Item_status status;
+
     public static Item createNewItem(String type,String Name,int Price,int StockQuantity,String description,int Weight,String Madein,String ManufacturedCompany){
         ItemFactory factory=new ItemFactory();
         Item newitem=factory.makingItemBytype(type);
@@ -83,29 +88,14 @@ public class Item {
 
         return item;
     }
-
-
-    public static String MakingImgfile(MultipartFile mfile){
-        String msg=null;
-        String str=Utils.deleteKorean(mfile.getOriginalFilename());
-        if(mfile!=null) {
-            File file = new File(Utils.getImgPATHwithOS()+File.separator+"upload"+File.separator+str);
-            try {
-                file.createNewFile();
-                FileOutputStream fos = new FileOutputStream(file);
-                fos.write(mfile.getBytes());
-                fos.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                msg="이미지를 찾을 수 없습니다.";
-                return msg;
-            } catch (IOException e) {
-                e.printStackTrace();
-                msg="이미지 변환간 에러가 발생했습니다.";
-                return msg;
-            }
-        }
-        return msg;
+    public static Item fromRegv2(R_itemDtoV2 v2){
+        DefaultMapper<Item>mapper=new DefaultMapper<>(ItemFactory.makingItemBytype(v2.getDtype()));
+        Item item=mapper.Translate(v2);
+        return item;
     }
 
+
+
+
 }
+

@@ -7,6 +7,7 @@ $(document).ready(function(){
     logoSetting();
     nameCheckMypage();
     mypageSetting();
+    getOrderedItem();
     $('input').attr('autocomplete','off');
 
     $('#mypage_title_container').hover(function(){
@@ -73,8 +74,47 @@ async function SessionCheck(){
         $("#login-navi").attr("href","#")
         $("#join-navi").text("로그아웃");
         $("#join-navi").attr("href","/logout");
+        $("#scart").click(function (){
+            window.location.assign(baseurl .protocol +"//"+baseurl .host+"/shopping-list");
+        })
+    }else{
+        $("#scart").click(function (){
+            alert("로그인이 필요한 서비스 입니다.")
+        })
     }
+
 }
+
+async function getOrderedItem(){
+    var url="/api/v1/payments/all?offset=0&&limit=30";
+    const res=await fetch(url,{method:"get"}).then(response => response.json());
+    console.log(res);
+    var sum = 0;
+    await $.each(res, function(idx1){
+        var innerhtmlSum='';
+        $.each(res[idx1].itemDtoList, function(idx2){
+            var priceComma = res[idx1].itemDtoList[idx2].price;
+            var totalComma = res[idx1].itemDtoList[idx2].count * res[idx1].itemDtoList[idx2].price;
+            sum = sum + totalComma;
+            priceComma = priceComma.toLocaleString();
+            totalComma = totalComma.toLocaleString();
+            var innerhtml='<tr class="component">\n' +
+            '                    <td class="mer_img"><img src='+res[idx1].itemDtoList[idx2].imgSrc+'></td>\n' +
+            '                    <td class="name" id='+res[idx1].itemDtoList[idx2].orderitem_id+'>'+res[idx1].itemDtoList[idx2].itemname+'</td>\n' +
+            '                    <td class="count">'+res[idx1].itemDtoList[idx2].count+'개</td>\n' +
+            '                    <td class="price">'+priceComma+'</td>\n' +
+            '                    <td class="total">'+totalComma+'원</td></tr>\n'
+            innerhtmlSum = innerhtmlSum +'\n'+ innerhtml;
+        })
+        innerhtmlSum = innerhtmlSum + '\n' +'<tr>\n' +
+                                      '     <td class="confirm" colspan="2" style="border-bottom: 3px solid #212425; padding-bottom:10px;"><button class="confirm_btn">인수확인</button></td>\n' +
+                                      '     <td class="cancel" colspan="3" style="border-bottom: 3px solid #212425; padding-bottom:10px;"><button class="cancel_btn">결제취소</button></td></tr>\n'
+        $("#shoppinglist").append(innerhtmlSum);
+    })
+    sum = sum.toLocaleString();
+    $("#totalpricevalue").text(sum);
+}
+
 function SearchSetting(){
     $("#searchicon").on("click",function(){
         if($("#searchbar").find("input").val()){

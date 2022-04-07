@@ -10,8 +10,10 @@ public class OrderItemDto {
     private String itemname;
     private int count;
     private int price;
+    private String imgSrc;
 
     public OrderItemDto(OrderItem item){
+        this.imgSrc=item.getItem().getImgSrc();
         this.orderitem_id=item.getOrderItem_ID();
         this.item_id=item.getItem().getItem_ID();
         this.itemname=item.getItem().getName();

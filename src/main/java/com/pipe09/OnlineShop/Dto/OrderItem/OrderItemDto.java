@@ -11,7 +11,6 @@ public class OrderItemDto {
     private String itemname;
     private int count;
     private int price;
-    private String imgSrc;
 
     public OrderItemDto(OrderItem item){
         this.imgSrc=item.getItem().getImgSrc();

@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'SUIT-Medium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Medium.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
 body{
     width:1500px;
     position: relative;
@@ -38,6 +44,22 @@ body{
     height:20px;
 
 
+
+}
+.confirm_btn{
+    cursor: pointer;
+}
+.cancel_btn{
+    cursor:pointer;
+}
+.confirm_btn:hover{
+    color:white;
+    background-color: black;
+
+}
+.cancel_btn:hover{
+    color:white;
+    background-color: black;
 
 }
 #navi-bar a{
@@ -377,6 +399,7 @@ input:-webkit-autofill {
 }
 .component{
     height:120px;
+    font-family: SUIT-Medium;
     overflow: hidden;
 }
 #shoppinglist{
@@ -465,4 +488,46 @@ input:-webkit-autofill {
 #total hr{
     color: lightgray;
     size:2px;
+}
+
+#modal{
+    display : none;
+    z-index : 1;
+    background-color: rgba(0,0,0,.3);
+    position:fixed;
+    left:0;
+    top: 170px;
+    width:100%;
+    height:100%;
+
+}
+#modal>#content{
+    width:500px;
+    margin:100px auto;
+    padding:20px;
+    position: relative;
+    background-color:#fff;
+    border-radius: 10px;
+    border:3px solid lightgray;
+}
+#cancelReason{
+    width:400px;
+    height:170px;
+    resize: none;
+}
+
+#modal .close{
+    position:absolute;
+    top:4px;
+    right:4px;
+    font-size:20px;
+    border:0;
+    background-color: #fff;
+}
+
+#modal .close:hover,
+#modal .close:focus {
+    color : #000;
+    text-decoration: none;
+    cursor :pointer;
 }

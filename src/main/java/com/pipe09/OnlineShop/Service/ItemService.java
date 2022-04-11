@@ -33,6 +33,8 @@ public class ItemService {
         return itemRepository.findItem(id);
     }
 
+
+
     @Transactional
     public Long updateItem(Item item){
         Item changed= itemRepository.findItem(item.getItem_ID());

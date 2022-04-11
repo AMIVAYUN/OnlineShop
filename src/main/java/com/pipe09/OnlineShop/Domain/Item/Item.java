@@ -3,6 +3,7 @@ package com.pipe09.OnlineShop.Domain.Item;
 
 import com.pipe09.OnlineShop.Dto.Item.R_itemDto;
 import com.pipe09.OnlineShop.Dto.Item.R_itemDtoV2;
+import com.pipe09.OnlineShop.Exception.StockLackException;
 import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
 import com.pipe09.OnlineShop.Utils.Utils;
 import lombok.Getter;
@@ -59,9 +60,12 @@ public class Item {
         return newitem;
     }
     public void removeStockQuantity(int count){
-        int rest=this.StockQuantity-count;
+
+        int rest=this.getStockQuantity()-count;
+        System.out.println("재고:"+this.getStockQuantity()+", 수량: "+count);
+        System.out.println(rest);
         if(rest<0){
-            throw new RuntimeException("재고 수량이 부족합니다");
+            throw new StockLackException("재고 수량이 부족합니다");
         }
         this.setStockQuantity(rest);
     }

@@ -6,17 +6,19 @@ import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.lang.Nullable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
 @Entity
 @DynamicInsert
+
+
 public class Cancels {
+
     @Id
     @GeneratedValue
     private Long payment_cancelId;
@@ -27,21 +29,29 @@ public class Cancels {
     private Integer taxAmount;
     private Integer refundableAmount;
     private String canceledAt;
-    @OneToOne(mappedBy = "cancels")
+    @ManyToOne()
+    @JoinColumn(name = "cancels")
     private payment payment;
-    public static Cancels processObjectArrayCancel(HashMap<String,Object> dto, payment payment1){
-        if(dto==null){
-            return null;
-        }
-        Cancels newcancel=new Cancels();
-        newcancel.setCancelAmount((Integer) dto.get("cancelAmount"));
-        newcancel.setCancelReason((String) dto.get("cancelReason"));
-        newcancel.setTaxFreeAmount((Integer) dto.get("taxFreeAmount"));
-        newcancel.setTaxAmount((Integer) dto.get("taxAmount"));
-        newcancel.setRefundableAmount((Integer) dto.get("refundableAmount"));
-        newcancel.setCanceledAt((String) dto.get("canceledAt"));
-        newcancel.setPayment(payment1);
-        return newcancel;
+
+    public static void processObjectArrayCancel(List<Map<String,Object>> dto, payment payment1){
+
+        dto.stream().forEach( obj -> {
+            Cancels newcancel=new Cancels();
+            newcancel.setCancelAmount((Integer) obj.get("cancelAmount"));
+            newcancel.setCancelReason((String) obj.get("cancelReason"));
+            newcancel.setTaxFreeAmount((Integer) obj.get("taxFreeAmount"));
+            newcancel.setTaxAmount((Integer) obj.get("taxAmount"));
+            newcancel.setRefundableAmount((Integer) obj.get("refundableAmount"));
+            newcancel.setCanceledAt((String) obj.get("canceledAt"));
+            newcancel.setPayment(payment1);
+            payment1.getCancels().add(newcancel);
+        });
+
+
     }
 
+
+
 }
+
+

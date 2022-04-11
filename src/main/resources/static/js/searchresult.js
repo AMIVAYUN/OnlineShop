@@ -59,7 +59,7 @@ async function getItembykeyword(keyword){
             var baseurl=window.location
             $.each(data, function (idx) {
                 var innerhtml = '<li class="item" id='+data[idx].dtype +'><div id="item_img"><img src=' +baseurl .protocol +"//"+baseurl .host+"/"+ data[idx].imgSrc + '></div>' +
-                    '<div id="item_text"><span><a id="merchansub">상품명:</a> <a id="item_name">'+data[idx].name+'</a></span></br>'+'<span><a id="merchansub">가 격:  </a><a id="item_price">'+data[idx].price+'</a></span></br></div></li>'
+                    '<div id="item_text"><span><a id="merchansub">상품명:</a> <a id="item_name">'+data[idx].name+'</a></span></br>'+'<span><a id="merchansub">가 격:  </a><a id="item_price">'+data[idx].price.toLocaleString()+'</a></span></br></div></li>'
                 $("#shoplist").append(innerhtml);
             })
             $("#explain_part").append('<span><mark>'+keyword+'</mark>'+"(으)로 검색한 결과, 총 "+'<mark>'+data.length+'</mark>'+ "건 입니다."+'</span>');

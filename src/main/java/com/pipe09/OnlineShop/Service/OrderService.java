@@ -8,12 +8,16 @@ import com.pipe09.OnlineShop.Domain.Member.Member;
 import com.pipe09.OnlineShop.Domain.Member.UserType;
 import com.pipe09.OnlineShop.Domain.Orders.OrderItem;
 import com.pipe09.OnlineShop.Domain.Orders.Orders;
+import com.pipe09.OnlineShop.Domain.Payment.Cancels;
 import com.pipe09.OnlineShop.Domain.Payment.Failure;
 import com.pipe09.OnlineShop.Domain.Payment.payment;
+import com.pipe09.OnlineShop.Domain.Payment.paymentType;
 import com.pipe09.OnlineShop.Domain.SessionUser;
 import com.pipe09.OnlineShop.Dto.Order.CreateOrderDto;
 import com.pipe09.OnlineShop.Dto.Payment.approvePaymentDto;
+import com.pipe09.OnlineShop.Dto.Payment.doCancelDto;
 import com.pipe09.OnlineShop.Dto.Payment.requestApproveDto;
+import com.pipe09.OnlineShop.Exception.StockLackException;
 import com.pipe09.OnlineShop.Repository.*;
 //import com.pipe09.OnlineShop.Utils.AES;
 import com.pipe09.OnlineShop.Utils.BASE64Utils;
@@ -76,6 +80,7 @@ public class OrderService {
         }
 
     }
+
     public Orders findOne(Long id){
         return orderRepository.findOne(id);
     }
@@ -97,27 +102,30 @@ public class OrderService {
     public Long createOrder(CreateOrderDto dto){
 
         Member member=null;
-        SessionUser user=(SessionUser) oauth2Service.getHttpSession().getAttribute("user");
-        if(user==null){
-           member=memberRepository.findByNameWithOauth(dto.getName(), UserType.LOCAL);
-        }else{
-            switch(user.getType()){
-                case "kakao":
-                    member=memberRepository.findByNameWithOauth(dto.getName(),UserType.KAKAO);
-                    break;
-                case "google":
-                    member=memberRepository.findByNameWithOauth(dto.getName(),UserType.GOOGLE);
-                    break;
+        SessionUser user = (SessionUser) oauth2Service.getHttpSession().getAttribute("user");
+        try{
+            if( user == null ){
+                member = memberRepository.findByNameWithOauth(dto.getName(), UserType.LOCAL);
+            }else{
+                switch( user.getType() ){
+                    case "kakao":
+                        member = memberRepository.findByNameWithOauth(dto.getName(),UserType.KAKAO);
+                        break;
+                    case "google":
+                        member = memberRepository.findByNameWithOauth(dto.getName(),UserType.GOOGLE);
+                        break;
 
+                }
             }
-        }
 
-        if(member==null){
+        }catch(Exception e){
             return -1L;
         }
-        List<OrderItem> orderItemList=dto.getItem().stream().map(item -> {
 
-            Orders newOrder=new Orders();
+
+
+        List<OrderItem> orderItemList = dto.getItem().stream().map( item -> {
+
             OrderItem orderItem= new OrderItem();
             Item findItem;
             log.info(item.getItem_id().toString());
@@ -126,24 +134,32 @@ public class OrderService {
             }else{
                 findItem=shopItemRepository.findShopItemByShopItemId(item.getItem_id()).getItem();
             }
+            try{
+                log.info("재고:"+findItem.getStockQuantity());
+                log.info("수량:"+item.getCount());
+                System.out.println(findItem);
+                findItem.removeStockQuantity(item.getCount());
+            }catch(StockLackException e){
+                throw new StockLackException("재고가 부족합니다");
+            }
+
 
 
             orderItem.setItem(findItem);
             orderItem.setCount(item.getCount());
             orderItem.setPrice(findItem.getPrice());
-
-            orderItem.setOrders(newOrder);
             return orderItem;
 
         }).collect(Collectors.toList());
-        Orders order=Orders.createOrder(member,new Date(),orderItemList,dto.getTotalprice());
-        orderRepository.save(order);
+        Orders order=Orders.createOrder( member, new Date(), orderItemList, dto.getTotalprice());
+        orderRepository.save( order );
         return order.getOrder_ID();
     }
     @Transactional
     public boolean SuccessHandle(Orders order,String paymentKey,int amount){
         order.setDeliverystatus(Deliverystatus.READY);
         order.setPaymentKey(paymentKey);
+
         if(order.getTotalPrice()==amount){
             return true;
         }else{
@@ -260,4 +276,31 @@ public class OrderService {
     public void ChangeStatToDelivery(Long id){
         orderRepository.changeStatDelivery(id);
     }
+    @Transactional
+    public void doCancel( String paymentKey, doCancelDto dto ){
+        payment object=paymentRepository.findByPaymentKey(paymentKey);
+
+        HttpHeaders headers=getRequestTossHeaders();
+        HttpEntity<doCancelDto> sendData= new HttpEntity<>(dto,headers);
+        rt.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
+        String url="https://api.tosspayments.com/v1/payments/"+paymentKey+"/cancel";
+        ResponseEntity<approvePaymentDto> response=rt.exchange(
+                url,
+                HttpMethod.POST,
+                sendData,
+                approvePaymentDto.class
+
+        );
+        log.info(response.getStatusCode() +": "+ response.getStatusCodeValue());
+        if(response.getStatusCodeValue()==200){
+            Cancels.processObjectArrayCancel(response.getBody().getCancels(),object);
+            BASE64Utils utils=new BASE64Utils(Base64.getEncoder(),Base64.getDecoder());
+            Orders order=orderRepository.findOne(Long.valueOf(utils.decode(response.getBody().getOrderId())));
+            order.setDeliverystatus(Deliverystatus.CANCEL);
+            object.setCurrent_type(paymentType.CANCELED);
+        }else{
+            log.info(response.getBody().getMessage());
+        }
+    }
+
 }

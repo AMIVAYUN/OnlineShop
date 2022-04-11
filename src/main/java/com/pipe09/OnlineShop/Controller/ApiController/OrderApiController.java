@@ -9,11 +9,14 @@ import com.pipe09.OnlineShop.Dto.Order.DeliverySetDto;
 import com.pipe09.OnlineShop.Dto.Order.OrderDto;
 import com.pipe09.OnlineShop.Dto.OrderItem.OrderItemDto;
 import com.pipe09.OnlineShop.Dto.Payment.Us_paymentDto;
+import com.pipe09.OnlineShop.Dto.Payment.doCancelDto;
+import com.pipe09.OnlineShop.Exception.StockLackException;
 import com.pipe09.OnlineShop.Service.MemberService;
 import com.pipe09.OnlineShop.Service.Oauth2Service;
 import com.pipe09.OnlineShop.Service.OrderService;
 
 import com.pipe09.OnlineShop.Utils.BASE64Utils;
+import io.swagger.models.Response;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -26,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.Base64;
 import java.util.List;
@@ -47,22 +51,32 @@ public class OrderApiController {
     }
 
     @PostMapping("/api/v1/orders/create")
-    public String createOrders(@Valid @RequestBody CreateOrderDto dto){
+    public ResponseEntity<String> createOrders(@Valid @RequestBody CreateOrderDto dto){
 
+        try{
+            Long result=orderService.createOrder(dto);
+            if(result==-1){
+                log.info(dto.getName()+"회원 엔티티 조회 실패");
+                return new ResponseEntity<>("회원을 찾을 수 없습니다",HttpStatus.NOT_FOUND);
+            }else{
+                try{
+                    String encoded=orderService.getEncodeOrderId(result);
+                    log.info(encoded+ "주문 내역 생성");
+                    return new ResponseEntity(encoded,HttpStatus.OK);
+                }catch (Exception e){
+                    log.info(e.toString());
+                }
 
-        Long result=orderService.createOrder(dto);
-        if(result==-1){
-            return result.toString();
-        }else{
-            try{
-                String encoded=orderService.getEncodeOrderId(result);
-                return encoded;
-            }catch (Exception e){
-                log.info(e.toString());
             }
 
+        }catch(StockLackException e){
+            log.info(dto.getItem().toString()+"재고 부족으로 인한 주문 생성 실패");
+            return new ResponseEntity("재고 부족",HttpStatus.BAD_REQUEST);
         }
-        return "-2";
+
+        return new ResponseEntity<>("서버 에러",HttpStatus.INTERNAL_SERVER_ERROR);
+
+
 
 
     }
@@ -90,7 +104,11 @@ public class OrderApiController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @PostMapping("/payments/doCancel/{paymentKey}")
+    public void paymentCancler(@PathVariable String paymentKey,@RequestBody doCancelDto dto){
+        orderService.doCancel(paymentKey,dto);
 
+    }
 
 
 

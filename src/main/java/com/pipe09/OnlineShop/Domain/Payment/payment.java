@@ -6,9 +6,13 @@ import com.pipe09.OnlineShop.Dto.Payment.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CollectionId;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -29,6 +33,7 @@ public class payment {
     private String approvedAt;
     private boolean useEscrow;
     private boolean cultureExpense;
+
     @Nullable
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="card_id")
@@ -52,10 +57,18 @@ public class payment {
     @Embedded
     @Nullable
     private Discount discount;
-    @OneToOne(cascade = CascadeType.ALL)
+
+
+    @OneToMany(mappedBy = "payment", cascade = CascadeType.ALL)
     @Nullable
-    @JoinColumn(name = "payment_cancelId")
-    private Cancels cancels; //cancelAmount(취소금액),cancelReason(취소사유),taxFreeAmount(면세처리금액),taxAmount(과세금액),refundableAmount(취소후 환불가능금액),canceledAt(취소 날짜정보 YYYY-MM-dd'T'HH:mm:SS±hh:mm)
+    private List<Cancels> cancels=new ArrayList<>(); //cancelAmount(취소금액),cancelReason(취소사유),taxFreeAmount(면세처리금액),taxAmount(과세금액),refundableAmount(취소후 환불가능금액),canceledAt(취소 날짜정보 YYYY-MM-dd'T'HH:mm:SS±hh:mm)
+
+     /*
+    @ElementCollection
+    @CollectionTable(name="cancels")
+    private List<Map<String,Object>> cancels;
+
+      */
     //순서대로  NUM,STRING,NUM,NUM,STRING
     @Nullable
     private String secret; //가상계좌 콜백 시크릿키
@@ -74,6 +87,9 @@ public class payment {
 
     @Transient
     private boolean Notfound=false;
+
+    @Enumerated(value = EnumType.STRING)
+    private paymentType current_type;
 
     @OneToOne
     @JoinColumn(name = "user_ID")
@@ -100,7 +116,7 @@ public class payment {
         this.foreignEasyPay=dto.getForeignEasyPay();
         this.cashReceipt=CashReceipt.DtoToCashReceipt(dto.getCashReceipt());
         this.discount=Discount.DtoToDiscount(dto.getDiscount());
-        this.cancels=Cancels.processObjectArrayCancel(dto.getCancels(),this);
+        Cancels.processObjectArrayCancel(dto.getCancels(),this);
         this.setSecret(dto.getSecret());
         this.setType(dto.getType());
         this.setEasyPay(dto.getEasyPay());
@@ -111,6 +127,7 @@ public class payment {
         this.suppliedAmount=dto.getSuppliedAmount();
         this.vat=dto.getVat();
         this.taxFreeAmount=dto.getTaxFreeAmount();
+        this.setCurrent_type(paymentType.ACTIVATE);
 
 
 

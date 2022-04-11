@@ -89,17 +89,20 @@ async function SessionCheck(){
 async function getOrderedItem(){
     var url="/api/v1/payments/all?offset=0&&limit=30";
     const res=await fetch(url,{method:"get"}).then(response => response.json());
-    console.log(res);
     var sum = 0;
     await $.each(res, function(idx1){
         var innerhtmlSum='';
         $.each(res[idx1].itemDtoList, function(idx2){
             var priceComma = res[idx1].itemDtoList[idx2].price;
             var totalComma = res[idx1].itemDtoList[idx2].count * res[idx1].itemDtoList[idx2].price;
-            sum = sum + totalComma;
-            priceComma = priceComma.toLocaleString();
+            if(res[idx1].type=="ACTIVATE"){
+                sum = sum + totalComma;
+
+            }
             totalComma = totalComma.toLocaleString();
-            var innerhtml='<tr class="component">\n' +
+            priceComma = priceComma.toLocaleString();
+
+            var innerhtml='<tr class="component" id='+res[idx1].paymentKey+'>\n' +
             '                    <td class="mer_img"><img src='+res[idx1].itemDtoList[idx2].imgSrc+'></td>\n' +
             '                    <td class="name" id='+res[idx1].itemDtoList[idx2].orderitem_id+'>'+res[idx1].itemDtoList[idx2].itemname+'</td>\n' +
             '                    <td class="count">'+res[idx1].itemDtoList[idx2].count+'개</td>\n' +
@@ -107,15 +110,66 @@ async function getOrderedItem(){
             '                    <td class="total">'+totalComma+'원</td></tr>\n'
             innerhtmlSum = innerhtmlSum +'\n'+ innerhtml;
         })
-        innerhtmlSum = innerhtmlSum + '\n' +'<tr>\n' +
-                                      '     <td class="confirm" colspan="2" style="border-bottom: 3px solid #212425; padding-bottom:10px;"><button class="confirm_btn">인수확인</button></td>\n' +
-                                      '     <td class="cancel" colspan="3" style="border-bottom: 3px solid #212425; padding-bottom:10px;"><button class="cancel_btn">결제취소</button></td></tr>\n'
+        innerhtmlSum = innerhtmlSum + '\n' +'<tr id='+res[idx1].paymentKey+'>\n' + checkStatus(res[idx1].type)
+
         $("#shoppinglist").append(innerhtmlSum);
     })
     sum = sum.toLocaleString();
     $("#totalpricevalue").text(sum);
 }
+function checkStatus(status){
+    if(status=="CANCELED"){
 
+        return '<td className="confirm" colSpan="2" style=" text-align: center;border-bottom: 3px solid #212425; padding-bottom:10px;">\n' +
+            '            환불처리 된 주문입니다.\n' +
+            '        </td>' +
+            '<td class="cancel" colspan="3" style="border-bottom: 3px solid #212425;text-align: center;font-size: 12px; padding-bottom:10px;">문의사항은 010-3141-5278로 문의해주세요</td></tr>\n'
+
+    }else{
+        return '     <td class="confirm" colspan="2" style="border-bottom: 3px solid #212425; padding-bottom:10px;"><button class="confirm_btn" onclick="checkGet(this)">인수확인</button></td>\n' +
+            '     <td class="cancel" colspan="3" style="border-bottom: 3px solid #212425; padding-bottom:10px;"><button class="cancel_btn"onclick="cancelOrder(this)">결제취소</button></td></tr>\n'
+    }
+}
+function checkGet(vari){
+    console.log($(vari).closest("tr").attr("id")+"아직 미구현된 서비스 입니다.")
+}
+function cancelOrder(vari){
+    console.log($(vari).closest("tr").attr("id"))
+    if(confirm("환불 하시겠습니까?")){
+        $("#paymentKey").val($(vari).closest("tr").attr("id"));
+        modalOpen();
+    }
+
+}
+function modalClose(){
+    var modal = document.getElementById('modal');
+    modal.style.display = 'none';
+}
+function modalOpen(){
+    var modal = document.getElementById('modal');
+    modal.style.display = 'block';
+}
+async function dopayCancel(){
+    if($("#cancelReason").val()){
+        var baseurl=window.location;
+        var url=baseurl .protocol +"//"+baseurl .host+"/payments/doCancel/"+$("#paymentKey").val();
+        let obj={
+            cancelReason:$("#cancelReason").val()
+        }
+        const res=await fetch(url,{method:"post",headers:{'Content-Type':'application/json','X-CSRF-TOKEN': csrfToken},body:JSON.stringify(obj)});
+        if(res.status==200){
+            alert("결제 취소가 완료되었습니다.");
+            location.reload();
+        }else{
+            alert("서버 내부에 문제가 있습니다. 잠시 후 다시 시도해주세요.");
+            location.reload();
+        }
+
+    }else{
+        alert("환불 사유를 적어주세요.");
+    }
+
+}
 function SearchSetting(){
     $("#searchicon").on("click",function(){
         if($("#searchbar").find("input").val()){
@@ -128,10 +182,11 @@ function SearchSetting(){
     })
 }
 
+
+
 function logoSetting(){
     $("#logo").click(function(){
         var baseurl=window.location;
-        console.log(baseurl .protocol +"//"+baseurl .host);
         window.location.assign(baseurl .protocol +"//"+baseurl .host);
     })
 
@@ -191,7 +246,7 @@ async function nameCheckMypage(){
     const usernameRes = await fetch(mypageUrl, {method:"GET"}).then((response) => response.text());
     var url="/api/v1/members/single/local/aboutMe";
     const userinfoRes = await fetch(url, {method:"get"}).then((response) => response.json());
-    fetch(url).then((response) => console.log(response));
+    fetch(url).then((response) => console.log(response.status));
     $("#members_username").val(usernameRes);
     $("#members_name").val(userinfoRes.name);
     $("#members_phone_num").val(userinfoRes.phone_num);

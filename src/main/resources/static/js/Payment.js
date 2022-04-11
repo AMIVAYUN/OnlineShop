@@ -344,17 +344,30 @@ function getIteminCode(){
 }
 
 async function makeOrder(data){
+    var status;
     const result=await fetch("/api/v1/orders/create"
     ,{
         method:"post",headers:{'Content-Type':'application/json','X-CSRF-TOKEN': csrfToken},
             body:JSON.stringify(data)
-        }).then( response => response.text())
+        }).then( response => {
+            status=response.status
+            return response.text();
+    })
+    console.log(result);
+    if(status == 200){
 
-    if(result==-1){
+        return StartToss(result);
+    }else{
+        return OrderErrEndPoint(result);
+    }
+    /*
+    if(result){
         alert("에러가 발생하였습니다. 다시 시도해주세요");
         location.reload();
-    }else{
-
+    }
+    else{
+     */
+    function StartToss(result){
         data.orderId=result;
         $("#orderId").val(result);
         var id=data.item[0].item_id;
@@ -364,9 +377,17 @@ async function makeOrder(data){
         $("#orderName").val(orderName);
         $("#customerName").val(data.name);
         openTosspay();
-
-
     }
+
+    function OrderErrEndPoint(result){
+        alert(result);
+        location.reload();
+    }
+
+
+
+
+
     function openTosspay(){
         window.open("/payments/credit/bytoss",'토스페이 결제',"width=800,height=600");
     }

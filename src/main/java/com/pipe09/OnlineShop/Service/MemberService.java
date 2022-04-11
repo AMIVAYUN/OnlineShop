@@ -34,6 +34,16 @@ public class MemberService implements UserDetailsService {
         return memberRepository.findAll(offset,limit);
     }
 
+    public boolean checkDup( String id ){
+        List<Member> list=memberRepository.findByuserIdlist(id);
+        if(list.size()==0){
+            return false;
+        }
+        return true;
+
+
+
+    }
     public Member findByname(String name){
         return memberRepository.findByName(name);
     }

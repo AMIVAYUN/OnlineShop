@@ -13,7 +13,6 @@ public class OrderItemDto {
     private String imgSrc;
 
     public OrderItemDto(OrderItem item){
-        
         this.orderitem_id=item.getOrderItem_ID();
         this.item_id=item.getItem().getItem_ID();
         this.itemname=item.getItem().getName();

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -50,6 +51,7 @@ public class MemberController {
         service.save(newMember);
         return new ResponseEntity<>("저장에 성공하였습니다", HttpStatus.OK);
     }
+
     /*
     @PostMapping("/loginproc")
     public String login(@Valid MemberDto dto){

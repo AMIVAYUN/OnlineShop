@@ -37,13 +37,13 @@ public class OrderController {
     public String getCompletePage() { return "fragments/private/PayEnd";}
 
     @GetMapping("/payments/purchase/success")
-    public String paymentSuccess( @RequestParam String orderId, @RequestParam String paymentKey,  @RequestParam int amount){
+    public String paymentSuccess( @RequestParam String orderId, @RequestParam String paymentKey,  @RequestParam int amount,Model model){
         String result=null;
         BASE64Utils base64=new BASE64Utils(Base64.getEncoder(),Base64.getDecoder());
         Long order_ID=Long.valueOf(base64.decode(orderId));
         log.info(order_ID.toString());
-        Orders order=orderService.findOne(order_ID);
-        if(orderService.SuccessHandle(order,paymentKey,amount)){
+
+        if(orderService.SuccessHandle(order_ID,paymentKey,amount)){
 
             result = orderService.getApprovalofPayment(paymentKey,orderId, amount);
 
@@ -51,10 +51,10 @@ public class OrderController {
         if(result.equals("200")){
 
 
+            model.addAttribute("message","결제에 성공하셨습니다.");
             return "fragments/private/PayEnd";
         }else{
-
-
+            model.addAttribute("message",result+" 다시 시도해주세요.");
             return "fragments/private/PayEnd";
         }
 

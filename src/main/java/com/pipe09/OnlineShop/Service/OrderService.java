@@ -159,7 +159,8 @@ public class OrderService {
         return order.getOrder_ID();
     }
     @Transactional
-    public boolean SuccessHandle(Orders order,String paymentKey,int amount){
+    public boolean SuccessHandle(Long Order_id,String paymentKey,int amount){
+        Orders order=orderRepository.findOne(Order_id);
         order.setDeliverystatus(Deliverystatus.READY);
         order.setPaymentKey(paymentKey);
 
@@ -308,6 +309,9 @@ public class OrderService {
         }else{
             log.info(response.getBody().getMessage());
         }
+    }
+    public Orders findByPaymentKey(String paymentKey){
+        return orderRepository.findByPaymentKey(paymentKey);
     }
 
 }

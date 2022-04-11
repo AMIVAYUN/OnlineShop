@@ -41,6 +41,9 @@ public class OrderRepository {
         }
 
     }
+    public Orders findByPaymentKey(String paymentKey){
+        return em.createQuery("select o from Orders o where o.paymentKey=:paymentKey",Orders.class).setParameter("paymentKey",paymentKey).getSingleResult();
+    }
     public void changeStatDelivery(Long id){
         em.createQuery( "update Orders o set o.deliverystatus=:stat where o.Order_ID=:id ")
                 .setParameter("stat",Deliverystatus.DELIVERY).setParameter("id",id).executeUpdate();

@@ -20,6 +20,10 @@ public class PaymentRepository {
         return payment.getPaymentKey();
     }
 
+    public payment findByPaymentKey(String paymentKey){
+        return em.find(payment.class,paymentKey);
+    }
+
     public payment findByOrderId(String OrderId){
         try{
             return em.createQuery("select p from payment p where p.orderId=:orderId",payment.class).setParameter("orderId",OrderId).getSingleResult();

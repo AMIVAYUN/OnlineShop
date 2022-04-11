@@ -302,31 +302,53 @@ function checkAddress(){
         return false;
     }
 }
-async function JoinbyLocal(){
-    var baseurl=window.location;
-    url=baseurl .protocol +"//"+baseurl .host+"/join-proc";
-    let obj={
-        "username":$("#pid").val(),
-        "password":$("#ppwd").val(),
-        "email":$("#emailvalue").val(),
-        "name":$("#pname").val(),
-        "phone_num":$("#phone1").val()+$("#phone2").val()+$("#phone3").val(),
-        "address":{
-            "postcode":$("#postcode").val(),
-            "address":$("#address").val(),
-            "detailAddress":$("#detailAddress").val(),
-            "ref_address":$("#extraAddress").val()
-        }
-
-    }
-    await fetch(url,{method:"post",headers:{'Content-Type': 'application/json','X-CSRF-TOKEN': csrfToken},body:JSON.stringify(obj)}).then(response => {
-        if(response.status==200){
-            alert("회원가입이 완료되었습니다.");
-            location.assign("/");
+async function checkDup(){
+    if($("#pid").val()){
+        var baseurl=window.location;
+        var url=baseurl .protocol +"//"+baseurl .host+"/api/v1/checkdup?user_id="+$("#pid").val();
+        const result=await fetch(url,{method:"get"}).then(response => response.text());
+        if(result=="true"){
+            alert("중복된 아이디 입니다. 다시 입력해주세요");
         }else{
-            console.log(response.status);
-            alert("오류가 발생하였습니다. 잠시후에 다시 시도해주세요");
+            alert("중복확인이 완료되었습니다.");
+            $("#pid").attr('disabled',true);
         }
-    })
+    }else{
+        alert("아이디를 입력해주세요")
+    }
+
+
+}
+async function JoinbyLocal(){
+    if($("#pid").attr("disabled")){
+        var baseurl=window.location;
+        var url=baseurl .protocol +"//"+baseurl .host+"/join-proc";
+        let obj={
+            "username":$("#pid").val(),
+            "password":$("#ppwd").val(),
+            "email":$("#emailvalue").val(),
+            "name":$("#pname").val(),
+            "phone_num":$("#phone1").val()+$("#phone2").val()+$("#phone3").val(),
+            "address":{
+                "postcode":$("#postcode").val(),
+                "address":$("#address").val(),
+                "detailAddress":$("#detailAddress").val(),
+                "ref_address":$("#extraAddress").val()
+            }
+
+        }
+        await fetch(url,{method:"post",headers:{'Content-Type': 'application/json','X-CSRF-TOKEN': csrfToken},body:JSON.stringify(obj)}).then(response => {
+            if(response.status==200){
+                alert("회원가입이 완료되었습니다.");
+                location.assign("/");
+            }else{
+                console.log(response.status);
+                alert("오류가 발생하였습니다. 잠시후에 다시 시도해주세요");
+            }
+        })
+    }else{
+        alert("중복 확인을 진행해주세요");
+    }
+
 }
 

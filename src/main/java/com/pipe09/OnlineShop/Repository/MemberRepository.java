@@ -33,6 +33,10 @@ public class MemberRepository {
         return em.createQuery("select m from Member m where m.user_ID=:id", Member.class)
                 .setParameter("id", id).getSingleResult();
     }
+    public List<Member> findByuserIdlist(String id){
+        return em.createQuery("select m from Member m where m.user_ID=:id", Member.class)
+                .setParameter("id", id).getResultList();
+    }
     public List<Member> findAll(int offset,int limit){
         return em.createQuery("select mlist from Member mlist").setFirstResult(offset).setMaxResults(limit).getResultList();
     }
@@ -40,6 +44,7 @@ public class MemberRepository {
         String jpql="select m from Member m where m.email=:email and m.userType<>:usertype";
         return em.createQuery(jpql,Member.class).setParameter("email",email).setParameter("usertype",UserType.LOCAL).getSingleResult();
     }
+
 
 
 

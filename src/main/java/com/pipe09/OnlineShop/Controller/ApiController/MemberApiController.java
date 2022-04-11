@@ -76,7 +76,10 @@ public class MemberApiController{
         List<MemberManageDto> dtoList=list.stream().map(MemberManageDto::new).collect(Collectors.toList());
         return dtoList;
     }
-
+    @GetMapping("/api/v1/checkdup")
+    public ResponseEntity<Boolean> returning(@RequestParam String user_id){
+        return new ResponseEntity<Boolean>(memberService.checkDup(user_id),HttpStatus.OK);
+    }
     /*
     @GetMapping("/api/v1/members/single/local/{username}")
     public MemberDto getSingleMem(@PathVariable String username){

@@ -29,6 +29,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -105,14 +106,16 @@ public class OrderService {
         SessionUser user = (SessionUser) oauth2Service.getHttpSession().getAttribute("user");
         try{
             if( user == null ){
-                member = memberRepository.findByNameWithOauth(dto.getName(), UserType.LOCAL);
+                String auth=SecurityContextHolder.getContext().getAuthentication().getName();
+                member = memberRepository.findByuserId(auth);
             }else{
                 switch( user.getType() ){
                     case "kakao":
-                        member = memberRepository.findByNameWithOauth(dto.getName(),UserType.KAKAO);
+
+                        member = memberRepository.findByEmailWithOauth(user.getEmail(),UserType.KAKAO);
                         break;
                     case "google":
-                        member = memberRepository.findByNameWithOauth(dto.getName(),UserType.GOOGLE);
+                        member = memberRepository.findByEmailWithOauth(user.getEmail(),UserType.GOOGLE);
                         break;
 
                 }

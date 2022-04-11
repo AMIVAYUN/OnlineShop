@@ -56,6 +56,7 @@ public class OrderApiController {
         try{
             Long result=orderService.createOrder(dto);
             if(result==-1){
+
                 log.info(dto.getName()+"회원 엔티티 조회 실패");
                 return new ResponseEntity<>("회원을 찾을 수 없습니다",HttpStatus.NOT_FOUND);
             }else{

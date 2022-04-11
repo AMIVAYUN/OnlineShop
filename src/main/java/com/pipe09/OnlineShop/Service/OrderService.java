@@ -298,6 +298,10 @@ public class OrderService {
             Orders order=orderRepository.findOne(Long.valueOf(utils.decode(response.getBody().getOrderId())));
             order.setDeliverystatus(Deliverystatus.CANCEL);
             object.setCurrent_type(paymentType.CANCELED);
+            order.getOrderItems().stream().forEach( oitem -> {
+                Item item=oitem.getItem();
+                item.setStockQuantity(item.getStockQuantity()+oitem.getCount());
+            });
         }else{
             log.info(response.getBody().getMessage());
         }

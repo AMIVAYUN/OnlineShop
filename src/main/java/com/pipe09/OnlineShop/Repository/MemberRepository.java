@@ -25,6 +25,10 @@ public class MemberRepository {
         String jpql="select m from Member m where m.Name=:name and m.userType=:type";
         return em.createQuery(jpql,Member.class).setParameter("name",name).setParameter("type",type).getSingleResult();
     }
+    public Member findByEmailWithOauth(String email,UserType type){
+        String jpql="select m from Member m where m.email=:email and m.userType=:type";
+        return em.createQuery(jpql,Member.class).setParameter("email",email).setParameter("type",type).getSingleResult();
+    }
     public Member findByName(String name){
         String jpql="select m from Member m join fetch m.shopCart where m.Name=:name and m.userType=:type";
         return em.createQuery(jpql,Member.class).setParameter("name",name).setParameter("type", UserType.LOCAL).getSingleResult();

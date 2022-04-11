@@ -161,6 +161,7 @@ public class OrderService {
     @Transactional
     public boolean SuccessHandle(Long Order_id,String paymentKey,int amount){
         Orders order=orderRepository.findOne(Order_id);
+        log.info(order.getOrder_ID()+"객체 확인");
         order.setDeliverystatus(Deliverystatus.READY);
         order.setPaymentKey(paymentKey);
 

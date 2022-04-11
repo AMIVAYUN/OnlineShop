@@ -34,7 +34,9 @@ public class Cancels {
     private payment payment;
 
     public static void processObjectArrayCancel(List<Map<String,Object>> dto, payment payment1){
-
+        if(dto==null){
+            return;
+        }
         dto.stream().forEach( obj -> {
             Cancels newcancel=new Cancels();
             newcancel.setCancelAmount((Integer) obj.get("cancelAmount"));

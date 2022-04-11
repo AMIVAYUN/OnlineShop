@@ -71,10 +71,10 @@ public class OrderApiController {
 
         }catch(StockLackException e){
             log.info(dto.getItem().toString()+"재고 부족으로 인한 주문 생성 실패");
-            return new ResponseEntity("재고 부족",HttpStatus.BAD_REQUEST);
+            return new ResponseEntity("재고 부족가 부족합니다",HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>("서버 에러",HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>("서버 내부에 문제가 발생하였습니다. 잠시 후 다시 시도해주세요",HttpStatus.INTERNAL_SERVER_ERROR);
 
 
 

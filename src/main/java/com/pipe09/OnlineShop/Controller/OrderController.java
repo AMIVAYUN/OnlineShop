@@ -8,6 +8,7 @@ import com.pipe09.OnlineShop.Service.OrderService;
 import com.pipe09.OnlineShop.Utils.BASE64Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +37,34 @@ public class OrderController {
     @GetMapping("/payments/purchase/endpoint")
     public String getCompletePage() { return "fragments/private/PayEnd";}
 
-    
+
+    @GetMapping("/payments/purchase/success")
+    public String paymentSuccess( @RequestParam String orderId, @RequestParam String paymentKey,  @RequestParam int amount,Model model ){
+        String result=null;
+        String username= SecurityContextHolder.getContext().getAuthentication().getName();
+        log.info(username+"님 결제성공 및 리다이렉트");
+        BASE64Utils base64=new BASE64Utils(Base64.getEncoder(),Base64.getDecoder());
+        Long order_ID=Long.valueOf(base64.decode(orderId));
+        log.info(order_ID.toString());
+
+        if(orderService.SuccessHandle(order_ID,paymentKey,amount)){
+
+            result = orderService.getApprovalofPayment(paymentKey,orderId, amount);
+
+        }
+        if(result.equals("200")){
+
+
+            model.addAttribute("message","결제에 성공하셨습니다.");
+            return "fragments/private/PayEnd";
+        }else{
+            model.addAttribute("message",result+" 다시 시도해주세요.");
+            return "fragments/private/PayEnd";
+        }
+
+
+    }
+
     @GetMapping("/payments/purchase/fail")
     public String paymentFail(@RequestParam String code, @RequestParam String message, @RequestParam String orderId, Model model){
         orderService.getFail(code, message, orderId);

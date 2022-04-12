@@ -13,6 +13,7 @@
 <body>
 
     <script>
+        var baseurl1=window.location;
 
         var amount=window.opener.document.getElementById('totalprice');
         var orderId=window.opener.document.getElementById('orderId');
@@ -25,8 +26,8 @@
             orderId: orderId.value,
             orderName: orderName.value,
             customerName: customerName.value,
-            successUrl: 'http://localhost:8080/payments/purchase/success',
-            failUrl: 'http://localhost:8080/payments/purchase/fail',
+            successUrl: baseurl1 .protocol +"//"+baseurl .host+'/payments/purchase/success',
+            failUrl: baseurl1 .protocol +"//"+baseurl .host+'/payments/purchase/fail',
         })
         /*
         tossPayments.requestPayment('카드', {

@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.cfg.annotations.reflection.internal.XMLContext;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
@@ -22,9 +23,9 @@ public class MailApiController {
 
     @PostMapping("/api/v2/mails/post.do")
     public String SendMail(@RequestBody MailDto dto){
-        log.info(dto.getName()+"유저 메일 서비스 사용");
-        service.makeQuestion(dto);
-        service.sendMail(service.makeQuestion(dto));
+        String username= SecurityContextHolder.getContext().getAuthentication().getName();
+        log.info(username+"유저 메일 서비스 사용");
+        service.makeQuestionAndSend(dto,username);
         return "전송에 성공하였습니다";
     }
     @GetMapping("/api/v2/mails/confirm")

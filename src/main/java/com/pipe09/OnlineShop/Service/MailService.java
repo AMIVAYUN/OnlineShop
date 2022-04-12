@@ -29,12 +29,12 @@ public class MailService {
     @Getter
     private HashMap<String,String> authfield=new HashMap<>();
     @Async
-    public SimpleMailMessage makeQuestion(MailDto dto){
+    public void makeQuestionAndSend(MailDto dto,String name){
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo("wntjrdbs@gmail.com");
-        message.setSubject(dto.getName()+"님께서 보내주신 문의입니다.");
+        message.setSubject(name+"님께서 보내주신 문의입니다.");
         message.setText("보낸 날짜: "+dto.getWrittendate()+"\n"+"연락처: "+dto.getPhonenum()+"\n"+"내용: "+dto.getContent());
-        return message;
+        sender.send(message);
 
 
     }
@@ -88,7 +88,7 @@ public class MailService {
         message.setText("테스트입니다");
 
          */
-        sender.send(message);
+
     }
 
 }

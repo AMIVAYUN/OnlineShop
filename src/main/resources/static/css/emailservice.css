@@ -14,6 +14,10 @@ body{
     transform: translate(-50%);
     overflow: revert;
 }
+#phonenum strong{
+    font-size:10px;
+    color:red;
+}
 #bodyheader{
     width:1200px;
     padding-top:40px;

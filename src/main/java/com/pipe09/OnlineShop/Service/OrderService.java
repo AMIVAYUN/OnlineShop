@@ -161,7 +161,7 @@ public class OrderService {
     @Transactional
     public boolean SuccessHandle(Long Order_id,String paymentKey,int amount){
         Orders order=orderRepository.findByCreateQuery(Order_id);
-
+        log.info(order.toString());
         order.setDeliverystatus(Deliverystatus.READY);
         order.setPaymentKey(paymentKey);
 

@@ -22,6 +22,9 @@ public class OrderRepository {
     public Orders findOne(Long id){
         return em.find(Orders.class,id);
     }
+    public Orders findByCreateQuery(Long id){
+        return em.createQuery("select o from Orders o where o.Order_ID=:id",Orders.class).setParameter("id",id).getSingleResult();
+    }
     public List<Orders> findAll(){
         String jpql="select o from Orders o";
         return em.createQuery(jpql).getResultList();

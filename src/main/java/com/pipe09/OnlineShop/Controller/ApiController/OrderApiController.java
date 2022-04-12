@@ -112,7 +112,38 @@ public class OrderApiController {
     }
 
 
+    @GetMapping("/payments/purchase/success")
+    public String paymentSuccess( @RequestParam String orderId, @RequestParam String paymentKey,  @RequestParam int amount,Model model ){
+        String result=null;
+        log.info(orderId+" paykey: "+paymentKey+"가격: "+String.valueOf(amount)) ;
+        model.addAttribute("message","결제에 성공하셨습니다.");
+        return "fragments/private/PayEnd";
+        /*
+        BASE64Utils base64=new BASE64Utils(Base64.getEncoder(),Base64.getDecoder());
+        Long order_ID=Long.valueOf(base64.decode(orderId));
+        log.info(order_ID.toString());
 
+
+
+        if(orderService.SuccessHandle(order_ID,paymentKey,amount)){
+
+            result = orderService.getApprovalofPayment(paymentKey,orderId, amount);
+
+        }
+        if(result.equals("200")){
+
+
+            model.addAttribute("message","결제에 성공하셨습니다.");
+            return "fragments/private/PayEnd";
+        }else{
+            model.addAttribute("message",result+" 다시 시도해주세요.");
+            return "fragments/private/PayEnd";
+        }
+
+         */
+
+
+    }
 
 
 

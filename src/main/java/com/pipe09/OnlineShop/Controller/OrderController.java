@@ -36,6 +36,7 @@ public class OrderController {
     @GetMapping("/payments/purchase/endpoint")
     public String getCompletePage() { return "fragments/private/PayEnd";}
 
+
     @GetMapping("/payments/purchase/success")
     public String paymentSuccess( @RequestParam String orderId, @RequestParam String paymentKey,  @RequestParam int amount,Model model ){
         String result=null;
@@ -61,6 +62,7 @@ public class OrderController {
 
 
     }
+
     @GetMapping("/payments/purchase/fail")
     public String paymentFail(@RequestParam String code, @RequestParam String message, @RequestParam String orderId, Model model){
         orderService.getFail(code, message, orderId);

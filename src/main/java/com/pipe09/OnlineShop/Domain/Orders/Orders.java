@@ -82,4 +82,8 @@ public class Orders {
             
         }
     }
+    @Override
+    public String toString(){
+        return this.getOrder_ID()+"-"+this.getDeliverystatus()+this.getTotalPrice();
+    }
 }

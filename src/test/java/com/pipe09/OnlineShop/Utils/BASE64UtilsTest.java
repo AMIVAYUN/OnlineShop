@@ -16,11 +16,12 @@ public class BASE64UtilsTest {
     @Test
     public void test(){
         BASE64Utils utils=new BASE64Utils(Base64.getEncoder(),Base64.getDecoder());
-        Long test=1L;
+        Long test=74L;
         String result=utils.encode(test);
         System.out.println(result);
         System.out.println(utils.decode(result));
-        System.out.println(Long.valueOf(utils.decode(result)));
+        System.out.println(utils.decode(result));
+        System.out.println((Long.valueOf(utils.decode(result))).equals(74L));
 
     }
 

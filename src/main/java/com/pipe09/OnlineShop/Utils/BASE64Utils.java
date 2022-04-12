@@ -45,6 +45,8 @@ public class BASE64Utils {
 
         try{
             byte[] decodedstr=decoder.decode(value.getBytes());
+            String str= new String(decodedstr);
+            log.info(str);
             return new String(decodedstr);
         } catch (Exception e) {
             log.info(e.toString());

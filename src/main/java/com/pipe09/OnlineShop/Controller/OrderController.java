@@ -39,7 +39,6 @@ public class OrderController {
     @GetMapping("/payments/purchase/success")
     public String paymentSuccess( @RequestParam String orderId, @RequestParam String paymentKey,  @RequestParam int amount,Model model ){
         String result=null;
-        log.info(orderId+" paykey: "+paymentKey+"가격: "+String.valueOf(amount)) ;
 
         BASE64Utils base64=new BASE64Utils(Base64.getEncoder(),Base64.getDecoder());
         Long order_ID=Long.valueOf(base64.decode(orderId));

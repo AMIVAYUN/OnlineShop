@@ -391,8 +391,9 @@ input:-webkit-autofill {
 }
 
 .name{
-    width:380px;
+    width:100px;
 }
+
 .mer_img img{
     width:80px;
     height:80px;

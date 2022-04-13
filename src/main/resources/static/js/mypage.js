@@ -7,7 +7,7 @@ $(document).ready(function(){
     SearchSetting();
     logoSetting();
     nameCheckMypage();
-    mypageSetting();
+    //mypageSetting();
     getOrderedItem();
     $('input').attr('autocomplete','off');
 
@@ -77,11 +77,28 @@ async function SessionCheck(){
         $("#join-navi").attr("href","/logout");
         $("#scart").click(function (){
             window.location.assign(baseurl .protocol +"//"+baseurl .host+"/shopping-list");
-        })
+        });
+        $("#comp_mypage").click(function (){
+            var url=baseurl .protocol +"//"+baseurl .host+"/mypage"
+            location.assign(url);
+        });
+        $("#mypage").click(function (){
+            var url=baseurl .protocol +"//"+baseurl .host+"/mypage"
+            location.assign(url);
+        });
+
     }else{
         $("#scart").click(function (){
             alert("로그인이 필요한 서비스 입니다.")
-        })
+        });
+
+        $("#comp_mypage").click(function (){
+            alert("로그인이 필요한 서비스 입니다.")
+        });
+        $("#mypage").click(function (){
+            alert("로그인이 필요한 서비스 입니다.")
+        });
+
     }
 
 }
@@ -105,12 +122,13 @@ async function getOrderedItem(){
             var innerhtml='<tr class="component" id='+res[idx1].paymentKey+'>\n' +
             '                    <td class="mer_img"><img src='+res[idx1].itemDtoList[idx2].imgSrc+'></td>\n' +
             '                    <td class="name" id='+res[idx1].itemDtoList[idx2].orderitem_id+'>'+res[idx1].itemDtoList[idx2].itemname+'</td>\n' +
+                '                <td class="date">'+    res[idx1].approvedAt+'</td>'+
             '                    <td class="count">'+res[idx1].itemDtoList[idx2].count+'개</td>\n' +
             '                    <td class="price">'+priceComma+'</td>\n' +
             '                    <td class="total">'+totalComma+'원</td></tr>\n'
             innerhtmlSum = innerhtmlSum +'\n'+ innerhtml;
         })
-        innerhtmlSum = innerhtmlSum + '\n' +'<tr id='+res[idx1].paymentKey+'>\n' + checkStatus(res[idx1].type)
+        innerhtmlSum = innerhtmlSum + '\n' +'<tr style="text-align: center;font-family: SUIT-Medium" id='+res[idx1].paymentKey+'>\n' + checkStatus(res[idx1].type)
 
         $("#shoppinglist").append(innerhtmlSum);
     })
@@ -123,18 +141,36 @@ function checkStatus(status){
         return '<td className="confirm" colSpan="2" style=" text-align: center;border-bottom: 3px solid #212425; padding-bottom:10px;">\n' +
             '            환불처리 된 주문입니다.\n' +
             '        </td>' +
-            '<td class="cancel" colspan="3" style="border-bottom: 3px solid #212425;text-align: center;font-size: 12px; padding-bottom:10px;">문의사항은 010-3141-5278로 문의해주세요</td></tr>\n'
+            '<td class="cancel" colspan="3" style="border-bottom: 3px solid #212425;text-align: center;font-size: 13px; padding-bottom:10px;">문의사항은 010-3141-5278로 문의해주세요</td></tr>\n'
 
-    }else{
-        return '     <td class="confirm" colspan="2" style="border-bottom: 3px solid #212425; padding-bottom:10px;"><button class="confirm_btn" onclick="checkGet(this)">인수확인</button></td>\n' +
+    }else if (status=="COMPLETE"){
+        return '<td className="confirm" colSpan="2" style=" text-align: center;border-bottom: 3px solid #212425; padding-bottom:10px;">\n' +
+            '            인수가 완료된 거래입니다.\n' +
+            '        </td>' +
+            '<td class="cancel" colspan="3" style="border-bottom: 3px solid #212425;text-align: center; padding-bottom:10px;">이용해주셔서 감사합니다</td></tr>\n'
+    }
+    else{
+        return '     <td class="confirm" colspan="2" style="border-bottom: 3px solid #212425; padding-bottom:10px;"><button class="confirm_btn" onclick="checkGet(this)">인수 확인</button></td>\n' +
             '     <td class="cancel" colspan="3" style="border-bottom: 3px solid #212425; padding-bottom:10px;"><button class="cancel_btn"onclick="cancelOrder(this)">결제취소</button></td></tr>\n'
     }
 }
-function checkGet(vari){
-    console.log($(vari).closest("tr").attr("id")+"아직 미구현된 서비스 입니다.")
+async function checkGet(vari){
+    var baseurl=window.location;
+    var url=baseurl .protocol +"//"+baseurl .host+ "/payments/doCompleteTrade/"+$(vari).closest("tr").attr("id")
+    const res=await fetch(url,{method:"post",headers:{'X-CSRF-TOKEN': csrfToken}})
+    if(res.status==200){
+        alert("인수 확인이 완료되었습니다. 이용해주셔서 감사합니다.")
+        location.reload()
+    }else if(res.status==400){
+        alert("권한이 없습니다.")
+        location.reload()
+    }else{
+        alert("내부 서버에 에러가 발생하였습니다.");
+        location.reload()
+    }
 }
 function cancelOrder(vari){
-    console.log($(vari).closest("tr").attr("id"))
+
     if(confirm("환불 하시겠습니까?")){
         $("#paymentKey").val($(vari).closest("tr").attr("id"));
         modalOpen();
@@ -350,4 +386,122 @@ function mypageSetting(){
             location.assign(url);
         }
     })
+}
+function checkValidPassword() {
+    var pass=$("#members_password").val();
+    var passchk=$("#members_password_chk").val();
+    if(pass != passchk){
+        alert("비밀번호와 확인 칸의 값이 다릅니다.");
+
+        return false;
+    }
+    if ($("#members_password").val() == "") {
+        alert("비밀 번호의 공백을 없애주세요")
+        return false;
+    }
+
+    const pw = $("#members_password").val();
+    // String.prototype.search() :: 검색된 문자열 중에 첫 번째로 매치되는 것의 인덱스를 반환한다. 찾지 못하면 -1 을 반환한다.
+    // number
+
+    if (pw.length < 6) {
+        // 최소 6문자.
+        alert("비밀번호는 여섯 글자 이상 이어야 합니다.")
+        return false;
+    } else if (pw.search(/\s/) != -1) {
+        // 공백 제거.
+        alert("비밀번호에 공백은 제거해주세요")
+        return false;
+    }
+
+    return true;
+}
+function chkValidAddr(){
+    if($("#members_address").val() &&$("#members_postcode").val() && $("#members_detailAddress").val() && $("#members_ref_address").val()){
+        return true;
+    }else{
+        return false;
+    }
+}
+function chkValidPhone(){
+    var phonenum=$("#members_phone_num").val();
+    var isnum = /^\d+$/.test(phonenum);
+    if(isnum){
+        if(phonenum.length>9 && phonenum.length<13){
+            return true;
+        }else{
+            alert("유효한 길이에 맞게 전화번호를 작성해주세요 ex)01012345678");
+        }
+    }else{
+        alert("번호에는 숫자만 넣어주세요");
+        return false;
+    }
+
+}
+async function changePwd(){
+    if(checkValidPassword()){
+        let obj={
+            str:$("#members_password").val()
+        }
+        var baseurl=window.location;
+        var url=baseurl .protocol +"//"+baseurl .host+"/api/v1/members/updatePwd";
+        await fetch(url,{method:"post",headers:{'Content-Type':'application/json','X-CSRF-TOKEN': csrfToken},body:JSON.stringify(obj)}).then(
+            response => {
+                if(response.status==400){
+                    alert("잘못된 접근입니다");
+                }
+                else if(response.status=200){
+                    alert("변경에 성공하였습니다.");
+                }else{
+                    alert("내부 서버에 장애가 있습니다. 잠시 후 다시 시도해주세요");
+                }
+            }
+        )
+    }
+}
+
+async function changeAddr(){
+    if(chkValidAddr()){
+        let obj={
+            postcode:$("#members_address").val(),
+            address:$("#members_address").val(),
+            detailAddress:$("#members_detailAddress").val(),
+            ref_address:$("#members_ref_address").val()
+        }
+        var baseurl=window.location;
+        var url=baseurl .protocol +"//"+baseurl .host+"/api/v1/members/updateAddress";
+        await fetch(url,{method:"post",headers:{'Content-Type':'application/json','X-CSRF-TOKEN': csrfToken},body:JSON.stringify(obj)}).then(
+            response => {
+                if(response.status==400){
+                    alert("잘못된 접근입니다");
+                }
+                else if(response.status=200){
+                    alert("변경에 성공하였습니다.");
+                }else{
+                    alert("내부 서버에 장애가 있습니다. 잠시 후 다시 시도해주세요");
+                }
+            }
+        )
+    }
+}
+async function changeNum(){
+    if(chkValidPhone()){
+        let obj={
+            str:$("#members_phone_num").val()
+        }
+        var baseurl=window.location;
+        var url=baseurl .protocol +"//"+baseurl .host+"/api/v1/members/updatePhonenum";
+        await fetch(url,{method:"post",headers:{'Content-Type':'application/json','X-CSRF-TOKEN': csrfToken},body:JSON.stringify(obj)}).then(
+            response => {
+                if(response.status==400){
+                    alert("잘못된 접근입니다");
+                }
+                else if(response.status=200){
+                    alert("변경에 성공하였습니다.");
+                }else{
+                    alert("내부 서버에 장애가 있습니다. 잠시 후 다시 시도해주세요");
+                }
+            }
+        )
+    }
 }

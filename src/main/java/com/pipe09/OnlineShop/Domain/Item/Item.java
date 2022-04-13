@@ -8,6 +8,7 @@ import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
 import com.pipe09.OnlineShop.Utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Formula;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -46,6 +47,12 @@ public class Item {
     private String DTYPE;
     @Enumerated(EnumType.STRING)
     private Item_status status;
+
+    @Basic(fetch = FetchType.LAZY)
+    @Formula("(select count(1) from item as i where i.status='SALE')")
+    private int countofItems;
+
+
 
     public static Item createNewItem(String type,String Name,int Price,int StockQuantity,String description,int Weight,String Madein,String ManufacturedCompany){
         ItemFactory factory=new ItemFactory();

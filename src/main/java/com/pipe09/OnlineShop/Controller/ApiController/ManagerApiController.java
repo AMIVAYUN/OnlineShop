@@ -251,28 +251,33 @@ public class ManagerApiController {
 
 
     @PutMapping(path = "/admin/manage/items/{id}/update-item.do")
-    public ResponseEntity<String> updateItemV2(@PathVariable Long id, @RequestParam(value = "body")String obj,@RequestPart(value = "file") @Nullable MultipartFile file) throws JsonProcessingException {
-        ObjectMapper objectMapper=new ObjectMapper().registerModule(new SimpleModule());
-        P_itemDto dto =objectMapper.readValue(obj,P_itemDto.class);
-        DefaultMapper<Item> mapper=new DefaultMapper<>(ItemFactory.makingItemBytype(dto.getDtype()));
-        ImgPathDto img=new ImgPathDto(null,null);
-        Item item=mapper.Translate(dto);
-        item.setItem_ID(id);
-        if(file != null){
-            img =itemService.MakingImgfile(file);
-            item.setImgSrc("img/upload/"+img.getName());
-        }
-        Long putid= itemService.updateItem(item);
+    public ResponseEntity<String> updateItemV2(@PathVariable Long id, @RequestParam(value = "body")String obj,@RequestPart(value = "file") @Nullable MultipartFile file) {
+        try{
+            ObjectMapper objectMapper=new ObjectMapper().registerModule(new SimpleModule());
+            P_itemDto dto =objectMapper.readValue(obj,P_itemDto.class);
+            DefaultMapper<Item> mapper=new DefaultMapper<>(ItemFactory.makingItemBytype(dto.getDtype()));
+            ImgPathDto img=new ImgPathDto(null,null);
+            Item item=mapper.Translate(dto);
+            item.setItem_ID(id);
+            if(file != null){
+                img =itemService.MakingImgfile(file);
+                item.setImgSrc("img/upload/"+img.getName());
+            }
+            Long putid= itemService.updateItem(item);
 
-        if((img.getMsg()==null && putid !=null)){
-            return new ResponseEntity<String>("수정에 성공하였습니다.",HttpStatus.OK);
+            if((img.getMsg()==null && putid !=null)){
+                return new ResponseEntity<String>("수정에 성공하였습니다.",HttpStatus.OK);
+            }
+            else if (img.getMsg() != null){
+                return new ResponseEntity<String>(img.getMsg(),HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+            else{
+                return new ResponseEntity<String>("데이터 변환간 에러가 발생하였습니다.",HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }catch(Exception e){
+            return new ResponseEntity("서버 내부 에러 발생",HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        else if (img.getMsg() != null){
-            return new ResponseEntity<String>(img.getMsg(),HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        else{
-            return new ResponseEntity<String>("데이터 변환간 에러가 발생하였습니다.",HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+
     }
 
 

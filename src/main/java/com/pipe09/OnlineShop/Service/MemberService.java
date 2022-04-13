@@ -1,8 +1,11 @@
 package com.pipe09.OnlineShop.Service;
 
 
+import com.pipe09.OnlineShop.Domain.Member.Address;
 import com.pipe09.OnlineShop.Domain.Member.Member;
 import com.pipe09.OnlineShop.Domain.Member.UserType;
+import com.pipe09.OnlineShop.Dto.Member.AddressDto;
+import com.pipe09.OnlineShop.Dto.Member.SimpleStringDto;
 import com.pipe09.OnlineShop.Repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
@@ -25,6 +28,7 @@ public class MemberService implements UserDetailsService {
     public Long save(Member member){
         //validateduplicateMember(member);
         member.Encodepwd(passwordEncoder);
+
         Long saveid =memberRepository.save(member);
         return saveid;
     }
@@ -73,5 +77,25 @@ public class MemberService implements UserDetailsService {
 
     public Member findById(String id){
         return memberRepository.findByuserId(id);
+    }
+
+    @Transactional
+    public void UpdateAddress(String name, AddressDto dto) throws Exception{
+        Member member=memberRepository.findByuserId(name);
+        Address setaddr=new Address();
+        setaddr.IntegeratedSetter(dto);
+        member.setAddress(setaddr);
+
+    }
+    @Transactional
+    public void UpdatePwd(String name, SimpleStringDto dto){
+        Member member=memberRepository.findByuserId(name);
+        member.setPwd(dto.getStr());
+        member.Encodepwd(getPasswordEncoder());
+    }
+    @Transactional
+    public void UpdatePhone(String name,SimpleStringDto dto){
+        Member member=memberRepository.findByuserId(name);
+        member.setPhone_Num(dto.getStr());
     }
 }

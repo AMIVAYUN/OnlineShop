@@ -33,7 +33,7 @@ public class ItemService {
         return itemRepository.findItem(id);
     }
 
-
+    public Integer getcountofKeyword(String keyword){ return itemRepository.getCountofKeyword(keyword); }
 
     @Transactional
     public Long updateItem(Item item){

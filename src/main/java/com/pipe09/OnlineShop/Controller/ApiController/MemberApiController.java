@@ -1,13 +1,16 @@
 package com.pipe09.OnlineShop.Controller.ApiController;
 
 
+import com.pipe09.OnlineShop.Domain.Member.Address;
 import com.pipe09.OnlineShop.Domain.Member.Member;
 import com.pipe09.OnlineShop.Domain.Member.RoleType;
 import com.pipe09.OnlineShop.Domain.Member.UserType;
 import com.pipe09.OnlineShop.Domain.SessionUser;
 import com.pipe09.OnlineShop.Dto.MemauthDto;
+import com.pipe09.OnlineShop.Dto.Member.AddressDto;
 import com.pipe09.OnlineShop.Dto.Member.MemberDto;
 import com.pipe09.OnlineShop.Dto.Member.MemberManageDto;
+import com.pipe09.OnlineShop.Dto.Member.SimpleStringDto;
 import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
 import com.pipe09.OnlineShop.Service.MemberService;
 import com.pipe09.OnlineShop.Service.Oauth2Service;
@@ -16,7 +19,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -102,5 +107,58 @@ public class MemberApiController{
         Member member= memberService.findById(user_id);
         MemberDto dto=new MemberDto(member.getUser_ID(),"접근 불가",member.getEmail(),member.getName(),member.getPhone_Num(),member.getAddress());
         return dto;
+    }
+    @PostMapping("/api/v1/members/updateAddress")
+    public ResponseEntity<String>changeAddr(@RequestBody AddressDto dto,@AuthenticationPrincipal UserDetails details){
+        try{
+            String name=details.getUsername();
+            if(name==null){
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            }
+            memberService.UpdateAddress(name,dto);
+
+            return new ResponseEntity("주소 변경에 성공하였습니다.",HttpStatus.OK);
+
+
+        }catch(Exception e){
+            log.info(e.toString());
+            return new ResponseEntity("주소 변경에 실패하였습니다.(자세 사항은 문의 부탁드립니다.)",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @PostMapping("/api/v1/members/updatePwd")
+    public ResponseEntity<String>changepwd(@RequestBody SimpleStringDto dto, @AuthenticationPrincipal UserDetails details){
+        try{
+            String name=details.getUsername();
+            if(name==null){
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            }
+            memberService.UpdatePwd(name,dto);
+
+            return new ResponseEntity("비밀번호 변경에 성공하였습니다.",HttpStatus.OK);
+
+
+        }catch(Exception e){
+            log.info(e.toString());
+            return new ResponseEntity("비밀번호 변경에 실패하였습니다.(자세 사항은 문의 부탁드립니다.)",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @PostMapping("/api/v1/members/updatePhonenum")
+    public ResponseEntity<String>changephone(@RequestBody SimpleStringDto dto, @AuthenticationPrincipal UserDetails details){
+        try{
+
+            String name=details.getUsername();
+            if(name==null){
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            }
+
+            memberService.UpdatePhone(name,dto);
+
+            return new ResponseEntity("전화번호 변경에 성공하였습니다.",HttpStatus.OK);
+
+
+        }catch(Exception e){
+            log.info(e.toString());
+            return new ResponseEntity("전화번호 변경에 실패하였습니다.(자세 사항은 문의 부탁드립니다.)",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

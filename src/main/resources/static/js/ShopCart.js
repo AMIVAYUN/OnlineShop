@@ -4,7 +4,7 @@ $(document).ready(function (){
     SessionCheck();
     SearchSetting();
     logoSetting();
-    mypageSetting();
+    //mypageSetting();
     delBtSetting();
 
 })
@@ -27,7 +27,16 @@ async function SessionCheck(){
         $("#join-navi").attr("href","/logout");
         $("#scart").click(function (){
             window.location.assign(baseurl .protocol +"//"+baseurl .host+"/shopping-list");
-        })
+        });
+        $("#comp_mypage").click(function (){
+            var url=baseurl .protocol +"//"+baseurl .host+"/mypage"
+            location.assign(url);
+        });
+        $("#mypage").click(function (){
+            var url=baseurl .protocol +"//"+baseurl .host+"/mypage"
+            location.assign(url);
+        });
+
         var suburl="/api/v1/shopcarts/items/all?username="+res1.iswho;
         const res=await fetch(suburl,{method:"get"}).then(response => response.json());
         await $.each(res, function(idx){
@@ -49,8 +58,14 @@ async function SessionCheck(){
 
     }else{
         $("#scart").click(function (){
-            alert("로그인이 필요한 서비스 입니다.")
+            alert("로그인이 필요한 서비스 입니다.");
         })
+        $("#comp_mypage").click(function (){
+            alert("로그인이 필요한 서비스 입니다.");
+        })
+        $("#mypage").click(function (){
+            alert("로그인이 필요한 서비스 입니다.");
+        });
     }
     sum = sum.toLocaleString();
     $("#totalpricevalue").text(sum +"원");

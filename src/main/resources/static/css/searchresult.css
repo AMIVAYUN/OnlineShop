@@ -46,9 +46,23 @@ body{
     color:black;
     text-decoration-line: none;
     white-space : nowrap;
+    cursor:pointer;
 
 }
-
+#paging{
+    width: 900px;
+    position: absolute;
+    height: 40px;
+    top: 1050px;
+    left:400px;
+    margin-top:15px;
+    cursor:pointer;
+}
+#paging input{
+    width:24px;
+    border-radius: 10px;
+    border:3px solid lightgray;
+}
 #logo{
     /*padding-left:120px;
 
@@ -135,7 +149,7 @@ hr{
 
     top:300px;
     width:900px;
-    height:800px;
+
     list-style: none;
     margin:0px;
     padding:0px;

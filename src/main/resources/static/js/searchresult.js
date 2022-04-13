@@ -15,12 +15,7 @@ async function SessionCheck(){
     if(!res1.isauth){
         return false;
     }
-    function gotoItem(){
-        $('#shoplist').on("click","li",function (){
-            var id=$(this).attr('id');
-            location.assign("./products/"+id);
-        })
-    }
+
     if(res1.iswhom !="[ROLE_ADMIN]"){
         $("#manager").remove();
     }
@@ -30,7 +25,7 @@ async function SessionCheck(){
         $("#join-navi").text("로그아웃");
         $("#join-navi").attr("href","/logout");
         $("#scart").click(function (){
-            window.location.assign(baseurl .protocol +"//"+baseurl .host+"/shopping-list");
+            location.assign(baseurl .protocol +"//"+baseurl .host+"/shopping-list");
         });
         $("#comp_mypage").click(function (){
             var url=baseurl .protocol +"//"+baseurl .host+"/mypage"
@@ -113,6 +108,7 @@ function logoSetting(){
     })
 
 }
+
 function gotoItem(){
     var baseurl=window.location;
     $('#shoplist').on("click","li",function (){

@@ -7,6 +7,9 @@ import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
 import com.pipe09.OnlineShop.Service.ItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -79,11 +82,19 @@ public class ItemApiController {
 
      */
     @GetMapping("/api/v2/items/all")
-    public List<ItemDto> getitemall(@RequestParam int offset, @RequestParam int limit){
-        List<Item> items=service.findAll(offset, limit);
-        DefaultMapper<ItemDto> mapper=new DefaultMapper<>(new ItemDto());
-        List<ItemDto> dtoList=items.stream().map(item -> mapper.Translate(item)).collect(Collectors.toList());
-        return dtoList;
+    public ResponseEntity<List<ItemDto>> getitemall(@RequestParam int offset, @RequestParam int limit){
+        try{
+            List<Item> items=service.findAll(offset, limit);
+            HttpHeaders headers=new HttpHeaders();
+            headers.set("itemLen",String.valueOf(items.get(0).getCountofItems()));
+            DefaultMapper<ItemDto> mapper=new DefaultMapper<>(new ItemDto());
+            List<ItemDto> dtoList=items.stream().map(item -> mapper.Translate(item)).collect(Collectors.toList());
+            return new ResponseEntity(dtoList,headers, HttpStatus.OK);
+        }catch (Exception e){
+            log.info(this.getClass().getName()+e.toString());
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
     @GetMapping("/api/v2/items/single/{itemid}")
     public ItemDto getItembyId(@PathVariable Long itemid){
@@ -93,11 +104,20 @@ public class ItemApiController {
 
     }
     @GetMapping("/api/v2/items/{keyword}")
-    public List<ItemDto> getItembykeyword(@RequestParam int offset,@RequestParam int limit,@PathVariable String keyword){
-        List<Item> items=service.findByTitleKeyword(keyword,offset,limit);
-        DefaultMapper<ItemDto> mapper=new DefaultMapper<>(new ItemDto());
-        List<ItemDto> dtoList=items.stream().map(item -> mapper.Translate(item)).collect(Collectors.toList());
-        return dtoList;
+    public ResponseEntity<List<ItemDto>> getItembykeyword(@RequestParam int offset,@RequestParam int limit,@PathVariable String keyword){
+        try{
+            Integer count=service.getcountofKeyword(keyword);
+            HttpHeaders headers=new HttpHeaders();
+            headers.set("count",count.toString());
+            List<Item> items=service.findByTitleKeyword(keyword,offset,limit);
+            DefaultMapper<ItemDto> mapper=new DefaultMapper<>(new ItemDto());
+            List<ItemDto> dtoList=items.stream().map(item -> mapper.Translate(item)).collect(Collectors.toList());
+            return new ResponseEntity(dtoList,headers,HttpStatus.OK);
+        }catch(Exception e){
+            log.info(e.toString());
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
 }

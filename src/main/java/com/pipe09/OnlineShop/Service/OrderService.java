@@ -282,7 +282,7 @@ public class OrderService {
         orderRepository.changeStatDelivery(id);
     }
     @Transactional
-    public void doCancel( String paymentKey, doCancelDto dto ){
+    public void doCancel( String paymentKey, doCancelDto dto ) throws Exception{
         payment object=paymentRepository.findByPaymentKey(paymentKey);
 
         HttpHeaders headers=getRequestTossHeaders();
@@ -315,4 +315,13 @@ public class OrderService {
         return orderRepository.findByPaymentKey(paymentKey);
     }
 
+    public void CompleteOrder(String paymentKey)throws Exception{
+        payment setpayment=paymentRepository.findByPaymentKey(paymentKey);
+        setpayment.setCurrent_type(paymentType.COMPLETE);
+        BASE64Utils utils=new BASE64Utils(Base64.getEncoder(),Base64.getDecoder());
+        Long Order_ID=Long.valueOf(utils.decode(setpayment.getOrderId()));
+        Orders order=orderRepository.findOne(Order_ID);
+        order.setDeliverystatus(Deliverystatus.COMPLETE);
+
+    }
 }

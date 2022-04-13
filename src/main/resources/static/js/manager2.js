@@ -1,7 +1,7 @@
 var firstGrid;
 var selected;
 const csrfToken = $('meta[name="_csrf"]').attr('content');
-let formData=new FormData();
+
 $(document).ready(function(){
     buttonSetting();
 
@@ -356,7 +356,7 @@ function getItemIDlists(list){
     return idlist;
 }
 function replaceItems(){
-
+    let formData=new FormData();
     selected=firstGrid.getList("selected");
     if(selected.length==1){
         let obj={
@@ -416,6 +416,7 @@ function gotoHome(){
     location.assign('/');
 }
 function getReturnValue(returnValue) {
+    let formData=new FormData();
     formData.append('file',returnValue.get('file'));
     let obj={
         "name":selected[0]['item_name'],
@@ -427,6 +428,7 @@ function getReturnValue(returnValue) {
         "madein":selected[0]['item_country'],
         "weight":selected[0]['item_weight']
     }
+    console.log(obj);
     formData.append('body',JSON.stringify(obj))
     updateItemSequence(selected[0].item_id,formData);
 
@@ -437,8 +439,7 @@ async function updateItemSequence(id,formData){
     await fetch(url,{method:"put",headers:{'X-CSRF-TOKEN': csrfToken},body:formData}).then(response => response.text()).then(
         (res) => {
             alert(res);
-            window.opener.
-            window.close();
+
         }
     )
 

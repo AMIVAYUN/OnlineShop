@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=yes, maximum-scale=1.0">
@@ -16,21 +16,8 @@
 </head>
 <body>
 <div id="wrap">
-    <nav id="navi-bar">
-
-        <a id="login-navi" href="/login">로그인</a>
-        <a id="join-navi" href="/join">회원가입</a>
-        <a id="mypage">마이페이지</a>
-        <a href="/contact">FAQ</a>
-
-    </nav>
-    <div id="bodyheader">
-        <div id="mainHeaderbar">
-            <img src="../img/static/DB_LOGO.gif" id="logo">
-            <div id="searchbar"><input type="text" placeholder="   제품을 검색하세요."><img  id="searchicon"src="../img/static/searchicon.png"></div>
-            <img src="../img/static/shoppingcart.png" id="scart" onclick="javascript:location.href='/shopping-list'">
-        </div>
-    </div>
+    <nav th:replace="fragments/part/navi_bar.html :: fragment-naviBar"></nav>
+    <div th:replace="fragments/part/bodyheader.html :: fragment-bodyheader"></div>
     <hr>
     <div id="main">
         <h1><i class="fa-solid fa-cart-shopping"></i></i>&nbsp장바구니</h1>
@@ -132,28 +119,8 @@
 
         </div>
     </div>
-    <div id="side_Bar">
-        <div id="comp_intr">
-            <img src="../img/static/companyIntroduction_ver2.png" onclick="javascript:location.href='/comp-intro'">
-        </div>
-        <div id="comp_mypage">
-            <img src="../img/static/mypage_ver2.png"onclick="javascript:location.href='/my-page'">
-
-        </div>
-        <div id="comp_hompage">
-            <img src="../img/static/homepage_ver2.png"onclick="javascript:location.href='http://www.대봉산업기계.com'">
-
-        </div>
-        <div id="comp_board">
-            <img src="../img/static/board_ver3.png" onclick="javascript:location.href='/contact/notice'">
-        </div>
-        <div id="comp_top">
-            <img src="../img/static/Top_ver2.png" onclick="window.scroll(0,0)">
-        </div>
-    </div>
-    <div id="footer">
-        <img src="../img/static/footer.png">
-    </div>
+    <div th:replace="fragments/part/footer.html :: fragment-footer"></div>
+    <div th:replace="fragments/part/side_bar.html :: fragment-sideBar"></div>
 </div>
 
 

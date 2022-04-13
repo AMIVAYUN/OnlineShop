@@ -22,6 +22,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.ui.Model;
@@ -106,9 +108,35 @@ public class OrderApiController {
     }
 
     @PostMapping("/payments/doCancel/{paymentKey}")
-    public void paymentCancler(@PathVariable String paymentKey,@RequestBody doCancelDto dto){
-        orderService.doCancel(paymentKey,dto);
+    public ResponseEntity paymentCancler(@PathVariable String paymentKey, @RequestBody doCancelDto dto, @AuthenticationPrincipal UserDetails user){
+        try{
+            String name=user.getUsername();
+            if(name==null){
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            }
+            orderService.doCancel(paymentKey,dto);
+            return new ResponseEntity(HttpStatus.OK);
+        }catch(Exception e){
+            log.info(e.toString());
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
+
+    }
+
+    @PostMapping("/payments/doCompleteTrade/{paymentKey}")
+    public ResponseEntity paymentCompleter(@PathVariable String paymentKey,@AuthenticationPrincipal UserDetails details){
+        try{
+            String name=details.getUsername();
+            if(name==null){
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            }
+            orderService.CompleteOrder(paymentKey);
+            return new ResponseEntity(HttpStatus.OK);
+        }catch(Exception e){
+            log.info(e.toString());
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 

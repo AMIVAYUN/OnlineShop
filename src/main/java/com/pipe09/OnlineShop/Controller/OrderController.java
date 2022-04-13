@@ -46,21 +46,26 @@ public class OrderController {
         BASE64Utils base64=new BASE64Utils(Base64.getEncoder(),Base64.getDecoder());
         Long order_ID=Long.valueOf(base64.decode(orderId));
         log.info(order_ID.toString());
+        try{
+            if(orderService.SuccessHandle(order_ID,paymentKey,amount)){
 
-        if(orderService.SuccessHandle(order_ID,paymentKey,amount)){
+                result = orderService.getApprovalofPayment(paymentKey,orderId, amount);
 
-            result = orderService.getApprovalofPayment(paymentKey,orderId, amount);
-
-        }
-        if(result.equals("200")){
+            }
+            if(result.equals("200")){
 
 
-            model.addAttribute("message","결제에 성공하셨습니다.");
+                model.addAttribute("message","결제에 성공하셨습니다.");
+                return "fragments/private/PayEnd";
+            }else{
+                model.addAttribute("message",result+" 다시 시도해주세요.");
+                return "fragments/private/PayEnd";
+            }
+        }catch (Exception e){
+            model.addAttribute("message",e.toString());
             return "fragments/private/PayEnd";
-        }else{
-            model.addAttribute("message",result+" 다시 시도해주세요.");
-            return "fragments/private/PayEnd";
         }
+
 
 
     }

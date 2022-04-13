@@ -21,21 +21,8 @@
 </head>
 <body>
 <div id="wrap">
-    <nav id="navi-bar">
-
-        <a id="login-navi" href="/login"style="left:1200px;">로그인</a>
-        <a id="join-navi" href="/join"style="left:1240px;">회원가입</a>
-        <a id="mypage"style="left:1290px;">마이페이지</a>
-        <a href="/contact"style="left:1350px;">FAQ</a>
-        <a id="manager" href="/admin/manage" style="left:1380px;">관리자</a>
-    </nav>
-    <div id="bodyheader">
-        <div id="mainHeaderbar">
-            <img src="/img/static/DB_LOGO.gif" id="logo">
-            <div id="searchbar"><input type="text" placeholder="   제품을 검색하세요."><img  id="searchicon"src="/img/static/searchicon.png"></div>
-            <img src="/img/static/shoppingcart.png" id="scart" onclick="javascript:location.href='/shopping-list'">
-        </div>
-    </div>
+    <nav th:replace="fragments/part/navi_bar.html :: fragment-naviBar"></nav>
+    <div th:replace="fragments/part/bodyheader.html :: fragment-bodyheader"></div>
     <hr>
     <button id="mypage_title_container" onclick="show_userinfo()">
         <div class="mypage_title_inner" id="mypage_userinfo_btn"><i class="fa-solid fa-user-gear"></i> <b>마이페이지</b></div>
@@ -74,7 +61,7 @@
                     <input class="userinfoChange" id="members_password_chk" type="password"></input>
                 </div>
             </div>
-            <button class="mypage_details_change" onclick="">비밀번호 변경</button>
+            <button class="mypage_details_change" onclick="changePwd()">비밀번호 변경</button>
         </div>
         <div class="separation"></div>
         <div class="mypage_details_div_leftRight">
@@ -96,7 +83,7 @@
                     <input class="userinfoChange" id="members_phone_num" type="text"></input>
                 </div>
             </div>
-            <button class="mypage_details_change" onclick="">
+            <button class="mypage_details_change" onclick="changeNum()">
                 전화번호 변경
             </button>
         </div>
@@ -146,7 +133,7 @@
                     <input class="userinfoChange" id="members_ref_address" type="text"></input>
                 </div>
             </div>
-            <button class="mypage_details_change" onclick="">주소 변경</button>
+            <button class="mypage_details_change" onclick="changeAddr()">주소 변경</button>
         </div>
         <!--주문내역 버튼 추가-->
         <button id="submit_button">회원정보 변경</button>
@@ -157,6 +144,7 @@
                 <tr>
                     <th class="mer_img">제품 이미지</th>
                     <th class="name">상품명</th>
+                    <th class="date">거래 시간</th>
                     <th class="count">수량</th>
                     <th class="price">가격</th>
                     <th class="total">합계</th>
@@ -249,28 +237,9 @@
         </div>
     </div>
 
-    <div id="side_Bar">
-        <div id="comp_intr">
-            <img src="/img/static/companyIntroduction_ver2.png" onclick="javascript:location.href='/comp-intro'">
-        </div>
-        <div id="comp_mypage">
-            <img src="/img/static/mypage_ver2.png">
+    <div th:replace="fragments/part/footer.html :: fragment-footer"></div>
+    <div th:replace="fragments/part/side_bar.html :: fragment-sideBar"></div>
 
-        </div>
-        <div id="comp_hompage">
-            <img src="/img/static/homepage_ver2.png"onclick="javascript:location.href='http://www.대봉산업기계.com'">
-
-        </div>
-        <div id="comp_board">
-            <img src="/img/static/board_ver3.png" onclick="javascript:location.href='/board'">
-        </div>
-        <div id="comp_top">
-            <img src="/img/static/Top_ver2.png" onclick="window.scroll(0,0)">
-        </div>
-    </div>
-    <div id="footer">
-        <img src="/img/static/footer.png">
-    </div>
     <div id='modal'>
         <div id='content'>
             <input type='button' value='X' class="close" id='btnClose' onclick="modalClose()"/>
@@ -279,6 +248,7 @@
             <input type='button' value='제출하기' id='btndoCancel' onclick="dopayCancel()"/>
             <input type="hidden" id="paymentKey">
         </div>
+    </div>
 </div>
 </body>
 </html>

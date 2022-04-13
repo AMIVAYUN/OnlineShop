@@ -3,6 +3,7 @@ package com.pipe09.OnlineShop.Repository;
 import com.pipe09.OnlineShop.Domain.Item.Item;
 import com.pipe09.OnlineShop.Domain.Item.Item_status;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,4 +54,10 @@ public class ItemRepository {
     public List<Item> findBytitleKeyword(String keyword,int offset,int limit){
         return em.createQuery("select i from Item i where i.status=:status and (i.Name like concat('%',:keyword,'%'))").setParameter("status",Item_status.SALE).setParameter("keyword",keyword).setFirstResult(offset).setMaxResults(limit).getResultList();
     }
+
+    public int getCountofKeyword(String keyword){
+        return em.createQuery("select i from Item i where i.status=:status and (i.Name like concat('%',:keyword,'%'))").setParameter("status",Item_status.SALE).setParameter("keyword",keyword).getResultList().size();
+    }
+
+
 }

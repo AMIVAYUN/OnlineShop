@@ -1,17 +1,27 @@
 
 $(document).ready(function(){
-    getItem();
+    getItem(0,12);
     gotoItem();
     categorySetting();
     SessionCheck();
     SearchSetting();
     logoSetting();
-    mypageSetting();
+    //mypageSetting();
 
 })
-function getItem(){
+function getItem(offset,limit){
     Cleaning($("#shoplist"));
-    fetch("./api/v2/items/all?offset=0&limit=30",{method:"GET"}).then((response) => response.json()).then(
+    fetch("./api/v2/items/all?offset="+offset+"&limit="+limit,{method:"GET"}).then((response) => {
+        if(response.status==200){
+            console.log(response.headers.get("itemLen"));
+            return response.json()
+        }
+
+
+
+
+
+    }).then(
         (data) => {
             $.each(data, function (idx) {
                 var innerhtml = '<li class="item" id='+data[idx].item_ID +'><div id="item_img"><img src=' + data[idx].imgSrc + '></div>' +
@@ -67,7 +77,7 @@ function getTypedItem(dtype){
     else{
         url+=dtype[0];
     }
-    url+="?offset=0&limit=30"
+    url+="?offset=0&limit=11"
     fetch(url,{method:"GET"}).then((response) => response.json()).then(
         (data) => {
             $.each(data, function (idx) {
@@ -97,11 +107,27 @@ async function SessionCheck(){
         $("#join-navi").attr("href","/logout");
         $("#scart").click(function (){
             window.location.assign(baseurl .protocol +"//"+baseurl .host+"/shopping-list");
-        })
+        });
+        $("#comp_mypage").click(function (){
+            var url=baseurl .protocol +"//"+baseurl .host+"/mypage"
+            location.assign(url);
+        });
+        $("#mypage").click(function (){
+            var url=baseurl .protocol +"//"+baseurl .host+"/mypage"
+            location.assign(url);
+        });
+
     }else{
         $("#scart").click(function (){
             alert("로그인이 필요한 서비스 입니다.")
-        })
+        });
+
+        $("#comp_mypage").click(function (){
+            alert("로그인이 필요한 서비스 입니다.")
+        });
+        $("#mypage").click(function (){
+            alert("로그인이 필요한 서비스 입니다.")
+        });
     }
 
 }
@@ -124,12 +150,37 @@ function logoSetting(){
     })
 
 }
+function pageUp(){
+    var value=parseInt($("#page").val());
+    if($(".item").length == 12){
+        $("#page").val(value+1)
+        pageChange(value+1);
+    }else{
+        alert("다음 페이지가 존재하지 않습니다.")
+    }
+}
+function pageDown(){
+    var value=parseInt($("#page").val());
+    if(value==1){
+        alert("첫번째 페이지 입니다.")
+    }else{
+        $("#page").val(value-1);
+        pageChange(value-1);
+    }
+}
+function pageChange(value){
+
+    var offset=0+((value-1)*12);
+    var limit=offset+12;
+    getItem(offset,limit);
+}
+/*
 function mypageSetting(){
     var baseurl=window.location;
 
     $("#comp_mypage").click(function (){
     if($("#login-navi").text()=="로그인"){
-            alert("로그인이 필요한 서비스 입니다.")
+            alert("로그인이 필요한 서비스 입니다.");
     }else{
         var url=baseurl .protocol +"//"+baseurl .host+"/mypage"
         location.assign(url);
@@ -145,4 +196,8 @@ function mypageSetting(){
         }
     })
 }
+
+ */
+
+
 

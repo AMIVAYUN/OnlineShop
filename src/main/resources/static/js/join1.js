@@ -5,7 +5,7 @@ $(document).ready(function(){
     //SessionCheck();
     SearchSetting();
     logoSetting();
-    mypageSetting();
+    //mypageSetting();
     emailProveSetting();
     purposeSetting();
 })
@@ -28,11 +28,27 @@ async function SessionCheck(){
         $("#join-navi").attr("href","/logout");
         $("#scart").click(function (){
             window.location.assign(baseurl .protocol +"//"+baseurl .host+"/shopping-list");
-        })
+        });
+        $("#comp_mypage").click(function (){
+            var url=baseurl .protocol +"//"+baseurl .host+"/mypage"
+            location.assign(url);
+        });
+        $("#mypage").click(function (){
+            var url=baseurl .protocol +"//"+baseurl .host+"/mypage"
+            location.assign(url);
+        });
+
     }else{
         $("#scart").click(function (){
             alert("로그인이 필요한 서비스 입니다.")
-        })
+        });
+
+        $("#comp_mypage").click(function (){
+            alert("로그인이 필요한 서비스 입니다.")
+        });
+        $("#mypage").click(function (){
+            alert("로그인이 필요한 서비스 입니다.")
+        });
     }
 
 }

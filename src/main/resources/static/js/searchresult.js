@@ -5,7 +5,7 @@ $(document).ready(function(){
     SearchSetting();
     logoSetting();
     gotoItem();
-    mypageSetting();
+    //mypageSetting();
 })
 async function SessionCheck(){
     //shoplist 세팅 포함
@@ -31,11 +31,27 @@ async function SessionCheck(){
         $("#join-navi").attr("href","/logout");
         $("#scart").click(function (){
             window.location.assign(baseurl .protocol +"//"+baseurl .host+"/shopping-list");
-        })
+        });
+        $("#comp_mypage").click(function (){
+            var url=baseurl .protocol +"//"+baseurl .host+"/mypage"
+            location.assign(url);
+        });
+        $("#mypage").click(function (){
+            var url=baseurl .protocol +"//"+baseurl .host+"/mypage"
+            location.assign(url);
+        });
+
     }else{
         $("#scart").click(function (){
             alert("로그인이 필요한 서비스 입니다.")
-        })
+        });
+
+        $("#comp_mypage").click(function (){
+            alert("로그인이 필요한 서비스 입니다.")
+        });
+        $("#mypage").click(function (){
+            alert("로그인이 필요한 서비스 입니다.")
+        });
     }
 
 }
@@ -50,11 +66,19 @@ function KeyWordCheck(){
     return Keyword;
 }
 function SearchByKeyWord(keyword){
-    getItembykeyword(keyword);
+    getItembykeyword(keyword,0,12);
 }
-async function getItembykeyword(keyword){
-    var url="/api/v2/items/"+keyword+"?offset=0&limit=36";
-    await fetch(url,{method:"get"}).then(response => response.json()).then(
+async function getItembykeyword(keyword,offset,limit){
+    Cleaning($("#shoplist"));
+    Cleaning($("#explain_part"));
+    var url="/api/v2/items/"+keyword+"?offset="+offset+"&limit="+limit;
+    await fetch(url,{method:"get"}).then(response => {
+        if(response.status==200){
+            $("#explain_part").append('<span><mark>'+keyword+'</mark>'+"(으)로 검색한 결과, 총 "+'<mark>'+response.headers.get("count")+'</mark>'+ "건 입니다."+'</span>');
+            return response.json()
+        }
+
+    }).then(
         data => {
             var baseurl=window.location
             $.each(data, function (idx) {
@@ -62,9 +86,13 @@ async function getItembykeyword(keyword){
                     '<div id="item_text"><span><a id="merchansub">상품명:</a> <a id="item_name">'+data[idx].name+'</a></span></br>'+'<span><a id="merchansub">가 격:  </a><a id="item_price">'+data[idx].price.toLocaleString()+'</a></span></br></div></li>'
                 $("#shoplist").append(innerhtml);
             })
-            $("#explain_part").append('<span><mark>'+keyword+'</mark>'+"(으)로 검색한 결과, 총 "+'<mark>'+data.length+'</mark>'+ "건 입니다."+'</span>');
+
         }
     )
+
+}
+function Cleaning(bodytag){
+    bodytag.empty();
 
 }
 function SearchSetting(){
@@ -112,4 +140,29 @@ function mypageSetting(){
             location.assign(url);
         }
     })
+}
+function pageUp(){
+    var value=parseInt($("#page").val());
+    if($(".item").length == 12){
+        $("#page").val(value+1)
+        pageChange(value+1);
+    }else{
+        alert("다음 페이지가 존재하지 않습니다.")
+    }
+}
+function pageDown(){
+    var value=parseInt($("#page").val());
+    if(value==1){
+        alert("첫번째 페이지 입니다.")
+    }else{
+        $("#page").val(value-1);
+        pageChange(value-1);
+    }
+}
+function pageChange(value){
+
+    var offset=0+((value-1)*12);
+    var limit=offset+12;
+
+    getItembykeyword(KeyWordCheck(),offset,limit);
 }

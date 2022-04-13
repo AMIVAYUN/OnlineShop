@@ -25,22 +25,9 @@
 <body>
 
     <div id="wrap">
+        <nav th:replace="fragments/part/navi_bar.html :: fragment-naviBar"></nav>
+        <div th:replace="fragments/part/bodyheader.html :: fragment-bodyheader"></div>
 
-        <nav id="navi-bar">
-
-            <a id="login-navi" href="/login">로그인</a>
-            <a id="join-navi" href="/join">회원가입</a>
-            <a id="mypage">마이페이지</a>
-            <a href="/contact">FAQ</a>
-            <a id="manager" href="/admin/manage">관리자</a>
-        </nav>
-        <div id="bodyheader">
-            <div id="mainHeaderbar">
-                <img src="img/static/DB_LOGO.gif" id="logo">
-                <div id="searchbar"><input type="text" placeholder="   제품을 검색하세요."><img  id="searchicon"src="/img/static/searchicon.png"></div>
-                <img src="img/static/shoppingcart.png" id="scart">
-            </div>
-        </div>
 
         <hr>
         <div id="category_part">
@@ -77,32 +64,14 @@
 
         </ul>
 
+        <div th:replace="fragments/part/pager.html :: fragment-pager"></div>
 
-        <div id="footer">
-            <img src="img/static/footer.png">
-        </div>
 
     </div>
 
-    <div id="side_Bar">
-        <div id="comp_intr">
-            <img src="img/static/companyIntroduction_ver2.png" onclick="javascript:location.href='/comp-intro'">
-        </div>
-        <div id="comp_mypage">
-            <img src="img/static/mypage_ver2.png"onclick="javascript:location.href='/my-page'">
+    <div th:replace="fragments/part/side_bar.html :: fragment-sideBar"></div>
 
-        </div>
-        <div id="comp_hompage">
-            <img src="img/static/homepage_ver2.png"onclick="javascript:location.href='http://www.대봉산업기계.com'">
 
-        </div>
-        <div id="comp_board">
-            <img src="img/static/board_ver3.png" onclick="javascript:location.href='/contact/notice'">
-        </div>
-        <div id="comp_top">
-            <img src="img/static/Top_ver2.png" onclick="window.scroll(0,0)">
-        </div>
-    </div>
 
 </body>
 

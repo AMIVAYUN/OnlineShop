@@ -22,6 +22,7 @@ public class ItemDto {
     private String ManufacturedCompany;
     public String imgSrc;
     private String DTYPE;
+
     /*
     public ItemDto(Item item){
         this.item_id=item.getItem_ID();

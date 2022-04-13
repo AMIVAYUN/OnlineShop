@@ -40,7 +40,8 @@ function categorySetting(){
     $('#category_list').on("click","li",function(){
 
         if($(this).attr("id")=="default_category"&&$("#shoplist")!=null){
-            getItem();
+            getItem(0,12);
+            $("#page").val(1);
         }
         else if($(this).attr("id")!="default_category"){
             getTypedItem($(this).attr("id"));

@@ -1,13 +1,18 @@
 package com.pipe09.OnlineShop.Controller;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pipe09.OnlineShop.Domain.Item.Item;
 import com.pipe09.OnlineShop.Domain.Orders.Orders;
+import com.pipe09.OnlineShop.Exception.Class.TossPayError;
 import com.pipe09.OnlineShop.Service.ItemService;
 import com.pipe09.OnlineShop.Service.OrderService;
 import com.pipe09.OnlineShop.Utils.BASE64Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.client.HttpResponseException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +20,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Base64;
@@ -39,35 +46,33 @@ public class OrderController {
 
 
     @GetMapping("/payments/purchase/success")
-    public String paymentSuccess( @RequestParam String orderId, @RequestParam String paymentKey,  @RequestParam int amount,Model model ){
-        String result=null;
+    public String paymentSuccess( @RequestParam String orderId, @RequestParam String paymentKey,  @RequestParam int amount,Model model ) throws JsonProcessingException {
         String username= SecurityContextHolder.getContext().getAuthentication().getName();
-        log.info(username+"님 결제성공 및 리다이렉트");
         BASE64Utils base64=new BASE64Utils(Base64.getEncoder(),Base64.getDecoder());
         Long order_ID=Long.valueOf(base64.decode(orderId));
-        log.info(order_ID.toString());
-        try{
-            if(orderService.SuccessHandle(order_ID,paymentKey,amount)){
+        log.info(username+"님 결제 성공 및 리다이렉트"+"주문 번호: "+order_ID.toString());
 
-                result = orderService.getApprovalofPayment(paymentKey,orderId, amount);
-
-            }
-            if(result.equals("200")){
-
-
+        if(orderService.SuccessHandle(order_ID,paymentKey,amount)){
+            try{
+                orderService.getApprovalofPayment(paymentKey,orderId, amount);
                 model.addAttribute("message","결제에 성공하셨습니다.");
                 return "fragments/private/PayEnd";
-            }else{
-                model.addAttribute("message",result+" 다시 시도해주세요.");
+            }catch(HttpStatusCodeException e){
+                ResponseEntity entity=ResponseEntity.status(e.getRawStatusCode()).header(e.getResponseHeaders().toString()).body(e.getResponseBodyAsString());
+                log.info(entity.getBody().toString());
+                ObjectMapper mapper = new ObjectMapper();
+                TossPayError error = mapper.readValue(entity.getBody().toString(),TossPayError.class);
+                model.addAttribute("message",error.getMessage());
                 return "fragments/private/PayEnd";
             }
-        }catch (Exception e){
-            model.addAttribute("message",e.toString());
-            return "fragments/private/PayEnd";
+
+
         }
 
 
 
+        model.addAttribute("내부 서버에 에러가 있습니다. 잠시 후 다시 시도해주세요.");
+        return "fragments/private/PayEnd";
     }
 
     @GetMapping("/payments/purchase/fail")

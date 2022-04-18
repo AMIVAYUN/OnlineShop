@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>마이페이지</title>
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/97e36fce94.js" crossorigin="anonymous"></script>
+    <link rel ="stylesheet" type="text/css" href="../css/mypagev2.css">
+    <script src="../js/mypagev2.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <nav th:replace="fragments/part/navi_bar.html :: fragment-naviBar"></nav>
+    <div th:replace="fragments/part/bodyheader.html :: fragment-bodyheader"></div>
+    <hr>
+    <div id="main">
+        <div id="main_category">
+            <ul id="a_list">
+                <li><a>주문목록/배송조회</a></li>
+                <li><a>개인정보확인/수정</a></li>
+                <li><a href="/contact/em-faq">문의하기</a></li>
+            </ul>
+        </div>
+        <div id="pay_list">
+            <div id="show_pay" class="section">
+                <ul id="show_pay_list">
+
+
+                </ul>
+                <div th:replace="fragments/part/pager.html :: fragment-pager"></div>
+            </div>
+            <div id="show_info" class="section">
+                <div th:replace="fragments/part/PersonalInfo :: fragment-personalinfo"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div th:replace="fragments/part/footer.html :: fragment-footer"></div>
+
+
+</div>
+<div id='modal'>
+    <div id='content'>
+        <input type='button' value='X' class="close" id='btnClose' onclick="modalClose()"/>
+        <label>결제 취소 사유를 입력하세요</label><br/>
+        <textarea id='cancelReason' value='1234' ></textarea>
+        <input type='button' value='제출하기' id='btndoCancel' onclick="dopayCancel()"/>
+        <input type="hidden" id="paymentKey">
+    </div>
+</div>
+
+<div th:replace="fragments/part/side_bar.html :: fragment-sideBar"></div>
+</body>
+</html>

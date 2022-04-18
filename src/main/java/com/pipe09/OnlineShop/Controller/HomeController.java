@@ -37,4 +37,5 @@ public class HomeController {
     public String getPersonalInfo(){ return "fragments/private/PersonalInfoLaw"; }
 
 
+
 }

@@ -1,0 +1,407 @@
+@font-face {
+    font-family: 'SUIT-Medium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Medium.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+    font-family: SUIT-Medium;
+    width:1500px;
+    position: relative;
+    margin:0 auto;
+
+    height:1200px;
+    overflow: scroll;
+}
+#wrap{
+    position:absolute;
+    left:50%;
+    margin-left:5%;
+    height:100%;
+    transform: translate(-50%);
+    overflow: revert;
+}
+#bodyheader{
+    width:1200px;
+    padding-top:40px;
+}
+#mainHeaderbar{
+
+    height:100px;
+    display:flex;
+    margin-top: 30px;
+    margin-left:30px;
+
+}
+#navi-bar{
+    margin-top:5px;
+    position:absolute;
+    right:250px;
+    top:0;
+    display: flex;
+    height:20px;
+
+
+
+}
+#navi-bar a{
+    font-size:10px;
+    margin-left:3px;
+    margin-right:3px;
+    top:5px;
+    color:black;
+    text-decoration-line: none;
+    white-space : nowrap;
+
+}
+
+#logo{
+    /*padding-left:120px;
+
+     */
+    width: 200px;
+    height:70px;
+    margin-right:10px;
+
+}
+#logo:hover{
+    cursor: pointer;
+}
+
+#searchbar{
+    position: relative;
+    width:600px;
+    height:52px;
+}
+
+#bodyheader input{
+    position: absolute;
+    width:560px;
+    height:45px;
+    margin-top:10px;
+    /*
+
+     */
+    border: 2px solid skyblue;
+    border-radius: 40px 40px;
+    padding-inline-start: 25px;
+}
+#searchicon{
+    position: absolute;
+    left:530px;
+    top:19px;
+}
+#searchicon:hover{
+    cursor: pointer;
+}
+
+#scart{
+    left:860px;
+    width: 32px;
+    height:32px;
+    position: absolute;
+    top:90px;
+    cursor: pointer;
+}
+
+#side_Bar{
+    margin-left:1200px;
+    position: fixed;
+    width:60px;
+    height:500px;
+    Top:200px;
+    background-color:white ;
+
+}
+#side_Bar div img{
+    left:850px;
+    cursor: pointer;
+    width:60px;
+    height:70px;
+}
+#side_Bar div img:hover{
+    filter:opacity(0.7) drop-shadow(0 0 0 #87cefa);
+}
+
+#footer{
+    position:fixed;
+    bottom:0px;
+    margin-top:20px;
+
+
+
+}
+
+
+#footer img{
+    width:950px;
+}
+/* 공용 코드  단일화 필요함. */
+#main{
+    width: 900px;
+    border: 5px solid lightgray;
+    margin-top: 20px;
+    margin-left: 25px;
+    border-radius: 10px;
+    font-weight:bold;
+    display:flex;
+    flex-direction: row;
+}
+
+#main_category{
+    width:200px;
+    background-color: #eeeeee;
+}
+
+#main_category ul a:hover{
+    color:darkblue;
+    cursor:pointer;
+}
+#main_pay_list{
+    width:700px;
+
+}
+#a_list{
+    list-style: none;
+}
+#a_list li{
+    margin-bottom: 20px;
+}
+#a_list li a{
+    color:black;
+    text-decoration:none;
+
+}
+#show_pay{
+    display:block;
+}
+#show_info{
+    display:none;
+}
+.component{
+    border:2px solid lightgray;
+    border-radius: 10px;
+    margin: 3px;
+    width: 500px;
+    padding-left: 30px;
+    padding-bottom: 20px;
+}
+.item_img{
+    width:50px;
+    height:50px;
+    margin-right:20px;
+}
+#show_pay_list li{
+    display: flex;
+    flex-direction: row;
+    border:2px solid lightgray;
+    border-radius: 10px;
+    height:230px;
+    margin-bottom: 8px;
+    height: 235px;
+    margin-right: 8px;
+}
+.order_main{
+    display: flex;
+    flex-direction: row;
+}
+.status{
+    margin-left:10px;
+}
+.totalPrice{
+    margin-left:50px;
+}
+.component_btn_list{
+    display:flex;
+    height:230px;
+    flex-direction: column;
+    justify-content: center;
+    vertical-align: center;
+}
+
+.component_btn_list button{
+    width:100px;
+    margin:20px;
+    border:3px solid gray;
+    border-radius: 10px;
+    height:40px;
+}
+.component_btn_list button:hover{
+    cursor: pointer;
+
+    filter:opacity(0.7) drop-shadow(0 0 0 #87cefa);
+}
+
+#paging{
+    margin-left: 260px;
+    marign-bottom:20px;
+}
+#paging input{
+    width:25px;
+    margin-bottom: 10px;
+}
+#show_info{
+
+    margin-left:30px;
+}
+/* personalinfo.css */
+#info_content{
+    width: 650px;
+    border: 2px solid lightgray;
+    margin-bottom: 50px;
+}
+#info_content tr th{
+    background-color: lightblue;
+    height:100px;
+    width:120px;
+    border-bottom:2px solid lightgray;
+}
+
+#info_content tr td{
+    padding-left: 20px;
+    border-bottom:2px solid lightgray;
+}
+#pi_header{
+    display: flex;
+    flex-direction: row;
+}
+#pi_header h1{
+
+    width:540px;
+    height:100px;
+}
+#pi_header div{
+
+    margin:30px;
+    cursor:pointer;
+}
+#pi_header div:hover{
+    filter:opacity(0.7) drop-shadow(0 0 0 #87cefa);
+}
+#ip_tel{
+    width:380px;
+    height:103px;
+}
+#ip_tel input{
+    width: 300px;
+    height: 30px;
+    margin-left:20px;
+    margin-top: 30px;
+}
+#personal_tel button{
+    width:100px;
+    height: 50px;
+    margin-top: 20px;
+
+}
+#personal_tel button:hover{
+    color:darkblue;
+    cursor:pointer;
+    filter:opacity(0.7) drop-shadow(0 0 0 #87cefa);
+}
+#personal_tel{
+    height: 104px;
+    display: flex;
+
+}
+
+#personal_address button{
+    width:100px;
+    height:40px;
+    margin-top: 40px;
+
+}
+#personal_address button:hover{
+    color:darkblue;
+    cursor:pointer;
+    filter:opacity(0.7) drop-shadow(0 0 0 #87cefa);
+}
+#personal_address{
+    display: flex;
+    flex-direction: row;
+
+}
+#ip_pwd{
+    width:380px;
+    height:103px;
+    display: flex;
+    flex-direction: column;
+}
+#personal_pwd button{
+    width:100px;
+    height: 50px;
+    margin-top: 25px;
+
+}
+#ip_pwd input{
+    width: 300px;
+    height: 30px;
+    margin-left:20px;
+    margin-top: 10px;
+}
+#personal_pwd button:hover{
+    color:darkblue;
+    cursor:pointer;
+    filter:opacity(0.7) drop-shadow(0 0 0 #87cefa);
+}
+#personal_pwd{
+    display: flex;
+}
+
+#ip_addr{
+    padding-top:15px;
+    width:380px;
+    height:103px;
+}
+#ip_addr input{
+    height:25px;
+}
+#address{
+    width:300px;
+}
+#detailAddress{
+    width:180px;
+}
+/* personalinfo.css */
+
+#modal{
+    display : none;
+    z-index : 1;
+    background-color: rgba(0,0,0,.3);
+    position:fixed;
+    left:0;
+    top: 170px;
+    width:100%;
+    height:100%;
+
+}
+#modal>#content{
+    width:500px;
+    margin:100px auto;
+    padding:20px;
+    position: relative;
+    background-color:#fff;
+    border-radius: 10px;
+    border:3px solid lightgray;
+}
+#cancelReason{
+    width:400px;
+    height:170px;
+    resize: none;
+}
+
+#modal .close{
+    position:absolute;
+    top:4px;
+    right:4px;
+    font-size:20px;
+    border:0;
+    background-color: #fff;
+}
+
+#modal .close:hover,
+#modal .close:focus {
+    color : #000;
+    text-decoration: none;
+    cursor :pointer;
+}

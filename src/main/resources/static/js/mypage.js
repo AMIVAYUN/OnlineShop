@@ -3,6 +3,7 @@ var title_btn2_state = false;
 const csrfToken = $('meta[name="_csrf"]').attr('content');
 
 $(document).ready(function(){
+    chkIE();
     SessionCheck();
     SearchSetting();
     logoSetting();
@@ -34,7 +35,12 @@ $(document).ready(function(){
         $(this).css('cursor', 'default');
     })
 })
-
+function chkIE(){
+    if (window.navigator.userAgent.match(/MSIE|Internet Explorer|Trident/i)) {
+        window.open("microsoft-edge:" + window.location.href);
+        window.location = 'https://support.microsoft.com/ko-kr/office/%ec%97%b0%ea%b2%b0%ed%95%98%eb%a0%a4%eb%8a%94-%ec%9b%b9-%ec%82%ac%ec%9d%b4%ed%8a%b8%ea%b0%80-internet-explorer%ec%97%90%ec%84%9c-%ec%9e%91%eb%8f%99%ed%95%98%ec%a7%80-%ec%95%8a%ec%8a%b5%eb%8b%88%eb%8b%a4-8f5fc675-cd47-414c-9535-12821ddfc554?ui=ko-kr&rs=ko-kr&ad=kr';
+    }
+}
 function show_userinfo(){
     var con1 = document.getElementById("mypage_userinfo");
     var con2 = document.getElementById("mypage_order");
@@ -71,6 +77,7 @@ async function SessionCheck(){
         $("#manager").remove();
     }
     if(res1.iswhom !="[ROLE_ANONYMOUS]"){
+        var baseurl = window.location;
         $("#login-navi").text(res1.iswho + "님 안녕하세요");
         $("#login-navi").attr("href","#")
         $("#join-navi").text("로그아웃");
@@ -145,9 +152,15 @@ function checkStatus(status){
 
     }else if (status=="COMPLETE"){
         return '<td className="confirm" colSpan="2" style=" text-align: center;border-bottom: 3px solid #212425; padding-bottom:10px;">\n' +
-            '            인수가 완료된 거래입니다.\n' +
+            '            완료된 거래입니다.\n' +
             '        </td>' +
             '<td class="cancel" colspan="3" style="border-bottom: 3px solid #212425;text-align: center; padding-bottom:10px;">이용해주셔서 감사합니다</td></tr>\n'
+    }else if (status=="DELIVERY"){
+        return  '<td className="confirm" colSpan="2" style=" text-align: center;border-bottom: 3px solid #212425; padding-bottom:10px;">\n' +
+            '            배송중인 거래입니다..\n' +
+            '        </td>' +
+            '<td class="cancel" colspan="3" style="border-bottom: 3px solid #212425;text-align: center; padding-bottom:10px;">환불 문의사항은 010-6348-5278로 연락주세요.</td></tr>\n'
+
     }
     else{
         return '     <td class="confirm" colspan="2" style="border-bottom: 3px solid #212425; padding-bottom:10px;"><button class="confirm_btn" onclick="checkGet(this)">인수 확인</button></td>\n' +
@@ -155,22 +168,25 @@ function checkStatus(status){
     }
 }
 async function checkGet(vari){
-    var baseurl=window.location;
-    var url=baseurl .protocol +"//"+baseurl .host+ "/payments/doCompleteTrade/"+$(vari).closest("tr").attr("id")
-    const res=await fetch(url,{method:"post",headers:{'X-CSRF-TOKEN': csrfToken}})
-    if(res.status==200){
-        alert("인수 확인이 완료되었습니다. 이용해주셔서 감사합니다.")
-        location.reload()
-    }else if(res.status==400){
-        alert("권한이 없습니다.")
-        location.reload()
-    }else{
-        alert("내부 서버에 에러가 발생하였습니다.");
-        location.reload()
+    if(confirm("물품을 받으셨습니까?")){
+        var baseurl=window.location;
+        var url=baseurl .protocol +"//"+baseurl .host+ "/payments/doCompleteTrade/"+$(vari).closest("tr").attr("id")
+        const res=await fetch(url,{method:"post",headers:{'X-CSRF-TOKEN': csrfToken}})
+        if(res.status==200){
+            alert("인수 확인이 완료되었습니다. 이용해주셔서 감사합니다.")
+            location.reload()
+        }else if(res.status==400){
+            alert("권한이 없습니다.")
+            location.reload()
+        }else{
+            alert("내부 서버에 에러가 발생하였습니다.");
+            location.reload()
+        }
     }
+
+
 }
 function cancelOrder(vari){
-
     if(confirm("환불 하시겠습니까?")){
         $("#paymentKey").val($(vari).closest("tr").attr("id"));
         modalOpen();
@@ -262,7 +278,7 @@ function execDaumPostcode() {
                     extraAddr = ' (' + extraAddr + ')';
                 }
                 // 조합된 참고항목을 해당 필드에 넣는다.
-                document.getElementById("members_ref_address").value = extraAddr;
+                document.getElementById("extraAddress").value = extraAddr;
 
             } else {
                 document.getElementById("members_ref_address").value = '';

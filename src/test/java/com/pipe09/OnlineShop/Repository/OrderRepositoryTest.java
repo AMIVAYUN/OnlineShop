@@ -2,7 +2,7 @@ package com.pipe09.OnlineShop.Repository;
 
 
 
-import com.pipe09.OnlineShop.Domain.Board.Delivery.Deliverystatus;
+import com.pipe09.OnlineShop.Domain.Delivery.Deliverystatus;
 import com.pipe09.OnlineShop.Domain.Member.Member;
 import com.pipe09.OnlineShop.Domain.Orders.Orders;
 import org.junit.Test;

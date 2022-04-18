@@ -1,6 +1,6 @@
 package com.pipe09.OnlineShop.Repository;
 
-import com.pipe09.OnlineShop.Domain.Board.Delivery.Deliverystatus;
+import com.pipe09.OnlineShop.Domain.Delivery.Deliverystatus;
 import com.pipe09.OnlineShop.Domain.Orders.OrderItem;
 import com.pipe09.OnlineShop.Domain.Orders.Orders;
 import lombok.RequiredArgsConstructor;
@@ -29,12 +29,15 @@ public class OrderRepository {
         String jpql="select o from Orders o";
         return em.createQuery(jpql).getResultList();
     }
+    public List<Orders> findPaidsByUser(String username,int offset,int limit){
+        return em.createQuery("select o from Orders o where o.member.user_ID=:username and o.deliverystatus<>:status").setParameter("username",username).setParameter("status",Deliverystatus.BEFORE).setFirstResult(offset).setMaxResults(limit).getResultList();
+    }
     public List<Orders> findByDeliveryStatus(Deliverystatus status){
         String jpql="select o from Orders o where o.deliverystatus=:status";
         return em.createQuery(jpql,Orders.class).setParameter("status",status).getResultList();
     }
     public List<Orders> findAllwithToOne(int offset,int limit){
-        return em.createQuery("select o from Orders o join fetch o.member m", Orders.class).setFirstResult(offset).setMaxResults(limit).getResultList();
+        return em.createQuery("select o from Orders o join fetch o.member m where o.deliverystatus <>:status", Orders.class).setFirstResult(offset).setMaxResults(limit).setParameter("status",Deliverystatus.BEFORE).getResultList();
     }
     public List<OrderItem> findOrderItems(Long id){
         try{
@@ -47,9 +50,14 @@ public class OrderRepository {
     public Orders findByPaymentKey(String paymentKey){
         return em.createQuery("select o from Orders o where o.paymentKey=:paymentKey",Orders.class).setParameter("paymentKey",paymentKey).getSingleResult();
     }
-    public void changeStatDelivery(Long id){
+    public void changeStatDelivery(Long id) throws Exception{
         em.createQuery( "update Orders o set o.deliverystatus=:stat where o.Order_ID=:id ")
                 .setParameter("stat",Deliverystatus.DELIVERY).setParameter("id",id).executeUpdate();
+        em.clear();
+    }
+    public void changeStatComp(Long id) throws Exception{
+        em.createQuery( "update Orders o set o.deliverystatus=:stat where o.Order_ID=:id ")
+                .setParameter("stat",Deliverystatus.COMPLETE).setParameter("id",id).executeUpdate();
         em.clear();
     }
     /*

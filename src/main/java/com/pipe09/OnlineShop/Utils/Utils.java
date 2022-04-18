@@ -1,7 +1,7 @@
 package com.pipe09.OnlineShop.Utils;
 
 
-import com.pipe09.OnlineShop.Domain.Board.Delivery.Deliverystatus;
+import com.pipe09.OnlineShop.Domain.Delivery.Deliverystatus;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -72,9 +72,9 @@ public class Utils {
         }else if(deliverystatus.equals(Deliverystatus.CANCEL)){
             return "결제 취소";
         }else if(deliverystatus.equals(Deliverystatus.DELIVERY)){
-            return "배달 중";
+            return "배송 중";
         }else if(deliverystatus.equals(Deliverystatus.COMPLETE)){
-            return "배달 완료";
+            return "배송 완료";
         }else{
             return "에러 발생";
         }

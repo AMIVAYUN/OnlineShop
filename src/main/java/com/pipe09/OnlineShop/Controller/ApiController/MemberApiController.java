@@ -13,7 +13,7 @@ import com.pipe09.OnlineShop.Dto.Member.MemberManageDto;
 import com.pipe09.OnlineShop.Dto.Member.SimpleStringDto;
 import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
 import com.pipe09.OnlineShop.Service.MemberService;
-import com.pipe09.OnlineShop.Service.Oauth2Service;
+//import com.pipe09.OnlineShop.Service.Oauth2Service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MemberApiController{
     private final MemberService memberService;
-    private final Oauth2Service oauth2Service;
+    /*
     @GetMapping("/api/v1/members/is-oauth")
     public boolean isOauth(){
         SessionUser user=(SessionUser) oauth2Service.getHttpSession().getAttribute("user");
@@ -44,20 +44,16 @@ public class MemberApiController{
         }else{
             return true;
         }
-    }
+
+
+    }*/
     @GetMapping("/api/v1/members/is-auth")
     public boolean isAuth(){
         return SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
     }
     @GetMapping("/api/v1/members/is-who")
     public String iswho(){
-        SessionUser user=(SessionUser) oauth2Service.getHttpSession().getAttribute("user");
-        if(user==null){
-            return SecurityContextHolder.getContext().getAuthentication().getName();
-        }else{
-            return user.getEmail();
-        }
-
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
     @GetMapping("/api/v1/members/is-whom")
     public String iswhom(){
@@ -66,13 +62,8 @@ public class MemberApiController{
     @GetMapping("/api/v1/members/session")
     public ResponseEntity<MemauthDto> status(){
         Authentication auth=SecurityContextHolder.getContext().getAuthentication();
+        return new ResponseEntity<MemauthDto>(new MemauthDto(auth.isAuthenticated(),auth.getName(),auth.getAuthorities().toString()), HttpStatus.OK);
 
-        SessionUser user=(SessionUser) oauth2Service.getHttpSession().getAttribute("user");
-        if(user==null){
-            return new ResponseEntity<MemauthDto>(new MemauthDto(auth.isAuthenticated(),auth.getName(),auth.getAuthorities().toString()), HttpStatus.OK);
-        }else{
-            return new ResponseEntity<MemauthDto>(new MemauthDto(auth.isAuthenticated(), user.getEmail(), "ROLE_USER"), HttpStatus.OK);
-        }
 
     }
     @GetMapping("/api/v1/members/all")
@@ -97,13 +88,7 @@ public class MemberApiController{
     //TODO 보안취약 수정必 --> 수정 완
     @GetMapping("/api/v1/members/single/local/aboutMe")
     public MemberDto getSingleMembyID(){
-        SessionUser user=(SessionUser) oauth2Service.getHttpSession().getAttribute("user");
-        String user_id;
-        if(user==null){
-            user_id=SecurityContextHolder.getContext().getAuthentication().getName();
-        }else{
-            user_id= user.getEmail();
-        }
+        String user_id=SecurityContextHolder.getContext().getAuthentication().getName();;
         Member member= memberService.findById(user_id);
         MemberDto dto=new MemberDto(member.getUser_ID(),"접근 불가",member.getEmail(),member.getName(),member.getPhone_Num(),member.getAddress());
         return dto;

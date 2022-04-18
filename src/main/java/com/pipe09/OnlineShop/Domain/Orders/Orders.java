@@ -1,10 +1,11 @@
 package com.pipe09.OnlineShop.Domain.Orders;
 
 
-import com.pipe09.OnlineShop.Domain.Board.Delivery.Deliverystatus;
+import com.pipe09.OnlineShop.Domain.Delivery.Deliverystatus;
 import com.pipe09.OnlineShop.Domain.Member.Member;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -43,6 +44,11 @@ public class Orders {
 
     @Column(name ="paymentKey")
     private String paymentKey;
+
+    @Nullable
+    @Column(name = "transport_docnum")
+    private String transport_docnum;
+
 
     public void addOrderItem(OrderItem[] orderItems,Orders order){
         Arrays.stream(orderItems).forEach(orderItem -> {

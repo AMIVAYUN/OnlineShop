@@ -2,7 +2,7 @@ package com.pipe09.OnlineShop.Service;
 
 import com.pipe09.OnlineShop.Domain.Member.Member;
 import com.pipe09.OnlineShop.Domain.SessionUser;
-import com.pipe09.OnlineShop.Oauth.Attributes;
+//import com.pipe09.OnlineShop.Oauth.Attributes;
 import com.pipe09.OnlineShop.Repository.MemberRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
-
+/*
 @RequiredArgsConstructor
 @Service
 public class Oauth2Service implements OAuth2UserService<OAuth2UserRequest,OAuth2User> {
@@ -63,3 +63,6 @@ public class Oauth2Service implements OAuth2UserService<OAuth2UserRequest,OAuth2
 
     }
 }
+
+
+ */

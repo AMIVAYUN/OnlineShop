@@ -232,6 +232,7 @@ async function OrderlistSetting(){
     firstGrid = new ax5.ui.grid();
 
     firstGrid.setConfig({
+        showRowSelector:true,
         target: $('[data-ax5grid="order-grid"]'),
 
         columns: [
@@ -247,36 +248,46 @@ async function OrderlistSetting(){
 
 
                 ]},
-            {
-                key: "isChecked", label: "Checkbox", width: 50, sortable: false, align: "center", editor: {
-                    type: "checkbox", config: {height: 17, trueValue: "Y", falseValue: "N"}
-                }},
+
             {key: "order_address", label: "배달 장소",width:320,editor:{type:"textarea"}},
-            {key: "order_status",label:"주문 상태"}
+            {key: "order_status",label:"주문 상태",editor: {type:"select",config:{
+                        columnKeys:{
+                            optionValue:"CD",optionText:"NM"
+                        },
+                        options: [
+                            {CD:"배송 중",NM:"배송 중"},
+                            {CD:"배송 완료",NM:"배송 완료"},
+                            {CD:"취소",NM:"취소"}
+                        ]
+
+                    }}},
+            {key: "order_transport_doc",label:"운송장 번호",editor:{type:"text"}}
 
             
         ],
-        body:{
-            mergeCells:["order_Id","order_customer","order_totalprice","order_date","order_address","order_status"],
-            onDBLClick: function(){
-                if(this.item.order_status==='배송 대기중'){
-                    if(confirm("배송 중인 상태로 수정하시겠습니까?")){
-                        ChangeOrders(this.item.order_Id);
-                        OrderlistSetting();
-                    }
-                }else{
-                    alert("해당 주문은 배송 대기중인 건이 아닙니다.");
-                }
-
+        page: {
+            navigationItemCount: 9,
+            height: 30,
+            display: true,
+            firstIcon: '<i class="fa fa-step-backward" aria-hidden="true"></i>',
+            prevIcon: '<i class="fa fa-caret-left" aria-hidden="true"></i>',
+            nextIcon: '<i class="fa fa-caret-right" aria-hidden="true"></i>',
+            lastIcon: '<i class="fa fa-step-forward" aria-hidden="true"></i>',
+            onChange: function () {
+                gridView.setData(this.page.selectPage);
             }
+        },
+        body:{
+            mergeCells:["order_Id","order_customer","order_totalprice","order_date","order_address","order_status","order_transport_doc"],
         }
+
 
 
 
 
     });
 
-    await fetch("/api/v1/orders/all?offset="+0+"&limit="+50).then(response => response.json()).then(
+    await fetch("/api/v1/orders/all?offset="+0+"&limit="+200).then(response => response.json()).then(
         (res) => {
             var list=[];
 
@@ -285,7 +296,7 @@ async function OrderlistSetting(){
                 console.log(res[i].orderId);
                 var id=res[i].orderId;
                 for(var j=0; j<res[i].orderItemDto.length;j++){
-                    list.push({order_Id:res[i].orderId,order_customer:res[i].user_name,order_totalprice:res[i].totalprice,order_date:res[i].orderdate,id:res[i].orderItemDto[j].orderitem_id+"/"+res[i].orderItemDto[j].item_id,itemname:res[i].orderItemDto[j].itemname,count:res[i].orderItemDto[j].count,price:res[i].orderItemDto[j].price,order_address:res[i].address,order_status:res[i].deliverystatus})
+                    list.push({order_Id:res[i].orderId,order_customer:res[i].user_name,order_totalprice:res[i].totalprice,order_date:res[i].orderdate,id:res[i].orderItemDto[j].orderitem_id+"/"+res[i].orderItemDto[j].item_id,itemname:res[i].orderItemDto[j].itemname,count:res[i].orderItemDto[j].count,price:res[i].orderItemDto[j].price,order_address:res[i].address,order_status:res[i].deliverystatus,order_transport_doc:res[i].order_transport_doc})
                 }
 
 
@@ -297,11 +308,82 @@ async function OrderlistSetting(){
 
 
 }
-async function ChangeOrders(id){
+async function register_transPort(){
+    var selected = firstGrid.getList("selected");
+    await fetch("/admin/manage/orders/registerTransPort?transPort="+selected[0]['order_transport_doc']+"&order_id="+selected[0]['order_Id'],{method:"put",headers:{
+        'X-CSRF-TOKEN': csrfToken
+        }}).then(response => {
+            if(response.status==200){
+                alert("운송장 번호 수정에 성공하였습니다.");
+                location.reload();
+            }else{
+                alert("변환간 에러가 발생하였습니다.");
+                location.reload();
+            }
+    })
+
+
+}
+function getOption(status){
+    switch (status){
+        default:
+            return 0;
+        case ("배송 중"):
+            return 1;
+
+        case ("배송 완료"):
+            return 2;
+
+        case ("취소"):
+            return 3;
+
+    }
+}
+async function putOrder(){
+    var selected=firstGrid.getList("selected");
+
+    let obj={
+        "order_id":selected[0]['order_Id']
+    }
+    console.log(obj);
+    const option = getOption(selected[0]['order_status']);
+
+    if(selected.length==1){
+        await fetch("/admin/manage/orders/changeStat?option="+option,{
+            method:"put",headers:{'Content-Type':'application/json','X-CSRF-TOKEN': csrfToken},body:JSON.stringify(obj)
+        }).then(res=> {
+            if(res.status==200){
+                alert("상태가 변경되었습니다.");
+            }else{
+                alert("서버 에러 발생");
+            }
+        })
+    }else{
+        alert("주문을 한개만 선택해주세요");
+    }
+
+}
+async function ChangeOrderstoDel(id){
     let obj={
         "order_id":id
     }
-    await fetch("/admin/manage/orders/upto-delivery",{
+    var option = 0;
+    await fetch("/admin/manage/orders/upto-delivery?option="+option,{
+        method:"put",headers:{'Content-Type':'application/json','X-CSRF-TOKEN': csrfToken},body:JSON.stringify(obj)
+    }).then(res=> {
+        if(res.status==200){
+            alert("상태가 변경되었습니다.");
+        }else{
+            alert("서버 에러 발생");
+        }
+    })
+}
+async function ChangeOrderstoComp(id){
+    let obj={
+        "order_id":id
+    }
+    var option = 1;
+    await fetch("/admin/manage/orders/upto-delivery?option="+option,{
         method:"put",headers:{'Content-Type':'application/json','X-CSRF-TOKEN': csrfToken},body:JSON.stringify(obj)
     }).then(res=> {
         if(res.status==200){

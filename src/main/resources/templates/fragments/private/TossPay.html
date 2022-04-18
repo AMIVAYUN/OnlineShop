@@ -4,6 +4,9 @@
     <title>결제하기</title>
     <!-- 1. 스크립트 추가 -->
     <script src="https://js.tosspayments.com/v1"></script>
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <script>
     var clientKey = 'test_ck_O6BYq7GWPVvBN91GaGVNE5vbo1d4' // 테스트용 클라이언트 키
@@ -13,6 +16,68 @@
 <body>
 
     <script>
+        const csrfToken = $('meta[name="_csrf"]').attr('content');
+        $(document).ready(function (){
+            $(document).keydown(function (e) {
+                if (e.which === 116) {
+                    if (typeof event == "object") {
+                        event.keyCode = 0;
+                    } return false; } else if (e.which === 82 && e.ctrlKey) {
+                    return false;
+                }
+                /*
+                window.onbeforeunload=function(event){
+                    event.preventDefault();
+                    beforeClose();
+                }
+
+                 */
+                //$(window).on("beforeunload",beforeClose);
+            });
+            /* 이게됨
+            window.onbeforeunload = function (e) {
+                e = e || window.event; // For IE<8 and Firefox prior to version 4
+                if (e) {
+
+                    e.returnValue =window.opener.returnifnonePay();
+                }else{
+
+                    return $(opener.document).returnifnonePay();
+                } // For Chrome, Safari, IE8+ and Opera 12+
+
+            };
+
+             */
+
+
+
+
+        })
+
+        /*
+        async function beforeClose(){
+            var Id= $(opener.document).find("#orderId").val();
+            console.log(Id);
+            await fetch("/payments/Canceled?orderId="+Id,{method:"post",headers:{'X-CSRF-TOKEN': csrfToken}}).then(
+                response => {
+                    if(response.status == 200){
+                        return e.returnValue = '페이지를 닫습니다.';
+
+                    }else{
+                        e.returnValue = "서버에 에러가 발생하였습니다. 잠시 후 다시 시도해주세요.";
+                        window.opener.location.assign("/");
+                    }
+                }
+            )
+        }
+
+         */
+
+
+
+
+
+
         var baseurl1=window.location;
 
         var amount=window.opener.document.getElementById('totalprice');

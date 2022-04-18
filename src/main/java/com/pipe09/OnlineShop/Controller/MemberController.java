@@ -41,7 +41,7 @@ public class MemberController {
 
     @GetMapping("/mypage")
     public String getMypage(){
-        return "fragments/public/mypage";
+        return "fragments/private/mypagev2";
     }
 
     @PostMapping("/join-proc")

@@ -1,7 +1,7 @@
 package com.pipe09.OnlineShop.Configuration;
 
 import com.pipe09.OnlineShop.Service.MemberService;
-import com.pipe09.OnlineShop.Service.Oauth2Service;
+//import com.pipe09.OnlineShop.Service.Oauth2Service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ public class SecConfing extends WebSecurityConfigurerAdapter {
     private final MemberService service;
     private final AuthenticationFailureHandler failureHandler;
     private final AuthenticationSuccessHandler successHandler;
-    private final Oauth2Service oauth2Service;
+    //private final Oauth2Service oauth2Service;
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(service).passwordEncoder(service.getPasswordEncoder());
@@ -70,7 +70,7 @@ public class SecConfing extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().loginPage("/login").loginProcessingUrl("/loginproc").defaultSuccessUrl("/").successHandler(successHandler).failureHandler(failureHandler)
                 .and().logout().logoutUrl("/logout").invalidateHttpSession(true).clearAuthentication(true).deleteCookies("JSESSIONID").logoutSuccessUrl("/").permitAll()
-                .and().oauth2Login().loginPage("/login/oauth2").userInfoEndpoint().userService(oauth2Service)
+
         ;
 
 

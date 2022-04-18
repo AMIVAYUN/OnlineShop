@@ -159,6 +159,7 @@ $(document).ready(function(){
 })
 
 async function SessionCheck(){
+    var baseurl=window.location;
     const res1=await fetch("/api/v1/members/session",{method:"GET"}).then(response => response.json());
     if(!res1.isauth){
         return false;

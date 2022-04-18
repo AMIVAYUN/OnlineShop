@@ -2,22 +2,21 @@ package com.pipe09.OnlineShop.Service;
 
 
 //import com.pipe09.OnlineShop.Domain.Delivery.Delivery;
-import com.pipe09.OnlineShop.Domain.Board.Delivery.Deliverystatus;
+import com.pipe09.OnlineShop.Domain.Delivery.Deliverystatus;
 import com.pipe09.OnlineShop.Domain.Item.Item;
 import com.pipe09.OnlineShop.Domain.Member.Member;
-import com.pipe09.OnlineShop.Domain.Member.UserType;
 import com.pipe09.OnlineShop.Domain.Orders.OrderItem;
 import com.pipe09.OnlineShop.Domain.Orders.Orders;
 import com.pipe09.OnlineShop.Domain.Payment.Cancels;
 import com.pipe09.OnlineShop.Domain.Payment.Failure;
 import com.pipe09.OnlineShop.Domain.Payment.payment;
 import com.pipe09.OnlineShop.Domain.Payment.paymentType;
-import com.pipe09.OnlineShop.Domain.SessionUser;
 import com.pipe09.OnlineShop.Dto.Order.CreateOrderDto;
 import com.pipe09.OnlineShop.Dto.Payment.approvePaymentDto;
 import com.pipe09.OnlineShop.Dto.Payment.doCancelDto;
 import com.pipe09.OnlineShop.Dto.Payment.requestApproveDto;
 import com.pipe09.OnlineShop.Exception.StockLackException;
+
 import com.pipe09.OnlineShop.Repository.*;
 //import com.pipe09.OnlineShop.Utils.AES;
 import com.pipe09.OnlineShop.Utils.BASE64Utils;
@@ -29,13 +28,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Base64;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,7 +47,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final MemberRepository memberRepository;
     private final ShopItemRepository shopItemRepository;
-    private final Oauth2Service oauth2Service;
+    //private final Oauth2Service oauth2Service;
     private final ItemRepository itemRepository;
     private final PaymentRepository paymentRepository;
     @Value("${tosspayment.secret}")
@@ -71,15 +71,24 @@ public class OrderService {
     }
 
      */
-    public String getEncodeOrderId(Long value){
-        try{
-            BASE64Utils utils=new BASE64Utils(Base64.getEncoder(),Base64.getDecoder());
-            String encoded=utils.encode(value);
-            return encoded;
-        }catch (Exception e){
-            return e.toString();
-        }
+    public String getEncodeOrderId(Long value) throws Exception{
 
+        BASE64Utils utils=new BASE64Utils(Base64.getEncoder(),Base64.getDecoder());
+        String encoded=utils.encode(value);
+        return encoded;
+
+
+    }
+    public List<Orders> findPaidsByuser(String username,int offset,int limit) throws Exception{
+        List<Orders> orders=orderRepository.findPaidsByUser(username,offset,limit);
+        /* 정렬 */
+        orders.sort((d1,d2) -> (d1.getOrderdate().before(d2.getOrderdate())?1:0) );
+        return orders;
+    }
+    @Transactional
+    public void CreateTransPortNum(String num,Long Order_id) throws Exception{
+        Orders order = orderRepository.findOne(Order_id);
+        order.setTransport_docnum(num);
     }
 
     public Orders findOne(Long id){
@@ -100,33 +109,9 @@ public class OrderService {
 
     }
     @Transactional
-    public Long createOrder(CreateOrderDto dto){
+    public Long createOrder(CreateOrderDto dto,String username) throws Exception {
 
-        Member member=null;
-        SessionUser user = (SessionUser) oauth2Service.getHttpSession().getAttribute("user");
-        try{
-            if( user == null ){
-                String auth=SecurityContextHolder.getContext().getAuthentication().getName();
-                member = memberRepository.findByuserId(auth);
-            }else{
-                switch( user.getType() ){
-                    case "kakao":
-
-                        member = memberRepository.findByEmailWithOauth(user.getEmail(),UserType.KAKAO);
-                        break;
-                    case "google":
-                        member = memberRepository.findByEmailWithOauth(user.getEmail(),UserType.GOOGLE);
-                        break;
-
-                }
-            }
-
-        }catch(Exception e){
-            return -1L;
-        }
-
-
-
+        Member member=memberRepository.findByuserId(username);
         List<OrderItem> orderItemList = dto.getItem().stream().map( item -> {
 
             OrderItem orderItem= new OrderItem();
@@ -190,12 +175,12 @@ public class OrderService {
     }
 
      */
-    public String getApprovalofPayment(String paymentKey,String orderId, int amount){
-        requestApproveDto entity=new requestApproveDto();
+    public void getApprovalofPayment(String paymentKey,String orderId, int amount) throws HttpStatusCodeException {
+        requestApproveDto entity = new requestApproveDto();
         entity.setAmount(amount);
         entity.setOrderId(orderId);
-        HttpHeaders headers=getRequestTossHeaders();
-        HttpEntity<requestApproveDto> sendData= new HttpEntity<>(entity,headers);
+        HttpHeaders headers = getRequestTossHeaders();
+        HttpEntity<requestApproveDto> sendData = new HttpEntity<>(entity, headers);
         /*
         requestApproveDto entity=new requestApproveDto();
         entity.setOrderId(orderId);
@@ -205,22 +190,21 @@ public class OrderService {
         //보내기
 
         rt.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
-        String url="https://api.tosspayments.com/v1/payments/"+paymentKey;
-        ResponseEntity<approvePaymentDto> response=rt.exchange(
+        String url = "https://api.tosspayments.com/v1/payments/" + paymentKey;
+        ResponseEntity<approvePaymentDto> response = rt.exchange(
                 url,
                 HttpMethod.POST,
                 sendData,
                 approvePaymentDto.class
 
         );
-        log.info(response.getStatusCode() +": "+ response.getStatusCodeValue());
-        if(response.getStatusCodeValue()==200){
-            String result=processPaymentApprove(response.getBody());
-            log.info(result+" Entity 결제 완료 및 저장 ");
-            return String.valueOf(response.getStatusCodeValue());
-        }else{
-            return response.getBody().getMessage();
+
+        if (response.getStatusCodeValue() == 200) {
+            String result = processPaymentApprove(response.getBody());
+            log.info(result + " Entity 결제 완료 및 저장 ");
+
         }
+
     }
 
 
@@ -228,7 +212,7 @@ public class OrderService {
     @Transactional
     public String processPaymentApprove(approvePaymentDto dto){
         payment payment=new payment(dto);
-        String user_id=getLoginUsername();
+        String user_id=SecurityContextHolder.getContext().getAuthentication().getName();
         Member member=memberRepository.findByuserId(user_id);
         payment.setMember(member);
         paymentRepository.save(payment);
@@ -249,9 +233,27 @@ public class OrderService {
         }
 
     }
+    /*
+    public boolean CancelBeforePay(String Order_ID) throws Exception{
+        BASE64Utils utils=new BASE64Utils(Base64.getEncoder(),Base64.getDecoder());
+        Long order_id=Long.valueOf(utils.decode(Order_ID));
+        Orders order= orderRepository.findOne(order_id);
+        if(order.getPaymentKey()==null){
+            log.info(order_id+"주문 결제전 삭제");
+            order.setDeliverystatus(Deliverystatus.CANCEL);
+            return true;
+        }else{
+            log.info("주문 완료 상태");
+
+            return false;
+        }
+
+    }
+
+     */
 
     public List<payment> getListByUser(int offset,int limit){
-        String user_id=getLoginUsername();
+        String user_id=SecurityContextHolder.getContext().getAuthentication().getName();
         List<payment> paymentList=paymentRepository.findByUserId(user_id,offset,limit);
         if(paymentList==null){
             return null;
@@ -261,14 +263,7 @@ public class OrderService {
 
     }
 
-    public String getLoginUsername(){
-        SessionUser user=(SessionUser) oauth2Service.getHttpSession().getAttribute("user");
-        if(user==null){
-            return SecurityContextHolder.getContext().getAuthentication().getName();
-        }else{
-            return user.getEmail();
-        }
-    }
+
     public List<OrderItem> getOrderItemsByEncodedOrderID(String orderId){
         BASE64Utils utils=new BASE64Utils(Base64.getEncoder(),Base64.getDecoder());
         Long order_id=Long.valueOf(utils.decode(orderId));
@@ -278,8 +273,21 @@ public class OrderService {
         }
         return orderRepository.findOrderItems(order_id);
     }
-    public void ChangeStatToDelivery(Long id){
-        orderRepository.changeStatDelivery(id);
+    @Transactional
+    public void ChangeStat(Long id,int option) throws Exception{
+        Orders order = orderRepository.findOne(id);
+        switch (option){
+            case 1:
+                order.setDeliverystatus(Deliverystatus.DELIVERY);
+                break;
+            case 2:
+                order.setDeliverystatus(Deliverystatus.COMPLETE);
+                break;
+            case 3:
+                order.setDeliverystatus(Deliverystatus.CANCEL);
+                break;
+        }
+
     }
     @Transactional
     public void doCancel( String paymentKey, doCancelDto dto ) throws Exception{

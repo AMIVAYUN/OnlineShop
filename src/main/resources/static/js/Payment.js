@@ -418,7 +418,8 @@ async function makeOrder(data){
 
 
     async function openTosspay(){
-        var toss = window.open("/payments/credit/bytoss",'토스페이 결제',"width=800,height=600");
+        var baseurl= window.location;
+        var toss = window.open("https://"+baseurl.host+"/payments/credit/bytoss",'토스페이 결제',"width=800,height=600");
 
     }
 }

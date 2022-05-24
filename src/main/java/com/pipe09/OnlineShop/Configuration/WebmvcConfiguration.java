@@ -21,4 +21,5 @@ public class WebmvcConfiguration implements WebMvcConfigurer {
         registry.addResourceHandler("img/static/**").addResourceLocations("file:////"+Utils.getImgPATHwithOS()+"static"+File.separator);
     }
 
+
 }

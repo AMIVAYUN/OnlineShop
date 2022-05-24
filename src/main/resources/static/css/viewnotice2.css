@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'SUIT-Medium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Medium.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
 body{
     width:1500px;
     position: relative;
@@ -269,15 +275,56 @@ li #item_img img{
 #mailingservice i{
     margin-right:5px;
 }
+#tdate{
+    width:25%;
+    background-color: beige;
+}
+#ttitle{
+    width:75%;
+    background-color: beige;
+}
 #content{
-    display: flex;
-    flex-direction: column;
-    margin-top:20px;
+    margin-top: 20px;
+    width:100%;
+    position:absolute;
+    left:50%;
+    transform:translate(-50%);
+    border-collapse: collapse; /* tr 줄*/
     border: 3px solid gray;
     border-radius: 10px;
-    height: 100%;
+}
+#content th,td{
+    max-width: 700px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#content th{
+    text-align: center;
+
+    border-bottom: 2px solid lightgray;
+
 }
 
+#content td{
+    text-align: center;
+}
+
+.component .title{
+    cursor: pointer;
+
+}
+.component .desc{
+    display: none;
+}
+#content tr{
+    height:40px;
+    font-size:20px;
+    border-bottom: 2px solid lightgray;
+    font-family: SUIT-Medium;
+}
 .partition{
     width:1010px;
     display: flex;
@@ -286,7 +333,7 @@ li #item_img img{
 
 
 }
-
+/*
 #content summary{
     width:770px;
     padding-right: 10px;
@@ -307,4 +354,19 @@ li #item_img img{
     margin-left:110px;
     line-height: 30px;
     font-weight: bold;
+}
+
+
+ */
+/* pager */
+#paging{
+    margin-left: 400px;
+    margin-top: 10px
+}
+#page{
+    height: 30px;
+    text-align: center;
+}
+#paging i{
+    cursor:pointer;
 }

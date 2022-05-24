@@ -40,5 +40,16 @@ public class BoardRepository {
             return em.createQuery("select nlist from Notice nlist where nlist.name LIKE concat('%',:Keyword,'%')").setParameter("Keyword",Keyword).getResultList();
         }
     }
+    public List<Notice> findAllWithofflim(int offset, int limit){
+        return em.createQuery("select nlist from Notice nlist order by nlist.date desc").setFirstResult(offset).setMaxResults(limit).getResultList();
+    }
+    public List<Notice> findWithKeyWordWithofflim(String Keyword, int offset, int limit){
+        if(Keyword==null){
+            return findAllWithofflim(offset,limit);
+        }
+        else{
+            return em.createQuery("select nlist from Notice nlist where nlist.name LIKE concat('%',:Keyword,'%') order by nlist.date desc").setParameter("Keyword",Keyword).setFirstResult(offset).setMaxResults(limit).getResultList();
+        }
+    }
 
 }

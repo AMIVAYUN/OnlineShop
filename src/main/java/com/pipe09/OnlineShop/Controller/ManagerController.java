@@ -2,12 +2,19 @@ package com.pipe09.OnlineShop.Controller;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 @Slf4j
 public class ManagerController {
+
+    @Value("${latest.version}")
+    private String version;
+    @Value("${latest.reportUrl}")
+    private String reportUrl;
 
     //version2
     @GetMapping("/admin/manage/register-faq")
@@ -19,7 +26,9 @@ public class ManagerController {
         return "fragments/private/Pop_Regitem";
     }
     @GetMapping(path = "/admin/manage")
-    public String managerAccess(){
+    public String managerAccess(Model model){
+        model.addAttribute("version",version);
+        model.addAttribute("reportUrl",reportUrl);
         return "fragments/private/managerv2";
     }
     @GetMapping(path = "/admin/manage/image/putImage")

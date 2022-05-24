@@ -1,12 +1,13 @@
 $(document).ready(function (){
     chkIE();
     var Keyword=KeyWordCheck();
-    getFaqlist(Keyword);
+    initFaqlist(Keyword,0,15);
     SessionCheck();
     SearchSetting();
     logoSetting();
     //mypageSetting();
 })
+
 function chkIE(){
     if (window.navigator.userAgent.match(/MSIE|Internet Explorer|Trident/i)) {
         window.open("microsoft-edge:" + window.location.href);
@@ -22,26 +23,29 @@ function KeyWordCheck(){
     $("#faqkeyword").attr("value",Keyword);
     return Keyword;
 }
-async function getFaqlist(Keyword){
-    if(Keyword==null){
-        var url="/api/v2/faq/all";
-    }else{
-        var url="/api/v2/faq/all?keyword="+Keyword;
-    }
+async function initFaqlist(Keyword,offset,limit){
+    var url="/api/v2/faq/all?keyword="+Keyword+"&offset="+offset+"&limit="+limit;
+
 
     const res=await fetch(url,{method:"get"});
     if(res.status==200){
         res.json().then(
             (data) => {
+                localStorage.setItem("lenN",data.length);
+                var idx1 = offset;
+                $.each(data.reverse(), function (idx){
 
-                $.each(data, function (idx){
-
-                    var innerhtml='<div className="partition">\n' +
-                        '                    <details>\n' +
-                        '                        <summary>['+data[idx].date+'] '+data[idx].name+'</summary>\n' +
-                        '                        <p>제목: '+data[idx].name+'\n'+' 내용: '+data[idx].description+'</p>\n' +
-                        '                    </details>'
+                    if( idx1 == offset+limit){
+                        return;
+                    }
+                    var innerhtml='<tr class="component">\n' +
+                        '                <td class = "date"> '+data[idx].date+' </td>\n' +
+                        '                <td class = "title"> '+data[idx].name+' </td>\n' +
+                        '                <td class = "desc">'+data[idx].description+'</td>\n' +
+                        '            </tr>'
                     $("#content").append(innerhtml);
+                    idx1++;
+
 
                 })
             }
@@ -49,17 +53,84 @@ async function getFaqlist(Keyword){
     }else{
         res.text().then(
             msg=>{
-                var innerhtml='<p>'+msg+'</p>';
+                var innerhtml='<p>아직 작성된 게시물이 없습니다.</p>';
                 $("#content").append(innerhtml);
             }
 
         )
 
     }
-        // .then((response) => response.json()).then(
+    // .then((response) => response.json()).then(
 
 
 
+}
+async function getFaqlist(Keyword,offset,limit){
+    var url="/api/v2/faq/partition?keyword="+Keyword+"&offset="+offset+"&limit="+limit;
+
+
+    const res=await fetch(url,{method:"get"});
+    if(res.status==200){
+        res.json().then(
+            (data) => {
+                var idx1 = offset;
+                $.each(data, function (idx){
+
+                    if( idx1 == offset+limit){
+                        return;
+                    }
+                    var innerhtml='<tr class="component">\n' +
+                        '                <td class = "date"> '+data[idx].date+' </td>\n' +
+                        '                <td class = "title"> '+data[idx].name+' </td>\n' +
+                        '                <td class = "desc">'+data[idx].description+'</td>\n' +
+                        '            </tr>'
+                    $("#content").append(innerhtml);
+                    idx1++;
+
+
+                })
+            }
+        )
+    }else{
+        res.text().then(
+            msg=>{
+                var innerhtml='<p>관련 게시물이 없습니다.</p>';
+                $("#content").append(innerhtml);
+            }
+
+        )
+
+    }
+    // .then((response) => response.json()).then(
+
+
+
+}
+function pageUp(){
+    var value=parseInt($("#page").val());
+    if($(".component").length == 15 & (value * 15) != localStorage.getItem("lenN")){
+        $("#page").val(value+1)
+        pageChange(value+1);
+    }else{
+        alert("다음 페이지가 존재하지 않습니다.")
+    }
+}
+function pageDown(){
+    var value=parseInt($("#page").val());
+    if(value==1){
+        alert("첫번째 페이지 입니다.")
+    }else{
+        $("#page").val(value-1);
+        pageChange(value-1);
+    }
+}
+function pageChange(value){
+
+    var offset=0+((value-1)*15);
+    var limit=offset+15;
+    var Keyword=KeyWordCheck();
+    $(".component").remove();
+    getFaqlist(Keyword,offset,limit);
 }
 function SearchSetting(){
     $("#searchicon").on("click",function(){

@@ -44,6 +44,20 @@ h1 img{
     padding-top:50px;
     height:900px;
 }
+#default{
+    display: block;
+}
+#default_title{
+
+}
+#default_content{
+
+}
+#default_content a{
+    cursor:pointer;
+    border-radius: 10px;
+    background-color: lightgray;
+}
 #bodyheader{
     width:80%;
     height:800px;

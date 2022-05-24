@@ -52,4 +52,12 @@ public class BoardService {
             return boardRepository.findWithKeyWord(Keyword);
         }
     }
+    public List<Notice>findWithKeywordwithOfflim(String Keyword,int offset, int limit){
+        if(Keyword==null){
+            return boardRepository.findAllWithofflim(offset,limit);
+        }
+        else{
+            return boardRepository.findWithKeyWordWithofflim(Keyword, offset, limit);
+        }
+    }
 }

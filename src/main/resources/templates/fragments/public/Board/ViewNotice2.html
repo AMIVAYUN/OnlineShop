@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=yes, maximum-scale=1.0">
     <title>고객센터</title>
     <script src="https://kit.fontawesome.com/97e36fce94.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/viewnotice.css" type="text/css" media="all">
+    <link rel="stylesheet" href="../css/viewnotice2.css" type="text/css" media="all">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="../js/viewnotice.js"charset="UTF-8"></script>
+    <script src="../js/viewnotice2.js"charset="UTF-8"></script>
 
 </head>
 <body>
@@ -38,10 +38,19 @@
                 <i class="fa-regular fa-envelope"></i>
                 메일로 문의하기</div>
         </div>
-        <div id="content">
+        <div th:replace="fragments/part/pager.html :: fragment-pager"></div>
+        <table id = "content" max="16">
+            <tr id="table_header">
+                <th id="tdate"> 작성 날짜 </th>
+                <th id="ttitle"> 제 목 </th>
+            </tr>
 
 
-        </div>
+
+
+        </table>
+
+
     </div>
     <div id="footer">
         <img src="../img/static/footer.png">

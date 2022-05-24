@@ -26,7 +26,7 @@ public class BoardController {
     }
     @GetMapping("/contact/notice")
     public String ViewNotice(){
-        return "fragments/public/Board/ViewNotice";
+        return "fragments/public/Board/ViewNotice2";
     }
     @GetMapping("/contact/em-faq")
     public String EmailingService(){

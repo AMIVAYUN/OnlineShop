@@ -149,13 +149,7 @@ public class OrderService {
         log.info(order.toString());
         order.setDeliverystatus(Deliverystatus.READY);
         order.setPaymentKey(paymentKey);
-
-        if(order.getTotalPrice()==amount){
-            return true;
-        }else{
-            return false;
-
-        }
+        return (order.getTotalPrice()==amount);
 
     }
     public HttpHeaders getRequestTossHeaders(){

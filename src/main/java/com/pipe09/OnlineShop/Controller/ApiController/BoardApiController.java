@@ -31,6 +31,8 @@ public class BoardApiController {
         List<NoticeDto>list=noticeList.stream().map(notice -> new NoticeDto(notice.getNotice_ID(),notice.getName(), notice.getDescription(),notice.getDate())).collect(Collectors.toList());
         return new ResponseEntity(list,HttpStatus.OK);
     }
+
+
     @GetMapping("/api/v2/faq/all")
     public ResponseEntity<List<NoticeDto>> faqlistbyV2(@RequestParam(required = false) String keyword){
         List<Notice> noticeList=boardService.findWithKeyword(keyword);
@@ -42,4 +44,18 @@ public class BoardApiController {
         List<NoticeDto>list=noticeList.stream().map(notice -> mapper.Translate(notice)).collect(Collectors.toList());
         return new ResponseEntity(list,HttpStatus.OK);
     }
+
+    //2022-05-18
+    @GetMapping("/api/v2/faq/partition")
+    public ResponseEntity<List<NoticeDto>> faqlistbyV2(@RequestParam(required = false) String keyword, @RequestParam int offset, @RequestParam int limit){
+        List<Notice> noticeList=boardService.findWithKeywordwithOfflim(keyword,offset,limit);
+
+        if(noticeList.size()==0){
+            return new ResponseEntity("저장된 게시물이 없습니다.", HttpStatus.NOT_FOUND);
+        }
+        DefaultMapper<NoticeDto> mapper=new DefaultMapper<>(new NoticeDto());
+        List<NoticeDto>list=noticeList.stream().map(notice -> mapper.Translate(notice)).collect(Collectors.toList());
+        return new ResponseEntity(list,HttpStatus.OK);
+    }
+
 }

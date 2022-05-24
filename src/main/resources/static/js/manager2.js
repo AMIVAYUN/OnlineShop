@@ -193,7 +193,7 @@ async function updatePost(obj){
 
 }
 function registerNotice(){
-    var popup=window.open("/admin/manage/register-faq" ,'new',toolbar=false,menubar=false,scrollbars=true,width=700,height=700)
+    var popup=window.open("/admin/manage/register-faq" ,'new',toolbar=false,menubar=false,scrollbars=true,width=800,height=1200)
     popup.focus();
 
 }

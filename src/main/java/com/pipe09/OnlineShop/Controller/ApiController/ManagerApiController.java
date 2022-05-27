@@ -84,7 +84,7 @@ public class ManagerApiController {
      */
 
 
-
+    
 
     @PostMapping(path = "/admin/manage/items/register-item.do")
     public ResponseEntity<String> postItemV2(@RequestParam(value = "body")String obj,@RequestPart(value = "file") @Nullable MultipartFile file) throws JsonProcessingException {

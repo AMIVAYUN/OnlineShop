@@ -157,10 +157,11 @@ public class OrderApiController {
     @PostMapping("/payments/doCancel/{paymentKey}")
     public ResponseEntity paymentCancler(@PathVariable String paymentKey, @RequestBody doCancelDto dto, @AuthenticationPrincipal UserDetails user){
         try{
-            String name=user.getUsername();
-            if(name==null){
+
+            if(user==null){
                 return new ResponseEntity(HttpStatus.BAD_REQUEST);
             }
+
             orderService.doCancel(paymentKey,dto);
             return new ResponseEntity(HttpStatus.OK);
         }catch(Exception e){

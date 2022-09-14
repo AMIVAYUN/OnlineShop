@@ -1,6 +1,5 @@
 package com.pipe09.OnlineShop.Dto.Item;
 
-import com.pipe09.OnlineShop.Domain.Item.Item;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;

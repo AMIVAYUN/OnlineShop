@@ -15,6 +15,11 @@ import java.util.List;
 public class OrderRepository {
     private final EntityManager em;
 
+    public void flush(){
+        em.flush();
+        return;
+    }
+
     public Long save(Orders order){
         em.persist(order);
         return order.getOrder_ID();
@@ -30,7 +35,7 @@ public class OrderRepository {
         return em.createQuery(jpql).getResultList();
     }
     public List<Orders> findPaidsByUser(String username,int offset,int limit){
-        return em.createQuery("select o from Orders o where o.member.user_ID=:username and o.deliverystatus<>:status").setParameter("username",username).setParameter("status",Deliverystatus.BEFORE).setFirstResult(offset).setMaxResults(limit).getResultList();
+        return em.createQuery("select o from Orders o join fetch o.member where o.member.user_ID=:username and o.deliverystatus<>:status").setParameter("username",username).setParameter("status",Deliverystatus.BEFORE).setFirstResult(offset).setMaxResults(limit).getResultList();
     }
     public List<Orders> findByDeliveryStatus(Deliverystatus status){
         String jpql="select o from Orders o where o.deliverystatus=:status";
@@ -50,6 +55,7 @@ public class OrderRepository {
     public Orders findByPaymentKey(String paymentKey){
         return em.createQuery("select o from Orders o where o.paymentKey=:paymentKey",Orders.class).setParameter("paymentKey",paymentKey).getSingleResult();
     }
+    /*
     public void changeStatDelivery(Long id) throws Exception{
         em.createQuery( "update Orders o set o.deliverystatus=:stat where o.Order_ID=:id ")
                 .setParameter("stat",Deliverystatus.DELIVERY).setParameter("id",id).executeUpdate();
@@ -60,6 +66,8 @@ public class OrderRepository {
                 .setParameter("stat",Deliverystatus.COMPLETE).setParameter("id",id).executeUpdate();
         em.clear();
     }
+
+     */
     /*
     public String saveOrderKey(String key,Long Order_ID){
         OrderKey orderKey=new OrderKey();

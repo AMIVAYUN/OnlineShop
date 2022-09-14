@@ -1,8 +1,8 @@
-package com.pipe09.OnlineShop.Domain.Item.Typed;
+package com.pipe09.OnlineShop.Domain.Item.V1.Typed;
 
 
-import com.pipe09.OnlineShop.Domain.Item.Item;
-import com.pipe09.OnlineShop.Domain.Item.Item_status;
+import com.pipe09.OnlineShop.Domain.Item.V1.Item;
+import com.pipe09.OnlineShop.Domain.Item.V1.Item_status;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,10 +10,10 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("G")
+@DiscriminatorValue("C")
 @Getter
 @Setter
-public class Grindstone extends Item {
+public class Cutter extends Item {
     private Long Item_ID;
     private String Name;
     private int Price;
@@ -25,4 +25,5 @@ public class Grindstone extends Item {
     public String imgSrc;
     private String DTYPE;
     private Item_status status;
+
 }

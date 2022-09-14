@@ -1,18 +1,19 @@
-package com.pipe09.OnlineShop.Domain.Item.Typed;
+package com.pipe09.OnlineShop.Domain.Item.V1.Typed;
 
 
-import com.pipe09.OnlineShop.Domain.Item.Item;
-import com.pipe09.OnlineShop.Domain.Item.Item_status;
+import com.pipe09.OnlineShop.Domain.Item.V1.Item;
+import com.pipe09.OnlineShop.Domain.Item.V1.Item_status;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("L")
+@DiscriminatorValue("S")
 @Getter
 @Setter
-public class LeakDetector extends Item {
+public class SewerCleaner extends Item {
     private Long Item_ID;
     private String Name;
     private int Price;

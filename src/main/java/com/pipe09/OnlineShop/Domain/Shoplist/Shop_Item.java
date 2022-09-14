@@ -1,7 +1,7 @@
 package com.pipe09.OnlineShop.Domain.Shoplist;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.pipe09.OnlineShop.Domain.Item.Item;
+import com.pipe09.OnlineShop.Domain.Item.V1.Item;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,10 +1,9 @@
 package com.pipe09.OnlineShop;
 
 
-import com.pipe09.OnlineShop.Domain.Item.Item;
-import com.pipe09.OnlineShop.Domain.Member.Member;
-import com.pipe09.OnlineShop.Domain.Shoplist.ShopCart;
-import com.pipe09.OnlineShop.Domain.Shoplist.Shop_Item;
+import com.pipe09.OnlineShop.Domain.Item.V2.DTYPE.dType.dType;
+import com.pipe09.OnlineShop.Domain.Item.V2.DTYPE.dType.dtype_classify;
+import com.pipe09.OnlineShop.Repository.DtypeRepository;
 import com.pipe09.OnlineShop.Repository.ShopCartRepository;
 import com.pipe09.OnlineShop.Service.MailService;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +27,20 @@ public class InitSerivce {
     private final EntityManager em;
     private final ShopCartRepository repository;
     private final MailService mailservice;
+    private final DtypeRepository drepository;
     @Transactional
     public void dbInit() throws MessagingException, IOException {
+        /*
+        dType dType = new dType("테스트");
+
+        dType dType1 = new dType( "테스트2",dType, dtype_classify.MIDDLE);
+        dType dType2 = new dType( "테스트3", dType1,dtype_classify.SMALL);
+
+        drepository.save(dType);
+        drepository.save(dType1);
+        drepository.save(dType2);
+
+         */
         //mailservice.getAuthfield().put("wntjrdbs@gmail.com","111111");
         //Member member=em.find(Member.class,)
         //메일 서비스 테스트

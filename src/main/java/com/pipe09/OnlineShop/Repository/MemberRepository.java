@@ -16,11 +16,16 @@ import java.util.List;
 public class MemberRepository {
     private final EntityManager em;
 
+    public void flush(){
+        em.flush();
+        return;
+    }
     public Long save(Member member){
         em.persist(member);
 
         return member.getMember_ID();
     }
+    /*
     public Member findByNameWithOauth(String name,UserType type){
         String jpql="select m from Member m where m.Name=:name and m.userType=:type";
         return em.createQuery(jpql,Member.class).setParameter("name",name).setParameter("type",type).getSingleResult();
@@ -29,6 +34,9 @@ public class MemberRepository {
         String jpql="select m from Member m where m.email=:email and m.userType=:type";
         return em.createQuery(jpql,Member.class).setParameter("email",email).setParameter("type",type).getSingleResult();
     }
+
+     */
+
     public Member findByName(String name){
         String jpql="select m from Member m join fetch m.shopCart where m.Name=:name and m.userType=:type";
         return em.createQuery(jpql,Member.class).setParameter("name",name).setParameter("type", UserType.LOCAL).getSingleResult();
@@ -44,10 +52,13 @@ public class MemberRepository {
     public List<Member> findAll(int offset,int limit){
         return em.createQuery("select mlist from Member mlist").setFirstResult(offset).setMaxResults(limit).getResultList();
     }
+    /*
     public Member findByEmailinOauth(String email){
         String jpql="select m from Member m where m.email=:email and m.userType<>:usertype";
         return em.createQuery(jpql,Member.class).setParameter("email",email).setParameter("usertype",UserType.LOCAL).getSingleResult();
     }
+
+     */
 
 
 

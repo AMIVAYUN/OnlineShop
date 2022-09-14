@@ -1,12 +1,6 @@
 package com.pipe09.OnlineShop.Dto.Item;
 
-import com.pipe09.OnlineShop.Domain.Item.Item;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.persistence.Column;
-import javax.persistence.Lob;
 
 @Data
 

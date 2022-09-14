@@ -1,7 +1,7 @@
 package com.pipe09.OnlineShop.Controller.ApiController;
 
 
-import com.pipe09.OnlineShop.Domain.Item.Item;
+import com.pipe09.OnlineShop.Domain.Item.V1.Item;
 import com.pipe09.OnlineShop.Domain.Shoplist.Shop_Item;
 import com.pipe09.OnlineShop.Dto.ShopCarts.ShopCartAppendDto;
 import com.pipe09.OnlineShop.Dto.ShopCarts.ShopCartDelDto;

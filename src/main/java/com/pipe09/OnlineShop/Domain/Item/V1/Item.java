@@ -1,4 +1,4 @@
-package com.pipe09.OnlineShop.Domain.Item;
+package com.pipe09.OnlineShop.Domain.Item.V1;
 
 
 import com.pipe09.OnlineShop.Dto.Item.R_itemDto;
@@ -9,16 +9,8 @@ import com.pipe09.OnlineShop.Utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Formula;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 @Entity
 @Getter
@@ -86,7 +78,7 @@ public class Item {
 
         dtoList.stream()
                 .forEach(m_itemDto -> m_itemDto.setDtype(
-                        m_itemDto.getDtype().substring("com.pipe09.OnlineShop.Domain.Item.Typed.".length())));
+                        m_itemDto.getDtype().substring("com.pipe09.OnlineShop.Domain.Item.V1.Typed.".length())));
         return dtoList;
     }
     */

@@ -1,25 +1,19 @@
 package com.pipe09.OnlineShop.Repository;
 
-import com.pipe09.OnlineShop.Configuration.SwaggerConfig;
-import com.pipe09.OnlineShop.Domain.Item.Item;
-import com.pipe09.OnlineShop.Domain.Item.ItemFactory;
-import com.pipe09.OnlineShop.Domain.Item.Item_status;
-import com.pipe09.OnlineShop.Domain.Item.Typed.LeakDetector;
+import com.pipe09.OnlineShop.Domain.Item.V1.Item;
+import com.pipe09.OnlineShop.Domain.Item.V1.ItemFactory;
+import com.pipe09.OnlineShop.Domain.Item.V1.Item_status;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
-import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import java.util.List;
@@ -40,7 +34,7 @@ public class ItemRepositoryTest {
 
     @Transactional
     @Before
-    public void setUp(){
+    public void forUnit(){
         Item item = new ItemFactory().makingItemBytype("누수탐지기");
         item.setName("testman");
         item.setStockQuantity( 10 );
@@ -109,6 +103,7 @@ public class ItemRepositoryTest {
 
         //TODO 이것이 왜 해결책일까? 이유는 FLUSH다 조회를 하나 flush를 직접 부르나 db와 동기화는 되기 때문에.
         /*
+        repository.flush();
         List<Item> tests = repository.findAll(0,1000);
         tests.stream().forEach( test -> { System.out.println( test.getName());});
 

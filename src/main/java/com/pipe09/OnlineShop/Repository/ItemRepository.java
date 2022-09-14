@@ -1,15 +1,13 @@
 package com.pipe09.OnlineShop.Repository;
 
-import com.pipe09.OnlineShop.Domain.Item.Item;
-import com.pipe09.OnlineShop.Domain.Item.Item_status;
+import com.pipe09.OnlineShop.Domain.Item.V1.Item;
+import com.pipe09.OnlineShop.Domain.Item.V1.Item_status;
+import com.pipe09.OnlineShop.Domain.Item.V2.DTYPE.Itemv2;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.transaction.Transaction;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -35,13 +33,12 @@ public class ItemRepository {
         return em.find(Item.class,id);
     }
     public List<Item> findAll(int offset,int limit){
-        String jpql="select i from Item i where i.status=:status";
-        return em.createQuery(jpql, Item.class).setParameter("status", Item_status.SALE).setFirstResult(offset).setMaxResults(limit).getResultList();
+        return em.createQuery("select i from Item i where i.status=:status", Item.class).setParameter("status", Item_status.SALE ).setFirstResult( offset ).setMaxResults( limit ).getResultList();
     }
 
     public List<Item> findAllbyType(String type,int offset,int limit){
 
-        return em.createQuery("select i from Item i where i.DTYPE=:type and i.status=:status").setParameter("type",type).setParameter("status",Item_status.SALE).setFirstResult(offset).setMaxResults(limit).getResultList();
+        return em.createQuery("select i from Item i where i.DTYPE=:type and i.status=:status").setParameter("type",type).setParameter("status",Item_status.SALE).setFirstResult( offset ).setMaxResults( limit ).getResultList();
 
     }
 
@@ -67,6 +64,9 @@ public class ItemRepository {
     public int getCountofKeyword(String keyword){
         return em.createQuery("select i from Item i where i.status=:status and (i.Name like concat('%',:keyword,'%'))").setParameter("status",Item_status.SALE).setParameter("keyword",keyword).getResultList().size();
     }
+
+
+
 
 
 }

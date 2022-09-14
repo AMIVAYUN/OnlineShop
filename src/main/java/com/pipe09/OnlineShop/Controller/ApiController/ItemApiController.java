@@ -1,18 +1,19 @@
 package com.pipe09.OnlineShop.Controller.ApiController;
 
 
-import com.pipe09.OnlineShop.Domain.Item.Item;
+import com.pipe09.OnlineShop.Domain.Item.V1.Item;
 import com.pipe09.OnlineShop.Dto.Item.ItemDto;
 import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
 import com.pipe09.OnlineShop.Service.ItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -82,13 +83,51 @@ public class ItemApiController {
 
      */
     @GetMapping("/api/v2/items/all")
-    public ResponseEntity<List<ItemDto>> getitemall(@RequestParam int offset, @RequestParam int limit){
+    public ResponseEntity<List<ItemDto>> getitemall( @RequestParam int offset, @RequestParam int limit ){
         try{
+            // 아이템 불러오기
             List<Item> items=service.findAll(offset, limit);
+            System.out.println( items.size() );
             HttpHeaders headers=new HttpHeaders();
+            if( items.size() == 0 ){
+                return new ResponseEntity<>( HttpStatus.NO_CONTENT );
+            }
+
+            /**
+             * 쿠키 설정
+             */
+            /**
+            int pageNum = ( offset / 12 ) + 1;
+
+            //공백, 개행 안됨. CR/LF
+            String val = "";
+
+
+
+            for( int i = 0; i < items.size(); i++ ){
+                val += items.get( i ).getImgSrc() + "~~~";
+            }
+
+
+            Cookie itemCookie = new Cookie( String.valueOf( pageNum ),val );
+            //itemCookie.setSecure( true );
+            itemCookie.setMaxAge( 600 );
+            response.addCookie( itemCookie );
+             */
+
+
+            /**
+             * 아이템 길이 밑 dtolist 반환
+             */
             headers.set("itemLen",String.valueOf(items.get(0).getCountofItems()));
             DefaultMapper<ItemDto> mapper=new DefaultMapper<>(new ItemDto());
             List<ItemDto> dtoList=items.stream().map(item -> mapper.Translate(item)).collect(Collectors.toList());
+            /*
+            CacheControl cache = CacheControl.maxAge( 600, TimeUnit.SECONDS ).noTransform().mustRevalidate();
+            headers.setCacheControl( cache );
+
+             */
+            //return ResponseEntity.ok().cacheControl(CacheControl.maxAge(60,TimeUnit.SECONDS)).headers(headers).body(dtoList);
             return new ResponseEntity(dtoList,headers, HttpStatus.OK);
         }catch (Exception e){
             log.info(this.getClass().getName()+e.toString());

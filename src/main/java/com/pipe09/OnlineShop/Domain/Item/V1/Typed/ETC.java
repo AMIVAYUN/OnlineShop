@@ -1,19 +1,15 @@
-package com.pipe09.OnlineShop.Domain.Item.Typed;
+package com.pipe09.OnlineShop.Domain.Item.V1.Typed;
 
 
-import com.pipe09.OnlineShop.Domain.Item.Item;
-import com.pipe09.OnlineShop.Domain.Item.Item_status;
-import lombok.Getter;
-import lombok.Setter;
+import com.pipe09.OnlineShop.Domain.Item.V1.Item;
+import com.pipe09.OnlineShop.Domain.Item.V1.Item_status;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("S")
-@Getter
-@Setter
-public class SewerCleaner extends Item {
+@DiscriminatorValue("ETC")
+public class ETC extends Item {
     private Long Item_ID;
     private String Name;
     private int Price;

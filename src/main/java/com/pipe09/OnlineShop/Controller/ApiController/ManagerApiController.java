@@ -5,9 +5,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.pipe09.OnlineShop.Domain.Board.Notice;
-import com.pipe09.OnlineShop.Domain.Item.Item;
-import com.pipe09.OnlineShop.Domain.Item.ItemFactory;
-import com.pipe09.OnlineShop.Domain.Item.Item_status;
+import com.pipe09.OnlineShop.Domain.Item.V1.Item;
+import com.pipe09.OnlineShop.Domain.Item.V1.ItemFactory;
+import com.pipe09.OnlineShop.Domain.Item.V1.Item_status;
 import com.pipe09.OnlineShop.Dto.Board.UpdateNoticeDto;
 import com.pipe09.OnlineShop.Dto.Item.*;
 import com.pipe09.OnlineShop.Dto.Board.NoticeDto;
@@ -18,13 +18,11 @@ import com.pipe09.OnlineShop.Service.ItemService;
 import com.pipe09.OnlineShop.Service.MemberService;
 import com.pipe09.OnlineShop.Service.OrderService;
 
-import com.pipe09.OnlineShop.Utils.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.apache.catalina.security.SecurityClassLoad;
+
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
@@ -90,8 +88,12 @@ public class ManagerApiController {
     public ResponseEntity<String> postItemV2(@RequestParam(value = "body")String obj,@RequestPart(value = "file") @Nullable MultipartFile file) throws JsonProcessingException {
         ObjectMapper objectMapper=new ObjectMapper().registerModule(new SimpleModule());
         R_itemDtoV2 dto =objectMapper.readValue(obj,R_itemDtoV2.class);
+        /*
         DefaultMapper<Item> mapper=new DefaultMapper<>(ItemFactory.makingItemBytype(dto.getDtype()));
+
+         */
         ImgPathDto img=new ImgPathDto(null,null);
+
         if(file != null){
             img =itemService.MakingImgfile(file);
             dto.setImgSrc("img/upload/"+img.getName());

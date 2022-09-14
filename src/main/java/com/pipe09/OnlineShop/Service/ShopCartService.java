@@ -1,17 +1,15 @@
 package com.pipe09.OnlineShop.Service;
 
 
-import com.pipe09.OnlineShop.Domain.Item.Item;
+import com.pipe09.OnlineShop.Domain.Item.V1.Item;
 import com.pipe09.OnlineShop.Domain.Shoplist.ShopCart;
 import com.pipe09.OnlineShop.Domain.Shoplist.Shop_Item;
 import com.pipe09.OnlineShop.Repository.ShopCartRepository;
 import com.pipe09.OnlineShop.Repository.ShopItemRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Transactional

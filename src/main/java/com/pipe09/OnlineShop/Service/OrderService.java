@@ -3,7 +3,7 @@ package com.pipe09.OnlineShop.Service;
 
 //import com.pipe09.OnlineShop.Domain.Delivery.Delivery;
 import com.pipe09.OnlineShop.Domain.Delivery.Deliverystatus;
-import com.pipe09.OnlineShop.Domain.Item.Item;
+import com.pipe09.OnlineShop.Domain.Item.V1.Item;
 import com.pipe09.OnlineShop.Domain.Member.Member;
 import com.pipe09.OnlineShop.Domain.Orders.OrderItem;
 import com.pipe09.OnlineShop.Domain.Orders.Orders;
@@ -35,7 +35,6 @@ import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Base64;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;

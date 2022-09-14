@@ -1,7 +1,7 @@
 package com.pipe09.OnlineShop.Service;
 
 
-import com.pipe09.OnlineShop.Domain.Item.Item;
+import com.pipe09.OnlineShop.Domain.Item.V1.Item;
 import com.pipe09.OnlineShop.Dto.Item.ImgPathDto;
 import com.pipe09.OnlineShop.Repository.ItemRepository;
 import com.pipe09.OnlineShop.Utils.Utils;

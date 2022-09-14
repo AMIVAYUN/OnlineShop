@@ -17,11 +17,19 @@ function chkIE(){
     }
 }
 function getItem(offset,limit){
+    cacheName = "home";
+    url = "./api/v2/items/all?offset="+offset+"&limit="+limit;
     Cleaning($("#shoplist"));
-    fetch("./api/v2/items/all?offset="+offset+"&limit="+limit,{method:"GET"}).then((response) => {
+    fetch( url,{method:"GET"}).then((response) => {
         if(response.status==200){
-            console.log(response.headers.get("itemLen"));
+
             return response.json()
+        }else if( response.status == 204 ){
+
+            alert("더 이상 존재하지 않습니다.");
+            window.location.href= window.location;
+        }else{
+            alert("내부 서버에 문제가 있습니다.");
         }
 
 
@@ -30,6 +38,7 @@ function getItem(offset,limit){
 
     }).then(
         (data) => {
+
             $.each(data, function (idx) {
                 var innerhtml = '<li class="item" id='+data[idx].item_ID +'><div id="item_img"><img src=' + data[idx].imgSrc + '></div>' +
                     '<div id="item_text"><span><a id="merchansub">상품명:</a> <a id="item_name">'+data[idx].name+'</a></span></br>'+'<span><a id="merchansub">가 격:  </a><a id="item_price">'+data[idx].price.toLocaleString()+'</a></span></br></div></li>'
@@ -178,8 +187,10 @@ function pageDown(){
 }
 function pageChange(value){
 
-    var offset=0+((value-1)*12);
-    var limit=offset+12;
+    var offset=0+ ( (value-1) *12);
+
+    var limit=12;
+
     getItem(offset,limit);
 }
 /*

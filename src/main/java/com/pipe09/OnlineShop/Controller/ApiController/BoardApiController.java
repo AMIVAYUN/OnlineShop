@@ -5,6 +5,7 @@ import com.pipe09.OnlineShop.Dto.Board.NoticeDto;
 import com.pipe09.OnlineShop.Dto.StandardMsgDto;
 import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
 import com.pipe09.OnlineShop.Service.BoardService;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,8 @@ import java.util.stream.Collectors;
 @Slf4j
 public class BoardApiController {
     private final BoardService boardService;
+
+    @ApiOperation( value = "공지사항 전체 불러오기" , notes = " LOAD ALL FAQ API ")
     @GetMapping("/api/v1/view-faq.do")
     public ResponseEntity<List<NoticeDto>> faqlist(){
         List<Notice> noticeList=boardService.findAll();
@@ -33,6 +36,7 @@ public class BoardApiController {
     }
 
 
+    @ApiOperation( value = "키워드 기반 공지사항 불러오기 ", notes = " LOAD FAQ WITH KEYWORD API ")
     @GetMapping("/api/v2/faq/all")
     public ResponseEntity<List<NoticeDto>> faqlistbyV2(@RequestParam(required = false) String keyword){
         List<Notice> noticeList=boardService.findWithKeyword(keyword);
@@ -46,6 +50,7 @@ public class BoardApiController {
     }
 
     //2022-05-18
+    @ApiOperation( value = "키워드, offset, limit으로 공지사항 불러오기 ", notes = " LOAD FAQ WITH KEYWORD & OFFSET * LIMIT API " )
     @GetMapping("/api/v2/faq/partition")
     public ResponseEntity<List<NoticeDto>> faqlistbyV2(@RequestParam(required = false) String keyword, @RequestParam int offset, @RequestParam int limit){
         List<Notice> noticeList=boardService.findWithKeywordwithOfflim(keyword,offset,limit);

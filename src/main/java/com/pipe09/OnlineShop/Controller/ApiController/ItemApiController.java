@@ -5,6 +5,7 @@ import com.pipe09.OnlineShop.Domain.Item.V1.Item;
 import com.pipe09.OnlineShop.Dto.Item.ItemDto;
 import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
 import com.pipe09.OnlineShop.Service.ItemService;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
@@ -55,7 +56,7 @@ public class ItemApiController {
     }
 
      */
-
+    @ApiOperation( value = "타입, offset, limit 별 아이템 불러오기" , notes = "LOAD TYPE,KEYWORD,OFFSET & LIMIT BASED ITEM API" )
     @GetMapping("/api/v2/items/typed/{DTYPE}")
     public List<ItemDto> getminiItemsbyType(@PathVariable String DTYPE,@RequestParam int offset,@RequestParam int limit){
         List<Item>items=service.findAllbyType(DTYPE,offset,limit);
@@ -66,6 +67,7 @@ public class ItemApiController {
         return dtoList;
 
     }
+    @ApiOperation( value = " 공구 불러오기 " , notes = "LOAD TOOLS API" )
     @GetMapping("api/v2/items/cast-tool")
     public List<ItemDto> getminiItemsAboutTool(){
         List<Item>items=service.findAllaboutTools();
@@ -82,6 +84,7 @@ public class ItemApiController {
     }
 
      */
+    @ApiOperation( value = "offset, limit 기반 아이템 불러오기" , notes = "LOAD OFFSET & LIMIT BASED ITEM API" )
     @GetMapping("/api/v2/items/all")
     public ResponseEntity<List<ItemDto>> getitemall( @RequestParam int offset, @RequestParam int limit ){
         try{
@@ -135,6 +138,7 @@ public class ItemApiController {
         }
 
     }
+    @ApiOperation( value = "아이템 ID로 해당 아이템 조회" , notes = "LOAD SINGLE ITEM WITH ID API" )
     @GetMapping("/api/v2/items/single/{itemid}")
     public ItemDto getItembyId(@PathVariable Long itemid){
         Item item=service.findOne(itemid);
@@ -142,6 +146,7 @@ public class ItemApiController {
         return mapper.Translate(item);
 
     }
+    @ApiOperation( value = "offset & limit, 키워드로 아이템 조회 " , notes = "LOAD ITEMS WITH KEYWORD, OFFSET & LIMIT API" )
     @GetMapping("/api/v2/items/{keyword}")
     public ResponseEntity<List<ItemDto>> getItembykeyword(@RequestParam int offset,@RequestParam int limit,@PathVariable String keyword){
         try{

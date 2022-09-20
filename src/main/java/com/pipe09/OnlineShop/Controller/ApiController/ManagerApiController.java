@@ -18,6 +18,7 @@ import com.pipe09.OnlineShop.Service.ItemService;
 import com.pipe09.OnlineShop.Service.MemberService;
 import com.pipe09.OnlineShop.Service.OrderService;
 
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,6 +49,7 @@ public class ManagerApiController {
     private final MemberService memberService;
     private final BoardService boardService;
 
+    @ApiOperation( value = "로그 아웃" , notes = "LOGOUT API" )
     @GetMapping("/logout")
     public RedirectView logout(HttpServletRequest request, HttpServletResponse response) throws Exception{
         Authentication auth= SecurityContextHolder.getContext().getAuthentication();
@@ -82,8 +84,8 @@ public class ManagerApiController {
      */
 
 
-    
 
+    @ApiOperation( value = " 제품 등록 " , notes = " ENROLL ITEM API" )
     @PostMapping(path = "/admin/manage/items/register-item.do")
     public ResponseEntity<String> postItemV2(@RequestParam(value = "body")String obj,@RequestPart(value = "file") @Nullable MultipartFile file) throws JsonProcessingException {
         ObjectMapper objectMapper=new ObjectMapper().registerModule(new SimpleModule());
@@ -136,6 +138,7 @@ public class ManagerApiController {
     }
 
      */
+    @ApiOperation( value = " 공지사항 등록 " , notes = " ENROLL FAQ API" )
     @PostMapping("/admin/manage/register-faq.do")
     public ResponseEntity reg_faq(@Valid @RequestBody NoticeDto dto){
         try{
@@ -152,6 +155,7 @@ public class ManagerApiController {
         }
         return new ResponseEntity(HttpStatus.OK);
     }
+    @ApiOperation( value = " 공지사항 삭제 " , notes = " DELETE FAQ API" )
     @DeleteMapping("/admin/manage/delete-faq.do")
     public ResponseEntity delfaqv2(@RequestBody SimpleLongArrayDto dto){
         try{
@@ -181,6 +185,7 @@ public class ManagerApiController {
     }
 
      */
+    @ApiOperation( value = " 공지사항 수정 " , notes = " UPDATE FAQ API" )
     @PutMapping(path="/admin/manage/update-faq.do")
     public ResponseEntity updatefaqv2(@RequestBody List<UpdateNoticeDto> dtoList){
         try{
@@ -244,6 +249,7 @@ public class ManagerApiController {
     }
 
      */
+    @ApiOperation( value = " 제품 삭제 " , notes = " DELETE ITEMS API" )
     @DeleteMapping("/admin/manage/items/delete-item.do")
     public ResponseEntity<String> deleteItemV2(@RequestBody Dv2_itemDto dto){
 
@@ -255,7 +261,7 @@ public class ManagerApiController {
         return new ResponseEntity<String>("삭제가 완료되었습니다.", HttpStatus.OK);
     }
 
-
+    @ApiOperation( value = " 제품 수정 " , notes = " UPDATE ITEM API " )
     @PutMapping(path = "/admin/manage/items/{id}/update-item.do")
     public ResponseEntity<String> updateItemV2(@PathVariable Long id, @RequestParam(value = "body")String obj,@RequestPart(value = "file") @Nullable MultipartFile file) {
         try{

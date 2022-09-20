@@ -17,6 +17,7 @@ import com.pipe09.OnlineShop.Service.MemberService;
 import com.pipe09.OnlineShop.Service.OrderService;
 
 import com.pipe09.OnlineShop.Utils.BASE64Utils;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.models.Response;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -46,6 +47,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class OrderApiController {
     private final OrderService orderService;
+
+
+    @ApiOperation( value = " 주문 조회하기 " , notes = " CHECK ALL ORDERS API" )
     @GetMapping("/api/v1/orders/all")
     public List<OrderDto> getOrders(@RequestParam(value = "offset") int offset,@RequestParam int limit){
         List<Orders> orders=orderService.findAllwithToOne(offset,limit);
@@ -55,6 +59,8 @@ public class OrderApiController {
 
         return orderDtos;
     }
+
+    @ApiOperation( value = " 이름으로 개인 지출 내역 조회하기 " , notes = " INDIVIDUAL CHECK PAYMENTS API" )
     @GetMapping("/api/v1/orders/paid/byuser")
     public ResponseEntity<List<Us_Orders>> getOrdersbyUser( @AuthenticationPrincipal UserDetails details ,@RequestParam int offset, @RequestParam int limit){
         if( details == null ){
@@ -72,7 +78,7 @@ public class OrderApiController {
 
 
     }
-
+    @ApiOperation( value = " 주문 생성하기 " , notes = " CREATE ORDERS API " )
     @PostMapping("/api/v1/orders/create")
     public ResponseEntity<String> createOrders(@Valid @RequestBody CreateOrderDto dto ,@AuthenticationPrincipal UserDetails details){
 
@@ -106,6 +112,8 @@ public class OrderApiController {
 
 
     }
+
+    @ApiOperation( value = " offset, limit으로 개인 유저 결제 및 주문 제품 정보 받기 " , notes = " GET PAYMENTS & ORDERITEM API" )
     @GetMapping("/api/v1/payments/all")
     public ResponseEntity getPaymentByUser(@RequestParam(value = "offset")int offset, @RequestParam(value = "limit")int limit){
         List<payment>payments=orderService.getListByUser(offset, limit);
@@ -132,6 +140,8 @@ public class OrderApiController {
     }
 
      */
+
+    @ApiOperation( value = " 주문 정보 수정하기 " , notes = " UPDATE ORDER API" )
     @PutMapping("/admin/manage/orders/changeStat")
     public ResponseEntity setUpDeliveryStat(@RequestParam(value = "option") int option, @RequestBody DeliverySetDto dto){
         try{
@@ -142,6 +152,8 @@ public class OrderApiController {
         }
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    @ApiOperation( value = " 배송번호 입력하기_ADMIN " , notes = " PUT TRANSPORT NUMBER API" )
     @PutMapping("/admin/manage/orders/registerTransPort")
     public ResponseEntity setTransportDoc(@RequestParam String transPort,@RequestParam Long order_id){
         try{
@@ -154,6 +166,7 @@ public class OrderApiController {
     }
 
 
+    @ApiOperation( value = " 결제 취소하기 " , notes = " CANCEL PAYMENTS API" )
     @PostMapping("/payments/doCancel/{paymentKey}")
     public ResponseEntity paymentCancler(@PathVariable String paymentKey, @RequestBody doCancelDto dto, @AuthenticationPrincipal UserDetails user){
         try{
@@ -172,7 +185,7 @@ public class OrderApiController {
 
     }
 
-
+    @ApiOperation( value = " 결제 완료 확인하기 " , notes = " CHECK PAY-DONE API" )
     @PostMapping("/payments/doCompleteTrade/{paymentKey}")
     public ResponseEntity paymentCompleter(@PathVariable String paymentKey,@AuthenticationPrincipal UserDetails details){
         try{

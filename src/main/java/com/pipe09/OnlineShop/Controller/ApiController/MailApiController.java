@@ -5,6 +5,7 @@ import com.pipe09.OnlineShop.Dto.Mail.MailDto;
 import com.pipe09.OnlineShop.Dto.Mail.MailProveDto;
 import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
 import com.pipe09.OnlineShop.Service.MailService;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.cfg.annotations.reflection.internal.XMLContext;
@@ -21,6 +22,8 @@ import java.io.IOException;
 public class MailApiController {
     private final MailService service;
 
+
+    @ApiOperation( value = "메일 쓰기" , notes = "WRITE MAIL API" )
     @PostMapping("/api/v2/mails/post.do")
     public String SendMail(@RequestBody MailDto dto){
         String username= SecurityContextHolder.getContext().getAuthentication().getName();
@@ -28,6 +31,7 @@ public class MailApiController {
         service.makeQuestionAndSend(dto,username);
         return "전송에 성공하였습니다";
     }
+    @ApiOperation( value = "메일로 인증하기" , notes = "DO AUTHENTICATION BY EMAIL API" )
     @GetMapping("/api/v2/mails/confirm")
     public int StartProve(@RequestParam String email) {
         log.info(email+"유저 이메일 인증 서비스 진행");
@@ -43,6 +47,8 @@ public class MailApiController {
         }
         return 0;
     }
+
+    @ApiOperation( value = "인증 결과 반환하기" , notes = "RETURN AUTHENTICATION RESULT API" )
     @PostMapping("/api/v2/mails/prove.do")
     public MailProveDto GetProve(@RequestBody MProveDto dto){
         MailProveDto result= new MailProveDto();

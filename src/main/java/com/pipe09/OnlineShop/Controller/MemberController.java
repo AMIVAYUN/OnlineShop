@@ -32,18 +32,22 @@ public class MemberController {
     }
 
 
-
+    /*
     @GetMapping("/join")
     public String join(){
         return "fragments/public/join1";
     }
 
 
+     */
+
     @GetMapping("/mypage")
     public String getMypage(){
         return "fragments/private/mypagev2";
     }
 
+
+    /*
     @PostMapping("/join-proc")
     public ResponseEntity<String> create(@Valid @RequestBody MemberDto dto){
         log.info(dto.getAddress().getAddress());
@@ -51,6 +55,8 @@ public class MemberController {
         service.save(newMember);
         return new ResponseEntity<>("저장에 성공하였습니다", HttpStatus.OK);
     }
+
+     */
 
     /*
     @PostMapping("/loginproc")

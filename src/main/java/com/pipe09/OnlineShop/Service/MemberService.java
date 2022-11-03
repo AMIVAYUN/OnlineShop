@@ -68,6 +68,7 @@ public class MemberService implements UserDetailsService {
             throw new UsernameNotFoundException(user_id);
         }
         //login method
+
         return User.builder().username(member.getUser_ID()).password(member.getPwd()).roles().roles(member.getRoleType().toString()).build();
     }
 

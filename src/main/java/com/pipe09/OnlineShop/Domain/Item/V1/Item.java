@@ -92,6 +92,7 @@ public class Item {
         return item;
     }
     public static Item fromRegv2(R_itemDtoV2 v2){
+        System.out.println(v2.getDtype());
         DefaultMapper<Item>mapper=new DefaultMapper<>(ItemFactory.makingItemBytype(v2.getDtype()));
         Item item=mapper.Translate(v2);
         return item;

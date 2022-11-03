@@ -77,5 +77,6 @@ public class ItemV2Repository {
     public int getCountofKeyword(String keyword) {
 
         return em.createQuery("select i from Itemv2 i where i.status=:status and (i.Name like concat('%',:keyword,'%'))").setParameter("status", Item_status.SALE).setParameter("keyword", keyword).getResultList().size();
+
     }
 }

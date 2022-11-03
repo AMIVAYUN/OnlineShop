@@ -38,9 +38,16 @@ async function initFaqlist(Keyword,offset,limit){
                     if( idx1 == offset+limit){
                         return;
                     }
+                    var date = data[idx].date.toString();
+                    date = date.replace(/\,/g,'-');
+                    obj = Object();
+                    obj.date = date;
+                    obj.name=data[idx].name.toString();
+                    obj.desc = data[idx].description.toString();
+
                     var innerhtml='<tr class="component">\n' +
-                        '                <td class = "date"> '+data[idx].date+' </td>\n' +
-                        '                <td class = "title"> '+data[idx].name+' </td>\n' +
+                        '                <td class = "date"> '+date+' </td>\n' +
+                        '                <td class = "title" onclick="mod_open('+'\''+ obj.name+ '\',' +'\''+obj.date+'\',\''+ obj.desc+'\'' +' )"> '+data[idx].name+' </td>\n' +
                         '                <td class = "desc">'+data[idx].description+'</td>\n' +
                         '            </tr>'
                     $("#content").append(innerhtml);
@@ -79,9 +86,15 @@ async function getFaqlist(Keyword,offset,limit){
                     if( idx1 == offset+limit){
                         return;
                     }
+                    var date = data[idx].date.toString();
+                    date = date.replace(/\,/g,'-');
+                    obj = Object();
+                    obj.date = date;
+                    obj.name=data[idx].name.toString();
+                    obj.desc = data[idx].description.toString();
                     var innerhtml='<tr class="component">\n' +
                         '                <td class = "date"> '+data[idx].date+' </td>\n' +
-                        '                <td class = "title"> '+data[idx].name+' </td>\n' +
+                        '                <td class = "title" onclick="mod_open('+'\''+ obj.name+ '\',' +'\''+obj.date+'\',\''+ obj.desc+'\'' +' )"> '+data[idx].name+' </td>\n' +
                         '                <td class = "desc">'+data[idx].description+'</td>\n' +
                         '            </tr>'
                     $("#content").append(innerhtml);
@@ -216,5 +229,23 @@ function mypageSetting(){
             var url=baseurl .protocol +"//"+baseurl .host+"/mypage"
             location.assign(url);
         }
+    })
+}
+// 모달 관련
+function mod_open( title,date,desc ){
+
+    $("#modal").css({
+        "display":"block"
+    })
+
+    $("#modal").find("#title").text( title );
+    $("#modal").find("#date").text( date );
+    $("#modal").find("#desc").text( desc );
+
+}
+
+function mod_close(){
+    $("#modal").css({
+        "display":"none"
     })
 }

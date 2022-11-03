@@ -193,7 +193,7 @@ async function updatePost(obj){
 
 }
 function registerNotice(){
-    var popup=window.open("/admin/manage/register-faq" ,'new',toolbar=false,menubar=false,scrollbars=true,width=800,height=1200)
+    var popup=window.open("/admin/manage/register-faq" ,'new',"toolbar=false,menubar=false,scrollbars=true,width=700,height=1000")
     popup.focus();
 
 }
@@ -491,7 +491,7 @@ function replaceItems(){
     }
 }
 function registerItems(){
-    window.open('/admin/manage/register-item','new',toolbar=false,menubar=false,scrollbars=true,width=700,height=900);return false
+    window.open('/admin/manage/register-item','new',"toolbar=false,menubar=false,scrollbars=true,width=800,height=1000");return false
 
 }
 function gotoHome(){

@@ -71,7 +71,9 @@ public class MemberApiController{
     @GetMapping("/api/v1/members/session")
     public ResponseEntity<MemauthDto> status(){
         Authentication auth=SecurityContextHolder.getContext().getAuthentication();
+        log.info( "Session checked " + auth.getName() + auth.getAuthorities().toString() );
         return new ResponseEntity<MemauthDto>(new MemauthDto(auth.isAuthenticated(),auth.getName(),auth.getAuthorities().toString()), HttpStatus.OK);
+
 
 
     }

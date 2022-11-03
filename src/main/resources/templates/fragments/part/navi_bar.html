@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <nav th:fragment="fragment-naviBar" id="navi-bar">
-    <a id="login-navi" href="/login">로그인</a>
-    <a id="join-navi" onclick="alert('현재 보안 개선중인 서비스 입니다.')">회원가입</a>
     <!--
     <a id="login-navi" href="/login">로그인</a>
-    <a id="join-navi" href="/join">회원가입</a>
+    <a id="join-navi" onclick="alert('현재 보안 개선중인 서비스 입니다.')">회원가입</a>
     -->
+
+    <a id="login-navi" href="/login">로그인</a>
+    <a id="join-navi" href="/join">회원가입</a>
+
     <a id="mypage" >마이페이지</a>
     <a href="/contact">FAQ</a>
     <a id="manager" href="/admin/manage">관리자</a>

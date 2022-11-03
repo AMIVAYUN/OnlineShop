@@ -1,0 +1,13 @@
+#wrap{
+    position:absolute;
+    width: 70%;
+    left:50%;
+    margin-top:10%;
+    margin-left:5%;
+    height:100%;
+    transform: translate(-50%);
+    overflow: revert;
+}
+#wrap > button{
+    float:right;
+}

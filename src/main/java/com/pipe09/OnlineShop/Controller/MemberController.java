@@ -24,6 +24,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService service;
+
     @GetMapping("/login")
     public String login(HttpServletRequest request)
     {
@@ -32,14 +33,16 @@ public class MemberController {
     }
 
 
-    /*
+
+
+
     @GetMapping("/join")
     public String join(){
         return "fragments/public/join1";
     }
 
 
-     */
+
 
     @GetMapping("/mypage")
     public String getMypage(){
@@ -47,7 +50,7 @@ public class MemberController {
     }
 
 
-    /*
+
     @PostMapping("/join-proc")
     public ResponseEntity<String> create(@Valid @RequestBody MemberDto dto){
         log.info(dto.getAddress().getAddress());
@@ -56,9 +59,9 @@ public class MemberController {
         return new ResponseEntity<>("저장에 성공하였습니다", HttpStatus.OK);
     }
 
-     */
 
-    /*
+
+
     @PostMapping("/loginproc")
     public String login(@Valid MemberDto dto){
         log.info(dto.getUsername()+"로그인 시도");
@@ -66,5 +69,5 @@ public class MemberController {
         return "redirect:/";
     }
 
-     */
+
 }

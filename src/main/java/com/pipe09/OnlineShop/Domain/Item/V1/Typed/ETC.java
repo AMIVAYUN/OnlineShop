@@ -8,7 +8,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("ETC")
+@DiscriminatorValue("R")
 public class ETC extends Item {
     private Long Item_ID;
     private String Name;

@@ -5,7 +5,7 @@
     font-style: normal;
 }
 body{
-    width:1500px;
+    width:100%;
     position: relative;
     margin:0 auto;
 
@@ -98,7 +98,7 @@ body{
 
 
 #side_Bar{
-    margin-left:1200px;
+    margin-left:80%;
     position: fixed;
     width:60px;
     height:500px;
@@ -389,7 +389,7 @@ li #item_img img{
     padding: 40px;
     background-color: white;
     border-radius: 25px;
-    width:400px;
+    width:500px;
     height:600px;
     transform: translate(-50%);
     top:25%;
@@ -399,5 +399,12 @@ li #item_img img{
 #modal_body > #title{
     overflow: hidden;
     height: 30px;
+    font-size:18px;
+    font-family: SUIT-Medium;
 
+}
+
+#desc{
+    resize:none;
+    font-family: SUIT-Medium;
 }

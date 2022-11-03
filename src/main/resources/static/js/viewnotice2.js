@@ -235,7 +235,11 @@ function mypageSetting(){
 function mod_open( title,date,desc ){
 
     $("#modal").css({
-        "display":"block"
+        "display":"block",
+
+    })
+    $("#side_Bar").css({
+        "display":"none"
     })
 
     $("#modal").find("#title").text( title );
@@ -246,6 +250,10 @@ function mod_open( title,date,desc ){
 
 function mod_close(){
     $("#modal").css({
-        "display":"none"
+        "display":"none",
+
+    })
+    $("#side_Bar").css({
+        "display":"block"
     })
 }

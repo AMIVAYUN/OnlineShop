@@ -1,5 +1,5 @@
 # OnlineShop
-Daebong industrial Online Shop_1.0
+Daebong industrial Online Shop_1.0 --> #현재는 Notion에서 관리
 link:http://ec2-13-125-22-236.ap-northeast-2.compute.amazonaws.com:8080/
 ![main page](https://user-images.githubusercontent.com/63450823/150277556-f738cd2f-bb70-4253-8c7a-edd3c7419ca0.GIF)
 # 전체 개발 일정

@@ -29,7 +29,7 @@ public class MailApiController {
         String username= SecurityContextHolder.getContext().getAuthentication().getName();
         log.info(username+"유저 메일 서비스 사용");
         service.makeQuestionAndSend(dto,username);
-        return "전송에 성공하였습니다";
+        return "200";
     }
     @ApiOperation( value = "메일로 인증하기" , notes = "DO AUTHENTICATION BY EMAIL API" )
     @GetMapping("/api/v2/mails/confirm")

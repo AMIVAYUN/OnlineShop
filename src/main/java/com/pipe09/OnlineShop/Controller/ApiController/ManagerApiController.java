@@ -98,7 +98,13 @@ public class ManagerApiController {
 
         if(file != null){
             img =itemService.MakingImgfile(file);
+            if( img.getName() == null ){
+                return new ResponseEntity<>(img.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR);
+            }
             dto.setImgSrc("img/upload/"+img.getName());
+        }
+        else{
+            return new ResponseEntity<>("이미지가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
         Item item=Item.fromRegv2(dto);
         item.setStatus(Item_status.SALE);

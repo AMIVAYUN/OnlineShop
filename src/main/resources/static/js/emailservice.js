@@ -91,9 +91,17 @@ async function sendmail(){
                 "phonenum":$("#phone1").val()+"-"+$("#phone2").val()+"-"+$("#phone3").val(),
                 "writtendate":new Date()
             })
-        }).then(response => response.text());
-        alert(res);
-        location.assign((baseurl .protocol +"//"+baseurl .host));
+        }).then(response => response.text())
+
+        if( res == "200"){
+            alert( "전송에 성공하였습니다" );
+            location.assign((baseurl .protocol +"//"+baseurl .host));
+        }
+
+
+
+
+
     }
 
 

@@ -57,6 +57,7 @@ public class Member {
     @Enumerated(EnumType.STRING)
     @NotNull
     private UserType userType;
+
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "shoplist_ID")
     private ShopCart shopCart;

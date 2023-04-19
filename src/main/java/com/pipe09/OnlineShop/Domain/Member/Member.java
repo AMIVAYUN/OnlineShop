@@ -3,6 +3,7 @@ package com.pipe09.OnlineShop.Domain.Member;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pipe09.OnlineShop.Domain.Orders.Orders;
 
+import com.pipe09.OnlineShop.Domain.Question.V1.questionV1;
 import com.pipe09.OnlineShop.Domain.Shoplist.ShopCart;
 import lombok.Getter;
 import lombok.Setter;
@@ -57,6 +58,9 @@ public class Member {
     @Enumerated(EnumType.STRING)
     @NotNull
     private UserType userType;
+
+    @OneToMany( mappedBy = "member" , fetch = FetchType.LAZY )
+    private List<questionV1> questions;
 
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "shoplist_ID")

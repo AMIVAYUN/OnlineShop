@@ -1,26 +1,7 @@
 package com.pipe09.OnlineShop.Service;
 
-import com.pipe09.OnlineShop.Domain.Member.Member;
-import com.pipe09.OnlineShop.Domain.SessionUser;
 //import com.pipe09.OnlineShop.Oauth.Attributes;
-import com.pipe09.OnlineShop.Repository.MemberRepository;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
-import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
-import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
-import org.springframework.security.oauth2.core.user.OAuth2User;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpSession;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
 /*
 @RequiredArgsConstructor
 @Service

@@ -33,7 +33,7 @@ public class OrderItem {
         return this.getPrice()*this.getCount();
     }
 
-    public static OrderItem createOrderItem(Item item,int price,int count){
+    public static OrderItem createOrderItem(Item item,int price,int count) throws Exception {
         OrderItem newOrderItem=new OrderItem();
         newOrderItem.setItem(item);
         newOrderItem.setPrice(price);

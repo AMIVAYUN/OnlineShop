@@ -48,7 +48,7 @@ public class ItemV2Repository {
 
     public List<Itemv2> findAllbyType(String type, int offset, int limit) {
 
-        return em.createQuery("select i from Itemv2 i join fetch i.DTYPE where i.status=:status and i.DTYPE.name = :type").setParameter("type", type).setParameter("status", Item_status.SALE).setFirstResult(offset).setMaxResults(limit).getResultList();
+        return em.createQuery("select i from Itemv2 i join fetch i.dType where i.status=:status and i.dType.name = :type").setParameter("type", type).setParameter("status", Item_status.SALE).setFirstResult(offset).setMaxResults(limit).getResultList();
 
     }
 
@@ -63,20 +63,21 @@ public class ItemV2Repository {
         return true;
     }
 
-    public List<Itemv2> findAllaboutTools() {
-        Long id = dtypeRepository.findClassifierId( "공구" );
-        return em.createQuery("select i from Itemv2 i join fetch i.DTYPE where i.status=:status and ( i.DTYPE.id =:id or i.DTYPE.parent_id := )").setParameter("status", Item_status.SALE).setParameter( "tools","공구").getResultList();
-    }
 
-    @Modifying(clearAutomatically = true)
+
     public List<Itemv2> findBytitleKeyword(String keyword, int offset, int limit) {
         em.clear();
-        return em.createQuery("select i from Itemv2 i where i.status=:status and (i.Name like concat('%',:keyword,'%'))").setParameter("status", Item_status.SALE).setParameter("keyword", keyword).setFirstResult(offset).setMaxResults(limit).getResultList();
+        return em.createQuery("select i from Itemv2 i where i.status=:status and (i.name like concat('%',:keyword,'%'))").setParameter("status", Item_status.SALE).setParameter("keyword", keyword).setFirstResult(offset).setMaxResults(limit).getResultList();
     }
 
     public int getCountofKeyword(String keyword) {
 
-        return em.createQuery("select i from Itemv2 i where i.status=:status and (i.Name like concat('%',:keyword,'%'))").setParameter("status", Item_status.SALE).setParameter("keyword", keyword).getResultList().size();
+        return em.createQuery("select i from Itemv2 i where i.status=:status and (i.name like concat('%',:keyword,'%'))").setParameter("status", Item_status.SALE).setParameter("keyword", keyword).getResultList().size();
 
+    }
+
+    public List<Itemv2> findAllaboutTools() {
+
+        return em.createQuery( "select i from Itemv2 i where i.dType.name =: name").setParameter( "name", "Tools").getResultList();
     }
 }

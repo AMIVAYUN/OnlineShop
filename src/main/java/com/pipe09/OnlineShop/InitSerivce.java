@@ -1,11 +1,16 @@
 package com.pipe09.OnlineShop;
 
 
+import com.pipe09.OnlineShop.Domain.Item.V1.Item;
+import com.pipe09.OnlineShop.Domain.Item.V2.DTYPE.Itemv2;
 import com.pipe09.OnlineShop.Domain.Item.V2.DTYPE.dType.dType;
 import com.pipe09.OnlineShop.Domain.Item.V2.DTYPE.dType.dtype_classify;
 import com.pipe09.OnlineShop.Repository.DtypeRepository;
+import com.pipe09.OnlineShop.Repository.ItemRepository;
+import com.pipe09.OnlineShop.Repository.ItemV2Repository;
 import com.pipe09.OnlineShop.Repository.ShopCartRepository;
 import com.pipe09.OnlineShop.Service.MailService;
+import com.pipe09.OnlineShop.Utils.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -15,6 +20,10 @@ import javax.mail.MessagingException;
 import javax.persistence.EntityManager;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 
@@ -27,8 +36,9 @@ public class InitSerivce {
     private final EntityManager em;
     private final ShopCartRepository repository;
     private final MailService mailservice;
-    private final DtypeRepository drepository;
-    @Transactional
+    private final DtypeRepository dtypeRepository;
+    private final ItemRepository itemRepository;
+    private final ItemV2Repository itemV2Repository;
     public void dbInit() throws MessagingException, IOException {
         /*
         dType dType = new dType("테스트");
@@ -185,6 +195,41 @@ public class InitSerivce {
         em.persist(newOrder);
 
          */
+
+
+
+
+
+
+
+    }
+
+    public void ItemVer2Migration(){
+        /*
+        List<Item> itemList = itemRepository.findAll( 0,45);
+        int idx = 0;
+        itemList.stream().forEach( i -> System.out.println( i.getDTYPE() ) );
+        HashSet< String > dtypeMapper = itemList.stream().map( i -> i.getDTYPE() ).collect( Collectors.toCollection( HashSet::new ) );
+        System.out.println( dtypeMapper.toString() );
+        HashMap< String, dType > mapper = new HashMap<>();
+        for( String type: dtypeMapper ){
+            String name = Utils.translateDtype( type ); // 번역
+            dType translated = new dType( name ); // 객체 생성
+            dtypeRepository.save( translated );
+            mapper.put( type, translated );
+        }
+
+        List< Itemv2 > newitemList = itemList.stream().map( Itemv2::new ).collect( Collectors.toList());
+
+        itemList.stream().forEach( i -> {
+            Itemv2 newitem = new Itemv2( i );
+            newitem.setDType( mapper.get( i.getDTYPE() ) );
+
+            itemV2Repository.save( newitem );
+        });
+
+     */
+
 
 
 

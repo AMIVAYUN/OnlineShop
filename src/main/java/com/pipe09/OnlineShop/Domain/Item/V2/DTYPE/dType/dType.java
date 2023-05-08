@@ -2,6 +2,7 @@ package com.pipe09.OnlineShop.Domain.Item.V2.DTYPE.dType;
 
 
 import com.pipe09.OnlineShop.Domain.Item.V2.DTYPE.Itemv2;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -9,46 +10,36 @@ import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
+import java.util.List;
 
 
 @Entity
-@RequiredArgsConstructor
 @Getter
 @Setter
+@Table( name = "dtype")
+@RequiredArgsConstructor
 public class dType {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
+    @Column( name = "dtype_id" )
+    private Long dtype_id;
 
-    @NotNull
+
+    @Column( unique = true, nullable = false )
     private String name;
 
-    @ManyToOne( cascade = CascadeType.ALL ,fetch = FetchType.LAZY )
-    @Nullable
-    private dType parent_id;
-
-    @Enumerated( EnumType.STRING )
+    @Enumerated( EnumType.STRING ) // 만들어짐 , 삭제
     private dType_Status dTypeStatus;
 
-
-    @Enumerated( EnumType.STRING )
-    private dtype_classify classifier;
     //@Enumerated( EnunType.)
     //@OneToOne( mappedBy = "DTYPE")
-    @OneToOne( mappedBy = "DTYPE")
-    private Itemv2 itemv2;
+    @OneToMany( mappedBy = "dType")
+    private List<Itemv2 > itemv2;
 
     public dType( String name ){
         this.name = name;
         this.dTypeStatus = dType_Status.ACTIVATED;
-        this.classifier = dtype_classify.BIG;
     }
-    public dType( String name, dType parent,dtype_classify classifier ){
-        this.name = name;
-        this.parent_id = parent;
-        this.classifier = classifier;
-        this.dTypeStatus = dType_Status.ACTIVATED;
-    }
+
 }

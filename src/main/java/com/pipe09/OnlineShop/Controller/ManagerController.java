@@ -23,8 +23,8 @@ public class ManagerController {
     }
     @GetMapping("/admin/manage/register-item")
     public String regitemAccess(){
-        return "fragments/private/Pop_Regitem";
-    }
+        return "fragments/private/Pop_Regitem2";
+    } // v1 Pop_regitem1
     @GetMapping(path = "/admin/manage")
     public String managerAccess(Model model){
         model.addAttribute("version",version);

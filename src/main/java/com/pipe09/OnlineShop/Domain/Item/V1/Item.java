@@ -8,6 +8,7 @@ import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
 import com.pipe09.OnlineShop.Utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Table(name="ITEM")
+@Slf4j
 @DiscriminatorColumn(name = "DTYPE")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Item {
@@ -61,8 +63,8 @@ public class Item {
     public void removeStockQuantity(int count){
 
         int rest=this.getStockQuantity()-count;
-        System.out.println("재고:"+this.getStockQuantity()+", 수량: "+count);
-        System.out.println(rest);
+        log.info("재고:"+this.getStockQuantity()+", 수량: "+count);
+
         if(rest<0){
             throw new StockLackException("재고 수량이 부족합니다");
         }

@@ -21,9 +21,9 @@ function getItem(offset,limit){
     url = "./api/v2/items/all?offset="+offset+"&limit="+limit;
     Cleaning($("#shoplist"));
     fetch( url,{method:"GET"}).then((response) => {
-        if(response.status==200){
+        if( response.status==200 ){
+            return response.json();
 
-            return response.json()
         }else if( response.status == 204 ){
 
             alert("더 이상 존재하지 않습니다.");
@@ -110,7 +110,7 @@ async function SessionCheck(){
     //shoplist 세팅 포함
     var baseurl=window.location;
 
-    const res1=await fetch("/api/v1/members/session",{method:"GET"}).then(response => response.json());
+    const res1= fetch("/api/v1/members/session",{method:"GET"}).then(response => response.json());
     if(!res1.isauth){
         return false;
     }

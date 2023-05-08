@@ -1,0 +1,69 @@
+	<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>상품 등록</title>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="../../css/popRegitem.css">
+		<meta name="_csrf" th:content="${_csrf.token}">
+		<meta name="_csrf_header" th:content="${_csrf.headerName}">
+		<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+		<script src="../../js/popRegitem.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			
+			<ul class="write_lists">
+				<li>상품명</li>
+				<li class="textbox-title">카테고리</li>
+				<li id="quantity">재고 수량</li>
+				<li>가격</li>
+				<li>무게</li>
+				<li id="information">상품 설명</li>
+				<li>제조국가</li>
+				<li>제조사</li>
+				<li>업로드</li>
+			</ul>
+			<ul class="list_textbox">
+				<li><input type="text"></li>
+				<li>
+					<div class="tab">
+						<ul class="tab-nav">
+							<li><a href="#tab01">기존 카테고리</a></li>
+							<li><a href="#tab02">카테고리 생성</a></li>
+						</ul>
+						<div class="tab-content">
+							<div id="tab01">
+								<select class="categories_dropdown" id="item_chart">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+								</select>
+							</div>
+							<div id="tab02">
+								<input id="categories_textbox" type="text" name="">
+								<input id="btn_create"type="button"  value="생성">
+							</div>
+						</div>
+					</div>
+				</li>
+				<li><input type="text"></li>
+				<li><input type="text"></li>
+				<li><input type="text"></li>
+				<li><textarea></textarea></li>
+				<li><input type="text"></li>
+				<li><input type="text"></li>
+				<li><input type="file" id="file_upload"></li>
+			</ul>
+			<div>
+				<p  class="btn" >
+					<a class="btn_layout" id="btn_cancel" href="">취     소</a>
+					<a class="btn_layout" id="btn_save" href="">등     록</a>
+				</p>
+			</div>
+		</div>
+		
+
+	</body>
+</html>

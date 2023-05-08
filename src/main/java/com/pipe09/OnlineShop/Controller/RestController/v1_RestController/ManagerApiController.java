@@ -1,4 +1,4 @@
-package com.pipe09.OnlineShop.Controller.ApiController;
+package com.pipe09.OnlineShop.Controller.RestController.v1_RestController;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -12,17 +12,16 @@ import com.pipe09.OnlineShop.Dto.Board.UpdateNoticeDto;
 import com.pipe09.OnlineShop.Dto.Item.*;
 import com.pipe09.OnlineShop.Dto.Board.NoticeDto;
 import com.pipe09.OnlineShop.Dto.SimpleLongArrayDto;
+import com.pipe09.OnlineShop.Dto.dType.R_dTypeDto;
 import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
-import com.pipe09.OnlineShop.Service.BoardService;
-import com.pipe09.OnlineShop.Service.ItemService;
-import com.pipe09.OnlineShop.Service.MemberService;
-import com.pipe09.OnlineShop.Service.OrderService;
+import com.pipe09.OnlineShop.Service.*;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
@@ -48,18 +47,7 @@ public class ManagerApiController {
     private final OrderService orderService;
     private final MemberService memberService;
     private final BoardService boardService;
-
-    @ApiOperation( value = "로그 아웃" , notes = "LOGOUT API" )
-    @GetMapping("/logout")
-    public RedirectView logout(HttpServletRequest request, HttpServletResponse response) throws Exception{
-        Authentication auth= SecurityContextHolder.getContext().getAuthentication();
-        if(auth!=null){
-            new SecurityContextLogoutHandler().logout(request, response, auth);
-
-
-        }
-        return new RedirectView("/");
-    }
+    private final DtypeService dtypeService;
 
 
     //TODO 이미지 중복처리
@@ -84,45 +72,6 @@ public class ManagerApiController {
      */
 
 
-
-    @ApiOperation( value = " 제품 등록 " , notes = " ENROLL ITEM API" )
-    @PostMapping(path = "/admin/manage/items/register-item.do")
-    public ResponseEntity<String> postItemV2(@RequestParam(value = "body")String obj,@RequestPart(value = "file") @Nullable MultipartFile file) throws JsonProcessingException {
-        ObjectMapper objectMapper=new ObjectMapper().registerModule(new SimpleModule());
-        R_itemDtoV2 dto =objectMapper.readValue(obj,R_itemDtoV2.class);
-        /*
-        DefaultMapper<Item> mapper=new DefaultMapper<>(ItemFactory.makingItemBytype(dto.getDtype()));
-
-         */
-        ImgPathDto img=new ImgPathDto(null,null);
-
-        if(file != null){
-            img =itemService.MakingImgfile(file);
-            if( img.getName() == null ){
-                return new ResponseEntity<>(img.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-            dto.setImgSrc("img/upload/"+img.getName());
-        }
-        else{
-            return new ResponseEntity<>("이미지가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        Item item=Item.fromRegv2(dto);
-        item.setStatus(Item_status.SALE);
-        try {
-            Long saveid=itemService.save(item);
-
-            return new ResponseEntity(""+saveid+"번째 제품 저장에 성공하였습니다.",HttpStatus.OK);
-
-        }catch(Exception e) {
-            log.info(e.toString());
-        }
-        return new ResponseEntity("DB 저장에 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-
-
-
-
     /*
     @PostMapping("/api/v1/register-faq.do")
     public ResponseEntity<Notice> regfaqAccess(@Valid NoticeDto dto){
@@ -144,37 +93,39 @@ public class ManagerApiController {
     }
 
      */
-    @ApiOperation( value = " 공지사항 등록 " , notes = " ENROLL FAQ API" )
+    @ApiOperation(value = " 공지사항 등록 ", notes = " ENROLL FAQ API")
     @PostMapping("/admin/manage/register-faq.do")
-    public ResponseEntity reg_faq(@Valid @RequestBody NoticeDto dto){
-        try{
-            if(dto.getName()==null||dto.getDescription()==null){
+    public ResponseEntity reg_faq(@Valid @RequestBody NoticeDto dto) {
+        try {
+            if (dto.getName() == null || dto.getDescription() == null) {
                 return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            Notice newEntity=Notice.createNotice(dto.getName(),dto.getDescription(), LocalDate.now());
-            Long id=boardService.save(newEntity);
-            log.info("admin"+id+"번째 게시글 등록");
+            Notice newEntity = Notice.createNotice(dto.getName(), dto.getDescription(), LocalDate.now());
+            Long id = boardService.save(newEntity);
+            log.info("admin" + id + "번째 게시글 등록");
 
-        }catch(Exception e){
+        } catch (Exception e) {
             log.info(e.toString());
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity(HttpStatus.OK);
     }
-    @ApiOperation( value = " 공지사항 삭제 " , notes = " DELETE FAQ API" )
+
+    @ApiOperation(value = " 공지사항 삭제 ", notes = " DELETE FAQ API")
     @DeleteMapping("/admin/manage/delete-faq.do")
-    public ResponseEntity delfaqv2(@RequestBody SimpleLongArrayDto dto){
-        try{
+    public ResponseEntity delfaqv2(@RequestBody SimpleLongArrayDto dto) {
+        try {
             dto.getValues().stream().forEach(value -> {
                 boardService.RemoveByID(value);
             });
 
-        }catch(Exception e){
+        } catch (Exception e) {
             log.info(e.toString());
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity(HttpStatus.OK);
     }
+
     /*
     @DeleteMapping(path = "/api/v1/delete-faq.do")
     public ResponseEntity delfaq(@RequestBody NoticeDto dto){
@@ -191,17 +142,18 @@ public class ManagerApiController {
     }
 
      */
-    @ApiOperation( value = " 공지사항 수정 " , notes = " UPDATE FAQ API" )
-    @PutMapping(path="/admin/manage/update-faq.do")
-    public ResponseEntity updatefaqv2(@RequestBody List<UpdateNoticeDto> dtoList){
-        try{
-            dtoList.stream().forEach(dto -> boardService.update(dto.getNotice_id(),dto.getName(),dto.getDescription()));
-        }catch (Exception e){
+    @ApiOperation(value = " 공지사항 수정 ", notes = " UPDATE FAQ API")
+    @PutMapping(path = "/admin/manage/update-faq.do")
+    public ResponseEntity updatefaqv2(@RequestBody List<UpdateNoticeDto> dtoList) {
+        try {
+            dtoList.stream().forEach(dto -> boardService.update(dto.getNotice_id(), dto.getName(), dto.getDescription()));
+        } catch (Exception e) {
             log.info(e.toString());
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity(HttpStatus.OK);
     }
+
     /*
     @PutMapping(path="api/v1/faq/{id}/update-faq.do")
     public ResponseEntity<String> updatefaq(@PathVariable Long id,@RequestBody NoticeDto dto){
@@ -255,9 +207,42 @@ public class ManagerApiController {
     }
 
      */
-    @ApiOperation( value = " 제품 삭제 " , notes = " DELETE ITEMS API" )
+    @ApiOperation(value = " 제품 등록 ", notes = " ENROLL ITEM API")
+    @PostMapping(path = "/admin/manage/items/register-item.do")
+    public ResponseEntity<String> regItemV2(@RequestParam(value = "body") String obj, @RequestPart(value = "file") @Nullable MultipartFile file) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper().registerModule(new SimpleModule());
+        R_itemDtoV2 dto = objectMapper.readValue(obj, R_itemDtoV2.class);
+        /*
+        DefaultMapper<Item> mapper=new DefaultMapper<>(ItemFactory.makingItemBytype(dto.getDtype()));
+
+         */
+        ImgPathDto img = new ImgPathDto(null, null);
+
+        if (file != null) {
+            img = itemService.MakingImgfile(file);
+            if (img.getName() == null) {
+                return new ResponseEntity<>(img.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+            dto.setImgSrc("img/upload/" + img.getName());
+        } else {
+            return new ResponseEntity<>("이미지가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        Item item = Item.fromRegv2(dto);
+        item.setStatus(Item_status.SALE);
+        try {
+            Long saveid = itemService.save(item);
+
+            return new ResponseEntity("" + saveid + "번째 제품 저장에 성공하였습니다.", HttpStatus.OK);
+
+        } catch (Exception e) {
+            log.info(e.toString());
+        }
+        return new ResponseEntity("DB 저장에 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ApiOperation(value = " 제품 삭제 ", notes = " DELETE ITEMS API")
     @DeleteMapping("/admin/manage/items/delete-item.do")
-    public ResponseEntity<String> deleteItemV2(@RequestBody Dv2_itemDto dto){
+    public ResponseEntity<String> deleteItemV2(@RequestBody Dv2_itemDto dto) {
 
         dto.getItemIdList().stream().forEach(id -> {
             itemService.removeById(id);
@@ -267,38 +252,62 @@ public class ManagerApiController {
         return new ResponseEntity<String>("삭제가 완료되었습니다.", HttpStatus.OK);
     }
 
-    @ApiOperation( value = " 제품 수정 " , notes = " UPDATE ITEM API " )
+    @ApiOperation(value = " 제품 수정 ", notes = " UPDATE ITEM API ")
     @PutMapping(path = "/admin/manage/items/{id}/update-item.do")
-    public ResponseEntity<String> updateItemV2(@PathVariable Long id, @RequestParam(value = "body")String obj,@RequestPart(value = "file") @Nullable MultipartFile file) {
-        try{
-            ObjectMapper objectMapper=new ObjectMapper().registerModule(new SimpleModule());
-            P_itemDto dto =objectMapper.readValue(obj,P_itemDto.class);
-            DefaultMapper<Item> mapper=new DefaultMapper<>(ItemFactory.makingItemBytype(dto.getDtype()));
-            ImgPathDto img=new ImgPathDto(null,null);
-            Item item=mapper.Translate(dto);
+    public ResponseEntity<String> updateItemV2(@PathVariable Long id, @RequestParam(value = "body") String obj, @RequestPart(value = "file") @Nullable MultipartFile file) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper().registerModule(new SimpleModule());
+            P_itemDto dto = objectMapper.readValue(obj, P_itemDto.class);
+            DefaultMapper<Item> mapper = new DefaultMapper<>(ItemFactory.makingItemBytype(dto.getDtype()));
+            ImgPathDto img = new ImgPathDto(null, null);
+            Item item = mapper.Translate(dto);
             item.setItem_ID(id);
-            if(file != null){
-                img =itemService.MakingImgfile(file);
-                item.setImgSrc("img/upload/"+img.getName());
+            if (file != null) {
+                img = itemService.MakingImgfile(file);
+                item.setImgSrc("img/upload/" + img.getName());
             }
-            Long putid= itemService.updateItem(item);
+            Long putid = itemService.updateItem(item);
 
-            if((img.getMsg()==null && putid !=null)){
-                return new ResponseEntity<String>("수정에 성공하였습니다.",HttpStatus.OK);
+            if ((img.getMsg() == null && putid != null)) {
+                return new ResponseEntity<String>("수정에 성공하였습니다.", HttpStatus.OK);
+            } else if (img.getMsg() != null) {
+                return new ResponseEntity<String>(img.getMsg(), HttpStatus.INTERNAL_SERVER_ERROR);
+            } else {
+                return new ResponseEntity<String>("데이터 변환간 에러가 발생하였습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            else if (img.getMsg() != null){
-                return new ResponseEntity<String>(img.getMsg(),HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-            else{
-                return new ResponseEntity<String>("데이터 변환간 에러가 발생하였습니다.",HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }catch(Exception e){
-            return new ResponseEntity("서버 내부 에러 발생",HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            return new ResponseEntity("서버 내부 에러 발생", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }
 
 
+    // Dtype V2 추가
+    @ApiOperation( value = " 카테고리 등록 " , notes = " REGISTER Dtype " )
+    @PostMapping( "/api/v2/dtypes/register-dType.do")
+    public ResponseEntity registerDtype( @RequestBody R_dTypeDto dto ){
+        log.info( SecurityContextHolder.getContext().getAuthentication().getName() + " 께서 dtype: " + dto.getName() +" 을 생성 시도 하셨습니다." );
+        if( dto.getName() == null ){
+            return new ResponseEntity( HttpStatus.BAD_REQUEST );
+        }
+        try{
+            dtypeService.createDtype( dto.getName() );
+            return new ResponseEntity( HttpStatus.OK );
+
+        }catch( DataIntegrityViolationException e ){
+            return new ResponseEntity( HttpStatus.EXPECTATION_FAILED );
+
+        }catch( Exception e ){
+            return new ResponseEntity( HttpStatus.INTERNAL_SERVER_ERROR );
+        }
+
+
+
+    }
+
+
 }
+
+
 
 

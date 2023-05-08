@@ -15,7 +15,7 @@ import static java.util.stream.Collectors.partitioningBy;
 @Slf4j
 public class DefaultMapper<R> implements Mapper{
     private R object;
-    Strategy strategy;
+
     HashMap<String, Optional<Object>>mapTable=new HashMap<>();
 
     public DefaultMapper(R r){
@@ -27,13 +27,13 @@ public class DefaultMapper<R> implements Mapper{
             return (R)constructor.newInstance();
 
         }catch (InvocationTargetException e) {
-            e.printStackTrace();
+            log.info( e.toString() );
         } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+            log.info( e.toString() );
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            log.info( e.toString() );
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            log.info( e.toString() );
         }
         return null;
 
@@ -79,7 +79,7 @@ public class DefaultMapper<R> implements Mapper{
             }catch (IllegalAccessException | InvocationTargetException e){
                 log.info(e.toString());
             }catch (NullPointerException e){
-
+                log.info( e.toString() );
             }
 
 

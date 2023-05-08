@@ -158,18 +158,20 @@ function emailProveSetting(){
             $("#code").attr("disabled",false);
             var baseurl=window.location;
             var url=baseurl .protocol +"//"+baseurl .host+"/api/v2/mails/confirm?email="+$("#emailvalue").val();
-            const res=await fetch(url).then(res => res.text());
-            if(res=="1"){
-                alert("이메일이 전송되었습니다.");
-                $("#email-identify").text("코드 인증");
-                $("#emailvalue").attr("disabled",true);
-                $("#email-identify").off("click")
-                $("#email-identify").on("click",page2);
-            }else{
-                alert("이메일 전송에 실패하였습니다. 개발팀에 문의해주세요.");
-                $("#code").attr("disabled",true);
+            await fetch(url).then(res => {
+                if( res.status == 200 ){
+                    alert("이메일이 전송되었습니다.");
+                    $("#email-identify").text("코드 인증");
+                    $("#emailvalue").attr("disabled",true);
+                    $("#email-identify").off("click")
+                    $("#email-identify").on("click",page2);
+                }else{
+                    alert("이메일 전송에 실패하였습니다. 개발팀에 문의해주세요.");
+                    $("#code").attr("disabled",true);
 
-            }
+                }
+            });
+
 
         }
     })
@@ -186,6 +188,7 @@ async function page2(){
         location.reload();
     }
     if(res.result){
+
         alert("이메일 인증에 성공하셨습니다.");
         $("#code").attr("disabled",true);
         sessionStorage.setItem("email",true);

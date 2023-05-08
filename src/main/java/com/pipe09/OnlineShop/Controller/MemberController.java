@@ -61,13 +61,15 @@ public class MemberController {
 
 
 
-
+    /*
     @PostMapping("/loginproc")
     public String login(@Valid MemberDto dto){
         log.info(dto.getUsername()+"로그인 시도");
         service.loadUserByUsername(dto.getUsername());
         return "redirect:/";
     }
+
+     */
 
 
 }

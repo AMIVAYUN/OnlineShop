@@ -1,6 +1,7 @@
 package com.pipe09.OnlineShop.Domain.Item.V2.DTYPE;
 
 
+import com.pipe09.OnlineShop.Domain.Item.V1.Item;
 import com.pipe09.OnlineShop.Domain.Item.V1.ItemFactory;
 import com.pipe09.OnlineShop.Domain.Item.V1.Item_status;
 import com.pipe09.OnlineShop.Domain.Item.V2.DTYPE.dType.dType;
@@ -20,29 +21,31 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@Table(name="ITEM2")
+@Table(name="ITEMv2")
 @RequiredArgsConstructor
 //@DiscriminatorColumn(name = "DTYPE")
 //@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Itemv2 {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
     private Long Item_ID;
 
 
-    private String Name;
-    private int Price;
-    private int StockQuantity;
+    private String name;
+    private int price;
+    private Integer stockQuantity; // 중요
     @Lob
-    private String Description;
+    private String description;
     ////
-    private int Weight;
-    private String MadeIn;
-    private String ManufacturedCompany;
+    private int weight;
+    private String madeIn;
+    private String manufacturedCompany;
     public String imgSrc;
-    @OneToOne( cascade = CascadeType.ALL )
-    private dType DTYPE;
+    @ManyToOne
+    @JoinColumn( name = "dtype_id", nullable = false )
+    private dType dType;
+
     @Enumerated(EnumType.STRING)
     private Item_status status;
 
@@ -51,31 +54,52 @@ public class Itemv2 {
     private int countofItems;
 
 
+
+
     public Itemv2( String name, Integer price, Integer stockQuantity, String desc, Integer weight, String madeIn, String manufacturedCompany, String imgSrc, dType dType){
-        this.Name = name;
-        this.Price = price;
-        this.StockQuantity = stockQuantity;
-        this.Description = desc;
-        this.Weight = weight;
-        this.MadeIn = madeIn;
-        this.ManufacturedCompany = manufacturedCompany;
+        this.name = name;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
+        this.description = desc;
+        this.weight = weight;
+        this.madeIn = madeIn;
+        this.manufacturedCompany = manufacturedCompany;
         this.imgSrc = imgSrc;
-        this.DTYPE = dType;
+        this.dType = dType;
         this.status = Item_status.SALE;
     }
 
-    public void removeStockQuantity(int count){
 
-        int rest=this.getStockQuantity()-count;
-        System.out.println("재고:"+this.getStockQuantity()+", 수량: "+count);
-        System.out.println(rest);
-        if(rest<0){
-            throw new StockLackException("재고 수량이 부족합니다");
+
+    public void removeStockQuantity(int count){
+        if( this.getStockQuantity() < count) {
+            throw new StockLackException();
         }
-        this.setStockQuantity(rest);
+        else{
+            this.stockQuantity-= count;
+        }
+
     }
     public void addStockQuantity(int count){
-        this.StockQuantity+=count;
+        this.stockQuantity+=count;
+    }
+
+    // For Migration
+    public Itemv2( Item item ){
+        this.name = item.getName();
+        this.status = item.getStatus();
+        this.stockQuantity = item.getStockQuantity();
+
+        //this.dType = new dType( Utils.translateDtype( item.getDTYPE() ) );
+        this.madeIn = item.getMadeIn();
+        this.imgSrc = item.getImgSrc();
+        this.weight = item.getWeight();
+        this.description = item.getDescription();
+        this.manufacturedCompany = item.getManufacturedCompany();
+        this.price = item.getPrice();
+
+
+
     }
     /** 도메인 정재 */
     /*

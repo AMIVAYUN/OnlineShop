@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -17,20 +18,21 @@ public class DtypeService {
 
 
     @Transactional
-    public Long createDtype(String name, Integer optionNum, String parentName, dtype_classify classifier){
-        dType newdType;
-        Long id;
-        switch ( optionNum ){
-            default:
-                dType pdType = repository.findByname( parentName );
-                newdType = new dType( name, pdType, classifier );
-                id = repository.save( newdType );
-                return id;
-            case 0:
-                newdType = new dType( name );
-                id = repository.save( newdType );
-                return id;
+    public Long createDtype(String name ){
 
-        }
+        dType newdType = new dType( name );
+        Long id = repository.save( newdType );
+        return id;
+
+
+    }
+
+    @Transactional
+    public List<dType> findAll(){
+
+        List<dType> dTypeList = repository.findAll();
+
+        return dTypeList;
+
     }
 }

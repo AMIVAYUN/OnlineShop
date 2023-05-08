@@ -121,14 +121,12 @@ public class OrderService {
             }else{
                 findItem=shopItemRepository.findShopItemByShopItemId(item.getItem_id()).getItem();
             }
-            try{
-                log.info("재고:"+findItem.getStockQuantity());
-                log.info("수량:"+item.getCount());
-                System.out.println(findItem);
-                findItem.removeStockQuantity(item.getCount());
-            }catch(StockLackException e){
-                throw new StockLackException("재고가 부족합니다");
-            }
+
+            log.info("재고:"+findItem.getStockQuantity());
+            log.info("수량:"+item.getCount());
+            System.out.println(findItem);
+
+            findItem.removeStockQuantity(item.getCount());
 
 
 

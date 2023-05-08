@@ -1,4 +1,4 @@
-package com.pipe09.OnlineShop.Controller.ApiController;
+package com.pipe09.OnlineShop.Controller.RestController.v1_RestController;
 
 /*
 import com.pipe09.OnlineShop.Domain.Delivery.Delivery;

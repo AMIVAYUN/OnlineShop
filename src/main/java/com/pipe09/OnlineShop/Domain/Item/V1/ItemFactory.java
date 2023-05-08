@@ -3,7 +3,6 @@ package com.pipe09.OnlineShop.Domain.Item.V1;
 import com.pipe09.OnlineShop.Domain.Item.V1.Typed.*;
 
 public class ItemFactory {
-    //TODO 어째서 걍 리턴은 객체가 그대로 저장 되는데 할당후에 리턴하면 다를까. 자바 고수를 만나면 한번 물어보자.
     public static Item makingItemBytype(String type){
         switch (type){
             case("누수탐지기"):

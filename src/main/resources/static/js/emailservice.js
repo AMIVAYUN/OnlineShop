@@ -78,9 +78,7 @@ function logoSetting(){
 async function sendmail(){
     var baseurl=window.location;
     const csrfToken = $('meta[name="_csrf"]').attr('content');
-    let obj= {
 
-    }
 
     if(confirm("전송하시겠습니까?")){
         const res=await fetch("/api/v2/mails/post.do",{method:"post",headers:{'Content-Type': 'application/json','X-CSRF-TOKEN': csrfToken},
@@ -91,12 +89,15 @@ async function sendmail(){
                 "phonenum":$("#phone1").val()+"-"+$("#phone2").val()+"-"+$("#phone3").val(),
                 "writtendate":new Date()
             })
-        }).then(response => response.text())
+        }).then(response => {
+            if( response.status == 200 ){
+                alert( "전송에 성공하였습니다" );
+                location.assign((baseurl .protocol +"//"+baseurl .host));
+            }else{
+                alert( "전송에 실패하셨습니다. 다시 시도해주세요");
+            }
+        })
 
-        if( res == "200"){
-            alert( "전송에 성공하였습니다" );
-            location.assign((baseurl .protocol +"//"+baseurl .host));
-        }
 
 
 

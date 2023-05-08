@@ -80,4 +80,34 @@ public class Utils {
         }
     }
 
+    /**
+     * for Migration
+     *
+     */
+
+    public static String translateDtype( String type ){
+        switch ( type ){
+            case "L":
+                return "누수탐지기";
+            case "S":
+                return "하수관청소기";
+            case "G":
+                return "글라인더";
+            case "E":
+                return "내시경";
+            case "C":
+                return "커터";
+            case "N" :
+                return "니퍼";
+            case "W":
+                return "렌치";
+            case "H":
+                return "해머";
+            case "D":
+                return "드릴";
+            default:
+                return "분류 없음";
+        }
+    }
+
 }

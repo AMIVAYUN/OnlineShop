@@ -44,7 +44,7 @@ function listSetting(index){
 function defaultSetting(){
 
 }
-async function ItemlistSetting(){
+function ItemlistSetting(){
     firstGrid = new ax5.ui.grid();
     var baseurl=window.location
     firstGrid.setConfig({
@@ -112,7 +112,7 @@ async function ItemlistSetting(){
         ]
     });
 
-    await fetch("/api/v2/items/all?offset="+0+"&limit="+500).then(response => response.json()
+    fetch("/api/v2/items/all?offset="+0+"&limit="+500).then(response => response.json()
         .then(
             (res) =>{
                 var list=[];
@@ -127,7 +127,7 @@ async function ItemlistSetting(){
 
 
 }
-async function FaqlistSetting(){
+function FaqlistSetting(){
     firstGrid = new ax5.ui.grid();
 
     firstGrid.setConfig({
@@ -142,7 +142,7 @@ async function FaqlistSetting(){
             
         ]
     });
-    await fetch("/api/v2/faq/all",{method:"get"}).then((response) => response.json()).then(
+    fetch("/api/v2/faq/all",{method:"get"}).then((response) => response.json()).then(
         (data) => {
             var list=[];
             var i=0;
@@ -172,11 +172,11 @@ function putNotice(){
         updatePost(list);
     }
 }
-async function updatePost(obj){
+function updatePost(obj){
 
     var url="/admin/manage/update-faq.do"
 
-    await fetch(url,{
+    fetch(url,{
         method:"put",
         headers: {'Content-Type': 'application/json','X-CSRF-TOKEN': csrfToken},
         body:JSON.stringify(obj)
@@ -197,7 +197,7 @@ function registerNotice(){
     popup.focus();
 
 }
-async function deleteNotice() {
+function deleteNotice() {
     list=[];
     var selected=firstGrid.getList("selected");
     $.each(selected,function(i){
@@ -210,7 +210,7 @@ async function deleteNotice() {
     //name:$(this).find("#name").text(),description:$(this).find("#desc").text(),date:$(this).find("#date")
     var url = "/admin/manage/delete-faq.do"
 
-    const res=await fetch(url, {
+    const res=fetch(url, {
         method: "delete",
         headers: {'Content-Type': 'application/json', 'Accept': 'application/json;charset=utf-8','X-CSRF-TOKEN': csrfToken},
         body: JSON.stringify(obj)
@@ -228,7 +228,7 @@ async function deleteNotice() {
 
 }
 
-async function OrderlistSetting(){
+function OrderlistSetting(){
     firstGrid = new ax5.ui.grid();
 
     firstGrid.setConfig({
@@ -287,7 +287,7 @@ async function OrderlistSetting(){
 
     });
 
-    await fetch("/api/v1/orders/all?offset="+0+"&limit="+200).then(response => response.json()).then(
+    fetch("/api/v1/orders/all?offset="+0+"&limit="+200).then(response => response.json()).then(
         (res) => {
             var list=[];
 
@@ -308,9 +308,9 @@ async function OrderlistSetting(){
 
 
 }
-async function register_transPort(){
+function register_transPort(){
     var selected = firstGrid.getList("selected");
-    await fetch("/admin/manage/orders/registerTransPort?transPort="+selected[0]['order_transport_doc']+"&order_id="+selected[0]['order_Id'],{method:"put",headers:{
+    fetch("/admin/manage/orders/registerTransPort?transPort="+selected[0]['order_transport_doc']+"&order_id="+selected[0]['order_Id'],{method:"put",headers:{
         'X-CSRF-TOKEN': csrfToken
         }}).then(response => {
             if(response.status==200){
@@ -339,7 +339,7 @@ function getOption(status){
 
     }
 }
-async function putOrder(){
+function putOrder(){
     var selected=firstGrid.getList("selected");
 
     let obj={
@@ -349,7 +349,7 @@ async function putOrder(){
     const option = getOption(selected[0]['order_status']);
 
     if(selected.length==1){
-        await fetch("/admin/manage/orders/changeStat?option="+option,{
+        fetch("/admin/manage/orders/changeStat?option="+option,{
             method:"put",headers:{'Content-Type':'application/json','X-CSRF-TOKEN': csrfToken},body:JSON.stringify(obj)
         }).then(res=> {
             if(res.status==200){
@@ -363,12 +363,12 @@ async function putOrder(){
     }
 
 }
-async function ChangeOrderstoDel(id){
+function ChangeOrderstoDel(id){
     let obj={
         "order_id":id
     }
     var option = 0;
-    await fetch("/admin/manage/orders/upto-delivery?option="+option,{
+    fetch("/admin/manage/orders/upto-delivery?option="+option,{
         method:"put",headers:{'Content-Type':'application/json','X-CSRF-TOKEN': csrfToken},body:JSON.stringify(obj)
     }).then(res=> {
         if(res.status==200){
@@ -378,12 +378,12 @@ async function ChangeOrderstoDel(id){
         }
     })
 }
-async function ChangeOrderstoComp(id){
+function ChangeOrderstoComp(id){
     let obj={
         "order_id":id
     }
     var option = 1;
-    await fetch("/admin/manage/orders/upto-delivery?option="+option,{
+    fetch("/admin/manage/orders/upto-delivery?option="+option,{
         method:"put",headers:{'Content-Type':'application/json','X-CSRF-TOKEN': csrfToken},body:JSON.stringify(obj)
     }).then(res=> {
         if(res.status==200){
@@ -393,7 +393,7 @@ async function ChangeOrderstoComp(id){
         }
     })
 }
-async function MemberlistSetting(){
+function MemberlistSetting(){
     firstGrid = new ax5.ui.grid();
 
     firstGrid.setConfig({
@@ -409,14 +409,20 @@ async function MemberlistSetting(){
             
         ]
     });
-    var list=[];
-    const res=await fetch("/api/v1/members/all?offset="+0+"&limit="+50).then(response => response.json())
-    $.each(res,function(i){
-        list.push({member_id:res[i].member_id,member_name:res[i].name,member_role:res[i].roleType,member_username:res[i].username,member_email:res[i].email,member_Tel:res[i].phone_num,member_date:res[i].enrollddate})
-    })
-    firstGrid.setData(list);
+
+    fetch("/api/v1/members/all?offset="+0+"&limit="+50)
+        .then(response => response.json())
+        .then( ( res ) => {
+            var list=[];
+            $.each(res,function(i){
+                list.push({member_id:res[i].member_id,member_name:res[i].name,member_role:res[i].roleType,member_username:res[i].username,member_email:res[i].email,member_Tel:res[i].phone_num,member_date:res[i].enrollddate})
+            })
+            firstGrid.setData(list);
+        })
+
+
 }
-async function deleteItems(){
+function deleteItems(){
     var selected=getItemIDlists(firstGrid.getList("selected"));
     if(selected.length==0){
         alert("삭제하실 제품을 선택해주세요");
@@ -425,7 +431,7 @@ async function deleteItems(){
     let obj={
         "itemIdList":selected
     }
-    const res=await fetch("/admin/manage/items/delete-item.do",{method:"delete",headers:{'Content-Type':'application/json','X-CSRF-TOKEN': csrfToken},body:JSON.stringify(obj)}).then(response => response.text());
+    const res=fetch("/admin/manage/items/delete-item.do",{method:"delete",headers:{'Content-Type':'application/json','X-CSRF-TOKEN': csrfToken},body:JSON.stringify(obj)}).then(response => response.text());
     alert(res);
     ItemlistSetting();
 
@@ -515,10 +521,10 @@ function getReturnValue(returnValue) {
     updateItemSequence(selected[0].item_id,formData);
 
 }
-async function updateItemSequence(id,formData){
+function updateItemSequence(id,formData){
     var url="/admin/manage/items/"+id+"/update-item.do"
 
-    await fetch(url,{method:"put",headers:{'X-CSRF-TOKEN': csrfToken},body:formData}).then(response => response.text()).then(
+    fetch(url,{method:"put",headers:{'X-CSRF-TOKEN': csrfToken},body:formData}).then(response => response.text()).then(
         (res) => {
             alert(res);
 

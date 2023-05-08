@@ -82,7 +82,7 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
                 .useDefaultResponseMessages(true)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.pipe09.OnlineShop.Controller.ApiController"))
+                .apis(RequestHandlerSelectors.basePackage("com.pipe09.OnlineShop.Controller.RestController.v2_RestController"))
                 .paths(PathSelectors.any())
                 .build();
 

@@ -26,9 +26,7 @@ public class ItemRepository {
 
         return item.getItem_ID();
     }
-    //앞으론 까먹지말고 매 레포지토리에 적용하도록 하자.
-    public void clear() { em.clear();}
-    public void flush() { em.flush(); }
+
     public Item findItem(Long id){
         return em.find(Item.class,id);
     }

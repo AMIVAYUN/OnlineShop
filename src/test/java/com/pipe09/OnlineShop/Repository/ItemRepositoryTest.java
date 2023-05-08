@@ -42,7 +42,7 @@ public class ItemRepositoryTest {
         System.out.println(" ItemRepository Test: TestCase: [ item( LeakDetector ){ name: testman stock: 10 } ]");
         this.testnum = repository.save( item );
         System.out.println( " 저장된 엔티티 아이디 값: " +  testnum );
-        repository.flush();
+
 
     }
     @After

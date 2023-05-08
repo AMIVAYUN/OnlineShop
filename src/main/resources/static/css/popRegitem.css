@@ -1,0 +1,190 @@
+/* CSS Reset */
+html, div, ul, li, p {
+	margin: 0;
+	padding: 0;
+}
+html{
+	/* width: 800px; */
+}
+
+body{
+	width: 610px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+ul, li {
+	list-style-type: none;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+
+.clearfix:after{
+	content: '';
+	display: block;
+	clear: both;
+}
+
+.container{
+	width: 100%;
+	padding: 0 auto;
+	margin: 0 auto;
+}
+
+.write_lists{
+	float: left;
+	margin-top: 5px;
+}
+
+.write_lists > li{
+	margin-bottom: 1.6rem;
+	border-bottom: 3px solid #d1d1d1;
+	text-align: justify;
+}
+
+#quantity{
+	margin-top: 4.4rem;
+}
+
+#information{
+	margin-bottom: 19.4rem;
+}
+
+.list_textbox{
+	margin-top: 25px;
+	margin-left: 100px;
+}
+
+.list_textbox > li{
+	margin-bottom: 20px;
+	display: inline-block;
+}
+
+.textbox-title{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.tab{
+	display: inline-block;
+	width: 508px; 
+	height: 100px;
+}
+
+.tab-nav{
+	font-size: 0; 
+	width: auto; 
+	border: 1px solid #ddd;
+}
+
+.tab-nav li{
+	display: inline-block;  
+	height: 35px; 
+	text-align: center; 
+	border-right: 1px solid #ddd;
+}
+
+.tab-nav li a:before{
+	content: ""; 
+	position: absolute; 
+	left: 0; 
+	top: 0px; 
+	width: 100%; 
+	height: 3px; 
+}
+
+.tab-nav li a.active:before{
+	background: dodgerblue;
+}
+
+.tab-nav li a.active{
+	border-bottom: 1px solid #fff;
+}
+
+.tab-nav li a{
+	position: relative;
+	display: block;
+	background: #f8f8f8;
+	color: #000; 
+	padding: 0 30px; 
+	line-height: 35px; 
+	text-decoration: none; 
+	font-size: 13px;
+}
+
+.tab-nav li a:hover,
+.tab-nav li a.active{
+	background: #fff; 
+	color: dodgerblue;
+}
+
+.tab-content{
+	padding: 20px; 
+	height: 25px; 
+	border: 1px solid #ddd; 
+	border-top: none;
+}
+
+.categories_dropdown{
+	width: 200px;
+	height: 22px;
+}
+#categories_textbox{
+	width: 185px;
+	height: 20px;
+	vertical-align: middle;
+}
+#btn_create{
+	width: 60px;
+	height: 27px;
+	font-size: 15px;
+	vertical-align: middle;
+}
+
+textarea{
+	width: 500px;
+	height: 300px;
+	resize: none;
+	font-size: 18px;
+}
+input{
+	font-size: 1rem;
+	font-style: none;
+	width: 500px;
+	height: 1.5rem;
+}
+input:focus,
+textarea:focus{
+	outline:2px solid dodgerblue;
+}
+
+#file_upload{
+	margin-top: .3rem;
+	width: 508px;
+	font-size: 14px;
+}
+
+.btn{
+	padding: 8px 15px;
+	margin: 30px auto 50px auto;
+	text-align: center;
+}
+
+.btn_layout{
+	padding: 15px 30px;
+	border-radius: 5px;
+	font-size: 1.1rem;
+}
+
+#btn_cancel{
+	background-color: #d1d1d1;
+}
+
+#btn_save{
+	background-color: dodgerblue;
+	margin-left: 50px;
+}

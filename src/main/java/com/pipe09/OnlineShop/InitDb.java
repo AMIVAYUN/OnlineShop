@@ -19,6 +19,7 @@ public class InitDb {
     public void init() throws MessagingException, IOException {
         initSerivce.dbInit();
         initSerivce.dbInit2();
+        initSerivce.ItemVer2Migration();
 
     }
 

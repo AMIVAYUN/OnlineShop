@@ -1,11 +1,11 @@
-package com.pipe09.OnlineShop.Controller.ApiController;
+package com.pipe09.OnlineShop.Controller.RestController.v1_RestController;
 
 
 import com.pipe09.OnlineShop.Domain.Member.Address;
 import com.pipe09.OnlineShop.Domain.Member.Member;
 import com.pipe09.OnlineShop.Domain.Member.RoleType;
 import com.pipe09.OnlineShop.Domain.Member.UserType;
-import com.pipe09.OnlineShop.Domain.SessionUser;
+
 import com.pipe09.OnlineShop.Dto.MemauthDto;
 import com.pipe09.OnlineShop.Dto.Member.AddressDto;
 import com.pipe09.OnlineShop.Dto.Member.MemberDto;
@@ -24,8 +24,12 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
@@ -48,26 +52,38 @@ public class MemberApiController{
 
 
     }*/
+    @ApiOperation( value = "로그 아웃" , notes = "LOGOUT" )
+    @GetMapping("/logout")
+    public RedirectView logout(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        Authentication auth= SecurityContextHolder.getContext().getAuthentication();
+        log.info( auth.getName() + "님 로그아웃");
+        if(auth!=null){
+            new SecurityContextLogoutHandler().logout(request, response, auth);
 
-    @ApiOperation( value = " 로그인 여부 확인하기 " , notes = " CHECK LOGIN API" )
+
+        }
+        return new RedirectView("/");
+    }
+
+    @ApiOperation( value = " 로그인 여부 확인하기 " , notes = " CHECK LOGIN " )
     @GetMapping("/api/v1/members/is-auth")
     public boolean isAuth(){
         return SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
     }
 
-    @ApiOperation( value = " 로그인 유저 이름 반환하기 " , notes = " RETURN USERNAME API" )
+    @ApiOperation( value = " 로그인 유저 이름 반환하기 " , notes = " RETURN USERNAME " )
     @GetMapping("/api/v1/members/is-who")
     public String iswho(){
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
-    @ApiOperation( value = " 유저 권한 확인하기 " , notes = " CHECK USER_AUTH API " )
+    @ApiOperation( value = " 유저 권한 확인하기 " , notes = " CHECK USER_AUTH " )
     @GetMapping("/api/v1/members/is-whom")
     public String iswhom(){
         return SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
     }
 
-    @ApiOperation( value = " SESSION 체크하기 " , notes = " CHECK SESSION API" )
+    @ApiOperation( value = " SESSION 체크하기 " , notes = " CHECK SESSION " )
     @GetMapping("/api/v1/members/session")
     public ResponseEntity<MemauthDto> status(){
         Authentication auth=SecurityContextHolder.getContext().getAuthentication();
@@ -78,7 +94,7 @@ public class MemberApiController{
 
     }
 
-    @ApiOperation( value = " offset, limit 기반 유저 정보 전체 반환하기 " , notes = " RETURN ALL MEMBERS API" )
+    @ApiOperation( value = " offset, limit 기반 유저 정보 전체 반환하기 " , notes = " RETURN ALL MEMBERS " )
     @GetMapping("/api/v1/members/all")
     public List<MemberManageDto> getmemall(@RequestParam int offset, @RequestParam int limit){
         List<Member> list=memberService.findAll(offset,limit);
@@ -86,7 +102,7 @@ public class MemberApiController{
         return dtoList;
     }
 
-    @ApiOperation( value = " 중복 확인하기 " , notes = " CHECK DUPLICATE API" )
+    @ApiOperation( value = " 중복 확인하기 " , notes = " CHECK DUPLICATE " )
     @GetMapping("/api/v1/checkdup")
     public ResponseEntity<Boolean> returning(@RequestParam String user_id){
         return new ResponseEntity<Boolean>(memberService.checkDup(user_id),HttpStatus.OK);
@@ -102,7 +118,7 @@ public class MemberApiController{
      */
     //TODO 보안취약 수정必 --> 수정 완 과거엔 아이디로 조회했기에 권한 여부를 떠나 타 아이디에 접근이 가능했음.
 
-    @ApiOperation( value = " 유저 정보 확인하기 " , notes = " CHECK USER INFO API" )
+    @ApiOperation( value = " 유저 정보 확인하기 " , notes = " CHECK USER INFO " )
     @GetMapping("/api/v1/members/single/local/aboutMe")
     public MemberDto getSingleMembyID(){
         String user_id=SecurityContextHolder.getContext().getAuthentication().getName();;
@@ -111,7 +127,7 @@ public class MemberApiController{
         return dto;
     }
 
-    @ApiOperation( value = " 주소 업데이트 하기 " , notes = " UPDATE ADDRESS API" )
+    @ApiOperation( value = " 주소 업데이트 하기 " , notes = " UPDATE ADDRESS " )
     @PostMapping("/api/v1/members/updateAddress")
     public ResponseEntity<String>changeAddr(@RequestBody AddressDto dto,@AuthenticationPrincipal UserDetails details){
         try{
@@ -130,7 +146,7 @@ public class MemberApiController{
         }
     }
 
-    @ApiOperation( value = " 비밀번호 수정하기 " , notes = " UPDATE PWD API" )
+    @ApiOperation( value = " 비밀번호 수정하기 " , notes = " UPDATE PWD " )
     @PostMapping("/api/v1/members/updatePwd")
     public ResponseEntity<String>changepwd(@RequestBody SimpleStringDto dto, @AuthenticationPrincipal UserDetails details){
         try{
@@ -149,7 +165,7 @@ public class MemberApiController{
         }
     }
 
-    @ApiOperation( value = " 연락처 수정하기 " , notes = " UPDATE PHONE_NUMBER API" )
+    @ApiOperation( value = " 연락처 수정하기 " , notes = " UPDATE PHONE_NUMBER " )
     @PostMapping("/api/v1/members/updatePhonenum")
     public ResponseEntity<String>changephone(@RequestBody SimpleStringDto dto, @AuthenticationPrincipal UserDetails details){
         try{

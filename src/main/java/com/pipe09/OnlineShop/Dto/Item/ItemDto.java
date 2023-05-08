@@ -1,9 +1,11 @@
 package com.pipe09.OnlineShop.Dto.Item;
 
+import com.pipe09.OnlineShop.Domain.Item.V2.DTYPE.Itemv2;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-
+@NoArgsConstructor
 public class ItemDto {
     private Long Item_ID;
     private String Name;
@@ -32,4 +34,19 @@ public class ItemDto {
     }
 
      */
+    public ItemDto( Itemv2 v2 ){
+
+        this.Item_ID = v2.getItem_ID();
+        this.Name = v2.getName();
+        this.Price = v2.getPrice();
+        this.StockQuantity = v2.getStockQuantity();
+        this.Description = v2.getDescription();
+        ////
+        this.Weight = v2.getWeight();
+        this.MadeIn = v2.getMadeIn();
+        this.ManufacturedCompany = v2.getManufacturedCompany();
+        this.imgSrc = v2.getImgSrc();
+        this.DTYPE = v2.getDType().getName();
+
+    }
 }

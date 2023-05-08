@@ -1,4 +1,4 @@
-package com.pipe09.OnlineShop.Controller.ApiController;
+package com.pipe09.OnlineShop.Controller.RestController.v1_RestController;
 
 
 import com.pipe09.OnlineShop.Domain.Orders.OrderItem;
@@ -49,7 +49,7 @@ public class OrderApiController {
     private final OrderService orderService;
 
 
-    @ApiOperation( value = " 주문 조회하기 " , notes = " CHECK ALL ORDERS API" )
+    @ApiOperation( value = " 주문 조회하기 " , notes = " CHECK ALL ORDERS" )
     @GetMapping("/api/v1/orders/all")
     public List<OrderDto> getOrders(@RequestParam(value = "offset") int offset,@RequestParam int limit){
         List<Orders> orders=orderService.findAllwithToOne(offset,limit);
@@ -60,7 +60,7 @@ public class OrderApiController {
         return orderDtos;
     }
 
-    @ApiOperation( value = " 이름으로 개인 지출 내역 조회하기 " , notes = " INDIVIDUAL CHECK PAYMENTS API" )
+    @ApiOperation( value = " 이름으로 개인 지출 내역 조회하기 " , notes = " INDIVIDUAL CHECK PAYMENTS" )
     @GetMapping("/api/v1/orders/paid/byuser")
     public ResponseEntity<List<Us_Orders>> getOrdersbyUser( @AuthenticationPrincipal UserDetails details ,@RequestParam int offset, @RequestParam int limit){
         if( details == null ){
@@ -78,7 +78,7 @@ public class OrderApiController {
 
 
     }
-    @ApiOperation( value = " 주문 생성하기 " , notes = " CREATE ORDERS API " )
+    @ApiOperation( value = " 주문 생성하기 " , notes = " CREATE ORDERS" )
     @PostMapping("/api/v1/orders/create")
     public ResponseEntity<String> createOrders(@Valid @RequestBody CreateOrderDto dto ,@AuthenticationPrincipal UserDetails details){
 
@@ -113,7 +113,7 @@ public class OrderApiController {
 
     }
 
-    @ApiOperation( value = " offset, limit으로 개인 유저 결제 및 주문 제품 정보 받기 " , notes = " GET PAYMENTS & ORDERITEM API" )
+    @ApiOperation( value = " offset, limit으로 개인 유저 결제 및 주문 제품 정보 받기 " , notes = " GET PAYMENTS & ORDERITEM" )
     @GetMapping("/api/v1/payments/all")
     public ResponseEntity getPaymentByUser(@RequestParam(value = "offset")int offset, @RequestParam(value = "limit")int limit){
         List<payment>payments=orderService.getListByUser(offset, limit);
@@ -141,7 +141,7 @@ public class OrderApiController {
 
      */
 
-    @ApiOperation( value = " 주문 정보 수정하기 " , notes = " UPDATE ORDER API" )
+    @ApiOperation( value = " 주문 정보 수정하기 " , notes = " UPDATE ORDER" )
     @PutMapping("/admin/manage/orders/changeStat")
     public ResponseEntity setUpDeliveryStat(@RequestParam(value = "option") int option, @RequestBody DeliverySetDto dto){
         try{
@@ -153,7 +153,7 @@ public class OrderApiController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @ApiOperation( value = " 배송번호 입력하기_ADMIN " , notes = " PUT TRANSPORT NUMBER API" )
+    @ApiOperation( value = " 배송번호 입력하기_ADMIN " , notes = " PUT TRANSPORT NUMBER" )
     @PutMapping("/admin/manage/orders/registerTransPort")
     public ResponseEntity setTransportDoc(@RequestParam String transPort,@RequestParam Long order_id){
         try{
@@ -166,7 +166,7 @@ public class OrderApiController {
     }
 
 
-    @ApiOperation( value = " 결제 취소하기 " , notes = " CANCEL PAYMENTS API" )
+    @ApiOperation( value = " 결제 취소하기 " , notes = " CANCEL PAYMENTS" )
     @PostMapping("/payments/doCancel/{paymentKey}")
     public ResponseEntity paymentCancler(@PathVariable String paymentKey, @RequestBody doCancelDto dto, @AuthenticationPrincipal UserDetails user){
         try{
@@ -185,7 +185,7 @@ public class OrderApiController {
 
     }
 
-    @ApiOperation( value = " 결제 완료 확인하기 " , notes = " CHECK PAY-DONE API" )
+    @ApiOperation( value = " 결제 완료 확인하기 " , notes = " CHECK PAY-DONE" )
     @PostMapping("/payments/doCompleteTrade/{paymentKey}")
     public ResponseEntity paymentCompleter(@PathVariable String paymentKey,@AuthenticationPrincipal UserDetails details){
         try{

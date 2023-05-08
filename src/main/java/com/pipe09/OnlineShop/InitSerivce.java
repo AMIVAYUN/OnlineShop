@@ -205,7 +205,7 @@ public class InitSerivce {
     }
 
     public void ItemVer2Migration(){
-        /*
+
         List<Item> itemList = itemRepository.findAll( 0,45);
         int idx = 0;
         itemList.stream().forEach( i -> System.out.println( i.getDTYPE() ) );
@@ -228,7 +228,7 @@ public class InitSerivce {
             itemV2Repository.save( newitem );
         });
 
-     */
+
 
 
 

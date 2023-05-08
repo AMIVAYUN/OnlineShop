@@ -4,10 +4,12 @@ import com.pipe09.OnlineShop.Domain.Delivery.Deliverystatus;
 import com.pipe09.OnlineShop.Domain.Orders.OrderItem;
 import com.pipe09.OnlineShop.Domain.Orders.Orders;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.LockModeType;
 import java.util.List;
 
 @Repository
@@ -19,7 +21,7 @@ public class OrderRepository {
         em.flush();
         return;
     }
-
+    @Lock( LockModeType.PESSIMISTIC_WRITE )
     public Long save(Orders order){
         em.persist(order);
         return order.getOrder_ID();

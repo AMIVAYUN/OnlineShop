@@ -106,11 +106,12 @@ function getTypedItem(dtype){
     )
 
 }
+
 async function SessionCheck(){
     //shoplist 세팅 포함
     var baseurl=window.location;
 
-    const res1= fetch("/api/v1/members/session",{method:"GET"}).then(response => response.json());
+    const res1= await fetch("/api/v1/members/session",{method:"GET"}).then(response => response.json());
     if(!res1.isauth){
         return false;
     }

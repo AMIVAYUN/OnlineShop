@@ -1,6 +1,7 @@
 package com.pipe09.OnlineShop;
 
 import com.pipe09.OnlineShop.Service.MailService;
+import com.pipe09.OnlineShop.Utils.Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +21,7 @@ public class InitDb {
         initSerivce.dbInit();
         initSerivce.dbInit2();
         initSerivce.ItemVer2Migration();
+        System.out.println( "check This ****: "+"file:////" + Utils.getImgPATHwithOS() );
 
     }
 

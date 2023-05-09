@@ -22,7 +22,7 @@ public class Utils {
         }
 
         else{
-            return IMGPATH+"/"+"img"+ File.separator;
+            return IMGPATH+File.separator+"img"+ File.separator;
         }
 
 

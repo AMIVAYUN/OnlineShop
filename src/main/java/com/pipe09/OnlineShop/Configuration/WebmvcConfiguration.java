@@ -24,9 +24,9 @@ public class WebmvcConfiguration implements WebMvcConfigurer {
         CacheControl staticCacheControl = CacheControl.maxAge(5, TimeUnit.SECONDS);
         CacheControl imgCacheControl = CacheControl.maxAge(20, TimeUnit.MINUTES);
         registry.addResourceHandler("**/*.*").addResourceLocations("classpath:/static/").setCacheControl(staticCacheControl);
-        registry.addResourceHandler("img/upload/**").addResourceLocations("file:////"+Utils.getImgPATHwithOS()+"upload"+ File.separator).setCacheControl(imgCacheControl);
-        registry.addResourceHandler("img/static/**").addResourceLocations("file:////"+Utils.getImgPATHwithOS()+"static"+File.separator).setCacheControl(imgCacheControl);
-
+        //registry.addResourceHandler("img/upload/**").addResourceLocations("file:////"+Utils.getImgPATHwithOS()+"upload"+ File.separator).setCacheControl(imgCacheControl);
+        //registry.addResourceHandler("img/static/**").addResourceLocations("file:////"+Utils.getImgPATHwithOS()+"static"+File.separator).setCacheControl(imgCacheControl);
+        registry.addResourceHandler( "img/**" ).addResourceLocations("file:////" + Utils.getImgPATHwithOS() ).setCacheControl(imgCacheControl );
 
         //swagger
         registry.addResourceHandler("/swagger-ui/**")

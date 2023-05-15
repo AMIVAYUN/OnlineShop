@@ -2,7 +2,7 @@ package com.pipe09.OnlineShop.Controller.RestController.v1_RestController;
 
 
 import com.pipe09.OnlineShop.Domain.Item.V1.Item;
-import com.pipe09.OnlineShop.Dto.Item.ItemDto;
+import com.pipe09.OnlineShop.Dto.Item.V1.ItemDto;
 import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
 import com.pipe09.OnlineShop.Service.ItemService;
 import lombok.RequiredArgsConstructor;

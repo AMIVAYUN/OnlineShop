@@ -74,11 +74,11 @@ function SearchByKeyWord(keyword){
 async function getItembykeyword(keyword,offset,limit){
     Cleaning($("#shoplist"));
     Cleaning($("#explain_part"));
-    var url="/api/v2/items/"+keyword+"?offset="+offset+"&limit="+limit;
+    var url="/api/v2/items/keyword/"+keyword+"?offset="+offset+"&limit="+limit;
     await fetch(url,{method:"get"}).then(response => {
         if(response.status==200){
             $("#explain_part").append('<span><mark>'+keyword+'</mark>'+"(으)로 검색한 결과, 총 "+'<mark>'+response.headers.get("count")+'</mark>'+ "건 입니다."+'</span>');
-            return response.json()
+            return response.json();
         }
 
     }).then(

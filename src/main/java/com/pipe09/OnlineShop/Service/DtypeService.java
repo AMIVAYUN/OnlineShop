@@ -35,4 +35,9 @@ public class DtypeService {
         return dTypeList;
 
     }
+
+    @Transactional
+    public dType findByName( String name ){
+        return repository.findByname( name );
+    }
 }

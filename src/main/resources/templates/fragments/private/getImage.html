@@ -9,9 +9,10 @@
 <body>
 <div class="image-container">
     <img style="width: 500px;" id="preview-image">
-    <input style="display: block;" type="file" id="input-image" onchange="ChangeParent()">
+    <input style="display: block;" type="file" id="input-image" onchange="readImage()">
     <button onclick="closing()">확인</button>
 </div>
+<!-- ChangeParent() -->
 <script>
     function readImage(input) {
         // 인풋 태그에 파일이 있는 경우
@@ -33,7 +34,7 @@
     inputImage.addEventListener("change", e => {
         readImage(e.target)
     })
-    function closing(){
+    async function closing(){
         let formdata=new FormData();
         var alph=$("#input-image")
         data=alph[0].files[0];

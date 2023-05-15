@@ -41,7 +41,9 @@ public class ItemV2Repository {
         return em.find(Itemv2.class, id);
     }
 
-    public List<Itemv2> findAll(int offset, int limit) {
+    public List<Itemv2> findAll(){ return em.createQuery( "select i from Itemv2 i where i.status =: status").setParameter( "status", Item_status.SALE ).getResultList(); }
+
+    public List<Itemv2> findAllWithOffLim(int offset, int limit) {
         String jpql = "select i from Itemv2 i where i.status=:status";
         return em.createQuery(jpql, Itemv2.class).setParameter("status", Item_status.SALE).setFirstResult(offset).setMaxResults(limit).getResultList();
     }

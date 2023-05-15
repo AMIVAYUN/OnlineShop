@@ -50,7 +50,10 @@ public class Utils {
     }
     public static String deleteKorean(String str){
         str=str.replaceAll("[ㄱ-힣]","");
-        str=str.substring(0,6);
+        if( str.length() > 6 ){
+            str=str.substring(0,6);
+        }
+
         return Long.toString(System.nanoTime())+str;
     }
     public static String getAccessToken(HttpServletRequest request){

@@ -2,18 +2,13 @@ package com.pipe09.OnlineShop.Domain.Item.V2.DTYPE;
 
 
 import com.pipe09.OnlineShop.Domain.Item.V1.Item;
-import com.pipe09.OnlineShop.Domain.Item.V1.ItemFactory;
 import com.pipe09.OnlineShop.Domain.Item.V1.Item_status;
 import com.pipe09.OnlineShop.Domain.Item.V2.DTYPE.dType.dType;
-import com.pipe09.OnlineShop.Dto.Item.R_itemDto;
-import com.pipe09.OnlineShop.Dto.Item.R_itemDtoV2;
+import com.pipe09.OnlineShop.Dto.Item.V2.itemDtoV2;
 import com.pipe09.OnlineShop.Exception.StockLackException;
-import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
-import com.pipe09.OnlineShop.Utils.Utils;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
@@ -53,8 +48,19 @@ public class Itemv2 {
     @Formula("(select count(1) from item as i where i.status='SALE')")
     private int countofItems;
 
-
-
+    //등록
+    public Itemv2(itemDtoV2 dto, dType dtype ){
+        this.name = dto.getName();
+        this.dType = dtype;
+        this.price = dto.getPrice();
+        this.stockQuantity = dto.getStockQuantity();
+        this.description = dto.getDescription();
+        this.weight = dto.getWeight();
+        this.madeIn = dto.getMadeIn();
+        this.manufacturedCompany = dto.getManufacturedCompany();
+        this.imgSrc = dto.getImgSrc();
+        this.status = Item_status.SALE;
+    }
 
     public Itemv2( String name, Integer price, Integer stockQuantity, String desc, Integer weight, String madeIn, String manufacturedCompany, String imgSrc, dType dType){
         this.name = name;
@@ -80,12 +86,13 @@ public class Itemv2 {
         }
 
     }
+
     public void addStockQuantity(int count){
         this.stockQuantity+=count;
     }
 
     // For Migration
-    public Itemv2( Item item ){
+    public Itemv2( Item item ) {
         this.name = item.getName();
         this.status = item.getStatus();
         this.stockQuantity = item.getStockQuantity();
@@ -99,9 +106,7 @@ public class Itemv2 {
         this.price = item.getPrice();
 
 
-
     }
-    /** 도메인 정재 */
     /*
     public static List<M_ItemDto> itemtoDto(List<Item> items){
         List<M_ItemDto> dtoList=items.stream().map(M_ItemDto::new).collect(Collectors.toList());

@@ -1,7 +1,7 @@
 package com.pipe09.OnlineShop.GlobalMapper;
 
 import com.pipe09.OnlineShop.Domain.Item.V1.Item;
-import com.pipe09.OnlineShop.Dto.Item.ItemDto;
+import com.pipe09.OnlineShop.Dto.Item.V1.ItemDto;
 import com.pipe09.OnlineShop.Repository.ItemRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;

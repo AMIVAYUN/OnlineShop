@@ -1,4 +1,4 @@
-package com.pipe09.OnlineShop.Dto.Item;
+package com.pipe09.OnlineShop.Dto.Item.V1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

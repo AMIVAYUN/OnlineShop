@@ -1,74 +1,46 @@
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="_csrf" th:content="${_csrf.token}">
+		<meta name="_csrf_header" th:content="${_csrf.headerName}">
+		<title>로그인 페이지</title>
+		<link rel="stylesheet" href="../css/login.css" type="text/css" media="all">
+	</head>
+	<body>
+		<div class="form-container">
+			<div class="login_header">
+				<img id="db_logo" src="img/static/DB_LOGO.gif" alt="대봉산업기계">
+			</div>
+			<form class="login-form" action="/loginproc" method="post">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="_csrf" th:content="${_csrf.token}">
-    <meta name="_csrf_header" th:content="${_csrf.headerName}">
-    <title>로그인 페이지</title>
-    <link rel="stylesheet" href="../css/login.css" type="text/css" media="all">
-</head>
-<body>
-<!--
-시큐리티는 x-www-form-urlencoded 타입만 인식
-<form action="/loginproc" method="post">
-    <input type="text" name="username"></br>
-    <input type="password" name="password"></br>
-    <button>로그인</button>
-</form>
--->
-<div id ="container" class="main_container">
-    <div style="padding: 20px;"></div>
-    <img src="img/static/DB_LOGO.gif" onclick="window.open('/');"style="cursor: pointer" class="logo">
-    <div style="padding: 20px;"></div>
-    <div class="join_container">
-        <div class="form_container">
-            <form name="login_form" action="/loginproc" method="post">
+				<div class="account">
+					<div class="account-item">
+						<input type="text" placeholder="아이디" name="username">
+					</div>
+					<div class="account-item">
+						<input type="password" name="password" placeholder="비밀번호">
+					</div>
+				</div>
+				<div class="btn-login">
+					<button type="submit" class="form_submit_button">
+						로그인
+					</button>
+				</div>
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+			</form>
+			<div class="acc_find">
+				<ul class="find-list">
+					<li><a href="#" id="id-find">아이디찾기</a></li>
+					<li><a href="#" id="id-password">비밀번호찾기</a></li>
+					<li><a id="join-navi" href="/join">회원가입</a></li>
+				</ul>
+			</div>
 
-                <div class="form_title_div">
-                    <p style="font-size:25px" class="form_title_p">로그인</p>
-                </div>
-                <div>
-                    <div>
-                        <a class="form_item_name">ID</a>
-                    </div>
-                    <div>
-                        <input type="text" name="username" placeholder="아이디를 입력하세요" class="form_input">
-                    </div>
-                    <div class="form_text_alert_padding">
-                        <div id="alert_ID" class="form_text_alert"></div>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <a class="form_item_name">Password</a>
-                    </div>
-                    <div>
-                        <input type="password" name="password" placeholder="비밀번호를 입력하세요" class="form_input">
-                    </div>
-                    <div class="form_text_alert_padding">
-                        <div id="alert_password" class="form_text_alert"></div>
-                    </div>
-                </div>
-                <div style="height: 10px;"></div>
-                <div>
-                    <button type="submit" class="form_submit_button">로그인</button>
-                </div>
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-            </form>
-            <!--div class="oauth">
-                <img src="img/static/googlelogo.jfif"onclick="javascript:location.href='/oauth2/authorization/google'"/>
-                <img src="img/static/kakaologo.jpg" onclick="javascript:location.href='/oauth2/authorization/kakao'">
-            </div-->
-
-        </div>
-    </div>
-
-
-</div>
-
-</body>
-
+			<div class="social_type">
+				<img id="kakaoicon" src="img/static/kakaoicon.png" alt="카카오 로그인">
+			</div>
+		</div>
+	</body>
 </html>

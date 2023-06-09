@@ -44,9 +44,33 @@ function listSetting(index){
 function defaultSetting(){
 
 }
-function ItemlistSetting(){
+//ref http://ax5ui.axisj.com/ax5ui-grid/demo/13-inline-edit.html 과거처럼 단순 고정 제품군이 아니기에, 이를 미리 불러와서 setconfig 당시 삽입을 해주어야 한다.
+// 즉 이 부분에서 call을 한번 더하자.
+
+function getDtypelist(){
+
+    const lst = fetch( "/api/v2/dtype", { method:"get"} ).then( r => r.json() );
+
+    return lst;
+
+}
+
+async function ItemlistSetting(){
     firstGrid = new ax5.ui.grid();
     var baseurl=window.location
+    const dtypes = await getDtypelist();
+
+    let optionlst = [];
+
+    $.each( dtypes, function( idx ){
+        let obj = new Object();
+        obj.CD = dtypes[ idx ].name;
+        obj.NM = dtypes[ idx ].name;
+        optionlst.push( obj );
+    })
+    //console.log( optionlst );
+
+
     firstGrid.setConfig({
         target: $('[data-ax5grid="item-grid"]'),
         showLineNumber:true,
@@ -62,7 +86,16 @@ function ItemlistSetting(){
             {key: "item_name", label: "제품 이름",editor:{type:"text"}},
             {key: "item_description", label: "제품 설명",sortable:false,editor: {type:"textarea"},width:250},
             {key: "item_price", label: "제품 가격",editor:{type:"money"},formatter:"money"},
-            {key: "item_type", label: "제품 군",sortable:false,editor: {type:"select",config:{
+            {key: "item_type", label: "제품 군",sortable:false,editor: {type:"select",
+                    config:{
+                        columnKeys:{
+                            optionValue:"CD",optionText:"NM"
+                        },
+                        options: optionlst
+                    }}},
+
+                /* v1
+                    config:{
                 columnKeys:{
                     optionValue:"CD",optionText:"NM"
                 },
@@ -104,6 +137,9 @@ function ItemlistSetting(){
 
                 }
                 }},
+
+                 */
+
             {key: "item_stock", label: "재고 수량",editor: {type:"money"}},
             {key: "item_company", label: "제조 회사",sortable:false,editor: {type:"text"}},
             {key: "item_country", label: "제조 국가",sortable:false,editor: {type:"text"}},
@@ -112,14 +148,15 @@ function ItemlistSetting(){
         ]
     });
 
-    fetch("/api/v2/items/all?offset="+0+"&limit="+500).then(response => response.json()
+    fetch("/api/v2/items").then(response => response.json()
         .then(
             (res) =>{
                 var list=[];
                 $.each(res,function(i){
                     list.push({item_id:res[i].item_ID,item_img:res[i].imgSrc,item_name:res[i].name,item_description:res[i].description,item_price:res[i].price,item_type:res[i].dtype,item_stock:res[i].stockQuantity,item_company:res[i].manufacturedCompany,item_country:res[i].madeIn,item_weight:res[i].weight})
-
+                    //console.log( res[ i ] );
                 })
+
                 firstGrid.setData(list);
 
             }
@@ -422,7 +459,7 @@ function MemberlistSetting(){
 
 
 }
-function deleteItems(){
+async function deleteItems(){
     var selected=getItemIDlists(firstGrid.getList("selected"));
     if(selected.length==0){
         alert("삭제하실 제품을 선택해주세요");
@@ -431,9 +468,13 @@ function deleteItems(){
     let obj={
         "itemIdList":selected
     }
-    const res=fetch("/admin/manage/items/delete-item.do",{method:"delete",headers:{'Content-Type':'application/json','X-CSRF-TOKEN': csrfToken},body:JSON.stringify(obj)}).then(response => response.text());
-    alert(res);
-    ItemlistSetting();
+    const res= await fetch("/admin/manage/items",{method:"delete",headers:{'Content-Type':'application/json','X-CSRF-TOKEN': csrfToken}, body: JSON.stringify( obj ) }).then(response => response.status );
+    if( res == 200 ){
+        alert(" 제품 삭제에 성공하였습니다.");
+        ItemlistSetting();
+    }else{
+        alert(" 내부 서버에 문제가 있습니다. 잠시 후 다시 시도해주세요.");
+    }
 
 }
 function getItemIDlists(list){
@@ -443,10 +484,27 @@ function getItemIDlists(list){
     })
     return idlist;
 }
+function makeUpdateItemFormData( obj ){
+
+    let formData = new FormData();
+
+    formData.append("name", obj.name );
+    formData.append("description", obj.description );
+    formData.append("price", obj.price );
+    formData.append("dtype",obj.dtype );
+    formData.append("stockquantity", obj.stockquantity );
+    formData.append("manufacturedcompany", obj.manufacturedcompany );
+    formData.append("madein", obj.madein );
+    formData.append("weight", obj.weight );
+
+    return formData;
+
+}
 function replaceItems(){
-    let formData=new FormData();
+    //let formData=new FormData();
     selected=firstGrid.getList("selected");
     if(selected.length==1){
+
         let obj={
             "name":selected[0]['item_name'],
             "description": selected[0]['item_description'],
@@ -457,12 +515,17 @@ function replaceItems(){
             "madein":selected[0]['item_country'],
             "weight":selected[0]['item_weight']
         }
+
+
+
+
+
         if(confirm("이미지를 변경하십니까?")){
             var popup=window.open("/admin/manage/image/putImage" ,'new',toolbar=false,menubar=false,scrollbars=true,width=700,height=700)
             popup.focus();
         }else{
-            formData.append('file',null);
-            formData.append('body',JSON.stringify(obj));
+            //formData.append('file',null);
+            let formData = makeUpdateItemFormData( obj );
             updateItemSequence(selected[0].item_id,formData);
         }
 
@@ -503,9 +566,14 @@ function registerItems(){
 function gotoHome(){
     location.assign('/');
 }
+
 function getReturnValue(returnValue) {
+    /*
     let formData=new FormData();
     formData.append('file',returnValue.get('file'));
+
+     */
+
     let obj={
         "name":selected[0]['item_name'],
         "description": selected[0]['item_description'],
@@ -516,20 +584,52 @@ function getReturnValue(returnValue) {
         "madein":selected[0]['item_country'],
         "weight":selected[0]['item_weight']
     }
-    console.log(obj);
-    formData.append('body',JSON.stringify(obj))
-    updateItemSequence(selected[0].item_id,formData);
+
+
+
+
+    let data = makeUpdateItemFormData( obj );
+    const url="/admin/manage/items/"+selected[0].item_id;
+    data.append('file1',returnValue.get( 'file') );
+    /*
+    console.log( fm );
+    console.log( fData.get( 'file1' ) );
+    console.log( fData.get( 'name' ) );
+
+     */
+    fetch( "/admin/manage/items/" + selected[0].item_id,{
+        method: "put",
+        headers:{'X-CSRF-TOKEN': csrfToken},
+        body: data,
+    }).then( response => {
+        if( response.status == 200 ){
+            alert( "제품 수정이 완료되었습니다.");
+            window.opener.reload();
+            window.close();
+        }else if( response.status == 400 ){
+            alert( "내용을 다시 입력해주세요. ");
+        }else if( response.status == 417 ){
+            alert( "중복된 이름 입니다." );
+        }else{
+            alert( " 서버 에러 잠시 후 다시 시도해주세요. " );
+        }
+
+    });
 
 }
-function updateItemSequence(id,formData){
-    var url="/admin/manage/items/"+id+"/update-item.do"
 
-    fetch(url,{method:"put",headers:{'X-CSRF-TOKEN': csrfToken},body:formData}).then(response => response.text()).then(
-        (res) => {
-            alert(res);
+function updateItemSequence(id,fData){
+    var url="/admin/manage/items/"+id
+    console.log( fData.get('file') );
+    fetch(url,{method:"put",headers:{'X-CSRF-TOKEN': csrfToken},body: fData }).then(response => response.status).then( ( status ) => {
+        if( status == 200 ){
+            alert(" 수정에 성공하였습니다.");
+            ItemlistSetting();
+        }else{
+            alert(" 내부 서버에 문제가 있습니다. 잠시 후 다시 시도해주세요.");
 
         }
-    )
+    });
 
 
 

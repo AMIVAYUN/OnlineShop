@@ -18,7 +18,7 @@ function chkIE(){
 }
 function getItem(offset,limit){
     cacheName = "home";
-    url = "./api/v2/items/all?offset="+offset+"&limit="+limit;
+    url = "./api/v2/items?offset="+offset+"&limit="+limit;
     Cleaning($("#shoplist"));
     fetch( url,{method:"GET"}).then((response) => {
         if( response.status==200 ){

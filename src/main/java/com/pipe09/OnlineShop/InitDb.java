@@ -16,6 +16,7 @@ public class InitDb {
     private final InitSerivce initSerivce;
     private final MailService service;
 
+
     @PostConstruct
     public void init() throws MessagingException, IOException {
         initSerivce.dbInit();

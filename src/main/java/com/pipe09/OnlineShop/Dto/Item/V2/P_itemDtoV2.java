@@ -1,26 +1,39 @@
-package com.pipe09.OnlineShop.Dto.Item;
+package com.pipe09.OnlineShop.Dto.Item.V2;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.lang.Nullable;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
+
 @Data
-public class R_itemDtoV2 {
+@Builder
+public class P_itemDtoV2{
+    @NotNull
     private String name;
+    @NotNull
     private Integer price;
-    @JsonProperty("StockQuantity")
+    @NotNull
     private Integer StockQuantity;
+    @NotNull
     private Integer weight;
-    @JsonProperty("Description")
+    @NotNull
     private String Description;
     ////
-    @JsonProperty("MadeIn")
+    @NotNull
     private String MadeIn;
-    @JsonProperty("ManufacturedCompany")
+    @NotNull
     private String ManufacturedCompany;
-    private String dtype;
+
+    @NotNull
+    private String dtype_name;
+
+
     @Nullable
     private String imgSrc;
+
+    @Override
+    public String toString(){
+        return this.name + "//" + this.price + "//" + this.dtype_name;
+    }
 }

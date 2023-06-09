@@ -1,8 +1,8 @@
 package com.pipe09.OnlineShop.Domain.Item.V1;
 
 
-import com.pipe09.OnlineShop.Dto.Item.R_itemDto;
-import com.pipe09.OnlineShop.Dto.Item.R_itemDtoV2;
+import com.pipe09.OnlineShop.Dto.Item.V1.R_itemDto;
+import com.pipe09.OnlineShop.Dto.Item.V2.itemDtoV2;
 import com.pipe09.OnlineShop.Exception.StockLackException;
 import com.pipe09.OnlineShop.GlobalMapper.DefaultMapper;
 import com.pipe09.OnlineShop.Utils.Utils;
@@ -93,12 +93,16 @@ public class Item {
 
         return item;
     }
+
+    /*
     public static Item fromRegv2(R_itemDtoV2 v2){
         System.out.println(v2.getDtype());
         DefaultMapper<Item>mapper=new DefaultMapper<>(ItemFactory.makingItemBytype(v2.getDtype()));
         Item item=mapper.Translate(v2);
         return item;
     }
+
+     */
 
 
 

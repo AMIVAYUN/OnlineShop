@@ -220,7 +220,7 @@ function logoSetting(){
 }
 
 async function getItem(keyword){
-    var url="/api/v2/items/single/"+keyword;
+    var url="/api/v2/items/"+keyword;
     const res=await fetch(url, {method: "get"}).then(response => response.json());
     $("#product_image").attr("src","/"+res.imgSrc);
     $("#product_name").text(res.name);

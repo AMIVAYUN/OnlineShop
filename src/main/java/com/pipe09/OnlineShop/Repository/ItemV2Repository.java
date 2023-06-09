@@ -6,6 +6,7 @@ import com.pipe09.OnlineShop.Domain.Item.V1.Item_status;
 import com.pipe09.OnlineShop.Domain.Item.V2.DTYPE.Itemv2;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -54,6 +55,11 @@ public class ItemV2Repository {
 
     }
 
+    public Long getCount(){
+        Long count = (Long) em.createQuery( "select count( i ) from Itemv2 i where i.status =:status").setParameter( "status", Item_status.SALE).getSingleResult();
+        return count;
+
+    }
 
     public boolean removeById(Long id) {
         Itemv2 item = em.find(Itemv2.class, id);

@@ -3,6 +3,7 @@ package com.pipe09.OnlineShop.Controller.RestController.v2_RestController;
 
 import com.pipe09.OnlineShop.Domain.Item.V2.DTYPE.Itemv2;
 import com.pipe09.OnlineShop.Dto.Item.V1.ItemDto;
+import com.pipe09.OnlineShop.Dto.Item.V2.itemLenDto;
 import com.pipe09.OnlineShop.Service.Itemv2Service;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -120,6 +121,20 @@ public class ItemApiController {
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
+    }
+
+    @ApiOperation( value = "전체 아이템 개수 가져오기 ", notes = "LOAD ITEMS TOTAL" )
+    @GetMapping( "/api/v2/items/len")
+    public ResponseEntity<itemLenDto> getItemLength(){
+        try{
+            Long count = service.getCount();
+            itemLenDto dto = new itemLenDto();
+            dto.setCount( count );
+            return new ResponseEntity( dto, HttpStatus.OK );
+        }catch( Exception e ){
+            log.info( SecurityContextHolder.getContext().getAuthentication().getName() +"님의 전체 아이템 갯수 조회간 에러 발생"+ e.toString() );
+            return new ResponseEntity( HttpStatus.INTERNAL_SERVER_ERROR );
+        }
     }
 
 

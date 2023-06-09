@@ -62,7 +62,7 @@ public class ItemV2RepositoryTest {
     @Test
     public void findAll() {
         Itemv2 tc = itemV2Repository.findItem( tc_id );
-        List< Itemv2 > itemv2List = itemV2Repository.findAll( 0, 10 );
+        List< Itemv2 > itemv2List = itemV2Repository.findAll();
         Truth.assertThat( itemv2List ).contains( tc );
         Truth.assertThat( itemv2List ).isNotNull();
         Truth.assertThat( itemv2List ).hasSize( 1 );

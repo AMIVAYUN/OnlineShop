@@ -1,78 +1,154 @@
-
 <!DOCTYPE html>
-
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=yes, maximum-scale=1.0">
-    <meta name="google-site-verification" content="50FkllZFImXYACu5bVyyDjrJkmFm9NL4-5anvgga8UA" />
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=yes, maximum-scale=1.0">
+		<meta name="google-site-verification" content="50FkllZFImXYACu5bVyyDjrJkmFm9NL4-5anvgga8UA" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+		<script src="https://kit.fontawesome.com/97e36fce94.js" crossorigin="anonymous"></script>
+		<script srt="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous"></script>
+		<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+		<title>대봉 산업 기계에 오신 것을 환영합니다!</title>
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="js/main.js"charset="UTF-8"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="header">
+				<div class="header-content clearfix">
+					<ul id="navi-bar">
+						<li class="nav_l li_section_bar mobile_hidden-menu"><a id="login-navi" href="/login">로그인</a></li>
+						<li class="nav_l li_section_bar hidden-menu"><a id="mypage" href="/mypage">마이페이지</a></li>
+						<li class="nav_l li_section_bar hidden-menu"><a id="scart" href="/shopping-list">장바구니</a></li>
+						<li class="nav_l li_section_bar mobile_hidden-menu"><a id="join-navi" href="/join">회원가입</a></li>
+						<li class="nav_l li_section_bar"><a id="faq" href="/contact">고객센터</a></li>
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-    <script src="https://kit.fontawesome.com/97e36fce94.js" crossorigin="anonymous"></script>
-    <title>대봉산업에 오신 것을 환영합니다.</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="js/main.js"charset="UTF-8"></script>
-
-
-</head>
-<body>
-
-    <div id="wrap">
-        <nav th:replace="fragments/part/navi_bar.html :: fragment-naviBar"></nav>
-        <div th:replace="fragments/part/bodyheader.html :: fragment-bodyheader"></div>
-
-
-        <hr>
-        <div id="category_part">
-
-            <ul id="category_list">
-                <li id="default_category">전체 보기</li>
-                <li id="LeakDetector">누수 탐지기</li>
-                <li id="SewerCleaner">하수관 청소기</li>
-                <li id="Endoscope" style="margin-top:3px;">내시경</li>
-                <li id="Tool" style="margin-top:3px;">공구</li>
-                <li id="ETC" style="margin-top:3px;">기타</li>
-
-
-            </ul>
-            <select name="정렬" id="OptionalSort">
-                <!--<option value="한줄씩 보기">한줄씩 보기</option>-->
-                <option value="4개씩 보기">4개씩 보기</option>
-            </select>
-
-        </div>
-
-        <ul id="shoplist">
-
-            <!--li class="item">
-                <div id="item_img">
-                    <img src="img/LeakDetector.jpg">
-                </div>
-                <div id="item_text">
-                    <a id="item_name">d</a></br>
-                    <a id="item_price">d</a></br>
-                    <button>바로가기</button>
-                </div>
-            </li-->
-
-        </ul>
-
-        <div th:replace="fragments/part/pager.html :: fragment-pager"></div>
-
-        <div th:replace="fragments/part/footer.html :: fragment-footer"></div>
-    </div>
-
-    <div th:replace="fragments/part/side_bar.html :: fragment-sideBar"></div>
-
-
-
-</body>
-
+					</ul>
+				</div>
+				<div class="header-content header-main clearfix">	
+					<div class="header-section">
+						<div id="header-title">
+							<img id="db_logo" src="img/static/DB_LOGO.gif">
+							<img id="db_logo2" src="img/static/DaebongMark.jpg">
+							<span id="title">대봉 산업 기계</span>
+						</div>
+					</div>
+					<div class="header-section" id="searchbar">
+						<input type="text" placeholder="제품을 검색하세요.">
+						<a href="#">
+							<i class="fa-solid fa-magnifying-glass" id="searchicon" style="color: skyblue;"></i>
+						</a>	
+					</div>
+					<div class="header-section icon-wrapper">
+						<div id="header-icon">
+							<a href="#" class="icon">
+								<i class="ri-user-line" onclick="javascript:location.href='/mypage'"></i>
+							</a>
+							<a href="#" class="icon">
+								<i class="ri-shopping-cart-2-line" onclick="javascript:location.href='/shopping-list'"></i>
+							</a>
+						</div>			
+					</div>					
+				</div>
+			</div>
+			
+			<div class="contents">
+				<div class="category">
+					<ul id="category_parts">
+						<li id="default_category"><a class="a_section_bar" >전체보기</a></li>
+						<li id="LeakDetector"><a class="a_section_bar">누수탐지기</a></li>
+						<li id="SewerCleaner"><a class="a_section_bar" >배관청소기</a></li>
+						<li id="Endoscope"><a class="a_section_bar" >내시경</a></li>
+						<li id="Tool"><a class="a_section_bar tool">공구</a></li>
+					</ul>
+				</div>
+				<div class="wrapper">
+					<div class="l_wrapper">
+						<ul id="shoplist" class="l_row clearfix">
+							<!-- li class="l_col l_col_3_12 l_col_tablet_4_12 l_col_tablet_6_12 l_col_mobile_12_12">
+								<div class="itemdesc">
+									<div class="item-cover-section">
+										<img class="item-cover" src="../static/doori2.jpg">
+									</div>
+									
+									<div class="item-contents">
+										<p>리지드 플렉스샤프트 K9-204</p>
+										<h1 class="item-price">1,000,000</h1>
+										<div class="item-footer">
+											<ul class="footer-btn">
+												<li class="btn"><a class="">보기</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li -->
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="contents-footer">
+				<div class="paging">
+					<ul class="pagination">
+						<!--
+						<li class=""><a>&laquo;</a></li>
+						<li class=""><a>1</a></li>
+						<li class=""><a>2</a></li>
+						<li class=""><a>3</a></li>
+						<li class=""><a>4</a></li>
+						<li class=""><a>5</a></li>
+						<li class="page-num"><a>6</a></li>
+						<li class="page-num"><a>7</a></li>
+						<li class="page-num"><a>8</a></li>
+						<li class="page-num"><a>9</a></li>
+						<li class="page-num"><a>10</a></li>
+						<li class=""><a>&raquo;</a></li>
+						-->
+					</ul>
+				</div>
+			</div>
+			<div class="">
+				<a class="btn-top"href="#mypage">TOP</a>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="container">
+				<div class="footer-section">
+					<ul class="footer-nav">
+						<li class="li_section_bar" id="comp_intr"><a href="#" onclick="javascript:location.href='/comp-intro'">회사소개</a></li>
+						<li class="li_section_bar" id="comp_board"><a href="#" onclick="javascript:location.href='/contact/notice'">공지사항</a></li>
+						<li class="li_section_bar"><a id="faq" href="/contact">고객센터</a></li>
+					</ul>
+				</div>
+				
+				<div class="footer-section">
+					<div class="footer-daebongmark clearfix">
+						<div>
+							<img id="daebongmark" src="img/static/DaebongMark.jpg">
+						</div>
+						<div>
+							<h4 id="co_kor_name">대봉산업기계</h4>
+							<span id="co_en_name">Daebong industry co.</span>
+						</div>	
+					</div>
+					<div class="l_info">
+						<ul class="info">
+							<li><span class="info-fonts">주소</span>서울시 금천구 시흥3동 984번지 시흥유통상가 19동 115호</li>
+							<li class="flex-grow"><span class="info-fonts">TEL</span>02) 809-2308</li>
+							<li><span class="info-fonts">상호명</span>대봉산업기계</li>
+							<li><span class="info-fonts">사업자등록번호</span>138-01-22801</li>
+							<li class="flex-grow"><span class="info-fonts">통신판매번호</span>2006-01315</li>
+							<li><span class="info-fonts">대표자</span>윤기봉</li>
+							<li class="flex-grow"><span class="info-fonts">개인정보관련책임자</span>윤주석</li>
+						</ul>
+					</div>
+				</div>
+			</div>		
+		</div>
+	</body>
 </html>

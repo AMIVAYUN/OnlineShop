@@ -38,6 +38,10 @@ dependencies {
 	implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
 	implementation group: 'io.springfox', name: 'springfox-oas', version: '3.0.0'
 	implementation 'org.springframework.kafka:spring-kafka'
+	implementation 'org.springframework.boot:spring-boot-starter-cache'
+	implementation 'org.ehcache:ehcache:3.8.1'
+	implementation 'javax.cache:cache-api:1.1.1'
+	//https://docs.spring.io/spring-framework/reference/integration/cache/strategies.html
 
 	//구버전
 	//implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
@@ -55,7 +59,7 @@ dependencies {
 	implementation 'com.google.oauth-client:google-oauth-client-jetty:1.32.1'
 	implementation 'com.google.apis:google-api-services-gmail:v1-rev20211108-1.32.1'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
-	implementation group: 'com.github.vladimir-bukhtoyarov', name: 'bucket4j-core', version: '7.0.0'
+	//implementation group: 'com.github.vladimir-bukhtoyarov', name: 'bucket4j-core', version: '7.0.0'
 	testImplementation 'com.google.truth:truth:0.43'
 	//implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
 	// https://mvnrepository.com/artifact/javax.servlet/jstl

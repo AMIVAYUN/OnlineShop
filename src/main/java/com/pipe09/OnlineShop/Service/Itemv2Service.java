@@ -9,6 +9,8 @@ import com.pipe09.OnlineShop.Repository.DtypeRepository;
 import com.pipe09.OnlineShop.Repository.ItemV2Repository;
 import com.pipe09.OnlineShop.Utils.Utils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,11 +29,7 @@ public class Itemv2Service {
     private final DtypeRepository dtypeRepository;
 
     @Transactional
-    public Long save(Itemv2 item){return itemRepository.save(item); }
-
-
-
-    @Transactional
+    @CacheEvict( cacheNames = "itemLen",key = "'total'" )
     public Long saveByAdmin( itemDtoV2 dto ){
         dType dtype = dtypeRepository.findByid( dto.getDtype_id() );
         Itemv2 newitem = new Itemv2( dto, dtype );
@@ -49,10 +47,17 @@ public class Itemv2Service {
     public Integer getcountofKeyword(String keyword){ return itemRepository.getCountofKeyword(keyword); }
 
     @Transactional
+    //@CacheEvict( cacheNames = "itemLen",key = "'total'" ) For cache test
     public List< Itemv2 > findAll(){
 
 
         return itemRepository.findAll();
+    }
+    //기본적으로 전체 데이터에 대한 캐시 추가
+    @Transactional
+    @Cacheable( cacheNames = "itemLen", key = "'total'")
+    public Long getCount( ){
+        return itemRepository.getCount();
     }
 
     @Transactional
@@ -65,6 +70,7 @@ public class Itemv2Service {
     }
 
     @Transactional
+    @CacheEvict( cacheNames = "itemLen",key = "'total'" )
     public boolean removeById(Long id){
         return itemRepository.removeById(id);
     }

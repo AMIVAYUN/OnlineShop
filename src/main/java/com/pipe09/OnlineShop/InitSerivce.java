@@ -2,6 +2,8 @@ package com.pipe09.OnlineShop;
 
 
 import com.pipe09.OnlineShop.Domain.Item.V1.Item;
+import com.pipe09.OnlineShop.Domain.Item.V1.Typed.SewerCleaner;
+import com.pipe09.OnlineShop.Domain.Item.V1.titem;
 import com.pipe09.OnlineShop.Domain.Item.V2.DTYPE.Itemv2;
 import com.pipe09.OnlineShop.Domain.Item.V2.DTYPE.dType.dType;
 import com.pipe09.OnlineShop.Domain.Item.V2.DTYPE.dType.dtype_classify;
@@ -9,6 +11,8 @@ import com.pipe09.OnlineShop.Repository.DtypeRepository;
 import com.pipe09.OnlineShop.Repository.ItemRepository;
 import com.pipe09.OnlineShop.Repository.ItemV2Repository;
 import com.pipe09.OnlineShop.Repository.ShopCartRepository;
+import com.pipe09.OnlineShop.Repository.Test.titemRepository;
+import com.pipe09.OnlineShop.Service.ItemService;
 import com.pipe09.OnlineShop.Service.MailService;
 import com.pipe09.OnlineShop.Utils.Utils;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +43,22 @@ public class InitSerivce {
     private final DtypeRepository dtypeRepository;
     private final ItemRepository itemRepository;
     private final ItemV2Repository itemV2Repository;
+    private final titemRepository titemRepository;
+    private final ItemService itemService;
     public void dbInit() throws MessagingException, IOException {
+        //itemService.Test4( 1075L );
+        /*
+        titem item1 = new titem();
+        item1.setName("DB-150");
+        item1.setStockQuantity(100);
+        item1.setManufacturedCompany("Daebong");
+        item1.setDescription("test");
+        item1.setWeight(25);
+        item1.setMadeIn("Korea");
+        item1.setPrice(1000000);
+        titemRepository.save( item1 );
+
+         */
         /*
         dType dType = new dType("테스트");
 
@@ -163,7 +182,6 @@ public class InitSerivce {
         em.persist(item4);
 
          */
-
 
 
     }

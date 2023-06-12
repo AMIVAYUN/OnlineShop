@@ -36,6 +36,8 @@ public class HomeController {
     @GetMapping("/laws/PersonalInfo")
     public String getPersonalInfo(){ return "fragments/private/PersonalInfoLaw"; }
 
+    @GetMapping("/laws/PersonalInfoprocess")
+    public String getPersonalInfoprocess(){ return "fragments/private/PersonalInfoProcess"; }
     /*
     @GetMapping("/test")
     public String getTest(){ return "fragments/public/Board/ViewNotice2"; }

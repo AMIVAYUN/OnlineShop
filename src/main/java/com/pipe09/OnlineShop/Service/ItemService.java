@@ -2,15 +2,20 @@ package com.pipe09.OnlineShop.Service;
 
 
 import com.pipe09.OnlineShop.Domain.Item.V1.Item;
+import com.pipe09.OnlineShop.Domain.Item.V1.titem;
 import com.pipe09.OnlineShop.Dto.Item.V1.ImgPathDto;
 import com.pipe09.OnlineShop.Repository.ItemRepository;
+import com.pipe09.OnlineShop.Repository.Test.titemRepository;
 import com.pipe09.OnlineShop.Utils.Utils;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.StaleObjectStateException;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import javax.persistence.OptimisticLockException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -23,14 +28,65 @@ import java.util.List;
 @Service
 public class ItemService {
     private final ItemRepository itemRepository;
+    private final titemRepository testRepository;
 
     @Transactional
     public Long save(Item item){return itemRepository.save(item); }
 
+    @Transactional
     public List<Item> findAll(int offset,int limit){ return itemRepository.findAll(offset,limit); }
 
+    @Transactional
     public Item findOne(Long id){
         return itemRepository.findItem(id);
+    }
+
+
+    @Transactional
+    public void Test(Long id){
+        Item item = itemRepository.findItem( id );
+        System.out.println( "now: " + item.getStockQuantity()  );
+        item.removeStockQuantity( 1 );
+        System.out.println( "after " + item.getStockQuantity() );
+    }
+    @Transactional
+    public void Test2(Long id, int count){
+        Item item = itemRepository.findItem( id );
+        System.out.println( "now: " + item.getStockQuantity()  );
+        item.setStockQuantity( item.getStockQuantity() - count );// item.removeStockQuantity( count );
+        System.out.println( "after " + item.getStockQuantity() );
+    }
+    @Transactional
+    public void Test3(Long id, int count){
+        Item item = itemRepository.findItemwithLock( id );
+        item.setStockQuantity( item.getStockQuantity() - count );// item.removeStockQuantity( count );
+    }
+
+    @Transactional
+    public void Test4( Long id ){
+        titem item = testRepository.findOne( 1075L );
+        item.setName("test");
+    }
+
+    @Transactional
+    public void Test5(Long id, int count){
+        titem item = testRepository.findOne( id );
+
+        System.out.println( "now: " + item.getStockQuantity()  );
+        item.setStockQuantity( item.getStockQuantity() - count );// item.removeStockQuantity( count );
+        System.out.println( "after " + item.getStockQuantity() );
+
+
+    }
+
+    @Transactional
+    public void Test6(Long id, int count){
+        titem item = testRepository.findOneOpt( id );
+
+        item.setStockQuantity( item.getStockQuantity() - count );// item.removeStockQuantity( count );
+
+
+
     }
 
     public Integer getcountofKeyword(String keyword){ return itemRepository.getCountofKeyword(keyword); }

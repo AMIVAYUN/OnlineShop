@@ -10,7 +10,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RequiredArgsConstructor
@@ -39,7 +42,9 @@ public class ItemV2Repository {
     }
 
     public Itemv2 findItem(Long id) {
-        return em.find(Itemv2.class, id);
+        Map<String,Object> properties = new HashMap<>();
+        properties.put( "javax.persistence.lock.timeout", 10000 );
+        return em.find(Itemv2.class, id, LockModeType.PESSIMISTIC_WRITE, properties );
     }
 
     public List<Itemv2> findAll(){ return em.createQuery( "select i from Itemv2 i where i.status =: status").setParameter( "status", Item_status.SALE ).getResultList(); }

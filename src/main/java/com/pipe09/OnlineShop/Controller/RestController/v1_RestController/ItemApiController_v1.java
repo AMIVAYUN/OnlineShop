@@ -142,4 +142,12 @@ public class ItemApiController_v1 {
 
      */
 
+
+    // TEST Data
+    //id: 880 재고:  123 |
+    //@GetMapping( "/test/decrease" )
+    public void test() throws InterruptedException {
+        service.Test( 880L );
+        Thread.sleep( 3000 ); // 3초 대기
+    }
 }

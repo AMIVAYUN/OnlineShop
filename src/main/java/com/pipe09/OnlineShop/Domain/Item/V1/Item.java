@@ -42,6 +42,7 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private Item_status status;
 
+
     @Basic(fetch = FetchType.LAZY)
     @Formula("(select count(1) from item as i where i.status='SALE')")
     private int countofItems;

@@ -4,11 +4,15 @@ import com.pipe09.OnlineShop.Domain.Item.V1.Item;
 import com.pipe09.OnlineShop.Domain.Item.V1.Item_status;
 import com.pipe09.OnlineShop.Domain.Item.V2.DTYPE.Itemv2;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Repository
@@ -29,6 +33,14 @@ public class ItemRepository {
 
     public Item findItem(Long id){
         return em.find(Item.class,id);
+    }
+
+
+    public Item findItemwithLock(Long id){
+        Map<String,Object> properties = new HashMap<>();
+        properties.put( "javax.persistence.lock.timeout", 10000 );
+
+        return em.find(Item.class,id, LockModeType.PESSIMISTIC_WRITE, properties );
     }
     public List<Item> findAll(int offset,int limit){
         return em.createQuery("select i from Item i where i.status=:status", Item.class).setParameter("status", Item_status.SALE ).setFirstResult( offset ).setMaxResults( limit ).getResultList();
@@ -65,6 +77,10 @@ public class ItemRepository {
 
 
 
+    @Lock( LockModeType.PESSIMISTIC_WRITE )
+    public Item pessimisticLockfind( Long id ){
+        return em.find( Item.class, id );
+    }
 
 
 }

@@ -42,4 +42,5 @@
     
 - **시스템 구조도**
 
-![project_Daebong_architecture.png](%E1%84%87%E1%85%A9%E1%86%A8%E1%84%89%E1%85%A1%E1%84%8B%E1%85%AD%E1%86%BC%20c72286e52b4d4652ab9260b4ac16c6d2/project_Daebong_architecture.png)
+<img width="460" alt="project_Daebong_architecture" src="https://github.com/AMIVAYUN/OnlineShop/assets/63450823/e407d7b6-a718-44ad-a738-837f9f273bd5">
+

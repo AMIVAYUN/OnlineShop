@@ -3,7 +3,7 @@
 **[대봉산업기계 온라인 사이트](https://www.notion.so/5d5a5e6f42e948eebf0c385392102206?pvs=21)** 
 
 - **URL**: [https://대봉eng.com](https://대봉eng.com)
-- **Period: 2022/01/02 ~ 2023.11**
+- **Period: 2022/01/02 ~ 2023.06**
 - **Used Stacks**:
     - Frontend: HTML / CSS / JS
     - Backend: Spring Boot, Spring Data JPA
